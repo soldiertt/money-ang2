@@ -1,0 +1,18 @@
+.money-table {
+  border: 1px solid black;
+}
+.money-table th, .money-table td {
+  border: 1px solid black;
+}
+.month-col {
+  min-width: 80px;
+}
+.money-cell {
+  text-align: center;
+}
+.fileheader {
+  font-family: 'Courier New'
+}
+.csvline-header {
+  background-color: red;
+}

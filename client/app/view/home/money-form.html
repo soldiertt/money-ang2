@@ -1,0 +1,34 @@
+<div>
+  <form>
+    <fieldset class="fields-group">
+      <legend>Select category type to display</legend>
+      <ul class="checkbox">
+        <li>
+            <input type="checkbox" id="category-type-fixed" [(ngModel)]="catTypeFixed" />
+            <label for="category-type-fixed">Fixed</label>
+        </li>
+        <li>
+            <input type="checkbox" id="category-type-other" [(ngModel)]="catTypeOther" />
+            <label for="category-type-other">Other</label>
+        </li>
+      </ul>
+    </fieldset>
+    <fieldset class="fields-group">
+      <legend>Select category frequency to display</legend>
+      <ul class="checkbox">
+        <li>
+            <input type="checkbox" id="category-freq-monthly" [(ngModel)]="catFreqMonthly" />
+            <label for="category-freq-monthly">Monthly</label>
+        </li>
+        <li>
+            <input type="checkbox" id="category-freq-quarter" [(ngModel)]="catFreqQuarter" />
+            <label for="category-freq-quarter">Quarter</label>
+        </li>
+        <li>
+            <input type="checkbox" id="category-freq-yearly" [(ngModel)]="catFreqYearly" />
+            <label for="category-freq-yearly">Yearly</label>
+        </li>
+      </ul>
+    </fieldset>
+  </form>
+</div>

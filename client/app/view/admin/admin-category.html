@@ -1,0 +1,61 @@
+<h2>Administration des catégories</h2>
+<!-- CREATION FORM -->
+<form (submit)="onCreate();nameCtrl.focus()" [ngFormModel]="createForm">
+  <fieldset>
+    <div>
+      <label for="cat-name">Name :</label>
+      <input type="text" name="cat-name" id="cat-name" ngControl="name" #nameCtrl />
+      <display-error control="name" error="required">Name is required</display-error>
+      <display-error control="name" error="minlength">Minimum length is 3 characters</display-error>
+      <display-error control="name" error="maxlength">Maximum length is 50 characters</display-error>
+    </div>
+    <div>
+      <label for="cat-type">Type :</label>
+      <select name="cat-type" id="cat-type" ngControl="type">
+        <option value="FIXED">FIXED</option>
+        <option value="OTHER">OTHER</option>
+      </select>
+    </div>
+    <div>
+      <label for="cat-frequency">Frequency :</label>
+      <select name="cat-frequency" id="cat-frequency" ngControl="frequency">
+        <option value="MONTHLY">MONTHLY</option>
+        <option value="QUARTER">QUARTER</option>
+        <option value="YEARLY">YEARLY</option>
+      </select>
+    </div>
+    <div>
+      <label for="cat-year">Year :</label>
+      <input type="number" name="cat-year" id="cat-year" ngControl="year" />
+      <display-error control="year" error="required">Year is required</display-error>
+      <display-error control="year" error="wrongYear">Year format is 'YYYY'</display-error>
+    </div>
+  </fieldset>
+  <fieldset>
+    <input type="submit" name="submit" value="Create" [disabled]="!createForm.valid">
+  </fieldset>
+</form>
+<!-- END CREATION FORM -->
+
+<!-- CATEGORIES LIST -->
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Freqency</th>
+      <th>Year</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="#category of categories">
+      <td>{{category.name}}</td>
+      <td>{{category.type}}</td>
+      <td>{{category.frequency}}</td>
+      <td>{{category.year}}</td>
+      <td><span (click)="onDelete(category)">Del</span></td>
+    </tr>
+  </tbody>
+</table>
+<!-- END CATEGORIES LIST -->

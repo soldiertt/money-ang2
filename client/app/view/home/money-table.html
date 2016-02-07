@@ -1,0 +1,16 @@
+<table class="money-table">
+<thead>
+  <tr>
+    <th>Catégories {{categories.length}}</th>
+    <th *ngFor="#month of months" class="month-col">{{month}}</th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="#category of categories | categorySorter | catfilter : displayParamService.types : displayParamService.frequencies">
+    <td>{{category.name}}</td>
+    <td *ngFor="#period of category.periods" [attr.colspan]="12/category.occSize" class="money-cell">
+      {{period.total | currency : 'EUR' : true : '1.2'}}
+    </td>
+  </tr>
+</tbody>
+</table>

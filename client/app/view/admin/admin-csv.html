@@ -1,0 +1,66 @@
+<form (submit)="createAccount()" [ngFormModel]="accountForm">
+  <div>
+    <label>Account name</label>
+    <input type="text" name="account-name" ngControl="name" [(ngModel)]="accountSetting.name">
+    <display-error control="name" error="required">Field is required</display-error>
+    <display-error control="name" error="minlength">Minimum length is 3 characters</display-error>
+    <display-error control="name" error="maxlength">Maximum length is 30 characters</display-error>
+  </div>
+  <div>
+    <label>Account number</label>
+    <input type="text" name="account-number" ngControl="accountNumber" [(ngModel)]="accountSetting.accountNumber">
+    <display-error control="accountNumber" error="required">Field is required</display-error>
+    <display-error control="accountNumber" error="minlength">Must be 16 characters</display-error>
+    <display-error control="accountNumber" error="maxlength">Must be 16 characters</display-error>
+  </div>
+  <div>
+    <label>Select a sample csv file</label>
+    <input type="file" name="csvfile" ngControl="csvfile" (change)="onUpload($event)">
+  </div>
+  <div *ngIf="fileFirstLines">
+    <div class="fileheader">
+      <div *ngFor="#line of fileFirstLines; #i=index" [ngClass]="{'csvline-header':accountSetting.headerLinesCount > i}">{{line}}</div>
+    </div>
+    <div>
+      <label>Number of header lines</label>
+      <input type="number" name="header-lines" ngControl="headerLinesCount" [(ngModel)]="accountSetting.headerLinesCount" (ngModelChange)="onSettingChange($event)" >
+      <display-error control="headerLinesCount" error="wrongNumber">Field is required</display-error>
+    </div>
+    <div>
+      <label>Field separator</label>
+      <input type="text" name="field-separator" ngControl="fieldSeparator" [(ngModel)]="accountSetting.fieldSeparator" (ngModelChange)="onSettingChange($event)" >
+      <display-error control="fieldSeparator" error="required">Field is required</display-error>
+      <display-error control="fieldSeparator" error="minlength">Must be 1 character</display-error>
+      <display-error control="fieldSeparator" error="maxlength">Must be 1 character</display-error>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Csv field</th><th>Field type</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="#field of lineTokens; #i=index">
+          <td>
+            {{field}}
+          </td>
+          <td>
+            <select [(ngModel)]="accountSetting.fieldMappings[i].value" (ngModelChange)="onMappingChange($event)">
+              <option value="ignore">[Ignore]</option>
+              <option value="amount">Amount</option>
+              <option value="communication">Communication</option>
+              <option value="date">Transaction date</option>
+              <option value="description">Description</option>
+              <option value="id">Identifier</option>
+              <option value="own-account-name">Own account name</option>
+              <option value="own-account-number">Own account number</option>
+              <option value="third-party-account-name">Third-party name</option>
+              <option value="third-party-account-number">Third-party account number</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <input type="hidden" ngControl="fieldMapping" />
+    <display-error control="fieldMapping" error="wrongMapping">Wrong mapping</display-error>
+  </div>
+  <input type="submit" value="Create" [disabled]="!accountForm.valid">
+</form>
