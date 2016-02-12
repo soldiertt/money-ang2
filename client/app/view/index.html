@@ -1,0 +1,17 @@
+<header>
+  <nav>
+    <h1>General</h1>
+    <ul>
+      <li><a [routerLink]="['/Home']">Home</a></li>
+    </ul>
+    <h1>Administration</h1>
+    <ul>
+      <li><a [routerLink]="['/AdminCategory']">Manage categories</a></li>
+      <li><a [routerLink]="['/AdminAccountSetting']">Manage account settings</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>
+<footer>Footer</footer>

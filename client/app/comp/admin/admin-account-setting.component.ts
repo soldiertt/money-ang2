@@ -1,37 +1,37 @@
 import {Component} from 'angular2/core'
 import {Control, ControlGroup, FormBuilder, Validators} from 'angular2/common'
+import {Http, RequestOptions, RequestMethod, Headers} from 'angular2/http'
+
 import {MultipartUploader} from '../../model/formutil/multipart-uploader.class'
 import {MultipartItem} from '../../model/formutil/multipart-item.class'
 import {AccountSetting} from '../../model/core/account-setting.class'
 import {FieldMapping} from '../../model/core/field-mapping.class'
 import {AccountFormValidator} from '../../model/validation/account-form-validator.class'
-import {Http, RequestOptions, RequestMethod, Headers} from 'angular2/http'
+import {AccountSettingRestService} from '../../service/account-setting-rest.service'
 import {DisplayErrorDirective} from '../directive/display-error.directive'
 
 @Component({
-    selector: 'admin-csv',
-    templateUrl: 'app/view/admin/admin-csv.html',
+    selector: 'money-admin-account-setting',
+    templateUrl: 'app/view/admin/account-setting.html',
     directives: [DisplayErrorDirective]
 })
-export class AdminCsvComponent {
+export class AdminAccountSettingComponent {
   accountForm: ControlGroup;
-  uploadUrl: string = '/upload';
-  file: File;
   fileFirstLines: Array<string>;
   lineTokens: Array<string>;
-  fieldMappingControl: Control;
+  dummyFieldMappingControl: Control;
   accountSetting: AccountSetting = new AccountSetting();
 
-  constructor(private _http: Http, fb: FormBuilder) {
+  constructor(private _http: Http, fb: FormBuilder, private _accountSettingRestService: AccountSettingRestService) {
     let accountFormValidator = new AccountFormValidator(this);
-    this.fieldMappingControl = fb.control('', accountFormValidator.validate);
+    this.dummyFieldMappingControl = fb.control('', accountFormValidator.validate);
     this.accountForm = fb.group({
       name: fb.control('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])),
       accountNumber: fb.control('', Validators.compose([Validators.required, Validators.minLength(16), Validators.maxLength(16)])),
       csvfile: fb.control(''),
       headerLinesCount: fb.control('', accountFormValidator.isValidNumber),
       fieldSeparator: fb.control('', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(1)])),
-      fieldMapping: this.fieldMappingControl
+      fieldMapping: this.dummyFieldMappingControl
     });
   }
 
@@ -42,10 +42,10 @@ export class AdminCsvComponent {
   }
 
   /**
-    Called after new csv upload.
-    Called in headerLinesCount setter and fieldSeparatorSetter.
+    * Called after new sample csv is uploaded
+    * Called if headerLinesCount change or fieldSeparatorSetter change.
   **/
-  updateTokens(thisComp: AdminCsvComponent) {
+  updateTokens(thisComp: AdminAccountSettingComponent) {
     if (thisComp.accountSetting.headerLinesCount < thisComp.fileFirstLines.length) {
       thisComp.lineTokens = thisComp.fileFirstLines[thisComp.accountSetting.headerLinesCount].split(thisComp.accountSetting.fieldSeparator);
       thisComp.accountSetting.fieldMappings = [];
@@ -60,12 +60,13 @@ export class AdminCsvComponent {
     Called after a mapping select box changed, to force validation computing.
   **/
   onMappingChange($event) {
-    this.fieldMappingControl.updateValue($event); //Just to fire change detection
-    this.fieldMappingControl.markAsDirty();
+    this.dummyFieldMappingControl.updateValue($event); //Just to fire change detection
+    this.dummyFieldMappingControl.markAsDirty();
   }
 
   onUpload(fileinput: any) {
-    this.file = fileinput.target.files[0];
+    const UPLOAD_URL = "/upload";
+    let sampleCsvFile : File = fileinput.target.files[0];
     /** NOT YET ANGULAR2 WAY TO DO THIS, SO USE THIRD PARTY LIB USING XMLHttpRequest
     see https://github.com/wangzilong/angular2-multipartForm **/
     /*let formData:FormData = new FormData("name", this.file);
@@ -78,10 +79,10 @@ export class AdminCsvComponent {
     .subscribe(response => {
       console.log(response.json());
     })*/
-    let uploader:MultipartUploader = new MultipartUploader({url: this.uploadUrl});
+    let uploader:MultipartUploader = new MultipartUploader({url: UPLOAD_URL});
     let item:MultipartItem = new MultipartItem(uploader);
     item.formData = new FormData();
-    item.formData.append("csvfile",  this.file);
+    item.formData.append("csvfile",  sampleCsvFile);
 
     let adminCsvComp = this;
     let uploadCallback = function(response: any) {
@@ -95,6 +96,8 @@ export class AdminCsvComponent {
   }
 
   createAccount() {
-    console.log(this.accountSetting);
+    this._accountSettingRestService.create(this.accountSetting).subscribe(response => {
+      console.log(response.json());
+    })
   }
 }

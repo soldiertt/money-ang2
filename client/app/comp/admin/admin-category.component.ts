@@ -1,13 +1,14 @@
 import {Component} from 'angular2/core';
 import {AbstractControl, Control, ControlGroup, FormBuilder, Validators} from 'angular2/common';
+
 import {Category} from '../../model/core/category.class';
 import {CategoryRestService} from '../../service/category-rest.service'
 import {FormUtilsService} from '../../service/form-utils.service'
 import {DisplayErrorDirective} from '../directive/display-error.directive'
 
 @Component({
-    selector: 'admin-category',
-    templateUrl: 'app/view/admin/admin-category.html',
+    selector: 'money-admin-category',
+    templateUrl: 'app/view/admin/category.html',
     directives: [DisplayErrorDirective]
 })
 

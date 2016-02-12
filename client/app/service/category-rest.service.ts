@@ -1,6 +1,7 @@
 import {Injectable} from 'angular2/core'
 import {Http} from 'angular2/http'
 import {Observable} from 'rxjs/Observable'
+
 import {Category} from '../model/core/category.class'
 
 @Injectable()

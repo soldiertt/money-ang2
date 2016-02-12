@@ -81,8 +81,8 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                 };
                 AdminCategoryComponent = __decorate([
                     core_1.Component({
-                        selector: 'admin-category',
-                        templateUrl: 'app/view/admin/admin-category.html',
+                        selector: 'money-admin-category',
+                        templateUrl: 'app/view/admin/category.html',
                         directives: [display_error_directive_1.DisplayErrorDirective]
                     }), 
                     __metadata('design:paramtypes', [category_rest_service_1.CategoryRestService, form_utils_service_1.FormUtilsService, common_1.FormBuilder])

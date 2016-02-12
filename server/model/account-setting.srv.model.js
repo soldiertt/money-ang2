@@ -6,6 +6,7 @@ var AccountSettingSchema = new Schema({
     name: {
       type: String,
       required: 'Account name is required',
+      unique: true,
       trim: true
     },
     accountNumber: {

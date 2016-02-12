@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './home/moneyhome.component', './admin/moneyadminhome.component', './admin/admincategory.component', './admin/admincsv.component'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', './home/home.component', './admin/admin-category.component', './admin/admin-account-setting.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/router', './home/moneyhome.component
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, moneyhome_component_1, moneyadminhome_component_1, admincategory_component_1, admincsv_component_1;
+    var core_1, router_1, home_component_1, admin_category_component_1, admin_account_setting_component_1;
     var AppComponent;
     return {
         setters:[
@@ -18,17 +18,14 @@ System.register(['angular2/core', 'angular2/router', './home/moneyhome.component
             function (router_1_1) {
                 router_1 = router_1_1;
             },
-            function (moneyhome_component_1_1) {
-                moneyhome_component_1 = moneyhome_component_1_1;
+            function (home_component_1_1) {
+                home_component_1 = home_component_1_1;
             },
-            function (moneyadminhome_component_1_1) {
-                moneyadminhome_component_1 = moneyadminhome_component_1_1;
+            function (admin_category_component_1_1) {
+                admin_category_component_1 = admin_category_component_1_1;
             },
-            function (admincategory_component_1_1) {
-                admincategory_component_1 = admincategory_component_1_1;
-            },
-            function (admincsv_component_1_1) {
-                admincsv_component_1 = admincsv_component_1_1;
+            function (admin_account_setting_component_1_1) {
+                admin_account_setting_component_1 = admin_account_setting_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -36,14 +33,13 @@ System.register(['angular2/core', 'angular2/router', './home/moneyhome.component
                 }
                 AppComponent = __decorate([
                     router_1.RouteConfig([
-                        new router_1.Route({ path: '/home', component: moneyhome_component_1.MoneyHomeComponent, name: 'Home', useAsDefault: true }),
-                        new router_1.Route({ path: '/admin', component: moneyadminhome_component_1.MoneyAdminHomeComponent, name: 'AdminHome' }),
-                        new router_1.Route({ path: '/admin/category', component: admincategory_component_1.AdminCategoryComponent, name: 'AdminCategory' }),
-                        new router_1.Route({ path: '/admin/csv', component: admincsv_component_1.AdminCsvComponent, name: 'AdminCsv' })
+                        new router_1.Route({ path: '/home', component: home_component_1.HomeComponent, name: 'Home', useAsDefault: true }),
+                        new router_1.Route({ path: '/admin/category', component: admin_category_component_1.AdminCategoryComponent, name: 'AdminCategory' }),
+                        new router_1.Route({ path: '/admin/account-setting', component: admin_account_setting_component_1.AdminAccountSettingComponent, name: 'AdminAccountSetting' })
                     ]),
                     core_1.Component({
                         selector: 'money-app',
-                        templateUrl: 'app/view/money-app.html',
+                        templateUrl: 'app/view/index.html',
                         encapsulation: core_1.ViewEncapsulation.None,
                         styleUrls: ['app/view/css/master.css'],
                         directives: [router_1.ROUTER_DIRECTIVES]

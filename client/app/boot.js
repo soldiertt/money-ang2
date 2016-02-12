@@ -1,5 +1,5 @@
-System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/platform/browser', './comp/app.component', './service/display-param.service', './service/category-rest.service', './service/form-utils.service', './config/json-request-options'], function(exports_1) {
-    var core_1, router_1, http_1, browser_1, app_component_1, display_param_service_1, category_rest_service_1, form_utils_service_1, json_request_options_1;
+System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/platform/browser', './comp/app.component', './service/display-param.service', './service/category-rest.service', './service/account-setting-rest.service', './service/form-utils.service', './config/json-request-options'], function(exports_1) {
+    var core_1, router_1, http_1, browser_1, app_component_1, display_param_service_1, category_rest_service_1, account_setting_rest_service_1, form_utils_service_1, json_request_options_1;
     return {
         setters:[
             function (core_1_1) {
@@ -23,6 +23,9 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
             function (category_rest_service_1_1) {
                 category_rest_service_1 = category_rest_service_1_1;
             },
+            function (account_setting_rest_service_1_1) {
+                account_setting_rest_service_1 = account_setting_rest_service_1_1;
+            },
             function (form_utils_service_1_1) {
                 form_utils_service_1 = form_utils_service_1_1;
             },
@@ -33,6 +36,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
             browser_1.bootstrap(app_component_1.AppComponent, [
                 display_param_service_1.DisplayParamService,
                 category_rest_service_1.CategoryRestService,
+                account_setting_rest_service_1.AccountSettingRestService,
                 form_utils_service_1.FormUtilsService,
                 router_1.ROUTER_PROVIDERS,
                 http_1.HTTP_PROVIDERS,

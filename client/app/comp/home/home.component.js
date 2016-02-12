@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router'], function(exports_1) {
+System.register(['angular2/core', './money-table.component', './table-filter-form.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,31 +8,34 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1;
-    var MoneyAdminHomeComponent;
+    var core_1, money_table_component_1, table_filter_form_component_1;
+    var HomeComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (router_1_1) {
-                router_1 = router_1_1;
+            function (money_table_component_1_1) {
+                money_table_component_1 = money_table_component_1_1;
+            },
+            function (table_filter_form_component_1_1) {
+                table_filter_form_component_1 = table_filter_form_component_1_1;
             }],
         execute: function() {
-            MoneyAdminHomeComponent = (function () {
-                function MoneyAdminHomeComponent() {
+            HomeComponent = (function () {
+                function HomeComponent() {
                 }
-                MoneyAdminHomeComponent = __decorate([
+                HomeComponent = __decorate([
                     core_1.Component({
-                        selector: 'money-admin-home',
-                        templateUrl: 'app/view/admin/money-admin-home.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        selector: 'money-home',
+                        templateUrl: 'app/view/home/index.html',
+                        directives: [money_table_component_1.MoneyTableComponent, table_filter_form_component_1.TableFilterFormComponent]
                     }), 
                     __metadata('design:paramtypes', [])
-                ], MoneyAdminHomeComponent);
-                return MoneyAdminHomeComponent;
+                ], HomeComponent);
+                return HomeComponent;
             })();
-            exports_1("MoneyAdminHomeComponent", MoneyAdminHomeComponent);
+            exports_1("HomeComponent", HomeComponent);
         }
     }
 });
