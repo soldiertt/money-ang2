@@ -46,11 +46,10 @@ export class AdminCategoryComponent {
       this._categoryRestService.create(newCateg).subscribe(response => {
         this.categories.push(response.json());
         this._formUtilsService.reset(this.createForm, "name", "type", "frequency", "year");
-      })
+      });
     }
 
     onDelete(category: Category) {
-      console.log("Deleting cat ", category.id);
       let categIndex = this.categories.indexOf(category);
       if (categIndex > -1) {
         this._categoryRestService.delete(category.id).subscribe(response => {

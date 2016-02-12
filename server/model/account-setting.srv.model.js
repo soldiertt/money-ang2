@@ -9,6 +9,12 @@ var AccountSettingSchema = new Schema({
       unique: true,
       trim: true
     },
+    fileStartsWith: {
+      type: String,
+      required: 'File starts with is required',
+      unique: true,
+      trim: true
+    },
     accountNumber: {
       type: String,
       required: 'Account number is required',

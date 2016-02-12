@@ -3,7 +3,7 @@ import {AbstractControl, NgFormModel} from 'angular2/common'
 
 @Component({
   selector: 'display-error',
-  template: `<div *ngIf="isDisplayed()"><ng-content></ng-content></div>`
+  template: `<div *ngIf="isDisplayed()" class="alert alert-danger"><ng-content></ng-content></div>`
 })
 export class DisplayErrorDirective implements OnInit {
   @Input('control') controlName: string;

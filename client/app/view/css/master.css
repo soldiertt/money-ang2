@@ -1,9 +1,28 @@
-.money-table {
-  border: 1px solid black;
+html {
+  position: relative;
+  min-height: 100%;
 }
-.money-table th, .money-table td {
-  border: 1px solid black;
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
 }
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+fieldset {
+  margin-bottom: 10px;
+}
+.fields-group legend {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
 .month-col {
   min-width: 80px;
 }
@@ -15,4 +34,10 @@
 }
 .csvline-header {
   background-color: red;
+}
+/** Override boostrap styles **/
+.alert {
+  margin-bottom:0px;
+  margin-top:5px;
+  padding:5px;
 }

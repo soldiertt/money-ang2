@@ -8,6 +8,7 @@ import {AccountSetting} from '../../model/core/account-setting.class'
 import {FieldMapping} from '../../model/core/field-mapping.class'
 import {AccountFormValidator} from '../../model/validation/account-form-validator.class'
 import {AccountSettingRestService} from '../../service/account-setting-rest.service'
+import {FormUtilsService} from '../../service/form-utils.service'
 import {DisplayErrorDirective} from '../directive/display-error.directive'
 
 @Component({
@@ -21,17 +22,23 @@ export class AdminAccountSettingComponent {
   lineTokens: Array<string>;
   dummyFieldMappingControl: Control;
   accountSetting: AccountSetting = new AccountSetting();
+  allAccountSettings: Array<AccountSetting>;
 
-  constructor(private _http: Http, fb: FormBuilder, private _accountSettingRestService: AccountSettingRestService) {
+  constructor(private _http: Http, fb: FormBuilder, private _accountSettingRestService: AccountSettingRestService, private _formUtilsService: FormUtilsService) {
     let accountFormValidator = new AccountFormValidator(this);
     this.dummyFieldMappingControl = fb.control('', accountFormValidator.validate);
+    this.dummyFieldMappingControl.markAsDirty();
     this.accountForm = fb.group({
       name: fb.control('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])),
       accountNumber: fb.control('', Validators.compose([Validators.required, Validators.minLength(16), Validators.maxLength(16)])),
       csvfile: fb.control(''),
+      fileStartsWith: fb.control('', Validators.compose([Validators.required])),
       headerLinesCount: fb.control('', accountFormValidator.isValidNumber),
       fieldSeparator: fb.control('', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(1)])),
       fieldMapping: this.dummyFieldMappingControl
+    });
+    this._accountSettingRestService.list().subscribe(data => {
+      this.allAccountSettings = data.json();
     });
   }
 
@@ -61,10 +68,9 @@ export class AdminAccountSettingComponent {
   **/
   onMappingChange($event) {
     this.dummyFieldMappingControl.updateValue($event); //Just to fire change detection
-    this.dummyFieldMappingControl.markAsDirty();
   }
 
-  onUpload(fileinput: any) {
+  onCsvSampleUpload(fileinput: any) {
     const UPLOAD_URL = "/upload";
     let sampleCsvFile : File = fileinput.target.files[0];
     /** NOT YET ANGULAR2 WAY TO DO THIS, SO USE THIRD PARTY LIB USING XMLHttpRequest
@@ -97,7 +103,22 @@ export class AdminAccountSettingComponent {
 
   createAccount() {
     this._accountSettingRestService.create(this.accountSetting).subscribe(response => {
-      console.log(response.json());
+      this.allAccountSettings.push(response.json());
+      this.accountSetting = new AccountSetting();
+      this.fileFirstLines = undefined;
+      this.lineTokens = undefined;
+      this._formUtilsService.reset(this.accountForm, 'csvfile');
     })
+  }
+
+  onDelete(accountSetting: AccountSetting) {
+    let settingIndex = this.allAccountSettings.indexOf(accountSetting);
+    if (settingIndex > -1) {
+      this._accountSettingRestService.delete(accountSetting.id).subscribe(response => {
+        this.allAccountSettings.splice(settingIndex, 1);
+      })
+    } else {
+      console.error("Cannot find AccountSettingRestService to delete with id ", accountSetting.id);
+    }
   }
 }

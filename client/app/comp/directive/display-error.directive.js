@@ -47,7 +47,7 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1) {
                 DisplayErrorDirective = __decorate([
                     core_1.Component({
                         selector: 'display-error',
-                        template: "<div *ngIf=\"isDisplayed()\"><ng-content></ng-content></div>"
+                        template: "<div *ngIf=\"isDisplayed()\" class=\"alert alert-danger\"><ng-content></ng-content></div>"
                     }),
                     __param(0, core_1.Host()), 
                     __metadata('design:paramtypes', [common_1.NgFormModel])

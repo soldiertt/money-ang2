@@ -1,7 +1,8 @@
-<table class="money-table">
+<div class="col-md-10">
+<table class="money-table table table-striped table-bordered">
 <thead>
   <tr>
-    <th>Catégories {{categories.length}}</th>
+    <th>Catégories</th>
     <th *ngFor="#month of months" class="month-col">{{month}}</th>
   </tr>
 </thead>
@@ -14,3 +15,4 @@
   </tr>
 </tbody>
 </table>
+</div>

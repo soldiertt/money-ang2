@@ -41,6 +41,7 @@ module.exports = function (db) {
     require('../routes/category.srv.route.js')(app);
     require('../routes/account-setting.srv.route.js')(app);
     require('../routes/csvupload.srv.route.js')(app);
+    require('../routes/preference.srv.route.js')(app);
 
     app.use(express.static('./client'));
     app.use('/lib', express.static('./node_modules'));

@@ -68,7 +68,6 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                 };
                 AdminCategoryComponent.prototype.onDelete = function (category) {
                     var _this = this;
-                    console.log("Deleting cat ", category.id);
                     var categIndex = this.categories.indexOf(category);
                     if (categIndex > -1) {
                         this._categoryRestService.delete(category.id).subscribe(function (response) {

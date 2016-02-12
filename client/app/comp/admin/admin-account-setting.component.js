@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../model/formutil/multipart-uploader.class', '../../model/formutil/multipart-item.class', '../../model/core/account-setting.class', '../../model/core/field-mapping.class', '../../model/validation/account-form-validator.class', '../../service/account-setting-rest.service', '../directive/display-error.directive'], function(exports_1) {
+System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../model/formutil/multipart-uploader.class', '../../model/formutil/multipart-item.class', '../../model/core/account-setting.class', '../../model/core/field-mapping.class', '../../model/validation/account-form-validator.class', '../../service/account-setting-rest.service', '../../service/form-utils.service', '../directive/display-error.directive'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../mod
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, http_1, multipart_uploader_class_1, multipart_item_class_1, account_setting_class_1, field_mapping_class_1, account_form_validator_class_1, account_setting_rest_service_1, display_error_directive_1;
+    var core_1, common_1, http_1, multipart_uploader_class_1, multipart_item_class_1, account_setting_class_1, field_mapping_class_1, account_form_validator_class_1, account_setting_rest_service_1, form_utils_service_1, display_error_directive_1;
     var AdminAccountSettingComponent;
     return {
         setters:[
@@ -39,24 +39,34 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../mod
             function (account_setting_rest_service_1_1) {
                 account_setting_rest_service_1 = account_setting_rest_service_1_1;
             },
+            function (form_utils_service_1_1) {
+                form_utils_service_1 = form_utils_service_1_1;
+            },
             function (display_error_directive_1_1) {
                 display_error_directive_1 = display_error_directive_1_1;
             }],
         execute: function() {
             AdminAccountSettingComponent = (function () {
-                function AdminAccountSettingComponent(_http, fb, _accountSettingRestService) {
+                function AdminAccountSettingComponent(_http, fb, _accountSettingRestService, _formUtilsService) {
+                    var _this = this;
                     this._http = _http;
                     this._accountSettingRestService = _accountSettingRestService;
+                    this._formUtilsService = _formUtilsService;
                     this.accountSetting = new account_setting_class_1.AccountSetting();
                     var accountFormValidator = new account_form_validator_class_1.AccountFormValidator(this);
                     this.dummyFieldMappingControl = fb.control('', accountFormValidator.validate);
+                    this.dummyFieldMappingControl.markAsDirty();
                     this.accountForm = fb.group({
                         name: fb.control('', common_1.Validators.compose([common_1.Validators.required, common_1.Validators.minLength(3), common_1.Validators.maxLength(30)])),
                         accountNumber: fb.control('', common_1.Validators.compose([common_1.Validators.required, common_1.Validators.minLength(16), common_1.Validators.maxLength(16)])),
                         csvfile: fb.control(''),
+                        fileStartsWith: fb.control('', common_1.Validators.compose([common_1.Validators.required])),
                         headerLinesCount: fb.control('', accountFormValidator.isValidNumber),
                         fieldSeparator: fb.control('', common_1.Validators.compose([common_1.Validators.required, common_1.Validators.minLength(1), common_1.Validators.maxLength(1)])),
                         fieldMapping: this.dummyFieldMappingControl
+                    });
+                    this._accountSettingRestService.list().subscribe(function (data) {
+                        _this.allAccountSettings = data.json();
                     });
                 }
                 AdminAccountSettingComponent.prototype.onSettingChange = function (value) {
@@ -84,9 +94,8 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../mod
                 **/
                 AdminAccountSettingComponent.prototype.onMappingChange = function ($event) {
                     this.dummyFieldMappingControl.updateValue($event); //Just to fire change detection
-                    this.dummyFieldMappingControl.markAsDirty();
                 };
-                AdminAccountSettingComponent.prototype.onUpload = function (fileinput) {
+                AdminAccountSettingComponent.prototype.onCsvSampleUpload = function (fileinput) {
                     var UPLOAD_URL = "/upload";
                     var sampleCsvFile = fileinput.target.files[0];
                     /** NOT YET ANGULAR2 WAY TO DO THIS, SO USE THIRD PARTY LIB USING XMLHttpRequest
@@ -115,9 +124,26 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../mod
                     item.upload();
                 };
                 AdminAccountSettingComponent.prototype.createAccount = function () {
+                    var _this = this;
                     this._accountSettingRestService.create(this.accountSetting).subscribe(function (response) {
-                        console.log(response.json());
+                        _this.allAccountSettings.push(response.json());
+                        _this.accountSetting = new account_setting_class_1.AccountSetting();
+                        _this.fileFirstLines = undefined;
+                        _this.lineTokens = undefined;
+                        _this._formUtilsService.reset(_this.accountForm, 'csvfile');
                     });
+                };
+                AdminAccountSettingComponent.prototype.onDelete = function (accountSetting) {
+                    var _this = this;
+                    var settingIndex = this.allAccountSettings.indexOf(accountSetting);
+                    if (settingIndex > -1) {
+                        this._accountSettingRestService.delete(accountSetting.id).subscribe(function (response) {
+                            _this.allAccountSettings.splice(settingIndex, 1);
+                        });
+                    }
+                    else {
+                        console.error("Cannot find AccountSettingRestService to delete with id ", accountSetting.id);
+                    }
                 };
                 AdminAccountSettingComponent = __decorate([
                     core_1.Component({
@@ -125,7 +151,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../mod
                         templateUrl: 'app/view/admin/account-setting.html',
                         directives: [display_error_directive_1.DisplayErrorDirective]
                     }), 
-                    __metadata('design:paramtypes', [http_1.Http, common_1.FormBuilder, account_setting_rest_service_1.AccountSettingRestService])
+                    __metadata('design:paramtypes', [http_1.Http, common_1.FormBuilder, account_setting_rest_service_1.AccountSettingRestService, form_utils_service_1.FormUtilsService])
                 ], AdminAccountSettingComponent);
                 return AdminAccountSettingComponent;
             })();

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './home/home.component', './admin/admin-category.component', './admin/admin-account-setting.component'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', './home/home.component', './import/import.component', './preferences/preferences.component', './admin/admin-category.component', './admin/admin-account-setting.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/router', './home/home.component', '.
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, home_component_1, admin_category_component_1, admin_account_setting_component_1;
+    var core_1, router_1, home_component_1, import_component_1, preferences_component_1, admin_category_component_1, admin_account_setting_component_1;
     var AppComponent;
     return {
         setters:[
@@ -20,6 +20,12 @@ System.register(['angular2/core', 'angular2/router', './home/home.component', '.
             },
             function (home_component_1_1) {
                 home_component_1 = home_component_1_1;
+            },
+            function (import_component_1_1) {
+                import_component_1 = import_component_1_1;
+            },
+            function (preferences_component_1_1) {
+                preferences_component_1 = preferences_component_1_1;
             },
             function (admin_category_component_1_1) {
                 admin_category_component_1 = admin_category_component_1_1;
@@ -34,8 +40,10 @@ System.register(['angular2/core', 'angular2/router', './home/home.component', '.
                 AppComponent = __decorate([
                     router_1.RouteConfig([
                         new router_1.Route({ path: '/home', component: home_component_1.HomeComponent, name: 'Home', useAsDefault: true }),
-                        new router_1.Route({ path: '/admin/category', component: admin_category_component_1.AdminCategoryComponent, name: 'AdminCategory' }),
-                        new router_1.Route({ path: '/admin/account-setting', component: admin_account_setting_component_1.AdminAccountSettingComponent, name: 'AdminAccountSetting' })
+                        new router_1.Route({ path: '/import', component: import_component_1.ImportComponent, name: 'Import' }),
+                        new router_1.Route({ path: '/preferences', component: preferences_component_1.PreferencesComponent, name: 'Preferences' }),
+                        new router_1.Route({ path: '/admin-category', component: admin_category_component_1.AdminCategoryComponent, name: 'AdminCategory' }),
+                        new router_1.Route({ path: '/admin-account-setting', component: admin_account_setting_component_1.AdminAccountSettingComponent, name: 'AdminAccountSetting' })
                     ]),
                     core_1.Component({
                         selector: 'money-app',

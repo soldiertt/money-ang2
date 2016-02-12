@@ -7,5 +7,6 @@ module.exports = function() {
     require('../model/category.srv.model');
     require('../model/transaction.srv.model');
     require('../model/account-setting.srv.model');
+    require('../model/preference.srv.model');
     return db;
 };
