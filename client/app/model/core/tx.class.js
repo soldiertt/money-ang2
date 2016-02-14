@@ -1,14 +1,20 @@
-System.register([], function(exports_1) {
+System.register(["./account.class"], function(exports_1) {
+    "use strict";
+    var account_class_1;
     var Tx;
     return {
-        setters:[],
+        setters:[
+            function (account_class_1_1) {
+                account_class_1 = account_class_1_1;
+            }],
         execute: function() {
             Tx = (function () {
-                function Tx(amount) {
-                    this.amount = amount;
+                function Tx() {
+                    this.ownAccount = new account_class_1.Account();
+                    this.thirdPartyAccount = new account_class_1.Account();
                 }
                 return Tx;
-            })();
+            }());
             exports_1("Tx", Tx);
         }
     }

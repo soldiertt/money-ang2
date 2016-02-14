@@ -42,6 +42,10 @@ System.register(['angular2/core', '../../model/core/preference.class', '../../se
                 PreferencesComponent.prototype.onSave = function () {
                     var _this = this;
                     if (this.preference.id) {
+                        this._preferenceRestService.update(this.preference).subscribe(function (response) {
+                            _this.preference = response.json();
+                            console.log("Preferences were updated");
+                        });
                     }
                     else {
                         this._preferenceRestService.create(this.preference).subscribe(function (response) {

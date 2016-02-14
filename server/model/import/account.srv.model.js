@@ -4,10 +4,10 @@ var mongoose = require('mongoose'),
 var AccountSchema = new Schema({
     name: {
         type: String,
-        required: 'Name is required',
+        required: 'Account name is required',
         trim: true
     },
-    accountNumber: {
+    number: {
         type: String,
         required: 'Account number is required',
         unique: true,

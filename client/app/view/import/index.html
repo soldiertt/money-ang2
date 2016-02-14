@@ -6,13 +6,20 @@
         <th>Amount</th>
         <th>Third-party</th>
         <th>Communication</th>
+        <th>Comment</th>
         <th>Category</th>
         <th>Compta date</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        
+      <tr *ngFor="#tx of pendingTxList">
+        <td>{{tx.date | date}}</td>
+        <td>{{tx.amount}}</td>
+        <td>{{tx.thirdPartyAccount.name}}</td>
+        <td>{{tx.communication}}</td>
+        <td>{{tx.comment}}</td>
+        <td></td>
+        <td></td>
       </tr>
     </tbody>
   </table>

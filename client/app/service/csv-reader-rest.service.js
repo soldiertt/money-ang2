@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http'], function(exports_1) {
+System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9,7 +9,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, http_1;
-    var PreferenceRestService;
+    var CsvReaderRestService;
     return {
         setters:[
             function (core_1_1) {
@@ -17,28 +17,24 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1) {
             },
             function (http_1_1) {
                 http_1 = http_1_1;
-            }],
+            },
+            function (_1) {}],
         execute: function() {
-            PreferenceRestService = (function () {
-                function PreferenceRestService(_http) {
+            CsvReaderRestService = (function () {
+                function CsvReaderRestService(_http) {
                     this._http = _http;
                 }
-                PreferenceRestService.prototype.list = function () {
-                    return this._http.get('/restapi/preference');
+                CsvReaderRestService.prototype.list = function (rootPath, startsWith, headerLinesCount) {
+                    return this._http.get('/restapi/csvreader?rootPath=' + encodeURIComponent(rootPath)
+                        + "&startsWith=" + startsWith + "&headerLinesCount=" + headerLinesCount).map(function (res) { return res.json(); });
                 };
-                PreferenceRestService.prototype.create = function (newPreference) {
-                    return this._http.post('/restapi/preference', JSON.stringify(newPreference));
-                };
-                PreferenceRestService.prototype.update = function (newPreference) {
-                    return this._http.put('/restapi/preference/' + newPreference.id, JSON.stringify(newPreference));
-                };
-                PreferenceRestService = __decorate([
+                CsvReaderRestService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])
-                ], PreferenceRestService);
-                return PreferenceRestService;
+                ], CsvReaderRestService);
+                return CsvReaderRestService;
             })();
-            exports_1("PreferenceRestService", PreferenceRestService);
+            exports_1("CsvReaderRestService", CsvReaderRestService);
         }
     }
 });

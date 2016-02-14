@@ -1,4 +1,5 @@
 System.register([], function(exports_1) {
+    "use strict";
     var AccountFormValidator;
     return {
         setters:[],
@@ -16,8 +17,6 @@ System.register([], function(exports_1) {
                     var date = 0;
                     var desc = 0;
                     var id = 0;
-                    var ownAccountName = 0;
-                    var ownAccountNumber = 0;
                     var thirdPartyAccountName = 0;
                     var thirdPartyAccountNumber = 0;
                     var mappingOk = true;
@@ -41,12 +40,6 @@ System.register([], function(exports_1) {
                             case "id":
                                 id++;
                                 break;
-                            case "own-account-name":
-                                ownAccountName++;
-                                break;
-                            case "own-account-number":
-                                ownAccountNumber++;
-                                break;
                             case "third-party-account-name":
                                 thirdPartyAccountName++;
                                 break;
@@ -55,8 +48,7 @@ System.register([], function(exports_1) {
                                 break;
                         }
                     }
-                    if (amount != 1 || comm != 1 || date != 1 || desc > 1 || id != 1 || ownAccountName > 1
-                        || ownAccountNumber > 1 || thirdPartyAccountName != 1 || thirdPartyAccountNumber != 1) {
+                    if (amount != 1 || comm != 1 || date != 1 || desc > 1 || id != 1 || thirdPartyAccountName != 1 || thirdPartyAccountNumber != 1) {
                         mappingOk = false;
                     }
                     if (mappingOk) {
@@ -102,7 +94,7 @@ System.register([], function(exports_1) {
                         }
                     }
                     var amountStr = component.lineTokens[mapping.index];
-                    amountStr = amountStr.replace(/[,.]/g, '');
+                    amountStr = amountStr.replace(/[.]/g, '').replace(/,/g, '.');
                     if (!Number.isNaN(Number(amountStr))) {
                         mapping.isBelgianNumber = true;
                     }
@@ -133,7 +125,7 @@ System.register([], function(exports_1) {
                     }
                 };
                 return AccountFormValidator;
-            })();
+            }());
             exports_1("AccountFormValidator", AccountFormValidator);
         }
     }

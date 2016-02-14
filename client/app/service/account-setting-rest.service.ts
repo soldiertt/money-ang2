@@ -1,6 +1,7 @@
 import {Injectable} from 'angular2/core'
 import {Http} from 'angular2/http'
 import {Observable} from 'rxjs/Observable'
+import 'rxjs/add/operator/map';
 
 import {AccountSetting} from '../model/core/account-setting.class'
 
@@ -10,7 +11,7 @@ export class AccountSettingRestService {
     }
 
     list(): Observable<any> {
-      return this._http.get('/restapi/account-setting');
+      return this._http.get('/restapi/account-setting').map(res => res.json());
     }
 
     create(newAccountSetting: AccountSetting): Observable<any> {

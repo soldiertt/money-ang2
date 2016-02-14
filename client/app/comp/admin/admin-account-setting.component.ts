@@ -37,8 +37,8 @@ export class AdminAccountSettingComponent {
       fieldSeparator: fb.control('', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(1)])),
       fieldMapping: this.dummyFieldMappingControl
     });
-    this._accountSettingRestService.list().subscribe(data => {
-      this.allAccountSettings = data.json();
+    this._accountSettingRestService.list().subscribe(accountSettings => {
+      this.allAccountSettings = accountSettings;
     });
   }
 

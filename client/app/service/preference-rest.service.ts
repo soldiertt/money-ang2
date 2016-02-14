@@ -17,7 +17,7 @@ export class PreferenceRestService {
       return this._http.post('/restapi/preference', JSON.stringify(newPreference));
     }
 
-    delete(preferenceId: String): Observable<any> {
-      return this._http.delete('/restapi/preference/' + preferenceId);
+    update(newPreference: Preference): Observable<any> {
+      return this._http.put('/restapi/preference/' + newPreference.id, JSON.stringify(newPreference));
     }
 }

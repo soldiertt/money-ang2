@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http'], function(exports_1) {
+System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -17,14 +17,15 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1) {
             },
             function (http_1_1) {
                 http_1 = http_1_1;
-            }],
+            },
+            function (_1) {}],
         execute: function() {
             AccountSettingRestService = (function () {
                 function AccountSettingRestService(_http) {
                     this._http = _http;
                 }
                 AccountSettingRestService.prototype.list = function () {
-                    return this._http.get('/restapi/account-setting');
+                    return this._http.get('/restapi/account-setting').map(function (res) { return res.json(); });
                 };
                 AccountSettingRestService.prototype.create = function (newAccountSetting) {
                     return this._http.post('/restapi/account-setting', JSON.stringify(newAccountSetting));

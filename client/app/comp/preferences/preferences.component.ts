@@ -29,7 +29,10 @@ export class PreferencesComponent implements OnInit {
 
   onSave() {
     if (this.preference.id) {
-      //this._preferenceRestService.update()
+      this._preferenceRestService.update(this.preference).subscribe(response => {
+        this.preference = response.json();
+        console.log("Preferences were updated");
+      });
     } else {
       this._preferenceRestService.create(this.preference).subscribe(response => {
         this.preference = response.json();

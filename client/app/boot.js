@@ -1,5 +1,6 @@
-System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/platform/browser', './comp/app.component', './service/display-param.service', './service/category-rest.service', './service/account-setting-rest.service', './service/preference-rest.service', './service/form-utils.service', './config/json-request-options'], function(exports_1) {
-    var core_1, router_1, http_1, browser_1, app_component_1, display_param_service_1, category_rest_service_1, account_setting_rest_service_1, preference_rest_service_1, form_utils_service_1, json_request_options_1;
+System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/platform/browser', './comp/app.component', './service/display-param.service', './service/preference.service', './service/category-rest.service', './service/account-setting-rest.service', './service/preference-rest.service', './service/tx-rest.service', './service/csv-reader-rest.service', './service/form-utils.service', './config/json-request-options'], function(exports_1) {
+    "use strict";
+    var core_1, router_1, http_1, browser_1, app_component_1, display_param_service_1, preference_service_1, category_rest_service_1, account_setting_rest_service_1, preference_rest_service_1, tx_rest_service_1, csv_reader_rest_service_1, form_utils_service_1, json_request_options_1;
     return {
         setters:[
             function (core_1_1) {
@@ -20,6 +21,9 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
             function (display_param_service_1_1) {
                 display_param_service_1 = display_param_service_1_1;
             },
+            function (preference_service_1_1) {
+                preference_service_1 = preference_service_1_1;
+            },
             function (category_rest_service_1_1) {
                 category_rest_service_1 = category_rest_service_1_1;
             },
@@ -28,6 +32,12 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
             },
             function (preference_rest_service_1_1) {
                 preference_rest_service_1 = preference_rest_service_1_1;
+            },
+            function (tx_rest_service_1_1) {
+                tx_rest_service_1 = tx_rest_service_1_1;
+            },
+            function (csv_reader_rest_service_1_1) {
+                csv_reader_rest_service_1 = csv_reader_rest_service_1_1;
             },
             function (form_utils_service_1_1) {
                 form_utils_service_1 = form_utils_service_1_1;
@@ -38,9 +48,12 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
         execute: function() {
             browser_1.bootstrap(app_component_1.AppComponent, [
                 display_param_service_1.DisplayParamService,
+                preference_service_1.PreferenceService,
                 category_rest_service_1.CategoryRestService,
                 account_setting_rest_service_1.AccountSettingRestService,
                 preference_rest_service_1.PreferenceRestService,
+                tx_rest_service_1.TxRestService,
+                csv_reader_rest_service_1.CsvReaderRestService,
                 form_utils_service_1.FormUtilsService,
                 router_1.ROUTER_PROVIDERS,
                 http_1.HTTP_PROVIDERS,

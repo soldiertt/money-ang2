@@ -16,26 +16,26 @@ var TransactionSchema = new Schema({
         type: Number,
         required: 'Amount is required'
     },
-    own_account: {
+    ownAccount: {
       type: Account,
-      required: 'OwnAccount is required'
+      required: 'Own account is required'
     },
-    account: {
+    thirdPartyAccount: {
       type: Account,
-      required: 'Account is required'
+      required: 'Third-party account is required'
     },
     communication: {
       type: String
     },
-    date_compta: {
+    dateCompta: {
       type: Date
     },
-    category: {
+    categoryId: {
       type: Schema.ObjectId,
-      required: 'Category is required',
+      required: 'CategoryId is required',
       ref: 'Category'
     },
-    index: {
+    categoryIndex: {
       type: Number,
       required: 'Category index is required',
     },

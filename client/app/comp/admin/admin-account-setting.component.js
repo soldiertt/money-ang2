@@ -65,8 +65,8 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../mod
                         fieldSeparator: fb.control('', common_1.Validators.compose([common_1.Validators.required, common_1.Validators.minLength(1), common_1.Validators.maxLength(1)])),
                         fieldMapping: this.dummyFieldMappingControl
                     });
-                    this._accountSettingRestService.list().subscribe(function (data) {
-                        _this.allAccountSettings = data.json();
+                    this._accountSettingRestService.list().subscribe(function (accountSettings) {
+                        _this.allAccountSettings = accountSettings;
                     });
                 }
                 AdminAccountSettingComponent.prototype.onSettingChange = function (value) {

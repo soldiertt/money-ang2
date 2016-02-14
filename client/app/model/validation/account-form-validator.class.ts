@@ -20,8 +20,6 @@ export class AccountFormValidator {
     let date:number = 0;
     let desc:number = 0;
     let id:number = 0;
-    let ownAccountName:number = 0;
-    let ownAccountNumber:number = 0;
     let thirdPartyAccountName: number = 0;
     let thirdPartyAccountNumber: number = 0;
     let mappingOk: boolean = true;
@@ -45,12 +43,6 @@ export class AccountFormValidator {
         case "id":
           id++;
           break;
-        case "own-account-name":
-          ownAccountName++;
-          break;
-        case "own-account-number":
-          ownAccountNumber++;
-          break;
         case "third-party-account-name":
           thirdPartyAccountName++;
           break;
@@ -59,8 +51,7 @@ export class AccountFormValidator {
           break;
       }
     }
-    if (amount != 1 || comm != 1 || date != 1 || desc > 1 || id !=1 || ownAccountName > 1
-      || ownAccountNumber > 1 || thirdPartyAccountName != 1 || thirdPartyAccountNumber != 1) {
+    if (amount != 1 || comm != 1 || date != 1 || desc > 1 || id !=1 || thirdPartyAccountName != 1 || thirdPartyAccountNumber != 1) {
       mappingOk = false;
     }
     if (mappingOk) {
@@ -103,7 +94,7 @@ export class AccountFormValidator {
       }
     }
     let amountStr: string = component.lineTokens[mapping.index];
-    amountStr = amountStr.replace(/[,.]/g, '');
+    amountStr = amountStr.replace(/[.]/g, '').replace(/,/g, '.');
     if (!Number.isNaN(Number(amountStr))) {
       mapping.isBelgianNumber = true;
     }
