@@ -41,17 +41,22 @@ System.register(['angular2/core', '../../model/core/preference.class', '../../se
                 };
                 PreferencesComponent.prototype.onSave = function () {
                     var _this = this;
-                    if (this.preference.id) {
-                        this._preferenceRestService.update(this.preference).subscribe(function (response) {
-                            _this.preference = response.json();
-                            console.log("Preferences were updated");
-                        });
+                    if (this.preference.workingYear <= new Date().getFullYear() && this.preference.workingYear > 2000) {
+                        if (this.preference.id) {
+                            this._preferenceRestService.update(this.preference).subscribe(function (response) {
+                                _this.preference = response.json();
+                                console.log("Preferences were updated");
+                            });
+                        }
+                        else {
+                            this._preferenceRestService.create(this.preference).subscribe(function (response) {
+                                _this.preference = response.json();
+                                console.log("Preferences were saved");
+                            });
+                        }
                     }
                     else {
-                        this._preferenceRestService.create(this.preference).subscribe(function (response) {
-                            _this.preference = response.json();
-                            console.log("Preferences were saved");
-                        });
+                        console.error("Invalid year");
                     }
                 };
                 PreferencesComponent = __decorate([

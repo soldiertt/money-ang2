@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', '../../model/core/category.class', '../../service/category-rest.service', '../../service/form-utils.service', '../directive/display-error.directive'], function(exports_1) {
+System.register(['angular2/core', 'angular2/common', '../../model/core/category.class', '../../service/category-rest.service', '../../service/form-utils.service', '../directive/display-error.directive', '../../model/core/category-type.enum', '../../model/core/category-frequency.enum'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, category_class_1, category_rest_service_1, form_utils_service_1, display_error_directive_1;
+    var core_1, common_1, category_class_1, category_rest_service_1, form_utils_service_1, display_error_directive_1, category_type_enum_1, category_frequency_enum_1;
     var AdminCategoryComponent;
     return {
         setters:[
@@ -29,6 +29,12 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
             },
             function (display_error_directive_1_1) {
                 display_error_directive_1 = display_error_directive_1_1;
+            },
+            function (category_type_enum_1_1) {
+                category_type_enum_1 = category_type_enum_1_1;
+            },
+            function (category_frequency_enum_1_1) {
+                category_frequency_enum_1 = category_frequency_enum_1_1;
             }],
         execute: function() {
             AdminCategoryComponent = (function () {
@@ -36,34 +42,33 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                     var _this = this;
                     this._categoryRestService = _categoryRestService;
                     this._formUtilsService = _formUtilsService;
-                    this._categoryRestService.list().subscribe(function (data) {
-                        _this.categories = data.json();
+                    this.yearList = [2014, 2015, 2016];
+                    this._categoryRestService.list().subscribe(function (categories) {
+                        _this.categories = categories;
                     });
                     this.createForm = fb.group({
                         name: fb.control('', common_1.Validators.compose([common_1.Validators.required, common_1.Validators.minLength(3), common_1.Validators.maxLength(50)])),
                         type: fb.control('', common_1.Validators.required),
                         frequency: fb.control('', common_1.Validators.required),
-                        year: fb.control('', common_1.Validators.compose([common_1.Validators.required, this.isYear]))
+                        years: fb.control([], common_1.Validators.compose([common_1.Validators.required]))
                     });
                 }
-                AdminCategoryComponent.prototype.isYear = function (control) {
-                    var year = new Number(control.value);
-                    var actualYear = new Date().getFullYear();
-                    if (year > (actualYear - 5) && year < (actualYear + 1)) {
-                        return null;
+                AdminCategoryComponent.prototype.yearsValueChange = function (event) {
+                    var allSelectedYears = [];
+                    for (var i in event.target.selectedOptions) {
+                        if (event.target.selectedOptions[i].value) {
+                            allSelectedYears.push(event.target.selectedOptions[i].value);
+                        }
                     }
-                    else {
-                        return { wrongYear: true };
-                    }
+                    this.createForm.controls['years'].updateValue(allSelectedYears);
                 };
-                ;
                 AdminCategoryComponent.prototype.onCreate = function () {
                     var _this = this;
                     var controls = this.createForm.controls;
-                    var newCateg = new category_class_1.Category(controls['name'].value, controls['type'].value, controls['frequency'].value, controls['year'].value);
+                    var newCateg = new category_class_1.Category(controls['name'].value, category_type_enum_1.CatType[controls['type'].value], category_frequency_enum_1.CatFrequency[controls['frequency'].value], controls['years'].value);
                     this._categoryRestService.create(newCateg).subscribe(function (response) {
                         _this.categories.push(response.json());
-                        _this._formUtilsService.reset(_this.createForm, "name", "type", "frequency", "year");
+                        _this._formUtilsService.reset(_this.createForm, "name", "type", "frequency", "years");
                     });
                 };
                 AdminCategoryComponent.prototype.onDelete = function (category) {

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http'], function(exports_1) {
+System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -17,7 +17,8 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1) {
             },
             function (http_1_1) {
                 http_1 = http_1_1;
-            }],
+            },
+            function (_1) {}],
         execute: function() {
             PreferenceRestService = (function () {
                 function PreferenceRestService(_http) {
@@ -25,6 +26,20 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1) {
                 }
                 PreferenceRestService.prototype.list = function () {
                     return this._http.get('/restapi/preference');
+                };
+                PreferenceRestService.prototype.getPref = function () {
+                    return this.list().map(function (res) {
+                        var prefList = res.json();
+                        if (prefList.length > 0) {
+                            /*let preference: Preference = prefList[0];
+                            let foundKeys:string[] = Object.keys(preference).filter(key => key === prefName);
+                            if (foundKeys.length > 0) {
+                              return preference[foundKeys[0]];
+                            }*/
+                            return prefList[0];
+                        }
+                        return undefined;
+                    });
                 };
                 PreferenceRestService.prototype.create = function (newPreference) {
                     return this._http.post('/restapi/preference', JSON.stringify(newPreference));

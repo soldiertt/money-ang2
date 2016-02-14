@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http'], function(exports_1) {
+System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -17,14 +17,18 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1) {
             },
             function (http_1_1) {
                 http_1 = http_1_1;
-            }],
+            },
+            function (_1) {}],
         execute: function() {
             CategoryRestService = (function () {
                 function CategoryRestService(_http) {
                     this._http = _http;
                 }
                 CategoryRestService.prototype.list = function () {
-                    return this._http.get('/restapi/category');
+                    return this._http.get('/restapi/category').map(function (res) { return res.json(); });
+                };
+                CategoryRestService.prototype.listForYear = function (year) {
+                    return this._http.get('/restapi/category/search?year=' + year).map(function (res) { return res.json(); });
                 };
                 CategoryRestService.prototype.create = function (newCateg) {
                     return this._http.post('/restapi/category', JSON.stringify(newCateg));

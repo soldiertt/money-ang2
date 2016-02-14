@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    Account = require('./import/account.srv.model');
+    Account = require('./import/account.srv.model'),
+    CategoryLink = require('./import/category-link.srv.model');
 
 var TransactionSchema = new Schema({
     ref: {
@@ -30,17 +31,12 @@ var TransactionSchema = new Schema({
     dateCompta: {
       type: Date
     },
-    categoryId: {
-      type: Schema.ObjectId,
-      required: 'CategoryId is required',
-      ref: 'Category'
-    },
-    categoryIndex: {
-      type: Number,
-      required: 'Category index is required',
-    },
     comment: {
       type: String
+    },
+    categoryLink: {
+      type: CategoryLink,
+      required: 'Category link is required'
     }
 });
 

@@ -4,8 +4,12 @@ var mongoose = require('mongoose'),
 var PreferenceSchema = new Schema({
     csvPath: {
       type: String,
-      required: 'csvPath name is required',
+      required: 'Csv path is required',
       trim: true
+    },
+    workingYear: {
+      type: Number,
+      required: 'Working year is required',
     }
 });
 

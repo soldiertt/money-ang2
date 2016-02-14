@@ -5,6 +5,8 @@ import {Category} from '../../model/core/category.class';
 import {CategoryRestService} from '../../service/category-rest.service'
 import {FormUtilsService} from '../../service/form-utils.service'
 import {DisplayErrorDirective} from '../directive/display-error.directive'
+import {CatType} from '../../model/core/category-type.enum'
+import {CatFrequency} from '../../model/core/category-frequency.enum'
 
 @Component({
     selector: 'money-admin-category',
@@ -16,36 +18,40 @@ export class AdminCategoryComponent {
     categories: Array<Category>;
     createForm: ControlGroup;
     name: Control;
+    yearList:Array<number>;
 
     constructor(private _categoryRestService : CategoryRestService, private _formUtilsService: FormUtilsService, fb: FormBuilder) {
-      this._categoryRestService.list().subscribe(data => {
-        this.categories = data.json();
+
+      this.yearList = [2014, 2015, 2016];
+
+      this._categoryRestService.list().subscribe(categories => {
+        this.categories = categories;
       });
 
       this.createForm = fb.group({
         name: fb.control('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])),
         type: fb.control('', Validators.required),
         frequency: fb.control('', Validators.required),
-        year: fb.control('', Validators.compose([Validators.required, this.isYear]))
+        years: fb.control([], Validators.compose([Validators.required]))
       });
     }
 
-    isYear(control: Control) {
-      let year = new Number(control.value);
-      let actualYear = new Date().getFullYear();
-      if (year > (actualYear - 5) && year < (actualYear + 1)) {
-        return null;
-      } else {
-        return {wrongYear : true};
+    yearsValueChange(event){
+      let allSelectedYears = [];
+      for (let i in event.target.selectedOptions){
+        if (event.target.selectedOptions[i].value) {
+          allSelectedYears.push(event.target.selectedOptions[i].value);
+        }
       }
-    };
+      (<Control> this.createForm.controls['years']).updateValue(allSelectedYears);
+    }
 
     onCreate(): void {
       let controls = this.createForm.controls;
-      let newCateg: Category = new Category(controls['name'].value, controls['type'].value, controls['frequency'].value, controls['year'].value);
+      let newCateg: Category = new Category(controls['name'].value, CatType[<string>controls['type'].value], CatFrequency[<string>controls['frequency'].value], controls['years'].value);
       this._categoryRestService.create(newCateg).subscribe(response => {
         this.categories.push(response.json());
-        this._formUtilsService.reset(this.createForm, "name", "type", "frequency", "year");
+        this._formUtilsService.reset(this.createForm, "name", "type", "frequency", "years");
       });
     }
 

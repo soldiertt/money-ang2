@@ -1,30 +1,30 @@
-import {Period} from "./period.class";
+import {Period} from './period.class'
+import {CatType} from './category-type.enum'
+import {CatFrequency} from './category-frequency.enum'
 
 export class Category {
   id: string;
-  name:string;
-  type:string;
-  frequency:string;
-  year: number;
-  income: boolean;
+  name: string;
+  type:CatType;
+  frequency:CatFrequency;
+  years: Array<number>;
   occSize: number;
   periods:Array<Period>;
 
-  constructor(name:string, type:string, frequency:string, year:number, income: boolean = false) {
+  constructor(name:string, type: CatType, frequency: CatFrequency, years:Array<number>) {
     this.name = name;
     this.type = type;
     this.frequency = frequency;
-    this.year = year;
-    this.income = income;
+    this.years = years;
     let occSize;
     switch(frequency) {
-      case "MONTHLY":
+      case CatFrequency.MONTHLY:
         occSize = 12;
         break;
-      case "QUARTER":
+      case CatFrequency.QUARTER:
         occSize = 4;
         break;
-      case "YEARLY":
+      case CatFrequency.YEARLY:
         occSize = 1;
         break;
     }

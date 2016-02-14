@@ -53,6 +53,19 @@ exports.list = function (req, res) {
     });
 };
 
+exports.search = function (req, res) {
+  var year = req.query.year;
+  Category.find({years: year}).exec(function (err, categories) {
+    if (err) {
+      return res.status(400).send({
+        message: getErrorMessage(err)
+      });
+    } else {
+      res.json(categories);
+    }
+  });
+};
+
 exports.categoryByID = function (req, res, next, id) {
     Category.findById(id).exec(function (err, category) {
         if (err) {

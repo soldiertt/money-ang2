@@ -35,8 +35,8 @@ System.register(['angular2/core', '../../service/display-param.service', '../../
                     this._categoryRestService = _categoryRestService;
                     this.months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
                     this.categories = [];
-                    _categoryRestService.list().subscribe(function (data) {
-                        _this.categories = data.json();
+                    _categoryRestService.list().subscribe(function (categories) {
+                        _this.categories = categories;
                     });
                 }
                 MoneyTableComponent = __decorate([

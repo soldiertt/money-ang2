@@ -19,8 +19,8 @@ export class MoneyTableComponent {
   public categories: Array<Category> = [];
 
   constructor(public displayParamService: DisplayParamService, private _categoryRestService: CategoryRestService) {
-    _categoryRestService.list().subscribe(data => {
-      this.categories = data.json();
+    _categoryRestService.list().subscribe(categories => {
+      this.categories = categories;
     })
   }
 }

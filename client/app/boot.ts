@@ -4,7 +4,6 @@ import {HTTP_PROVIDERS, RequestOptions} from 'angular2/http'
 import {bootstrap}    from 'angular2/platform/browser'
 import {AppComponent} from './comp/app.component'
 import {DisplayParamService} from './service/display-param.service'
-import {PreferenceService} from './service/preference.service'
 import {CategoryRestService} from './service/category-rest.service'
 import {AccountSettingRestService} from './service/account-setting-rest.service'
 import {PreferenceRestService} from './service/preference-rest.service'
@@ -16,7 +15,6 @@ import {JsonRequestOptions} from './config/json-request-options'
 
 bootstrap(AppComponent, [
   DisplayParamService,
-  PreferenceService,
   CategoryRestService,
   AccountSettingRestService,
   PreferenceRestService,

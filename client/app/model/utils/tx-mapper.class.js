@@ -1,5 +1,4 @@
 System.register(['../core/tx.class'], function(exports_1) {
-    "use strict";
     var tx_class_1;
     var TxMapper;
     return {
@@ -33,7 +32,7 @@ System.register(['../core/tx.class'], function(exports_1) {
                             case 'date':
                                 var dateStr = tokens[mapping.index];
                                 var parms = dateStr.split(/[\.\-\/]/);
-                                var yyyy = void 0, mm = void 0, dd = void 0;
+                                var yyyy, mm, dd;
                                 if (mapping.isDateDMY) {
                                     yyyy = parseInt(parms[2], 10);
                                     mm = parseInt(parms[1], 10);
@@ -60,7 +59,7 @@ System.register(['../core/tx.class'], function(exports_1) {
                     return outTx;
                 };
                 return TxMapper;
-            }());
+            })();
             exports_1("TxMapper", TxMapper);
         }
     }

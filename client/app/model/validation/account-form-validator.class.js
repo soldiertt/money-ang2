@@ -1,5 +1,4 @@
 System.register([], function(exports_1) {
-    "use strict";
     var AccountFormValidator;
     return {
         setters:[],
@@ -125,7 +124,7 @@ System.register([], function(exports_1) {
                     }
                 };
                 return AccountFormValidator;
-            }());
+            })();
             exports_1("AccountFormValidator", AccountFormValidator);
         }
     }

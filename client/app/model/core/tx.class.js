@@ -1,5 +1,4 @@
 System.register(["./account.class"], function(exports_1) {
-    "use strict";
     var account_class_1;
     var Tx;
     return {
@@ -14,7 +13,7 @@ System.register(["./account.class"], function(exports_1) {
                     this.thirdPartyAccount = new account_class_1.Account();
                 }
                 return Tx;
-            }());
+            })();
             exports_1("Tx", Tx);
         }
     }

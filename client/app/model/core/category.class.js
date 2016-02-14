@@ -1,25 +1,27 @@
-System.register([], function(exports_1) {
+System.register(['./category-frequency.enum'], function(exports_1) {
+    var category_frequency_enum_1;
     var Category;
     return {
-        setters:[],
+        setters:[
+            function (category_frequency_enum_1_1) {
+                category_frequency_enum_1 = category_frequency_enum_1_1;
+            }],
         execute: function() {
             Category = (function () {
-                function Category(name, type, frequency, year, income) {
-                    if (income === void 0) { income = false; }
+                function Category(name, type, frequency, years) {
                     this.name = name;
                     this.type = type;
                     this.frequency = frequency;
-                    this.year = year;
-                    this.income = income;
+                    this.years = years;
                     var occSize;
                     switch (frequency) {
-                        case "MONTHLY":
+                        case category_frequency_enum_1.CatFrequency.MONTHLY:
                             occSize = 12;
                             break;
-                        case "QUARTER":
+                        case category_frequency_enum_1.CatFrequency.QUARTER:
                             occSize = 4;
                             break;
-                        case "YEARLY":
+                        case category_frequency_enum_1.CatFrequency.YEARLY:
                             occSize = 1;
                             break;
                     }

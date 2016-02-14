@@ -18,7 +18,27 @@
         <td>{{tx.thirdPartyAccount.name}}</td>
         <td>{{tx.communication}}</td>
         <td>{{tx.comment}}</td>
-        <td></td>
+        <td>
+          <div>
+            <input type="radio" name="cat-type-{{tx.ref}}" id="cat-type-fixed-{{tx.ref}}" value="FIXED" />
+            <label [attr.for]="'cat-type-fixed-' + tx.ref">Fixed</label>
+            <input type="radio" name="cat-type-{{tx.ref}}" id="cat-type-other-{{tx.ref}}" value="OTHER" checked="checked" />
+            <label [attr.for]="'cat-type-other-' + tx.ref">Other</label>
+          </div>
+          <div>
+            <input type="radio" name="cat-freq-{{tx.ref}}" id="cat-freq-monthly-{{tx.ref}}" value="MONTHLY" checked="checked" />
+            <label [attr.for]="'cat-freq-monthly-' + tx.ref">M</label>
+            <input type="radio" name="cat-freq-{{tx.ref}}" id="cat-freq-quarter-{{tx.ref}}" value="QUARTER" />
+            <label [attr.for]="'cat-freq-quarter-' + tx.ref">Q</label>
+            <input type="radio" name="cat-freq-{{tx.ref}}" id="cat-freq-yearly-{{tx.ref}}" value="YEARLY" />
+            <label [attr.for]="'cat-freq-yearly-' + tx.ref">Y</label>
+          </div>
+          <div>
+            <select>
+              <option *ngFor="#cat of yearCategories" [value]="cat.id">{{cat.name}}</option>
+            </select>
+          </div>
+        </td>
         <td></td>
       </tr>
     </tbody>
