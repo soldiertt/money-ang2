@@ -12,7 +12,7 @@ body {
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 60px;
-  background-color: #f5f5f5;
+  background-color: #d5d5d5;
 }
 
 fieldset {
@@ -35,6 +35,30 @@ fieldset {
 .csvline-header {
   background-color: red;
 }
+
+.form-control-inline {
+    min-width: 0;
+    width: auto;
+    display: inline;
+}
+
+.spacer-span {
+  display: inline-block;
+  width: 30px;
+}
+
+.label-std {
+  font-weight: normal;
+}
+
+.center {
+  text-align: center;
+}
+
+.table-valign-middle td {
+  vertical-align: middle !important;
+}
+
 /** Override boostrap styles **/
 .alert {
   margin-bottom:0px;
