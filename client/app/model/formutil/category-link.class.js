@@ -5,6 +5,7 @@ System.register([], function(exports_1) {
         execute: function() {
             CategoryLink = (function () {
                 function CategoryLink() {
+                    this.categoryId = "";
                 }
                 return CategoryLink;
             })();

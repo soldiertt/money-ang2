@@ -4,6 +4,8 @@ module.exports = function (app) {
     app.route('/restapi/category')
       .get(categoryCtrl.list)
       .post(categoryCtrl.create);
+    app.route('/restapi/category/addtx')
+      .post(categoryCtrl.addTx);
     app.route('/restapi/category/search')
       .get(categoryCtrl.search);
     app.route('/restapi/category/:categoryId')

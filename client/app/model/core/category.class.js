@@ -1,8 +1,11 @@
-System.register(['./category-frequency.enum'], function(exports_1) {
-    var category_frequency_enum_1;
+System.register(['./period.class', './category-frequency.enum'], function(exports_1) {
+    var period_class_1, category_frequency_enum_1;
     var Category;
     return {
         setters:[
+            function (period_class_1_1) {
+                period_class_1 = period_class_1_1;
+            },
             function (category_frequency_enum_1_1) {
                 category_frequency_enum_1 = category_frequency_enum_1_1;
             }],
@@ -25,8 +28,12 @@ System.register(['./category-frequency.enum'], function(exports_1) {
                             occSize = 1;
                             break;
                     }
-                    this.occSize = occSize;
-                    this.periods = new Array(occSize);
+                    this.periods = [];
+                    for (var i = 0; i < years.length; i++) {
+                        for (var j = 0; j < occSize; j++) {
+                            this.periods.push(new period_class_1.Period(years[i], j));
+                        }
+                    }
                 }
                 return Category;
             })();

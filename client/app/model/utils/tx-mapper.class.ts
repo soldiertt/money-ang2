@@ -7,8 +7,8 @@ export class TxMapper {
     let tokens:Array<string> = csvLine.split(setting.fieldSeparator);
     let outTx: Tx = new Tx();
     outTx.ownAccount.name = setting.name;
-    outTx.ownAccount.name = setting.accountNumber;
-    
+    outTx.ownAccount.number = setting.accountNumber;
+
     setting.fieldMappings.forEach(function(mapping) {
       switch (mapping.value) {
         case 'id':
@@ -21,7 +21,7 @@ export class TxMapper {
           }
           break;
         case 'communication':
-          outTx.communication = tokens[mapping.index];
+          outTx.communication = tokens[mapping.index].trim();
           break;
         case 'date':
           let dateStr = tokens[mapping.index];

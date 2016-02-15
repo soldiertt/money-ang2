@@ -1,15 +1,20 @@
 import {Tx} from "./tx.class";
 
 export class Period {
+  year:number;
+  index:number;
   total:number;
-  tx:Array<Tx>;
+  txList:Array<Tx>;
 
-  constructor() {
+  constructor(year:number, index:number) {
+    this.year = year;
+    this.index = index;
     this.total = 0;
+    this.txList = [];
   }
 
   addTx(tx:Tx) {
-    this.tx.push(tx);
+    this.txList.push(tx);
     this.total += tx.amount;
   }
 }

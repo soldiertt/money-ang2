@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], function(exports_1) {
+System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map', 'rxjs/add/observable/fromArray'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,15 +18,17 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
             function (http_1_1) {
                 http_1 = http_1_1;
             },
-            function (_1) {}],
+            function (_1) {},
+            function (_2) {}],
         execute: function() {
             CsvReaderRestService = (function () {
                 function CsvReaderRestService(_http) {
                     this._http = _http;
                 }
-                CsvReaderRestService.prototype.list = function (rootPath, startsWith, headerLinesCount) {
+                CsvReaderRestService.prototype.list = function (rootPath, accountSetting) {
                     return this._http.get('/restapi/csvreader?rootPath=' + encodeURIComponent(rootPath)
-                        + "&startsWith=" + startsWith + "&headerLinesCount=" + headerLinesCount).map(function (res) { return res.json(); });
+                        + "&startsWith=" + accountSetting.fileStartsWith + "&headerLinesCount=" + accountSetting.headerLinesCount)
+                        .map(function (res) { return res.json(); });
                 };
                 CsvReaderRestService = __decorate([
                     core_1.Injectable(), 

@@ -1,5 +1,4 @@
 import {Account} from "./account.class";
-import {CategoryLink} from "./category-link.class";
 
 export class Tx {
   id: string;
@@ -11,7 +10,6 @@ export class Tx {
   communication: string;
   dateCompta: Date;
   comment: string;
-  categoryLink: CategoryLink;
 
   constructor() {
     this.ownAccount = new Account();

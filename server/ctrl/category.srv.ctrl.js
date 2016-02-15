@@ -1,4 +1,5 @@
-var Category = require('mongoose').model('Category');
+var Category = require('mongoose').model('Category'),
+    Transaction = require('../model/import/tx.srv.model');
 
 var getErrorMessage = function (err) {
     var message = '',
@@ -26,17 +27,39 @@ var getErrorMessage = function (err) {
 };
 
 exports.create = function (req, res) {
-   console.log(req.body);
-    var category = new Category(req.body);
-    category.save(function (err) {
-        if (err) {
-            return res.status(400).send({
-                message: getErrorMessage(err)
-            });
-        } else {
-            res.json(category);
-        }
-    });
+  var category = new Category(req.body);
+  category.save(function (err) {
+    if (err) {
+      return res.status(400).send({
+        message: getErrorMessage(err)
+      });
+    } else {
+      res.json(category);
+    }
+  });
+};
+
+exports.addTx = function (req, res) {
+  var tx = req.body.tx;
+  var catLink = req.body.categoryLink;
+  Category.update({ _id: catLink.categoryId,
+                    periods : {
+                      $elemMatch: { year: catLink.categoryYear, index: catLink.periodIndex }
+                    }
+                  },
+                  {
+                    $push: { "periods.$.txList" : tx}
+                  },
+                  function (err) {
+                    if (err) {
+                      return res.status(400).send({
+                        message: getErrorMessage(err)
+                      });
+                    } else {
+                      res.json(tx);
+                    }
+                  }
+  );
 };
 
 exports.list = function (req, res) {
@@ -55,15 +78,28 @@ exports.list = function (req, res) {
 
 exports.search = function (req, res) {
   var year = req.query.year;
-  Category.find({years: year}).exec(function (err, categories) {
-    if (err) {
-      return res.status(400).send({
-        message: getErrorMessage(err)
-      });
-    } else {
-      res.json(categories);
-    }
-  });
+  if (req.query.id) {
+    var catId = req.query.id;
+    Category.findOne({_id: catId, years: year}).exec(function (err, category) {
+      if (err) {
+        return res.status(400).send({
+          message: getErrorMessage(err)
+        });
+      } else {
+        res.json(category);
+      }
+    });
+  } else {
+    Category.find({years: year}).exec(function (err, categories) {
+      if (err) {
+        return res.status(400).send({
+          message: getErrorMessage(err)
+        });
+      } else {
+        res.json(categories);
+      }
+    });
+  }
 };
 
 exports.categoryByID = function (req, res, next, id) {

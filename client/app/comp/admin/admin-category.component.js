@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', '../../model/core/category.class', '../../service/category-rest.service', '../../service/form-utils.service', '../directive/display-error.directive', '../../model/core/category-type.enum', '../../model/core/category-frequency.enum'], function(exports_1) {
+System.register(['angular2/core', 'angular2/common', '../../model/core/category.class', '../../service/category-rest.service', '../../service/form-utils.service', '../directive/display-error.directive', '../../model/core/category-type.enum', '../../model/core/category-frequency.enum', '../../pipe/category-sorter-pipe'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, category_class_1, category_rest_service_1, form_utils_service_1, display_error_directive_1, category_type_enum_1, category_frequency_enum_1;
+    var core_1, common_1, category_class_1, category_rest_service_1, form_utils_service_1, display_error_directive_1, category_type_enum_1, category_frequency_enum_1, category_sorter_pipe_1;
     var AdminCategoryComponent;
     return {
         setters:[
@@ -35,6 +35,9 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
             },
             function (category_frequency_enum_1_1) {
                 category_frequency_enum_1 = category_frequency_enum_1_1;
+            },
+            function (category_sorter_pipe_1_1) {
+                category_sorter_pipe_1 = category_sorter_pipe_1_1;
             }],
         execute: function() {
             AdminCategoryComponent = (function () {
@@ -57,7 +60,7 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                     var allSelectedYears = [];
                     for (var i in event.target.selectedOptions) {
                         if (event.target.selectedOptions[i].value) {
-                            allSelectedYears.push(event.target.selectedOptions[i].value);
+                            allSelectedYears.push(Number(event.target.selectedOptions[i].value));
                         }
                     }
                     this.createForm.controls['years'].updateValue(allSelectedYears);
@@ -66,10 +69,11 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                     var _this = this;
                     var controls = this.createForm.controls;
                     var newCateg = new category_class_1.Category(controls['name'].value, category_type_enum_1.CatType[controls['type'].value], category_frequency_enum_1.CatFrequency[controls['frequency'].value], controls['years'].value);
+                    console.log(newCateg);
                     this._categoryRestService.create(newCateg).subscribe(function (response) {
                         _this.categories.push(response.json());
                         _this._formUtilsService.reset(_this.createForm, "name", "type", "frequency", "years");
-                    });
+                    }, function (err) { return console.log(err); });
                 };
                 AdminCategoryComponent.prototype.onDelete = function (category) {
                     var _this = this;
@@ -87,7 +91,8 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                     core_1.Component({
                         selector: 'money-admin-category',
                         templateUrl: 'app/view/admin/category.html',
-                        directives: [display_error_directive_1.DisplayErrorDirective]
+                        directives: [display_error_directive_1.DisplayErrorDirective],
+                        pipes: [category_sorter_pipe_1.CategorySorterPipe]
                     }), 
                     __metadata('design:paramtypes', [category_rest_service_1.CategoryRestService, form_utils_service_1.FormUtilsService, common_1.FormBuilder])
                 ], AdminCategoryComponent);

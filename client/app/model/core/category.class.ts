@@ -8,7 +8,6 @@ export class Category {
   type:CatType;
   frequency:CatFrequency;
   years: Array<number>;
-  occSize: number;
   periods:Array<Period>;
 
   constructor(name:string, type: CatType, frequency: CatFrequency, years:Array<number>) {
@@ -28,7 +27,11 @@ export class Category {
         occSize = 1;
         break;
     }
-    this.occSize = occSize;
-    this.periods = new Array<Period>(occSize);
+    this.periods = [];
+    for (let i = 0; i < years.length; i++) {
+      for (let j = 0; j < occSize; j++) {
+        this.periods.push(new Period(years[i], j));
+      }
+    }
   }
 }

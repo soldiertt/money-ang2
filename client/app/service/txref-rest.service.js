@@ -9,7 +9,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, http_1;
-    var TxRestService;
+    var TxrefRestService;
     return {
         setters:[
             function (core_1_1) {
@@ -20,29 +20,23 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
             },
             function (_1) {}],
         execute: function() {
-            TxRestService = (function () {
-                function TxRestService(_http) {
+            TxrefRestService = (function () {
+                function TxrefRestService(_http) {
                     this._http = _http;
                 }
-                TxRestService.prototype.readByRef = function (txRef) {
-                    return this._http.get('/restapi/tx/ref/' + txRef).map(function (res) { return res.json(); });
+                TxrefRestService.prototype.readByRef = function (txRef) {
+                    return this._http.get('/restapi/txref/ref/' + txRef).map(function (res) { return res.json(); });
                 };
-                TxRestService.prototype.list = function () {
-                    return this._http.get('/restapi/tx');
+                TxrefRestService.prototype.create = function (txRef) {
+                    return this._http.post('/restapi/txref', JSON.stringify(txRef));
                 };
-                TxRestService.prototype.create = function (newTx) {
-                    return this._http.post('/restapi/tx', JSON.stringify(newTx));
-                };
-                TxRestService.prototype.update = function (newTx) {
-                    return this._http.put('/restapi/tx/' + newTx.id, JSON.stringify(newTx));
-                };
-                TxRestService = __decorate([
+                TxrefRestService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])
-                ], TxRestService);
-                return TxRestService;
+                ], TxrefRestService);
+                return TxrefRestService;
             })();
-            exports_1("TxRestService", TxRestService);
+            exports_1("TxrefRestService", TxrefRestService);
         }
     }
 });

@@ -1,5 +1,5 @@
-System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/platform/browser', './comp/app.component', './service/display-param.service', './service/category-rest.service', './service/account-setting-rest.service', './service/preference-rest.service', './service/tx-rest.service', './service/csv-reader-rest.service', './service/form-utils.service', './config/json-request-options'], function(exports_1) {
-    var core_1, router_1, http_1, browser_1, app_component_1, display_param_service_1, category_rest_service_1, account_setting_rest_service_1, preference_rest_service_1, tx_rest_service_1, csv_reader_rest_service_1, form_utils_service_1, json_request_options_1;
+System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/platform/browser', './comp/app.component', './service/display-param.service', './service/category-rest.service', './service/account-setting-rest.service', './service/preference-rest.service', './service/txref-rest.service', './service/csv-reader-rest.service', './service/form-utils.service', './config/json-request-options'], function(exports_1) {
+    var core_1, router_1, http_1, browser_1, app_component_1, display_param_service_1, category_rest_service_1, account_setting_rest_service_1, preference_rest_service_1, txref_rest_service_1, csv_reader_rest_service_1, form_utils_service_1, json_request_options_1;
     return {
         setters:[
             function (core_1_1) {
@@ -29,8 +29,8 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
             function (preference_rest_service_1_1) {
                 preference_rest_service_1 = preference_rest_service_1_1;
             },
-            function (tx_rest_service_1_1) {
-                tx_rest_service_1 = tx_rest_service_1_1;
+            function (txref_rest_service_1_1) {
+                txref_rest_service_1 = txref_rest_service_1_1;
             },
             function (csv_reader_rest_service_1_1) {
                 csv_reader_rest_service_1 = csv_reader_rest_service_1_1;
@@ -47,7 +47,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                 category_rest_service_1.CategoryRestService,
                 account_setting_rest_service_1.AccountSettingRestService,
                 preference_rest_service_1.PreferenceRestService,
-                tx_rest_service_1.TxRestService,
+                txref_rest_service_1.TxrefRestService,
                 csv_reader_rest_service_1.CsvReaderRestService,
                 form_utils_service_1.FormUtilsService,
                 router_1.ROUTER_PROVIDERS,

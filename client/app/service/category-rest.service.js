@@ -30,11 +30,24 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                 CategoryRestService.prototype.listForYear = function (year) {
                     return this._http.get('/restapi/category/search?year=' + year).map(function (res) { return res.json(); });
                 };
+                CategoryRestService.prototype.existsCategoryForYear = function (categoryId, year) {
+                    return this._http.get('/restapi/category/search?id=' + categoryId + '&year=' + year).map(function (res) {
+                        if (res) {
+                            return res.json();
+                        }
+                        else {
+                            return undefined;
+                        }
+                    });
+                };
                 CategoryRestService.prototype.create = function (newCateg) {
                     return this._http.post('/restapi/category', JSON.stringify(newCateg));
                 };
                 CategoryRestService.prototype.delete = function (categId) {
                     return this._http.delete('/restapi/category/' + categId);
+                };
+                CategoryRestService.prototype.addTx = function (txFormData) {
+                    return this._http.post('/restapi/category/addtx', JSON.stringify(txFormData));
                 };
                 CategoryRestService = __decorate([
                     core_1.Injectable(), 

@@ -1,4 +1,4 @@
-<div class="row">
+<div>
 <h2>Administration des catégories</h2>
 <!-- CREATION FORM -->
 <form (submit)="onCreate();nameCtrl.focus()" [ngFormModel]="createForm" class="form-horizontal">
@@ -61,7 +61,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="#category of categories">
+    <tr *ngFor="#category of categories | categorySorter">
       <td>{{category.name}}</td>
       <td>{{category.type}}</td>
       <td>{{category.frequency}}</td>

@@ -7,11 +7,13 @@ import {FormUtilsService} from '../../service/form-utils.service'
 import {DisplayErrorDirective} from '../directive/display-error.directive'
 import {CatType} from '../../model/core/category-type.enum'
 import {CatFrequency} from '../../model/core/category-frequency.enum'
+import {CategorySorterPipe} from '../../pipe/category-sorter-pipe'
 
 @Component({
     selector: 'money-admin-category',
     templateUrl: 'app/view/admin/category.html',
-    directives: [DisplayErrorDirective]
+    directives: [DisplayErrorDirective],
+    pipes:[CategorySorterPipe]
 })
 
 export class AdminCategoryComponent {
@@ -37,10 +39,10 @@ export class AdminCategoryComponent {
     }
 
     yearsValueChange(event){
-      let allSelectedYears = [];
+      let allSelectedYears:Array<number> = [];
       for (let i in event.target.selectedOptions){
         if (event.target.selectedOptions[i].value) {
-          allSelectedYears.push(event.target.selectedOptions[i].value);
+          allSelectedYears.push(Number(event.target.selectedOptions[i].value));
         }
       }
       (<Control> this.createForm.controls['years']).updateValue(allSelectedYears);
@@ -49,10 +51,11 @@ export class AdminCategoryComponent {
     onCreate(): void {
       let controls = this.createForm.controls;
       let newCateg: Category = new Category(controls['name'].value, CatType[<string>controls['type'].value], CatFrequency[<string>controls['frequency'].value], controls['years'].value);
+      console.log(newCateg);
       this._categoryRestService.create(newCateg).subscribe(response => {
         this.categories.push(response.json());
         this._formUtilsService.reset(this.createForm, "name", "type", "frequency", "years");
-      });
+      }, err => console.log(err));
     }
 
     onDelete(category: Category) {

@@ -7,7 +7,7 @@ import {DisplayParamService} from './service/display-param.service'
 import {CategoryRestService} from './service/category-rest.service'
 import {AccountSettingRestService} from './service/account-setting-rest.service'
 import {PreferenceRestService} from './service/preference-rest.service'
-import {TxRestService} from './service/tx-rest.service'
+import {TxrefRestService} from './service/txref-rest.service'
 import {CsvReaderRestService} from './service/csv-reader-rest.service'
 import {FormUtilsService} from './service/form-utils.service'
 import {JsonRequestOptions} from './config/json-request-options'
@@ -18,7 +18,7 @@ bootstrap(AppComponent, [
   CategoryRestService,
   AccountSettingRestService,
   PreferenceRestService,
-  TxRestService,
+  TxrefRestService,
   CsvReaderRestService,
   FormUtilsService,
   ROUTER_PROVIDERS,

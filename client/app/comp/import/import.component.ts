@@ -1,4 +1,5 @@
-import {Component} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
+import 'rxjs/add/operator/map';
 
 import {AccountSetting} from '../../model/core/account-setting.class'
 import {Tx} from '../../model/core/tx.class'
@@ -8,26 +9,25 @@ import {PreferenceRestService} from '../../service/preference-rest.service'
 import {AccountSettingRestService} from '../../service/account-setting-rest.service'
 import {CategoryRestService} from '../../service/category-rest.service'
 import {CsvReaderRestService} from '../../service/csv-reader-rest.service'
-import {TxRestService} from '../../service/tx-rest.service'
+import {TxrefRestService} from '../../service/txref-rest.service'
 import {CatType} from '../../model/core/category-type.enum'
 import {CatFrequency} from '../../model/core/category-frequency.enum'
 import {TxFormData} from '../../model/formutil/tx-form-data.class'
+import {Txref} from '../../model/core/txref.class'
 import {CatfilterPipe} from '../../pipe/catfilter-pipe'
-import {TxSorterPipe} from '../../pipe/tx-sorter-pipe'
 
 @Component({
   selector: 'money-import',
   templateUrl: 'app/view/import/index.html',
   directives: [],
-  pipes: [CatfilterPipe, TxSorterPipe]
+  pipes: [CatfilterPipe]
 })
 
-export class ImportComponent {
+export class ImportComponent implements OnInit {
 
-  pendingTxList:Array<Tx> = [];
-  pendingRefList:Array<string> = [];
+  txFormDataList:Array<TxFormData> = [];
+  refList:Array<string> = [];
   yearCategories:Array<Category>;
-  txFormDataMap:Map<string, TxFormData> = new Map<string, TxFormData>();
 
   months:Array<Object> = [{value:0, name:"January"},{value:1, name:"February"},{value:2, name:"March"},
     {value:3, name:"April"},{value:4, name:"May"},{value:5, name:"June"},
@@ -38,9 +38,11 @@ export class ImportComponent {
   constructor(private _prefRestService: PreferenceRestService,
     private _accountSettingRestService: AccountSettingRestService,
     private _csvReaderRestService: CsvReaderRestService,
-    private _txRestService: TxRestService,
+    private _txrefRestService: TxrefRestService,
     private _categoryRestService : CategoryRestService) {
+  }
 
+  ngOnInit() {
     this._prefRestService.getPref().subscribe(preference => {
 
       this._categoryRestService.listForYear(preference.workingYear).subscribe(categories => {
@@ -49,15 +51,23 @@ export class ImportComponent {
 
       this._accountSettingRestService.list().subscribe(accounts => {
         accounts.forEach(account => {
-          this._csvReaderRestService.list(preference.csvPath, account.fileStartsWith, account.headerLinesCount).subscribe(csvLines => {
-            csvLines.forEach(csvLine => {
-              let tx = TxMapper.mapLineToTx(csvLine, account);
-              this._txRestService.readByRef(tx.ref).subscribe(foundTx => {
-                if (!foundTx && this.pendingRefList.indexOf(tx.ref) == -1) {
-                  this.pendingTxList.push(tx);
-                  this.pendingTxList = this.pendingTxList.slice(0); //Hack to force change detection
-                  this.pendingRefList.push(tx.ref);
-                  this.txFormDataMap.set(tx.ref, new TxFormData(tx.amount));
+          this._csvReaderRestService.list(preference.csvPath, account).subscribe(csvLines => {
+
+            let txList:Array<Tx> = csvLines.map(csvLine => TxMapper.mapLineToTx(csvLine, account));
+            txList.sort((a:Tx, b:Tx) => {
+              if (a.date > b.date) {
+                return 1;
+              } else if (a.date < b.date) {
+                return -1;
+              } else {
+                return 0;
+              }
+            });
+            txList.forEach(tx => {
+              this._txrefRestService.readByRef(tx.ref).subscribe(foundRef => {
+                if (!foundRef && this.refList.indexOf(tx.ref) == -1 && this.txFormDataList.length < 10) {
+                  this.txFormDataList.push(new TxFormData(tx));
+                  this.refList.push(tx.ref);
                 }
               });
             });
@@ -67,36 +77,53 @@ export class ImportComponent {
     });
   }
 
-  catTypeChanged($event, ref) {
-    this.txFormDataMap.get(ref).categoryType = CatType[<string>$event.target.value];
+  catTypeChanged($event, txFormData) {
+    txFormData.categoryType = CatType[<string>$event.target.value];
   }
 
-  catFrequencyChanged($event, ref) {
-    this.txFormDataMap.get(ref).categoryFrequency = CatFrequency[<string>$event.target.value];
+  catFrequencyChanged($event, txFormData) {
+    txFormData.categoryFrequency = CatFrequency[<string>$event.target.value];
   }
 
-  comptaDateChanged($event, ref) {
-    let txFormData = this.txFormDataMap.get(ref);
+  comptaDateChanged($event, txFormData) {
     if ($event.target.checked) {
-      txFormData.comptaDate = new Date(txFormData.comptaYear, txFormData.comptaMonth, 1);
+      txFormData.comptaDate = true;
     } else {
       txFormData.resetComptaDate();
     }
   }
 
-  comptaMonthChanged($event, ref) {
-    let txFormData = this.txFormDataMap.get(ref);
-    txFormData.comptaMonth = $event.target.value;
-    txFormData.comptaDate = new Date(txFormData.comptaYear, txFormData.comptaMonth, 1);
-  }
-
-  comptaYearChanged($event, ref) {
-    let txFormData = this.txFormDataMap.get(ref);
-    txFormData.comptaYear = $event.target.value;
-    txFormData.comptaDate = new Date(txFormData.comptaYear, txFormData.comptaMonth, 1);
-  }
-
-  display() {
-    console.log(this.txFormDataMap);
+  saveAllTx() {
+    for (let txFormData of this.txFormDataList) {
+      if (txFormData.categoryLink.categoryId) {
+        let comptaDate: Date;
+        if (txFormData.comptaDate) {
+          comptaDate = new Date(txFormData.comptaYear, txFormData.comptaMonth, 1);
+        } else {
+          comptaDate = txFormData.tx.date;
+        }
+        let comptaYear:number = comptaDate.getFullYear();
+        txFormData.categoryLink.categoryYear = comptaYear;
+        (function(comp: ImportComponent, inComptaDate: Date, txFormData: TxFormData) {
+          comp._categoryRestService.existsCategoryForYear(txFormData.categoryLink.categoryId, comptaYear).subscribe(category => {
+            if (category) {
+              if (category.frequency == CatFrequency.MONTHLY) {
+                txFormData.categoryLink.periodIndex = inComptaDate.getMonth();
+              } else if (category.frequency == CatFrequency.QUARTER) {
+                txFormData.categoryLink.periodIndex = Math.floor((inComptaDate.getMonth() + 3) / 3) - 1;
+              } else if (category.frequency == CatFrequency.YEARLY) {
+                txFormData.categoryLink.periodIndex = 0;
+              }
+              comp._txrefRestService.create(new Txref(txFormData.tx.ref)).subscribe(txrefAdded => {
+                console.log("Added tx ref");
+              });
+              comp._categoryRestService.addTx(txFormData).subscribe(txAdded => {
+                console.log("Added tx", txAdded);
+              });
+            }
+          });
+        })(this, comptaDate, txFormData);
+      }
+    }
   }
 }

@@ -14,7 +14,7 @@ System.register(['../core/tx.class'], function(exports_1) {
                     var tokens = csvLine.split(setting.fieldSeparator);
                     var outTx = new tx_class_1.Tx();
                     outTx.ownAccount.name = setting.name;
-                    outTx.ownAccount.name = setting.accountNumber;
+                    outTx.ownAccount.number = setting.accountNumber;
                     setting.fieldMappings.forEach(function (mapping) {
                         switch (mapping.value) {
                             case 'id':
@@ -27,7 +27,7 @@ System.register(['../core/tx.class'], function(exports_1) {
                                 }
                                 break;
                             case 'communication':
-                                outTx.communication = tokens[mapping.index];
+                                outTx.communication = tokens[mapping.index].trim();
                                 break;
                             case 'date':
                                 var dateStr = tokens[mapping.index];
