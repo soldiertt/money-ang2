@@ -25,6 +25,12 @@ var CategorySchema = new Schema({
     required: 'Type is required',
     enum: ["FIXED", "OTHER", "INCOMING"]
   },
+  nbPeriods: {
+    type: Number,
+    required: 'Nb periods is required',
+    min: 1,
+    max: 12
+  },
   periods: {
     type: [Period],
     required: 'Periods are required'

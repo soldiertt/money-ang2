@@ -9,7 +9,7 @@
 <tbody>
   <tr *ngFor="#category of categories | categorySorter | catfilter : displayParamService.types : displayParamService.frequencies">
     <td>{{category.name}}</td>
-    <td *ngFor="#period of category.periods" [attr.colspan]="12/category.occSize" class="money-cell">
+    <td *ngFor="#period of category.periods | periodFilter : workingYear" [attr.colspan]="12/category.nbPeriods" class="money-cell">
       {{period.total | currency : 'EUR' : true : '1.2'}}
     </td>
   </tr>

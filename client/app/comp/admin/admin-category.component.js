@@ -69,7 +69,6 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                     var _this = this;
                     var controls = this.createForm.controls;
                     var newCateg = new category_class_1.Category(controls['name'].value, category_type_enum_1.CatType[controls['type'].value], category_frequency_enum_1.CatFrequency[controls['frequency'].value], controls['years'].value);
-                    console.log(newCateg);
                     this._categoryRestService.create(newCateg).subscribe(function (response) {
                         _this.categories.push(response.json());
                         _this._formUtilsService.reset(_this.createForm, "name", "type", "frequency", "years");

@@ -142,7 +142,7 @@ System.register(['angular2/core', 'rxjs/add/operator/map', '../../model/utils/tx
                                             console.log("Added tx ref");
                                         });
                                         comp._categoryRestService.addTx(txFormData).subscribe(function (txAdded) {
-                                            console.log("Added tx", txAdded);
+                                            console.log("Added tx");
                                         });
                                     }
                                 });

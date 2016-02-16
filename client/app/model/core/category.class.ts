@@ -8,6 +8,7 @@ export class Category {
   type:CatType;
   frequency:CatFrequency;
   years: Array<number>;
+  nbPeriods: number;
   periods:Array<Period>;
 
   constructor(name:string, type: CatType, frequency: CatFrequency, years:Array<number>) {
@@ -15,23 +16,24 @@ export class Category {
     this.type = type;
     this.frequency = frequency;
     this.years = years;
-    let occSize;
-    switch(frequency) {
-      case CatFrequency.MONTHLY:
-        occSize = 12;
-        break;
-      case CatFrequency.QUARTER:
-        occSize = 4;
-        break;
-      case CatFrequency.YEARLY:
-        occSize = 1;
-        break;
-    }
+    this.nbPeriods = this._getNbPeriods();
     this.periods = [];
     for (let i = 0; i < years.length; i++) {
-      for (let j = 0; j < occSize; j++) {
+      for (let j = 0; j < this.nbPeriods; j++) {
         this.periods.push(new Period(years[i], j));
       }
     }
   }
+
+  private _getNbPeriods():number {
+    switch(this.frequency) {
+      case CatFrequency.MONTHLY:
+        return 12;
+      case CatFrequency.QUARTER:
+        return 4;
+      case CatFrequency.YEARLY:
+        return 1;
+    }
+  }
+
 }

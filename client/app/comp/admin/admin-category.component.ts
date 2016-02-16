@@ -51,7 +51,6 @@ export class AdminCategoryComponent {
     onCreate(): void {
       let controls = this.createForm.controls;
       let newCateg: Category = new Category(controls['name'].value, CatType[<string>controls['type'].value], CatFrequency[<string>controls['frequency'].value], controls['years'].value);
-      console.log(newCateg);
       this._categoryRestService.create(newCateg).subscribe(response => {
         this.categories.push(response.json());
         this._formUtilsService.reset(this.createForm, "name", "type", "frequency", "years");

@@ -118,7 +118,7 @@ export class ImportComponent implements OnInit {
                 console.log("Added tx ref");
               });
               comp._categoryRestService.addTx(txFormData).subscribe(txAdded => {
-                console.log("Added tx", txAdded);
+                console.log("Added tx");
               });
             }
           });

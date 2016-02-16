@@ -48,7 +48,8 @@ exports.addTx = function (req, res) {
                     }
                   },
                   {
-                    $push: { "periods.$.txList" : tx}
+                    $push: { "periods.$.txList" : tx },
+                    $inc: { "periods.$.total" : Math.abs(tx.amount) }
                   },
                   function (err) {
                     if (err) {

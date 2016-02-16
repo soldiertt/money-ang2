@@ -16,25 +16,24 @@ System.register(['./period.class', './category-frequency.enum'], function(export
                     this.type = type;
                     this.frequency = frequency;
                     this.years = years;
-                    var occSize;
-                    switch (frequency) {
-                        case category_frequency_enum_1.CatFrequency.MONTHLY:
-                            occSize = 12;
-                            break;
-                        case category_frequency_enum_1.CatFrequency.QUARTER:
-                            occSize = 4;
-                            break;
-                        case category_frequency_enum_1.CatFrequency.YEARLY:
-                            occSize = 1;
-                            break;
-                    }
+                    this.nbPeriods = this._getNbPeriods();
                     this.periods = [];
                     for (var i = 0; i < years.length; i++) {
-                        for (var j = 0; j < occSize; j++) {
+                        for (var j = 0; j < this.nbPeriods; j++) {
                             this.periods.push(new period_class_1.Period(years[i], j));
                         }
                     }
                 }
+                Category.prototype._getNbPeriods = function () {
+                    switch (this.frequency) {
+                        case category_frequency_enum_1.CatFrequency.MONTHLY:
+                            return 12;
+                        case category_frequency_enum_1.CatFrequency.QUARTER:
+                            return 4;
+                        case category_frequency_enum_1.CatFrequency.YEARLY:
+                            return 1;
+                    }
+                };
                 return Category;
             })();
             exports_1("Category", Category);
