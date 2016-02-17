@@ -1,15 +1,25 @@
-System.register(['./period.class', './category-frequency.enum'], function(exports_1) {
-    var period_class_1, category_frequency_enum_1;
-    var Category;
+System.register(['./money-enums'], function(exports_1) {
+    var money_enums_1;
+    var Period, Category;
     return {
         setters:[
-            function (period_class_1_1) {
-                period_class_1 = period_class_1_1;
-            },
-            function (category_frequency_enum_1_1) {
-                category_frequency_enum_1 = category_frequency_enum_1_1;
+            function (money_enums_1_1) {
+                money_enums_1 = money_enums_1_1;
             }],
         execute: function() {
+            Period = (function () {
+                function Period(year, index) {
+                    this.year = year;
+                    this.index = index;
+                    this.total = 0;
+                    this.txList = [];
+                }
+                Period.prototype.addTx = function (tx) {
+                    this.txList.push(tx);
+                    this.total += tx.amount;
+                };
+                return Period;
+            })();
             Category = (function () {
                 function Category(name, type, frequency, years) {
                     this.name = name;
@@ -20,17 +30,17 @@ System.register(['./period.class', './category-frequency.enum'], function(export
                     this.periods = [];
                     for (var i = 0; i < years.length; i++) {
                         for (var j = 0; j < this.nbPeriods; j++) {
-                            this.periods.push(new period_class_1.Period(years[i], j));
+                            this.periods.push(new Period(years[i], j));
                         }
                     }
                 }
                 Category.prototype._getNbPeriods = function () {
                     switch (this.frequency) {
-                        case category_frequency_enum_1.CatFrequency.MONTHLY:
+                        case money_enums_1.CatFrequency.MONTHLY:
                             return 12;
-                        case category_frequency_enum_1.CatFrequency.QUARTER:
+                        case money_enums_1.CatFrequency.QUARTER:
                             return 4;
-                        case category_frequency_enum_1.CatFrequency.YEARLY:
+                        case money_enums_1.CatFrequency.YEARLY:
                             return 1;
                     }
                 };

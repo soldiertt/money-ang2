@@ -36,3 +36,31 @@ export class CategorySorterPipe {
       return array;
     }
 }
+
+@Pipe({
+  name: "periodFilter"
+})
+export class PeriodFilterPipe {
+  transform(periods, args){
+    if (periods) {
+      let [year] = args;
+      return periods.filter(period => period.year == year);
+    } else {
+      return periods;
+    }
+  }
+}
+
+@Pipe({
+  name: "catfilter"
+})
+export class CatfilterPipe {
+  transform(categories, args){
+    if (categories) {
+      let [types, frequencies] = args;
+      return categories.filter((item)=> types.indexOf(item.type) !== -1 && frequencies.indexOf(item.frequency) !== -1 );
+    } else {
+      return categories;
+    }
+  }
+}

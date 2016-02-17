@@ -1,4 +1,7 @@
-import {Account} from "./account.class";
+class Account {
+  name:string;
+  number:string;
+}
 
 export class Tx {
   id: string;

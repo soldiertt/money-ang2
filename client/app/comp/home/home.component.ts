@@ -5,7 +5,7 @@ import {TableFilterFormComponent} from './table-filter-form.component';
 
 @Component({
     selector: 'money-home',
-    templateUrl: 'app/view/home/index.html',
+    templateUrl: 'view/home/index.html',
     directives: [MoneyTableComponent, TableFilterFormComponent]
 })
 

@@ -1,24 +1,23 @@
 import {Component, OnInit} from 'angular2/core';
 import 'rxjs/add/operator/map';
 
-import {AccountSetting} from '../../model/core/account-setting.class'
-import {Tx} from '../../model/core/tx.class'
-import {Category} from '../../model/core/category.class'
-import {TxMapper} from '../../model/utils/tx-mapper.class'
-import {PreferenceRestService} from '../../service/preference-rest.service'
-import {AccountSettingRestService} from '../../service/account-setting-rest.service'
-import {CategoryRestService} from '../../service/category-rest.service'
-import {CsvReaderRestService} from '../../service/csv-reader-rest.service'
-import {TxrefRestService} from '../../service/txref-rest.service'
-import {CatType} from '../../model/core/category-type.enum'
-import {CatFrequency} from '../../model/core/category-frequency.enum'
-import {TxFormData} from '../../model/formutil/tx-form-data.class'
-import {Txref} from '../../model/core/txref.class'
-import {CatfilterPipe} from '../../pipe/catfilter-pipe'
+import {AccountSetting}             from '../../model/core/account-setting.class'
+import {Tx}                         from '../../model/core/tx.class'
+import {Category}                   from '../../model/core/category.class'
+import {CatType, CatFrequency}      from '../../model/core/money-enums'
+import {Txref}                      from '../../model/core/txref.class'
+import {TxMapper}                   from '../../model/utils/tx-mapper.class'
+import {TxFormData}                 from '../../model/formutil/tx-form-data.class'
+import {PreferenceRestService}      from '../../service/preference-rest.service'
+import {AccountSettingRestService}  from '../../service/account-setting-rest.service'
+import {CategoryRestService}        from '../../service/category-rest.service'
+import {CsvReaderRestService}       from '../../service/csv-reader-rest.service'
+import {TxrefRestService}           from '../../service/txref-rest.service'
+import {CatfilterPipe}              from '../../pipe/money-pipes'
 
 @Component({
   selector: 'money-import',
-  templateUrl: 'app/view/import/index.html',
+  templateUrl: 'view/import/index.html',
   directives: [],
   pipes: [CatfilterPipe]
 })
@@ -102,10 +101,9 @@ export class ImportComponent implements OnInit {
         } else {
           comptaDate = txFormData.tx.date;
         }
-        let comptaYear:number = comptaDate.getFullYear();
-        txFormData.categoryLink.categoryYear = comptaYear;
+        txFormData.categoryLink.categoryYear = comptaDate.getFullYear();
         (function(comp: ImportComponent, inComptaDate: Date, txFormData: TxFormData) {
-          comp._categoryRestService.existsCategoryForYear(txFormData.categoryLink.categoryId, comptaYear).subscribe(category => {
+          comp._categoryRestService.existsCategoryForYear(txFormData.categoryLink.categoryId, inComptaDate.getFullYear()).subscribe(category => {
             if (category) {
               if (category.frequency == CatFrequency.MONTHLY) {
                 txFormData.categoryLink.periodIndex = inComptaDate.getMonth();

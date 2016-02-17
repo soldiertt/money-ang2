@@ -45,7 +45,7 @@ module.exports = function (db) {
     require('../routes/csvreader.srv.route.js')(app);
     require('../routes/txref.srv.route.js')(app);
 
-    app.use(express.static('./client'));
+    app.use(express.static('./dist/client'));
     app.use('/lib', express.static('./node_modules'));
 
     return server;

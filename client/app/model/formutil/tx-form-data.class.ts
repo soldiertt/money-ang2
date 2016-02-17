@@ -1,7 +1,15 @@
-import {CatType} from '../core/category-type.enum'
-import {CatFrequency} from '../core/category-frequency.enum'
+import {CatType, CatFrequency} from '../core/money-enums'
 import {Tx} from '../core/tx.class'
-import {CategoryLink} from './category-link.class'
+
+class CategoryLink {
+  categoryId: string;
+  categoryYear: number;
+  periodIndex:number;
+
+  constructor() {
+    this.categoryId = "";
+  }
+}
 
 export class TxFormData {
   categoryType:CatType;

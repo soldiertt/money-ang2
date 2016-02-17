@@ -47,9 +47,9 @@ System.register(['angular2/core', 'angular2/router', './home/home.component', '.
                     ]),
                     core_1.Component({
                         selector: 'money-app',
-                        templateUrl: 'app/view/index.html',
+                        templateUrl: 'view/index.html',
                         encapsulation: core_1.ViewEncapsulation.None,
-                        styleUrls: ['app/view/css/master.css'],
+                        styleUrls: ['view/css/master.css'],
                         directives: [router_1.ROUTER_DIRECTIVES]
                     }), 
                     __metadata('design:paramtypes', [])

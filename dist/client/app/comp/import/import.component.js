@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'rxjs/add/operator/map', '../../model/utils/tx-mapper.class', '../../service/preference-rest.service', '../../service/account-setting-rest.service', '../../service/category-rest.service', '../../service/csv-reader-rest.service', '../../service/txref-rest.service', '../../model/core/category-type.enum', '../../model/core/category-frequency.enum', '../../model/formutil/tx-form-data.class', '../../model/core/txref.class', '../../pipe/catfilter-pipe'], function(exports_1) {
+System.register(['angular2/core', 'rxjs/add/operator/map', '../../model/core/money-enums', '../../model/core/txref.class', '../../model/utils/tx-mapper.class', '../../model/formutil/tx-form-data.class', '../../service/preference-rest.service', '../../service/account-setting-rest.service', '../../service/category-rest.service', '../../service/csv-reader-rest.service', '../../service/txref-rest.service', '../../pipe/money-pipes'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'rxjs/add/operator/map', '../../model/utils/tx
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, tx_mapper_class_1, preference_rest_service_1, account_setting_rest_service_1, category_rest_service_1, csv_reader_rest_service_1, txref_rest_service_1, category_type_enum_1, category_frequency_enum_1, tx_form_data_class_1, txref_class_1, catfilter_pipe_1;
+    var core_1, money_enums_1, txref_class_1, tx_mapper_class_1, tx_form_data_class_1, preference_rest_service_1, account_setting_rest_service_1, category_rest_service_1, csv_reader_rest_service_1, txref_rest_service_1, money_pipes_1;
     var ImportComponent;
     return {
         setters:[
@@ -16,8 +16,17 @@ System.register(['angular2/core', 'rxjs/add/operator/map', '../../model/utils/tx
                 core_1 = core_1_1;
             },
             function (_1) {},
+            function (money_enums_1_1) {
+                money_enums_1 = money_enums_1_1;
+            },
+            function (txref_class_1_1) {
+                txref_class_1 = txref_class_1_1;
+            },
             function (tx_mapper_class_1_1) {
                 tx_mapper_class_1 = tx_mapper_class_1_1;
+            },
+            function (tx_form_data_class_1_1) {
+                tx_form_data_class_1 = tx_form_data_class_1_1;
             },
             function (preference_rest_service_1_1) {
                 preference_rest_service_1 = preference_rest_service_1_1;
@@ -34,20 +43,8 @@ System.register(['angular2/core', 'rxjs/add/operator/map', '../../model/utils/tx
             function (txref_rest_service_1_1) {
                 txref_rest_service_1 = txref_rest_service_1_1;
             },
-            function (category_type_enum_1_1) {
-                category_type_enum_1 = category_type_enum_1_1;
-            },
-            function (category_frequency_enum_1_1) {
-                category_frequency_enum_1 = category_frequency_enum_1_1;
-            },
-            function (tx_form_data_class_1_1) {
-                tx_form_data_class_1 = tx_form_data_class_1_1;
-            },
-            function (txref_class_1_1) {
-                txref_class_1 = txref_class_1_1;
-            },
-            function (catfilter_pipe_1_1) {
-                catfilter_pipe_1 = catfilter_pipe_1_1;
+            function (money_pipes_1_1) {
+                money_pipes_1 = money_pipes_1_1;
             }],
         execute: function() {
             ImportComponent = (function () {
@@ -100,10 +97,10 @@ System.register(['angular2/core', 'rxjs/add/operator/map', '../../model/utils/tx
                     });
                 };
                 ImportComponent.prototype.catTypeChanged = function ($event, txFormData) {
-                    txFormData.categoryType = category_type_enum_1.CatType[$event.target.value];
+                    txFormData.categoryType = money_enums_1.CatType[$event.target.value];
                 };
                 ImportComponent.prototype.catFrequencyChanged = function ($event, txFormData) {
-                    txFormData.categoryFrequency = category_frequency_enum_1.CatFrequency[$event.target.value];
+                    txFormData.categoryFrequency = money_enums_1.CatFrequency[$event.target.value];
                 };
                 ImportComponent.prototype.comptaDateChanged = function ($event, txFormData) {
                     if ($event.target.checked) {
@@ -124,18 +121,17 @@ System.register(['angular2/core', 'rxjs/add/operator/map', '../../model/utils/tx
                             else {
                                 comptaDate = txFormData.tx.date;
                             }
-                            var comptaYear = comptaDate.getFullYear();
-                            txFormData.categoryLink.categoryYear = comptaYear;
+                            txFormData.categoryLink.categoryYear = comptaDate.getFullYear();
                             (function (comp, inComptaDate, txFormData) {
-                                comp._categoryRestService.existsCategoryForYear(txFormData.categoryLink.categoryId, comptaYear).subscribe(function (category) {
+                                comp._categoryRestService.existsCategoryForYear(txFormData.categoryLink.categoryId, inComptaDate.getFullYear()).subscribe(function (category) {
                                     if (category) {
-                                        if (category.frequency == category_frequency_enum_1.CatFrequency.MONTHLY) {
+                                        if (category.frequency == money_enums_1.CatFrequency.MONTHLY) {
                                             txFormData.categoryLink.periodIndex = inComptaDate.getMonth();
                                         }
-                                        else if (category.frequency == category_frequency_enum_1.CatFrequency.QUARTER) {
+                                        else if (category.frequency == money_enums_1.CatFrequency.QUARTER) {
                                             txFormData.categoryLink.periodIndex = Math.floor((inComptaDate.getMonth() + 3) / 3) - 1;
                                         }
-                                        else if (category.frequency == category_frequency_enum_1.CatFrequency.YEARLY) {
+                                        else if (category.frequency == money_enums_1.CatFrequency.YEARLY) {
                                             txFormData.categoryLink.periodIndex = 0;
                                         }
                                         comp._txrefRestService.create(new txref_class_1.Txref(txFormData.tx.ref)).subscribe(function (txrefAdded) {
@@ -153,9 +149,9 @@ System.register(['angular2/core', 'rxjs/add/operator/map', '../../model/utils/tx
                 ImportComponent = __decorate([
                     core_1.Component({
                         selector: 'money-import',
-                        templateUrl: 'app/view/import/index.html',
+                        templateUrl: 'view/import/index.html',
                         directives: [],
-                        pipes: [catfilter_pipe_1.CatfilterPipe]
+                        pipes: [money_pipes_1.CatfilterPipe]
                     }), 
                     __metadata('design:paramtypes', [preference_rest_service_1.PreferenceRestService, account_setting_rest_service_1.AccountSettingRestService, csv_reader_rest_service_1.CsvReaderRestService, txref_rest_service_1.TxrefRestService, category_rest_service_1.CategoryRestService])
                 ], ImportComponent);

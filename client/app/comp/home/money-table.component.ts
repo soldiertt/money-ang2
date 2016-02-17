@@ -1,18 +1,15 @@
 import {Component, OnInit} from 'angular2/core'
 
-import {Category} from "../../model/core/category.class"
-import {Period} from "../../model/core/period.class"
-import {Tx} from "../../model/core/tx.class"
-import {DisplayParamService} from '../../service/display-param.service' // Used in view
-import {CategoryRestService} from '../../service/category-rest.service'
-import {PreferenceRestService} from '../../service/preference-rest.service'
-import {CatfilterPipe} from '../../pipe/catfilter-pipe'
-import {CategorySorterPipe} from '../../pipe/category-sorter-pipe'
-import {PeriodFilterPipe} from '../../pipe/period-filter-pipe'
+import {Category}               from "../../model/core/category.class"
+import {Tx}                     from "../../model/core/tx.class"
+import {DisplayParamService}    from '../../service/display-param.service' // Used in view
+import {CategoryRestService}    from '../../service/category-rest.service'
+import {PreferenceRestService}  from '../../service/preference-rest.service'
+import {CatfilterPipe, CategorySorterPipe, PeriodFilterPipe}  from '../../pipe/money-pipes'
 
 @Component({
     selector: 'money-table',
-    templateUrl: 'app/view/home/money-table.html',
+    templateUrl: 'view/home/money-table.html',
     pipes: [CatfilterPipe, CategorySorterPipe, PeriodFilterPipe]
 })
 

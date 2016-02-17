@@ -2,18 +2,18 @@ import {Component} from 'angular2/core'
 import {Control, ControlGroup, FormBuilder, Validators} from 'angular2/common'
 import {Http, RequestOptions, RequestMethod, Headers} from 'angular2/http'
 
-import {MultipartUploader} from '../../model/formutil/multipart-uploader.class'
-import {MultipartItem} from '../../model/formutil/multipart-item.class'
-import {AccountSetting} from '../../model/core/account-setting.class'
-import {FieldMapping} from '../../model/core/field-mapping.class'
-import {AccountFormValidator} from '../../model/validation/account-form-validator.class'
-import {AccountSettingRestService} from '../../service/account-setting-rest.service'
-import {FormUtilsService} from '../../service/form-utils.service'
-import {DisplayErrorDirective} from '../directive/display-error.directive'
+import {MultipartUploader}          from '../../model/formutil/multipart-uploader.class'
+import {MultipartItem}              from '../../model/formutil/multipart-item.class'
+import {AccountSetting}             from '../../model/core/account-setting.class'
+import {FieldMapping}               from '../../model/core/field-mapping.class'
+import {AccountFormValidator}       from '../../model/validation/account-form-validator.class'
+import {AccountSettingRestService}  from '../../service/account-setting-rest.service'
+import {FormUtilsService}           from '../../service/form-utils.service'
+import {DisplayErrorDirective}      from '../directive/display-error.directive'
 
 @Component({
     selector: 'money-admin-account-setting',
-    templateUrl: 'app/view/admin/account-setting.html',
+    templateUrl: 'view/admin/account-setting.html',
     directives: [DisplayErrorDirective]
 })
 export class AdminAccountSettingComponent {

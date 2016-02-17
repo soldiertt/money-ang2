@@ -5,7 +5,7 @@ import {PreferenceRestService} from '../../service/preference-rest.service'
 
 @Component({
   selector: 'money-preferences',
-  templateUrl: 'app/view/preferences/index.html',
+  templateUrl: 'view/preferences/index.html',
   directives: []
 })
 

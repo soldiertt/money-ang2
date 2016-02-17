@@ -3,7 +3,7 @@ import {DisplayParamService} from '../../service/display-param.service';
 
 @Component({
     selector: 'money-table-filter-form',
-    templateUrl: 'app/view/home/table-filter-form.html'
+    templateUrl: 'view/home/table-filter-form.html'
 })
 
 export class TableFilterFormComponent {

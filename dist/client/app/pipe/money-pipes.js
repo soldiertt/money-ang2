@@ -9,7 +9,7 @@ System.register(["angular2/core"], function(exports_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var CategorySorterPipe;
+    var CategorySorterPipe, PeriodFilterPipe, CatfilterPipe;
     return {
         setters:[
             function (core_1_1) {
@@ -62,6 +62,48 @@ System.register(["angular2/core"], function(exports_1) {
                 return CategorySorterPipe;
             })();
             exports_1("CategorySorterPipe", CategorySorterPipe);
+            PeriodFilterPipe = (function () {
+                function PeriodFilterPipe() {
+                }
+                PeriodFilterPipe.prototype.transform = function (periods, args) {
+                    if (periods) {
+                        var year = args[0];
+                        return periods.filter(function (period) { return period.year == year; });
+                    }
+                    else {
+                        return periods;
+                    }
+                };
+                PeriodFilterPipe = __decorate([
+                    core_1.Pipe({
+                        name: "periodFilter"
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], PeriodFilterPipe);
+                return PeriodFilterPipe;
+            })();
+            exports_1("PeriodFilterPipe", PeriodFilterPipe);
+            CatfilterPipe = (function () {
+                function CatfilterPipe() {
+                }
+                CatfilterPipe.prototype.transform = function (categories, args) {
+                    if (categories) {
+                        var types = args[0], frequencies = args[1];
+                        return categories.filter(function (item) { return types.indexOf(item.type) !== -1 && frequencies.indexOf(item.frequency) !== -1; });
+                    }
+                    else {
+                        return categories;
+                    }
+                };
+                CatfilterPipe = __decorate([
+                    core_1.Pipe({
+                        name: "catfilter"
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], CatfilterPipe);
+                return CatfilterPipe;
+            })();
+            exports_1("CatfilterPipe", CatfilterPipe);
         }
     }
 });

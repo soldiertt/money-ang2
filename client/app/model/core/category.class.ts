@@ -1,6 +1,24 @@
-import {Period} from './period.class'
-import {CatType} from './category-type.enum'
-import {CatFrequency} from './category-frequency.enum'
+import {CatType, CatFrequency} from './money-enums'
+import {Tx} from "./tx.class";
+
+class Period {
+  year:number;
+  index:number;
+  total:number;
+  txList:Array<Tx>;
+
+  constructor(year:number, index:number) {
+    this.year = year;
+    this.index = index;
+    this.total = 0;
+    this.txList = [];
+  }
+
+  addTx(tx:Tx) {
+    this.txList.push(tx);
+    this.total += tx.amount;
+  }
+}
 
 export class Category {
   id: string;

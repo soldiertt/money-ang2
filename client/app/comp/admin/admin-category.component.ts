@@ -5,13 +5,12 @@ import {Category} from '../../model/core/category.class';
 import {CategoryRestService} from '../../service/category-rest.service'
 import {FormUtilsService} from '../../service/form-utils.service'
 import {DisplayErrorDirective} from '../directive/display-error.directive'
-import {CatType} from '../../model/core/category-type.enum'
-import {CatFrequency} from '../../model/core/category-frequency.enum'
-import {CategorySorterPipe} from '../../pipe/category-sorter-pipe'
+import {CatType, CatFrequency} from '../../model/core/money-enums'
+import {CategorySorterPipe} from '../../pipe/money-pipes'
 
 @Component({
     selector: 'money-admin-category',
-    templateUrl: 'app/view/admin/category.html',
+    templateUrl: 'view/admin/category.html',
     directives: [DisplayErrorDirective],
     pipes:[CategorySorterPipe]
 })
