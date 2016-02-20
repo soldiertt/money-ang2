@@ -1,45 +1,8 @@
 var Category = require('mongoose').model('Category'),
-    Transaction = require('../model/import/tx.srv.model');
+    Transaction = require('../model/import/tx.srv.model'),
+    basicCrudCtrl = require('./basic-crud.srv.ctrl')(Category, 'Category');
 
-var getErrorMessage = function (err) {
-    var message = '',
-        errName;
-
-    if (err.code) {
-        switch (err.code) {
-            case 11000:
-            case 11001:
-                message = 'Category already exists';
-                break;
-            default:
-                message = 'Something went wrong';
-        }
-    } else if (err.errors) {
-        for (errName in err.errors) {
-            if (err.errors[errName].message) {
-                message = err.errors[errName].message;
-            }
-        }
-    } else {
-        message = 'Unknown server error';
-    }
-    return message;
-};
-
-exports.create = function (req, res) {
-  var category = new Category(req.body);
-  category.save(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: getErrorMessage(err)
-      });
-    } else {
-      res.json(category);
-    }
-  });
-};
-
-exports.addTx = function (req, res) {
+basicCrudCtrl.addTx = function (req, res) {
   var tx = req.body.tx;
   var catLink = req.body.categoryLink;
   Category.update({ _id: catLink.categoryId,
@@ -63,21 +26,7 @@ exports.addTx = function (req, res) {
   );
 };
 
-exports.list = function (req, res) {
-    var queryObj = {};
-
-    Category.find(queryObj).exec(function (err, categories) {
-        if (err) {
-            return res.status(400).send({
-                message: getErrorMessage(err)
-            });
-        } else {
-            res.json(categories);
-        }
-    });
-};
-
-exports.search = function (req, res) {
+basicCrudCtrl.search = function (req, res) {
   var year = req.query.year;
   if (req.query.id) {
     var catId = req.query.id;
@@ -91,7 +40,7 @@ exports.search = function (req, res) {
       }
     });
   } else {
-    Category.find({years: year}).exec(function (err, categories) {
+    Category.find({years: year}, '-periods.txList').exec(function (err, categories) {
       if (err) {
         return res.status(400).send({
           message: getErrorMessage(err)
@@ -103,26 +52,33 @@ exports.search = function (req, res) {
   }
 };
 
-exports.categoryByID = function (req, res, next, id) {
-    Category.findById(id).exec(function (err, category) {
-        if (err) {
-            return next(err);
+basicCrudCtrl.searchTx = function (req, res) {
+  var categoryId = req.query.categoryId;
+  var years = req.query.years;
+  if (categoryId) {
+    Category.find({
+          _id: categoryId,
+          periods : {
+            $elemMatch: { year: { $in: years },
+                          txList: { $exists: true, $ne: [] }
+                        }
+          }
         }
-        if (!category) {
-            return next(new Error('Failed to load category ' + id));
-        }
-        req.category = category;
-        next();
+    ).exec(function (err, categories) {
+      if (err) {
+        return res.status(400).send({
+          message: getErrorMessage(err)
+        });
+      } else {
+        res.json(categories);
+      }
     });
+  }
 };
 
-exports.read = function (req, res) {
-    res.json(req.category);
-};
-
-exports.update = function (req, res) {
+basicCrudCtrl.update = function (req, res) {
     var category = req.category;
-    category.name = req.body.name;
+    category.years = req.body.years;
     category.save(function (err) {
         if (err) {
             return res.status(400).send({
@@ -134,15 +90,4 @@ exports.update = function (req, res) {
     });
 };
 
-exports.delete = function (req, res) {
-    var category = req.category;
-    category.remove(function (err) {
-        if (err) {
-            return res.status(400).send({
-                message: getErrorMessage(err)
-            });
-        } else {
-            res.json(category);
-        }
-    });
-};
+module.exports = basicCrudCtrl;

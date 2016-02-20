@@ -1,16 +1,21 @@
-import {Component, OnInit} from 'angular2/core'
+import {Component, OnInit, ViewEncapsulation} from 'angular2/core'
 
-import {Category}               from "../../model/core/category.class"
+import {Category, Period}       from "../../model/core/category.class"
 import {Tx}                     from "../../model/core/tx.class"
 import {DisplayParamService}    from '../../service/display-param.service' // Used in view
 import {CategoryRestService}    from '../../service/category-rest.service'
 import {PreferenceRestService}  from '../../service/preference-rest.service'
 import {CatfilterPipe, CategorySorterPipe, PeriodFilterPipe}  from '../../pipe/money-pipes'
+import {TooltipDirective}       from '../directive/tooltip.directive'
+import {TxDetailsComponent}     from './tx-details.component'
 
 @Component({
     selector: 'money-table',
     templateUrl: 'view/home/money-table.html',
-    pipes: [CatfilterPipe, CategorySorterPipe, PeriodFilterPipe]
+    styleUrls: ['view/css/tooltip.css'],
+    directives: [TooltipDirective, TxDetailsComponent],
+    pipes: [CatfilterPipe, CategorySorterPipe, PeriodFilterPipe],
+    encapsulation: ViewEncapsulation.None
 })
 
 export class MoneyTableComponent {
@@ -28,5 +33,17 @@ export class MoneyTableComponent {
         this.categories = categories;
       });
     });
+  }
+
+  findTx(period: Period) {
+    if (!period.txList) {
+      console.log("loaded");
+      period.txList = [];
+      let dummyTx = new Tx();
+      dummyTx.date = new Date();
+      dummyTx.amount = -101.45;
+      dummyTx.comment = "arf";
+      period.txList.push(dummyTx);
+    }
   }
 }

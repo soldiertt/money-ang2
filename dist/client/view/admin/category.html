@@ -65,7 +65,19 @@
       <td>{{category.name}}</td>
       <td>{{category.type}}</td>
       <td>{{category.frequency}}</td>
-      <td>{{category.years.join(",")}}</td>
+      <td>
+        <div *ngIf="editedCat?.id != category.id">{{category.years.join(",")}} <span (click)="onEdit(category)">Edit</span></div>
+        <div *ngIf="editedCat?.id == category.id">
+          <form [ngFormModel]="editForm" (submit)="onUpdate()">
+            <select multiple class="form-control" (change)="yearsEditValueChange($event)" focusOnInit>
+              <option *ngFor="#year of yearList" [value]="year" [attr.selected]="category.years.indexOf(year) != -1 ? true : null">{{year}}</option>
+            </select>
+            <display-error control="years" error="required">Year is required</display-error>
+            <div class="alert alert-danger" *ngIf="txExistsForRemovedYears">Invalid selection, there are existing transactions for year(s) you removed</div>
+            <input type="submit" value="Ok" [disabled]="!editForm.valid" class="btn btn-default" /> <a href (click)="onCancelEdit($event)">Cancel</a>
+          </form>
+        </div>
+      </td>
       <td><span (click)="onDelete(category)">Del</span></td>
     </tr>
   </tbody>

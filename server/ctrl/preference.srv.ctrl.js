@@ -1,5 +1,5 @@
 var Preference = require('mongoose').model('Preference'),
-    basicCrudCtrl = require('./basic-crud.srv.ctrl')(Preference);
+    basicCrudCtrl = require('./basic-crud.srv.ctrl')(Preference, 'Preference');
 
 basicCrudCtrl.update = function (req, res) {
     var preference = req.object;

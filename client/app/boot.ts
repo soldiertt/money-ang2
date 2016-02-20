@@ -10,7 +10,8 @@ import {PreferenceRestService} from './service/preference-rest.service'
 import {TxrefRestService} from './service/txref-rest.service'
 import {CsvReaderRestService} from './service/csv-reader-rest.service'
 import {FormUtilsService} from './service/form-utils.service'
-import {JsonRequestOptions} from './config/json-request-options'
+import {CategoryYearsChecker} from './model/utils/category-years-checker'
+import {JsonRequestOptions} from './model/config/json-request-options'
 
 
 bootstrap(AppComponent, [
@@ -21,6 +22,7 @@ bootstrap(AppComponent, [
   TxrefRestService,
   CsvReaderRestService,
   FormUtilsService,
+  CategoryYearsChecker,
   ROUTER_PROVIDERS,
   HTTP_PROVIDERS,
   provide(ROUTER_PRIMARY_COMPONENT, {useValue: AppComponent}),

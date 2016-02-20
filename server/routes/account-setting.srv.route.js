@@ -8,5 +8,5 @@ module.exports = function (app) {
         .get(accountSettingCtrl.read)
         .put(accountSettingCtrl.update)
         .delete(accountSettingCtrl.delete);
-    app.param('accountSettingId', accountSettingCtrl.categoryByID);
+    app.param('accountSettingId', accountSettingCtrl.findByID);
 };

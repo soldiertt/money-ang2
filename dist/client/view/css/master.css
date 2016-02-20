@@ -42,6 +42,7 @@ fieldset {
 
 .month-col {
   min-width: 80px;
+  text-align: center;
 }
 .money-cell {
   text-align: center;

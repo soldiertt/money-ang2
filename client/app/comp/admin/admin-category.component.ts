@@ -4,24 +4,32 @@ import {AbstractControl, Control, ControlGroup, FormBuilder, Validators} from 'a
 import {Category} from '../../model/core/category.class';
 import {CategoryRestService} from '../../service/category-rest.service'
 import {FormUtilsService} from '../../service/form-utils.service'
+import {CategoryYearsChecker} from '../../model/utils/category-years-checker'
 import {DisplayErrorDirective} from '../directive/display-error.directive'
+import {FocusOnInitDirective} from '../directive/focus-on-init.directive'
 import {CatType, CatFrequency} from '../../model/core/money-enums'
 import {CategorySorterPipe} from '../../pipe/money-pipes'
 
 @Component({
     selector: 'money-admin-category',
     templateUrl: 'view/admin/category.html',
-    directives: [DisplayErrorDirective],
+    directives: [DisplayErrorDirective, FocusOnInitDirective],
     pipes:[CategorySorterPipe]
 })
 
 export class AdminCategoryComponent {
     categories: Array<Category>;
     createForm: ControlGroup;
+    editForm: ControlGroup;
+    editedCat : Category;
     name: Control;
     yearList:Array<number>;
+    txExistsForRemovedYears: boolean = false;
 
-    constructor(private _categoryRestService : CategoryRestService, private _formUtilsService: FormUtilsService, fb: FormBuilder) {
+    constructor(private _categoryRestService : CategoryRestService,
+      private _formUtilsService: FormUtilsService,
+      private _categoryYearsChecker : CategoryYearsChecker,
+      fb: FormBuilder) {
 
       this.yearList = [2014, 2015, 2016];
 
@@ -35,9 +43,14 @@ export class AdminCategoryComponent {
         frequency: fb.control('', Validators.required),
         years: fb.control([], Validators.compose([Validators.required]))
       });
+
+      this.editForm = fb.group({
+        years: fb.control([], Validators.compose([Validators.required]))
+      });
     }
 
     yearsValueChange(event){
+      //Multi-value field not yet manage, so do manually
       let allSelectedYears:Array<number> = [];
       for (let i in event.target.selectedOptions){
         if (event.target.selectedOptions[i].value) {
@@ -47,12 +60,58 @@ export class AdminCategoryComponent {
       (<Control> this.createForm.controls['years']).updateValue(allSelectedYears);
     }
 
+    yearsEditValueChange(event){
+      //Multi-value field not yet manage, so do manually
+      let allSelectedYears:Array<number> = [];
+      for (let i in event.target.selectedOptions){
+        if (event.target.selectedOptions[i].value) {
+          allSelectedYears.push(Number(event.target.selectedOptions[i].value));
+        }
+      }
+      (<Control> this.editForm.controls['years']).updateValue(allSelectedYears);
+    }
+
     onCreate(): void {
       let controls = this.createForm.controls;
       let newCateg: Category = new Category(controls['name'].value, CatType[<string>controls['type'].value], CatFrequency[<string>controls['frequency'].value], controls['years'].value);
       this._categoryRestService.create(newCateg).subscribe(response => {
         this.categories.push(response.json());
         this._formUtilsService.reset(this.createForm, "name", "type", "frequency", "years");
+      }, err => console.log(err));
+    }
+
+    onEdit(category: Category): void {
+      this.editedCat = category;
+      (<Control> this.editForm.controls['years']).updateValue(category.years);
+    }
+
+    onCancelEdit($event): void {
+      $event.preventDefault();
+      this.editedCat = undefined;
+      this.txExistsForRemovedYears = false;
+    }
+
+    onUpdate(): void {
+      let controls = this.editForm.controls;
+      let removedYears = this._categoryYearsChecker.removedYears(this.editedCat.years, controls['years'].value);
+      if (removedYears.length > 0) {
+        this._categoryRestService.existsTxForYears(this.editedCat.id, removedYears).subscribe(exists => {
+          if (exists) {
+            this.txExistsForRemovedYears = true;
+          } else {
+            this.updateOk(controls);
+          }
+        });
+      } else {
+        this.updateOk(controls);
+      }
+    }
+
+    updateOk(controls):void {
+      this.txExistsForRemovedYears = false;
+      this.editedCat.years = controls['years'].value;
+      this._categoryRestService.update(this.editedCat).subscribe(response => {
+        this.editedCat = undefined;
       }, err => console.log(err));
     }
 

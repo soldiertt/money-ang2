@@ -1,5 +1,5 @@
 var Txref = require('mongoose').model('Txref'),
-    basicCrudCtrl = require('./basic-crud.srv.ctrl')(Txref);
+    basicCrudCtrl = require('./basic-crud.srv.ctrl')(Txref, 'Txref');
 
 basicCrudCtrl.findByRef = function (req, res, next, ref) {
   Txref.findOne({ref: ref}).exec(function (err, object) {

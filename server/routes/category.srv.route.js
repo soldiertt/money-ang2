@@ -8,9 +8,11 @@ module.exports = function (app) {
       .post(categoryCtrl.addTx);
     app.route('/restapi/category/search')
       .get(categoryCtrl.search);
+    app.route('/restapi/tx/search')
+      .get(categoryCtrl.searchTx);
     app.route('/restapi/category/:categoryId')
       .get(categoryCtrl.read)
       .put(categoryCtrl.update)
       .delete(categoryCtrl.delete);
-    app.param('categoryId', categoryCtrl.categoryByID);
+    app.param('categoryId', categoryCtrl.findByID);
 };

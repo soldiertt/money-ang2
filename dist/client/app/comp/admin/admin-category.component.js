@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', '../../model/core/category.class', '../../service/category-rest.service', '../../service/form-utils.service', '../directive/display-error.directive', '../../model/core/money-enums', '../../pipe/money-pipes'], function(exports_1) {
+System.register(['angular2/core', 'angular2/common', '../../model/core/category.class', '../../service/category-rest.service', '../../service/form-utils.service', '../../model/utils/category-years-checker', '../directive/display-error.directive', '../directive/focus-on-init.directive', '../../model/core/money-enums', '../../pipe/money-pipes'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, category_class_1, category_rest_service_1, form_utils_service_1, display_error_directive_1, money_enums_1, money_pipes_1;
+    var core_1, common_1, category_class_1, category_rest_service_1, form_utils_service_1, category_years_checker_1, display_error_directive_1, focus_on_init_directive_1, money_enums_1, money_pipes_1;
     var AdminCategoryComponent;
     return {
         setters:[
@@ -27,8 +27,14 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
             function (form_utils_service_1_1) {
                 form_utils_service_1 = form_utils_service_1_1;
             },
+            function (category_years_checker_1_1) {
+                category_years_checker_1 = category_years_checker_1_1;
+            },
             function (display_error_directive_1_1) {
                 display_error_directive_1 = display_error_directive_1_1;
+            },
+            function (focus_on_init_directive_1_1) {
+                focus_on_init_directive_1 = focus_on_init_directive_1_1;
             },
             function (money_enums_1_1) {
                 money_enums_1 = money_enums_1_1;
@@ -38,10 +44,12 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
             }],
         execute: function() {
             AdminCategoryComponent = (function () {
-                function AdminCategoryComponent(_categoryRestService, _formUtilsService, fb) {
+                function AdminCategoryComponent(_categoryRestService, _formUtilsService, _categoryYearsChecker, fb) {
                     var _this = this;
                     this._categoryRestService = _categoryRestService;
                     this._formUtilsService = _formUtilsService;
+                    this._categoryYearsChecker = _categoryYearsChecker;
+                    this.txExistsForRemovedYears = false;
                     this.yearList = [2014, 2015, 2016];
                     this._categoryRestService.list().subscribe(function (categories) {
                         _this.categories = categories;
@@ -52,8 +60,12 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                         frequency: fb.control('', common_1.Validators.required),
                         years: fb.control([], common_1.Validators.compose([common_1.Validators.required]))
                     });
+                    this.editForm = fb.group({
+                        years: fb.control([], common_1.Validators.compose([common_1.Validators.required]))
+                    });
                 }
                 AdminCategoryComponent.prototype.yearsValueChange = function (event) {
+                    //Multi-value field not yet manage, so do manually
                     var allSelectedYears = [];
                     for (var i in event.target.selectedOptions) {
                         if (event.target.selectedOptions[i].value) {
@@ -62,6 +74,16 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                     }
                     this.createForm.controls['years'].updateValue(allSelectedYears);
                 };
+                AdminCategoryComponent.prototype.yearsEditValueChange = function (event) {
+                    //Multi-value field not yet manage, so do manually
+                    var allSelectedYears = [];
+                    for (var i in event.target.selectedOptions) {
+                        if (event.target.selectedOptions[i].value) {
+                            allSelectedYears.push(Number(event.target.selectedOptions[i].value));
+                        }
+                    }
+                    this.editForm.controls['years'].updateValue(allSelectedYears);
+                };
                 AdminCategoryComponent.prototype.onCreate = function () {
                     var _this = this;
                     var controls = this.createForm.controls;
@@ -69,6 +91,41 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                     this._categoryRestService.create(newCateg).subscribe(function (response) {
                         _this.categories.push(response.json());
                         _this._formUtilsService.reset(_this.createForm, "name", "type", "frequency", "years");
+                    }, function (err) { return console.log(err); });
+                };
+                AdminCategoryComponent.prototype.onEdit = function (category) {
+                    this.editedCat = category;
+                    this.editForm.controls['years'].updateValue(category.years);
+                };
+                AdminCategoryComponent.prototype.onCancelEdit = function ($event) {
+                    $event.preventDefault();
+                    this.editedCat = undefined;
+                    this.txExistsForRemovedYears = false;
+                };
+                AdminCategoryComponent.prototype.onUpdate = function () {
+                    var _this = this;
+                    var controls = this.editForm.controls;
+                    var removedYears = this._categoryYearsChecker.removedYears(this.editedCat.years, controls['years'].value);
+                    if (removedYears.length > 0) {
+                        this._categoryRestService.existsTxForYears(this.editedCat.id, removedYears).subscribe(function (exists) {
+                            if (exists) {
+                                _this.txExistsForRemovedYears = true;
+                            }
+                            else {
+                                _this.updateOk(controls);
+                            }
+                        });
+                    }
+                    else {
+                        this.updateOk(controls);
+                    }
+                };
+                AdminCategoryComponent.prototype.updateOk = function (controls) {
+                    var _this = this;
+                    this.txExistsForRemovedYears = false;
+                    this.editedCat.years = controls['years'].value;
+                    this._categoryRestService.update(this.editedCat).subscribe(function (response) {
+                        _this.editedCat = undefined;
                     }, function (err) { return console.log(err); });
                 };
                 AdminCategoryComponent.prototype.onDelete = function (category) {
@@ -87,10 +144,10 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                     core_1.Component({
                         selector: 'money-admin-category',
                         templateUrl: 'view/admin/category.html',
-                        directives: [display_error_directive_1.DisplayErrorDirective],
+                        directives: [display_error_directive_1.DisplayErrorDirective, focus_on_init_directive_1.FocusOnInitDirective],
                         pipes: [money_pipes_1.CategorySorterPipe]
                     }), 
-                    __metadata('design:paramtypes', [category_rest_service_1.CategoryRestService, form_utils_service_1.FormUtilsService, common_1.FormBuilder])
+                    __metadata('design:paramtypes', [category_rest_service_1.CategoryRestService, form_utils_service_1.FormUtilsService, category_years_checker_1.CategoryYearsChecker, common_1.FormBuilder])
                 ], AdminCategoryComponent);
                 return AdminCategoryComponent;
             })();

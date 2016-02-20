@@ -20,6 +20,7 @@ System.register(['./money-enums'], function(exports_1) {
                 };
                 return Period;
             })();
+            exports_1("Period", Period);
             Category = (function () {
                 function Category(name, type, frequency, years) {
                     this.name = name;

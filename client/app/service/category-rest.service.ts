@@ -32,11 +32,25 @@ export class CategoryRestService {
       return this._http.post('/restapi/category', JSON.stringify(newCateg));
     }
 
+    update(categ: Category): Observable<any> {
+      return this._http.put('/restapi/category/' + categ.id, JSON.stringify(categ));
+    }
+
     delete(categId: String): Observable<any> {
       return this._http.delete('/restapi/category/' + categId);
     }
 
     addTx(txFormData: TxFormData): Observable<any> {
       return this._http.post('/restapi/category/addtx', JSON.stringify(txFormData));
+    }
+
+    existsTxForYears(categoryId: string, years: Array<number>) {
+      let yearsParam = "";
+      years.forEach(year => {
+        yearsParam += "&years=" + year;
+      });
+      return this._http.get('/restapi/tx/search?categoryId=' + categoryId  + yearsParam)
+        .map(res => res.json())
+        .map(categs => categs.length > 0);
     }
 }
