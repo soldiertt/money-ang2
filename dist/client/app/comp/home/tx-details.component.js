@@ -19,6 +19,9 @@ System.register(['angular2/core'], function(exports_1) {
             TxDetailsComponent = (function () {
                 function TxDetailsComponent() {
                 }
+                TxDetailsComponent.prototype.stringAsDate = function (dateStr) {
+                    return new Date(dateStr);
+                };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Array)

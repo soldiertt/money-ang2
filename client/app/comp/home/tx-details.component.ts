@@ -9,5 +9,7 @@ import {Tx} from '../../model/core/tx.class'
 export class TxDetailsComponent {
   @Input() txList : Array<Tx>;
 
-
+  stringAsDate(dateStr) {
+    return new Date(dateStr);
+  }
 }

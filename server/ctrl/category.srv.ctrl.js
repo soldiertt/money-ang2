@@ -29,6 +29,7 @@ basicCrudCtrl.addTx = function (req, res) {
 basicCrudCtrl.search = function (req, res) {
   var year = req.query.year;
   if (req.query.id) {
+    // Make sure the specific category exists within a specific year
     var catId = req.query.id;
     Category.findOne({_id: catId, years: year}).exec(function (err, category) {
       if (err) {
@@ -40,6 +41,7 @@ basicCrudCtrl.search = function (req, res) {
       }
     });
   } else {
+    // Find all categories for a specific year
     Category.find({years: year}, '-periods.txList').exec(function (err, categories) {
       if (err) {
         return res.status(400).send({
@@ -55,8 +57,10 @@ basicCrudCtrl.search = function (req, res) {
 basicCrudCtrl.searchTx = function (req, res) {
   var categoryId = req.query.categoryId;
   var years = req.query.years;
-  if (categoryId) {
-    Category.find({
+  var periodId = req.query.periodId;
+  if (categoryId && years) {
+    //Check if category contains any Tx for a array of years
+    Category.findOne({
           _id: categoryId,
           periods : {
             $elemMatch: { year: { $in: years },
@@ -65,6 +69,17 @@ basicCrudCtrl.searchTx = function (req, res) {
           }
         }
     ).exec(function (err, categories) {
+      if (err) {
+        return res.status(400).send({
+          message: getErrorMessage(err)
+        });
+      } else {
+        res.json(categories);
+      }
+    });
+  } else if (categoryId && periodId) {
+    // Retrieve all Tx for a given period.
+    Category.findOne({ _id: categoryId, 'periods._id' : periodId }, {'periods.$' : 1 }).exec(function (err, categories) {
       if (err) {
         return res.status(400).send({
           message: getErrorMessage(err)

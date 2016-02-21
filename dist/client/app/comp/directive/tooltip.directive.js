@@ -18,29 +18,38 @@ System.register(['angular2/core'], function(exports_1) {
         execute: function() {
             TooltipDirective = (function () {
                 function TooltipDirective(el) {
-                    this.isEnable = false;
+                    this.displayed = false;
+                    this.displayLeft = false;
                 }
                 TooltipDirective.prototype.enable = function ($event) {
-                    if (this.isEnable) {
-                        this.isEnable = false;
-                    }
-                    else {
-                        this.isEnable = true;
+                    if (this.isActive == "true") {
+                        if ($event.clientX - $event.offsetX + 450 > window.innerWidth) {
+                            this.displayLeft = true;
+                        }
+                        else {
+                            this.displayLeft = false;
+                        }
+                        if (this.displayed) {
+                            this.displayed = false;
+                        }
+                        else {
+                            this.displayed = true;
+                        }
                     }
                     return false;
                 };
                 TooltipDirective.prototype.startAutoClose = function () {
                     var _this = this;
-                    this.autoClose = setTimeout(function () { _this.isEnable = false; }, 2000);
+                    this.autoClose = setTimeout(function () { _this.displayed = false; }, 1000);
                 };
                 TooltipDirective.prototype.cancelAutoClose = function () {
                     clearTimeout(this.autoClose);
                 };
                 TooltipDirective.prototype.close = function () {
-                    this.isEnable = false;
+                    this.displayed = false;
                 };
                 __decorate([
-                    core_1.HostListener('click'), 
+                    core_1.HostListener('click', ["$event"]), 
                     __metadata('design:type', Function), 
                     __metadata('design:paramtypes', [Object]), 
                     __metadata('design:returntype', void 0)
@@ -66,7 +75,8 @@ System.register(['angular2/core'], function(exports_1) {
                 TooltipDirective = __decorate([
                     core_1.Directive({
                         selector: '[tooltip]',
-                        host: { '[class.moneytooltip]': 'true', '[class.showtooltip]': 'isEnable', '[tabindex]': '1' }
+                        inputs: ['isActive : tooltip'],
+                        host: { '[class.moneytooltip]': 'isActive == "true"', '[class.showtooltip]': 'displayed', '[class.displayleft]': 'displayLeft', '[tabindex]': '1' }
                     }), 
                     __metadata('design:paramtypes', [core_1.ElementRef])
                 ], TooltipDirective);

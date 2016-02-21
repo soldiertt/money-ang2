@@ -53,4 +53,9 @@ export class CategoryRestService {
         .map(res => res.json())
         .map(categs => categs.length > 0);
     }
+
+    findAllTxForPeriod(categoryId: string, periodId: string) {
+      return this._http.get('/restapi/tx/search?categoryId=' + categoryId + "&periodId=" + periodId)
+        .map(res => res.json());
+    }
 }

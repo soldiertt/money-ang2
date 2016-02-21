@@ -35,15 +35,11 @@ export class MoneyTableComponent {
     });
   }
 
-  findTx(period: Period) {
+  findTx(categoryId:string, period: Period) {
     if (!period.txList) {
-      console.log("loaded");
-      period.txList = [];
-      let dummyTx = new Tx();
-      dummyTx.date = new Date();
-      dummyTx.amount = -101.45;
-      dummyTx.comment = "arf";
-      period.txList.push(dummyTx);
+      this._categoryRestService.findAllTxForPeriod(categoryId, period.id).subscribe(categ => {
+        period.txList = categ.periods[0].txList;
+      });
     }
   }
 }

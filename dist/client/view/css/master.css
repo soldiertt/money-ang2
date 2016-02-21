@@ -46,6 +46,7 @@ fieldset {
 }
 .money-cell {
   text-align: center;
+  outline: none;
 }
 .fileheader {
   font-family: 'Courier New'

@@ -1,4 +1,4 @@
-System.register(['angular2/core', "../../model/core/tx.class", '../../service/display-param.service', '../../service/category-rest.service', '../../service/preference-rest.service', '../../pipe/money-pipes', '../directive/tooltip.directive', './tx-details.component'], function(exports_1) {
+System.register(['angular2/core', '../../service/display-param.service', '../../service/category-rest.service', '../../service/preference-rest.service', '../../pipe/money-pipes', '../directive/tooltip.directive', './tx-details.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,15 +8,12 @@ System.register(['angular2/core', "../../model/core/tx.class", '../../service/di
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, tx_class_1, display_param_service_1, category_rest_service_1, preference_rest_service_1, money_pipes_1, tooltip_directive_1, tx_details_component_1;
+    var core_1, display_param_service_1, category_rest_service_1, preference_rest_service_1, money_pipes_1, tooltip_directive_1, tx_details_component_1;
     var MoneyTableComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (tx_class_1_1) {
-                tx_class_1 = tx_class_1_1;
             },
             function (display_param_service_1_1) {
                 display_param_service_1 = display_param_service_1_1;
@@ -52,15 +49,11 @@ System.register(['angular2/core', "../../model/core/tx.class", '../../service/di
                         });
                     });
                 }
-                MoneyTableComponent.prototype.findTx = function (period) {
+                MoneyTableComponent.prototype.findTx = function (categoryId, period) {
                     if (!period.txList) {
-                        console.log("loaded");
-                        period.txList = [];
-                        var dummyTx = new tx_class_1.Tx();
-                        dummyTx.date = new Date();
-                        dummyTx.amount = -101.45;
-                        dummyTx.comment = "arf";
-                        period.txList.push(dummyTx);
+                        this._categoryRestService.findAllTxForPeriod(categoryId, period.id).subscribe(function (categ) {
+                            period.txList = categ.periods[0].txList;
+                        });
                     }
                 };
                 MoneyTableComponent = __decorate([

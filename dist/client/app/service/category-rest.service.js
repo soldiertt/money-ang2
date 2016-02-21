@@ -61,6 +61,10 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                         .map(function (res) { return res.json(); })
                         .map(function (categs) { return categs.length > 0; });
                 };
+                CategoryRestService.prototype.findAllTxForPeriod = function (categoryId, periodId) {
+                    return this._http.get('/restapi/tx/search?categoryId=' + categoryId + "&periodId=" + periodId)
+                        .map(function (res) { return res.json(); });
+                };
                 CategoryRestService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

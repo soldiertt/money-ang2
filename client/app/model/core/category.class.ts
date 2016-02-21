@@ -2,6 +2,7 @@ import {CatType, CatFrequency} from './money-enums'
 import {Tx} from "./tx.class";
 
 export class Period {
+  id: string;
   year:number;
   index:number;
   total:number;
