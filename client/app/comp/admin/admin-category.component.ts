@@ -1,22 +1,21 @@
 import {Component} from 'angular2/core';
 import {AbstractControl, Control, ControlGroup, FormBuilder, Validators} from 'angular2/common';
 
-import {Category} from '../../model/core/category.class';
-import {CategoryRestService} from '../../service/category-rest.service'
-import {FormUtilsService} from '../../service/form-utils.service'
-import {CategoryYearsChecker} from '../../model/utils/category-years-checker'
-import {DisplayErrorDirective} from '../directive/display-error.directive'
-import {FocusOnInitDirective} from '../directive/focus-on-init.directive'
-import {CatType, CatFrequency} from '../../model/core/money-enums'
-import {CategorySorterPipe} from '../../pipe/money-pipes'
+import {Category}               from '../../model/core/category.class';
+import {CatType, CatFrequency}  from '../../model/core/money-enums'
+import {CategoryYearsChecker}   from '../../model/utils/category-years-checker'
+import {CategoryRestService}    from '../../service/category-rest.service'
+import {FormUtilsService}       from '../../service/form-utils.service'
+import {DisplayErrorDirective}  from '../directive/display-error.directive'
+import {FocusOnInitDirective}   from '../directive/focus-on-init.directive'
+import {CategorySorterPipe}     from '../../pipe/money-pipes'
 
 @Component({
     selector: 'money-admin-category',
-    templateUrl: 'view/admin/category.html',
+    templateUrl: 'html/admin/category.html',
     directives: [DisplayErrorDirective, FocusOnInitDirective],
     pipes:[CategorySorterPipe]
 })
-
 export class AdminCategoryComponent {
     categories: Array<Category>;
     createForm: ControlGroup;
@@ -31,7 +30,7 @@ export class AdminCategoryComponent {
       private _categoryYearsChecker : CategoryYearsChecker,
       fb: FormBuilder) {
 
-      this.yearList = [2014, 2015, 2016];
+      this.yearList = _formUtilsService.getAppYears();
 
       this._categoryRestService.list().subscribe(categories => {
         this.categories = categories;

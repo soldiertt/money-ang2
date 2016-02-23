@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'rxjs/add/operator/map', '../../model/core/money-enums', '../../model/core/txref.class', '../../model/utils/tx-mapper.class', '../../model/formutil/tx-form-data.class', '../../service/preference-rest.service', '../../service/account-setting-rest.service', '../../service/category-rest.service', '../../service/csv-reader-rest.service', '../../service/txref-rest.service', '../../pipe/money-pipes'], function(exports_1) {
+System.register(['angular2/core', 'rxjs/add/operator/map', '../../model/core/money-enums', '../../model/core/txref.class', '../../model/utils/tx-mapper.class', '../../model/formutil/tx-form-data.class', '../../service/preference-rest.service', '../../service/account-setting-rest.service', '../../service/category-rest.service', '../../service/csv-reader-rest.service', '../../service/txref-rest.service', '../../service/form-utils.service', '../../pipe/money-pipes'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'rxjs/add/operator/map', '../../model/core/mon
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, money_enums_1, txref_class_1, tx_mapper_class_1, tx_form_data_class_1, preference_rest_service_1, account_setting_rest_service_1, category_rest_service_1, csv_reader_rest_service_1, txref_rest_service_1, money_pipes_1;
+    var core_1, money_enums_1, txref_class_1, tx_mapper_class_1, tx_form_data_class_1, preference_rest_service_1, account_setting_rest_service_1, category_rest_service_1, csv_reader_rest_service_1, txref_rest_service_1, form_utils_service_1, money_pipes_1;
     var ImportComponent;
     return {
         setters:[
@@ -43,24 +43,25 @@ System.register(['angular2/core', 'rxjs/add/operator/map', '../../model/core/mon
             function (txref_rest_service_1_1) {
                 txref_rest_service_1 = txref_rest_service_1_1;
             },
+            function (form_utils_service_1_1) {
+                form_utils_service_1 = form_utils_service_1_1;
+            },
             function (money_pipes_1_1) {
                 money_pipes_1 = money_pipes_1_1;
             }],
         execute: function() {
             ImportComponent = (function () {
-                function ImportComponent(_prefRestService, _accountSettingRestService, _csvReaderRestService, _txrefRestService, _categoryRestService) {
+                function ImportComponent(_prefRestService, _accountSettingRestService, _csvReaderRestService, _txrefRestService, _categoryRestService, _formUtilsService) {
                     this._prefRestService = _prefRestService;
                     this._accountSettingRestService = _accountSettingRestService;
                     this._csvReaderRestService = _csvReaderRestService;
                     this._txrefRestService = _txrefRestService;
                     this._categoryRestService = _categoryRestService;
+                    this._formUtilsService = _formUtilsService;
                     this.txFormDataList = [];
                     this.refList = [];
-                    this.months = [{ value: 0, name: "January" }, { value: 1, name: "February" }, { value: 2, name: "March" },
-                        { value: 3, name: "April" }, { value: 4, name: "May" }, { value: 5, name: "June" },
-                        { value: 6, name: "July" }, { value: 7, name: "Augustus" }, { value: 8, name: "September" },
-                        { value: 9, name: "October" }, { value: 10, name: "November" }, { value: 11, name: "December" }];
-                    this.years = [2014, 2015, 2016];
+                    this.months = this._formUtilsService.getAppMonths();
+                    this.years = this._formUtilsService.getAppYears();
                 }
                 ImportComponent.prototype.ngOnInit = function () {
                     var _this = this;
@@ -149,11 +150,11 @@ System.register(['angular2/core', 'rxjs/add/operator/map', '../../model/core/mon
                 ImportComponent = __decorate([
                     core_1.Component({
                         selector: 'money-import',
-                        templateUrl: 'view/import/index.html',
+                        templateUrl: 'html/import/index.html',
                         directives: [],
                         pipes: [money_pipes_1.CatfilterPipe]
                     }), 
-                    __metadata('design:paramtypes', [preference_rest_service_1.PreferenceRestService, account_setting_rest_service_1.AccountSettingRestService, csv_reader_rest_service_1.CsvReaderRestService, txref_rest_service_1.TxrefRestService, category_rest_service_1.CategoryRestService])
+                    __metadata('design:paramtypes', [preference_rest_service_1.PreferenceRestService, account_setting_rest_service_1.AccountSettingRestService, csv_reader_rest_service_1.CsvReaderRestService, txref_rest_service_1.TxrefRestService, category_rest_service_1.CategoryRestService, form_utils_service_1.FormUtilsService])
                 ], ImportComponent);
                 return ImportComponent;
             })();

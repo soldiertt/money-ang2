@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core'
+import {Component}                  from 'angular2/core'
 import {Control, ControlGroup, FormBuilder, Validators} from 'angular2/common'
 import {Http, RequestOptions, RequestMethod, Headers} from 'angular2/http'
 
@@ -13,7 +13,7 @@ import {DisplayErrorDirective}      from '../directive/display-error.directive'
 
 @Component({
     selector: 'money-admin-account-setting',
-    templateUrl: 'view/admin/account-setting.html',
+    templateUrl: 'html/admin/account-setting.html',
     directives: [DisplayErrorDirective]
 })
 export class AdminAccountSettingComponent {

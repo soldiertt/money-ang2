@@ -52,7 +52,7 @@ System.register(['angular2/core', '../../service/display-param.service'], functi
                 TableFilterFormComponent = __decorate([
                     core_1.Component({
                         selector: 'money-table-filter-form',
-                        templateUrl: 'view/home/table-filter-form.html'
+                        templateUrl: 'html/home/table-filter-form.html'
                     }), 
                     __metadata('design:paramtypes', [display_param_service_1.DisplayParamService])
                 ], TableFilterFormComponent);

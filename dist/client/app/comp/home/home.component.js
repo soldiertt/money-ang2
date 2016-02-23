@@ -28,7 +28,7 @@ System.register(['angular2/core', './money-table.component', './table-filter-for
                 HomeComponent = __decorate([
                     core_1.Component({
                         selector: 'money-home',
-                        templateUrl: 'view/home/index.html',
+                        templateUrl: 'html/home/index.html',
                         directives: [money_table_component_1.MoneyTableComponent, table_filter_form_component_1.TableFilterFormComponent]
                     }), 
                     __metadata('design:paramtypes', [])

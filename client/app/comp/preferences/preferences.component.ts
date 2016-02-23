@@ -5,15 +5,13 @@ import {PreferenceRestService} from '../../service/preference-rest.service'
 
 @Component({
   selector: 'money-preferences',
-  templateUrl: 'view/preferences/index.html',
+  templateUrl: 'html/preferences/index.html',
   directives: []
 })
-
 export class PreferencesComponent implements OnInit {
   preference: Preference = new Preference();
 
   constructor(private _preferenceRestService: PreferenceRestService) {
-
   }
 
   ngOnInit() {

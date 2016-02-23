@@ -13,32 +13,31 @@ import {AccountSettingRestService}  from '../../service/account-setting-rest.ser
 import {CategoryRestService}        from '../../service/category-rest.service'
 import {CsvReaderRestService}       from '../../service/csv-reader-rest.service'
 import {TxrefRestService}           from '../../service/txref-rest.service'
+import {FormUtilsService}           from '../../service/form-utils.service'
 import {CatfilterPipe}              from '../../pipe/money-pipes'
 
 @Component({
   selector: 'money-import',
-  templateUrl: 'view/import/index.html',
+  templateUrl: 'html/import/index.html',
   directives: [],
   pipes: [CatfilterPipe]
 })
-
 export class ImportComponent implements OnInit {
 
   txFormDataList:Array<TxFormData> = [];
   refList:Array<string> = [];
   yearCategories:Array<Category>;
-
-  months:Array<Object> = [{value:0, name:"January"},{value:1, name:"February"},{value:2, name:"March"},
-    {value:3, name:"April"},{value:4, name:"May"},{value:5, name:"June"},
-    {value:6, name:"July"},{value:7, name:"Augustus"},{value:8, name:"September"},
-    {value:9, name:"October"},{value:10, name:"November"},{value:11, name:"December"}];
-  years:Array<number> = [2014, 2015, 2016];
+  months:Array<Object>;
+  years:Array<number>;
 
   constructor(private _prefRestService: PreferenceRestService,
     private _accountSettingRestService: AccountSettingRestService,
     private _csvReaderRestService: CsvReaderRestService,
     private _txrefRestService: TxrefRestService,
-    private _categoryRestService : CategoryRestService) {
+    private _categoryRestService : CategoryRestService,
+    private _formUtilsService: FormUtilsService) {
+      this.months = this._formUtilsService.getAppMonths();
+      this.years = this._formUtilsService.getAppYears();
   }
 
   ngOnInit() {

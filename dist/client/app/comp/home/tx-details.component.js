@@ -29,7 +29,7 @@ System.register(['angular2/core'], function(exports_1) {
                 TxDetailsComponent = __decorate([
                     core_1.Component({
                         selector: 'money-tx-details',
-                        templateUrl: 'view/home/tx-details.html'
+                        templateUrl: 'html/home/tx-details.html'
                     }), 
                     __metadata('design:paramtypes', [])
                 ], TxDetailsComponent);

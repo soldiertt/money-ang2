@@ -15,11 +15,10 @@ new Route({path: '/admin-account-setting', component: AdminAccountSettingCompone
 ])
 @Component({
     selector: 'money-app',
-    templateUrl: 'view/index.html',
+    templateUrl: 'html/index.html',
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['view/css/master.css'],
+    styleUrls: ['css/master.css'],
     directives: [ROUTER_DIRECTIVES]
 })
-
 export class AppComponent {
 }

@@ -3,9 +3,8 @@ import {DisplayParamService} from '../../service/display-param.service';
 
 @Component({
     selector: 'money-table-filter-form',
-    templateUrl: 'view/home/table-filter-form.html'
+    templateUrl: 'html/home/table-filter-form.html'
 })
-
 export class TableFilterFormComponent {
     catTypeFixed:boolean = true;
     catTypeOther:boolean = true;

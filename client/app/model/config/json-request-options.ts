@@ -1,12 +1,12 @@
 import {RequestOptions, Headers} from 'angular2/http'
 
 export class JsonRequestOptions extends RequestOptions {
-constructor() {
+  constructor() {
     super({
-        headers: new Headers({
-            'Content-Type': 'application/json; charset=utf-8',
-            'Accept': 'application/json'
-        })
+      headers: new Headers({
+          'Content-Type': 'application/json; charset=utf-8',
+          'Accept': 'application/json'
+      })
     });
-   }
+  }
 }

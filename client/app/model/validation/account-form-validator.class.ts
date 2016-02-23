@@ -6,9 +6,7 @@ export class AccountFormValidator {
   public validate: (control: Control) => Object;
 
   constructor(component: AdminAccountSettingComponent) {
-
     let validator = this;
-
     validator.validate = (control: Control) => {
       return validator.validateMapping(component);
     }

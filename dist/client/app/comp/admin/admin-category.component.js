@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', '../../model/core/category.class', '../../service/category-rest.service', '../../service/form-utils.service', '../../model/utils/category-years-checker', '../directive/display-error.directive', '../directive/focus-on-init.directive', '../../model/core/money-enums', '../../pipe/money-pipes'], function(exports_1) {
+System.register(['angular2/core', 'angular2/common', '../../model/core/category.class', '../../model/core/money-enums', '../../model/utils/category-years-checker', '../../service/category-rest.service', '../../service/form-utils.service', '../directive/display-error.directive', '../directive/focus-on-init.directive', '../../pipe/money-pipes'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, category_class_1, category_rest_service_1, form_utils_service_1, category_years_checker_1, display_error_directive_1, focus_on_init_directive_1, money_enums_1, money_pipes_1;
+    var core_1, common_1, category_class_1, money_enums_1, category_years_checker_1, category_rest_service_1, form_utils_service_1, display_error_directive_1, focus_on_init_directive_1, money_pipes_1;
     var AdminCategoryComponent;
     return {
         setters:[
@@ -21,23 +21,23 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
             function (category_class_1_1) {
                 category_class_1 = category_class_1_1;
             },
+            function (money_enums_1_1) {
+                money_enums_1 = money_enums_1_1;
+            },
+            function (category_years_checker_1_1) {
+                category_years_checker_1 = category_years_checker_1_1;
+            },
             function (category_rest_service_1_1) {
                 category_rest_service_1 = category_rest_service_1_1;
             },
             function (form_utils_service_1_1) {
                 form_utils_service_1 = form_utils_service_1_1;
             },
-            function (category_years_checker_1_1) {
-                category_years_checker_1 = category_years_checker_1_1;
-            },
             function (display_error_directive_1_1) {
                 display_error_directive_1 = display_error_directive_1_1;
             },
             function (focus_on_init_directive_1_1) {
                 focus_on_init_directive_1 = focus_on_init_directive_1_1;
-            },
-            function (money_enums_1_1) {
-                money_enums_1 = money_enums_1_1;
             },
             function (money_pipes_1_1) {
                 money_pipes_1 = money_pipes_1_1;
@@ -50,7 +50,7 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                     this._formUtilsService = _formUtilsService;
                     this._categoryYearsChecker = _categoryYearsChecker;
                     this.txExistsForRemovedYears = false;
-                    this.yearList = [2014, 2015, 2016];
+                    this.yearList = _formUtilsService.getAppYears();
                     this._categoryRestService.list().subscribe(function (categories) {
                         _this.categories = categories;
                     });
@@ -143,7 +143,7 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                 AdminCategoryComponent = __decorate([
                     core_1.Component({
                         selector: 'money-admin-category',
-                        templateUrl: 'view/admin/category.html',
+                        templateUrl: 'html/admin/category.html',
                         directives: [display_error_directive_1.DisplayErrorDirective, focus_on_init_directive_1.FocusOnInitDirective],
                         pipes: [money_pipes_1.CategorySorterPipe]
                     }), 

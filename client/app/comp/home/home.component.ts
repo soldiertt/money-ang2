@@ -1,13 +1,12 @@
 import {Component} from 'angular2/core';
 
-import {MoneyTableComponent} from './money-table.component';
+import {MoneyTableComponent}      from './money-table.component';
 import {TableFilterFormComponent} from './table-filter-form.component';
 
 @Component({
     selector: 'money-home',
-    templateUrl: 'view/home/index.html',
+    templateUrl: 'html/home/index.html',
     directives: [MoneyTableComponent, TableFilterFormComponent]
 })
-
 export class HomeComponent {
 }

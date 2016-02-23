@@ -1,0 +1,32 @@
+<div class="col-md-10">
+<table class="money-table table table-striped table-bordered">
+<thead>
+  <tr>
+    <th>Catégories</th>
+    <th *ngFor="#month of months" class="month-col">{{month.name}}</th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="#category of categories | categorySorter | catfilter : displayParamService.types : displayParamService.frequencies">
+    <td>
+      <span class="money-icon"
+        [class.cat-type-fixed-icon]="category.type == 'FIXED'"
+        [class.cat-type-other-icon]="category.type == 'OTHER'"
+        [class.cat-type-incoming-icon]="category.type == 'INCOMING'"></span>
+      <span class="money-icon"
+        [class.cat-freq-monthly-icon]="category.frequency == 'MONTHLY'"
+        [class.cat-freq-quarter-icon]="category.frequency == 'QUARTER'"
+        [class.cat-freq-yearly-icon]="category.frequency == 'YEARLY'"></span>
+      {{category.name}}
+    </td>
+    <td *ngFor="#period of category.periods | periodFilter : workingYear" [attr.colspan]="12/category.nbPeriods"
+      class="money-cell" [class.current]="isCurrentPeriod(category, period)" tooltip="{{period.total > 0}}" (click)="findTx(category.id, period)">
+      <div *ngIf="period.total > 0">
+        {{period.total | number:'1.2-2'}} €
+        <money-tx-details [txList]="period.txList"></money-tx-details>
+      </div>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
