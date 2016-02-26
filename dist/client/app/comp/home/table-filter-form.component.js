@@ -24,9 +24,11 @@ System.register(['angular2/core', '../../service/display-param.service'], functi
                     this.displayParamService = displayParamService;
                     this.catTypeFixed = true;
                     this.catTypeOther = true;
+                    this.catTypeIncoming = true;
                     this.catFreqMonthly = true;
                     this.catFreqQuarter = true;
                     this.catFreqYearly = true;
+                    this._displayTotals = true;
                 }
                 TableFilterFormComponent.prototype.onFilterUpdated = function ($event) {
                     var types = [];
@@ -36,6 +38,9 @@ System.register(['angular2/core', '../../service/display-param.service'], functi
                     }
                     if (this.catTypeOther) {
                         types.push("OTHER");
+                    }
+                    if (this.catTypeIncoming) {
+                        types.push("INCOMING");
                     }
                     if (this.catFreqMonthly) {
                         frequencies.push("MONTHLY");
@@ -49,6 +54,17 @@ System.register(['angular2/core', '../../service/display-param.service'], functi
                     this.displayParamService.types = types;
                     this.displayParamService.frequencies = frequencies;
                 };
+                Object.defineProperty(TableFilterFormComponent.prototype, "displayTotals", {
+                    get: function () {
+                        return this._displayTotals;
+                    },
+                    set: function (value) {
+                        this._displayTotals = value;
+                        this.displayParamService.showTotals = value;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
                 TableFilterFormComponent = __decorate([
                     core_1.Component({
                         selector: 'money-table-filter-form',

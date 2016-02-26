@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, EventEmitter, Output} from 'angular2/core';
 import {DisplayParamService} from '../../service/display-param.service';
 
 @Component({
@@ -8,9 +8,11 @@ import {DisplayParamService} from '../../service/display-param.service';
 export class TableFilterFormComponent {
     catTypeFixed:boolean = true;
     catTypeOther:boolean = true;
+    catTypeIncoming:boolean = true;
     catFreqMonthly:boolean = true;
     catFreqQuarter:boolean = true;
     catFreqYearly:boolean = true;
+    _displayTotals:boolean = true;
 
     constructor(public displayParamService: DisplayParamService) {
     }
@@ -20,6 +22,7 @@ export class TableFilterFormComponent {
       let frequencies = [];
       if (this.catTypeFixed)    { types.push("FIXED");          }
       if (this.catTypeOther)    { types.push("OTHER");          }
+      if (this.catTypeIncoming) { types.push("INCOMING");       }
       if (this.catFreqMonthly)  { frequencies.push("MONTHLY");  }
       if (this.catFreqQuarter)  { frequencies.push("QUARTER");  }
       if (this.catFreqYearly)   { frequencies.push("YEARLY");   }
@@ -28,4 +31,12 @@ export class TableFilterFormComponent {
       this.displayParamService.frequencies = frequencies;
     }
 
+    get displayTotals() {
+      return this._displayTotals;
+    }
+
+    set displayTotals(value: boolean) {
+      this._displayTotals = value;
+      this.displayParamService.showTotals = value;
+    }
 }

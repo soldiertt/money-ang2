@@ -1,27 +1,27 @@
 module.exports = function(ObjectModel, objectName) {
   var getErrorMessage = function (err) {
-      var message = '',
-          errName;
+    var message = '',
+        errName;
 
-      if (err.code) {
-          switch (err.code) {
-              case 11000:
-              case 11001:
-                  message = objectName + ' already exists';
-                  break;
-              default:
-                  message = 'Something went wrong';
-          }
-      } else if (err.errors) {
-          for (errName in err.errors) {
-              if (err.errors[errName].message) {
-                  message = err.errors[errName].message;
-              }
-          }
-      } else {
-          message = 'Unknown server error';
+    if (err.code) {
+      switch (err.code) {
+        case 11000:
+        case 11001:
+          message = objectName + ' already exists';
+          break;
+        default:
+          message = 'Something went wrong';
       }
-      return message;
+    } else if (err.errors) {
+      for (errName in err.errors) {
+        if (err.errors[errName].message) {
+          message = err.errors[errName].message;
+        }
+      }
+    } else {
+      message = 'Unknown server error';
+    }
+    return message;
   };
 
   var create = function (req, res) {
@@ -82,6 +82,7 @@ module.exports = function(ObjectModel, objectName) {
   };
 
   return {
+    getErrorMessage: getErrorMessage,
     create: create,
     list: list,
     findByID: findByID,

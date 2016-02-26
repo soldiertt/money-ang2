@@ -1,5 +1,5 @@
 <div class="col-md-10">
-<table class="money-table table table-striped table-bordered">
+<table class="table table-striped table-bordered">
 <thead>
   <tr>
     <th>Catégories</th>
@@ -9,14 +9,8 @@
 <tbody>
   <tr *ngFor="#category of categories | categorySorter | catfilter : displayParamService.types : displayParamService.frequencies">
     <td>
-      <span class="money-icon"
-        [class.cat-type-fixed-icon]="category.type == 'FIXED'"
-        [class.cat-type-other-icon]="category.type == 'OTHER'"
-        [class.cat-type-incoming-icon]="category.type == 'INCOMING'"></span>
-      <span class="money-icon"
-        [class.cat-freq-monthly-icon]="category.frequency == 'MONTHLY'"
-        [class.cat-freq-quarter-icon]="category.frequency == 'QUARTER'"
-        [class.cat-freq-yearly-icon]="category.frequency == 'YEARLY'"></span>
+      <money-icon [icon-class]="'cat-type-' + category.type + '-icon'"></money-icon>
+      <money-icon [icon-class]="'cat-freq-' + category.frequency + '-icon'"></money-icon>
       {{category.name}}
     </td>
     <td *ngFor="#period of category.periods | periodFilter : workingYear" [attr.colspan]="12/category.nbPeriods"
@@ -25,6 +19,39 @@
         {{period.total | number:'1.2-2'}} €
         <money-tx-details [txList]="period.txList"></money-tx-details>
       </div>
+    </td>
+  </tr>
+</tbody>
+</table>
+<!--TOTAL-->
+<table class="total-table" *ngIf="displayParamService.showTotals">
+<thead>
+  <tr>
+    <th>TOTALS</th>
+    <th *ngFor="#month of months" class="month-col">{{month.name}}</th>
+  </tr>
+</thead>
+<tbody>
+  <template ngFor #displayedType [ngForOf]="displayParamService.types">
+    <template ngFor #displayedFreq [ngForOf]="displayParamService.frequencies">
+      <tr>
+        <td>{{displayedType}}-{{displayedFreq}}</td>
+        <td *ngFor="#total of totals.get(displayedType + '-' + displayedFreq)">
+          {{total | number:'1.2-2'}} €
+        </td>
+      </tr>
+    </template>
+    <tr class="total-row-medium">
+      <td>{{displayedType}}</td>
+      <td *ngFor="#total of totals.get(displayedType)">
+        {{total | number:'1.2-2'}} €
+      </td>
+    </tr>
+  </template>
+  <tr class="total-row-large">
+    <td>GLOBAL</td>
+    <td *ngFor="#total of totals.get('GLOBAL')">
+      {{total | number:'1.2-2'}} €
     </td>
   </tr>
 </tbody>

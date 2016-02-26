@@ -10,6 +10,10 @@
       <input type="checkbox" id="category-type-other" [(ngModel)]="catTypeOther" (ngModelChange)="onFilterUpdated($event)" />
       <label for="category-type-other">Other</label>
     </div>
+    <div>
+      <input type="checkbox" id="category-type-incoming" [(ngModel)]="catTypeIncoming" (ngModelChange)="onFilterUpdated($event)" />
+      <label for="category-type-incoming">Incoming</label>
+    </div>
   </fieldset>
   <fieldset class="fields-group">
     <legend>Category frequency</legend>
@@ -24,6 +28,13 @@
     <div>
       <input type="checkbox" id="category-freq-yearly" [(ngModel)]="catFreqYearly" (ngModelChange)="onFilterUpdated($event)" />
       <label for="category-freq-yearly">Yearly</label>
+    </div>
+  </fieldset>
+  <fieldset class="fields-group">
+    <legend>Totals</legend>
+    <div>
+      <input type="checkbox" id="display-totals" [(ngModel)]="displayTotals" />
+      <label for="display-totals">Display totals</label>
     </div>
   </fieldset>
 </form>

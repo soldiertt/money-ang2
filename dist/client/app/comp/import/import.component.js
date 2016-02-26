@@ -151,7 +151,7 @@ System.register(['angular2/core', 'rxjs/add/operator/map', '../../model/core/mon
                     core_1.Component({
                         selector: 'money-import',
                         templateUrl: 'html/import/index.html',
-                        directives: [],
+                        styleUrls: ['css/import.css'],
                         pipes: [money_pipes_1.CatfilterPipe]
                     }), 
                     __metadata('design:paramtypes', [preference_rest_service_1.PreferenceRestService, account_setting_rest_service_1.AccountSettingRestService, csv_reader_rest_service_1.CsvReaderRestService, txref_rest_service_1.TxrefRestService, category_rest_service_1.CategoryRestService, form_utils_service_1.FormUtilsService])

@@ -1,0 +1,40 @@
+.month-col {
+  min-width: 80px;
+  text-align: center;
+}
+
+.money-cell {
+  text-align: center;
+  outline: none;
+}
+
+.money-cell.current {
+  background-color: antiquewhite;
+}
+
+.total-table {
+  width: 100%;
+  border: 2px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.total-table td {
+  padding: 0px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+.total-table th {
+  padding: 3px;
+  border: 2px solid #ddd;
+  text-align: center;
+}
+
+.total-row-medium {
+  background-color: darkseagreen;
+}
+.total-row-large {
+  background-color: burlywood;
+}
+.total-row-large td {
+  font-weight: bold;
+}

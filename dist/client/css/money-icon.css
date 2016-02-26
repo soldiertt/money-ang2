@@ -1,0 +1,29 @@
+.money-icon {
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}
+.cat-type-fixed-icon {
+  background-image: url('images/fixed.png');
+}
+
+.cat-type-other-icon {
+  background-image: url('images/other.png');
+}
+
+.cat-type-incoming-icon {
+  background-image: url('images/incoming.png');
+}
+
+.cat-freq-monthly-icon {
+  background-image: url('images/m.png');
+}
+
+.cat-freq-quarter-icon {
+  background-image: url('images/q.png');
+}
+
+.cat-freq-yearly-icon {
+  background-image: url('images/y.png');
+}

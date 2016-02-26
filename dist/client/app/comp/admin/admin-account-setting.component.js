@@ -149,6 +149,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../mod
                     core_1.Component({
                         selector: 'money-admin-account-setting',
                         templateUrl: 'html/admin/account-setting.html',
+                        styleUrls: ['css/admin/account-setting.css'],
                         directives: [display_error_directive_1.DisplayErrorDirective]
                     }), 
                     __metadata('design:paramtypes', [http_1.Http, common_1.FormBuilder, account_setting_rest_service_1.AccountSettingRestService, form_utils_service_1.FormUtilsService])

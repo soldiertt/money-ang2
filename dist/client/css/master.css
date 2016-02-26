@@ -12,11 +12,6 @@ main {
   margin-right: 15px;
 }
 
-.td-small {
-  line-height: 0.8 !important;
-  font-size: 12px;
-}
-
 .router-link-active {
   background-image: linear-gradient(to bottom,#dbdbdb 0,#e2e2e2 100%);
   box-shadow: inset 0 3px 9px rgba(0,0,0,.075);
@@ -38,78 +33,6 @@ fieldset {
 .fields-group legend {
   font-size: 1.2em;
   margin-bottom: 10px;
-}
-
-.month-col {
-  min-width: 80px;
-  text-align: center;
-}
-.money-cell {
-  text-align: center;
-  outline: none;
-}
-.money-cell.current {
-  background-color: antiquewhite;
-}
-
-.money-icon {
-  background-repeat: no-repeat;
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-}
-.cat-type-fixed-icon {
-  background-image: url('images/fixed.png');
-}
-
-.cat-type-other-icon {
-  background-image: url('images/other.png');
-}
-
-.cat-type-incoming-icon {
-  background-image: url('images/incoming.png');
-}
-
-.cat-freq-monthly-icon {
-  background-image: url('images/m.png');
-}
-
-.cat-freq-quarter-icon {
-  background-image: url('images/q.png');
-}
-
-.cat-freq-yearly-icon {
-  background-image: url('images/y.png');
-}
-
-.fileheader {
-  font-family: 'Courier New'
-}
-.csvline-header {
-  background-color: red;
-}
-
-.form-control-inline {
-    min-width: 0;
-    width: auto;
-    display: inline;
-}
-
-.spacer-span {
-  display: inline-block;
-  width: 5px;
-}
-
-.label-std {
-  font-weight: normal;
-}
-
-.center {
-  text-align: center;
-}
-
-.table-valign-middle td {
-  vertical-align: middle !important;
 }
 
 /** Override boostrap styles **/

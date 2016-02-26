@@ -19,7 +19,7 @@ import {CatfilterPipe}              from '../../pipe/money-pipes'
 @Component({
   selector: 'money-import',
   templateUrl: 'html/import/index.html',
-  directives: [],
+  styleUrls: ['css/import.css'],
   pipes: [CatfilterPipe]
 })
 export class ImportComponent implements OnInit {

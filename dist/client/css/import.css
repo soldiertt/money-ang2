@@ -1,0 +1,27 @@
+.form-control-inline {
+    min-width: 0;
+    width: auto;
+    display: inline;
+}
+
+.td-small {
+  line-height: 0.8 !important;
+  font-size: 12px;
+}
+
+.spacer-span {
+  display: inline-block;
+  width: 5px;
+}
+
+.label-std {
+  font-weight: normal;
+}
+
+.center {
+  text-align: center;
+}
+
+.table-valign-middle td {
+  vertical-align: middle !important;
+}

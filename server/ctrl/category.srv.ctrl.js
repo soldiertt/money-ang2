@@ -17,7 +17,7 @@ basicCrudCtrl.addTx = function (req, res) {
                   function (err) {
                     if (err) {
                       return res.status(400).send({
-                        message: getErrorMessage(err)
+                        message: basicCrudCtrl.getErrorMessage(err)
                       });
                     } else {
                       res.json(tx);
@@ -34,7 +34,7 @@ basicCrudCtrl.search = function (req, res) {
     Category.findOne({_id: catId, years: year}).exec(function (err, category) {
       if (err) {
         return res.status(400).send({
-          message: getErrorMessage(err)
+          message: basicCrudCtrl.getErrorMessage(err)
         });
       } else {
         res.json(category);
@@ -45,7 +45,7 @@ basicCrudCtrl.search = function (req, res) {
     Category.find({years: year}, '-periods.txList').exec(function (err, categories) {
       if (err) {
         return res.status(400).send({
-          message: getErrorMessage(err)
+          message: basicCrudCtrl.getErrorMessage(err)
         });
       } else {
         res.json(categories);

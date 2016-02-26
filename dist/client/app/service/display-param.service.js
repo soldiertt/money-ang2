@@ -18,15 +18,18 @@ System.register(['angular2/core'], function(exports_1) {
         execute: function() {
             DisplayParamService = (function () {
                 function DisplayParamService() {
-                    this._types = ["FIXED", "OTHER"];
+                    this._types = ["FIXED", "OTHER", "INCOMING"];
                     this._frequencies = ["MONTHLY", "QUARTER", "YEARLY"];
+                    this.showTotals = true;
+                    this.filtersUpdated = new core_1.EventEmitter();
                 }
                 Object.defineProperty(DisplayParamService.prototype, "types", {
                     get: function () {
                         return this._types;
                     },
-                    set: function (inTypes) {
-                        this._types = inTypes;
+                    set: function (types) {
+                        this._types = types;
+                        this.filtersUpdated.emit("types");
                     },
                     enumerable: true,
                     configurable: true
@@ -35,8 +38,9 @@ System.register(['angular2/core'], function(exports_1) {
                     get: function () {
                         return this._frequencies;
                     },
-                    set: function (inFrequencies) {
-                        this._frequencies = inFrequencies;
+                    set: function (frequencies) {
+                        this._frequencies = frequencies;
+                        this.filtersUpdated.emit("frequencies");
                     },
                     enumerable: true,
                     configurable: true

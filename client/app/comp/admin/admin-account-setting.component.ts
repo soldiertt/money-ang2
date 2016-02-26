@@ -14,6 +14,7 @@ import {DisplayErrorDirective}      from '../directive/display-error.directive'
 @Component({
     selector: 'money-admin-account-setting',
     templateUrl: 'html/admin/account-setting.html',
+    styleUrls : ['css/admin/account-setting.css'],
     directives: [DisplayErrorDirective]
 })
 export class AdminAccountSettingComponent {

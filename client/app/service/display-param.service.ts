@@ -1,20 +1,25 @@
-import {Injectable} from 'angular2/core';
+import {Injectable, EventEmitter} from 'angular2/core';
+import {Observable} from 'rxjs/Observable'
 
 @Injectable()
 export class DisplayParamService {
-  private _types:Array<string> = ["FIXED", "OTHER"];
-  private _frequencies:Array<string> = ["MONTHLY", "QUARTER", "YEARLY"];
+  _types:Array<string> = ["FIXED", "OTHER", "INCOMING"];
+  _frequencies:Array<string> = ["MONTHLY", "QUARTER", "YEARLY"];
+  showTotals: boolean = true;
+  filtersUpdated: EventEmitter<string> = new EventEmitter<string>();
 
-  get types():Array<string> {
+  get types() {
     return this._types;
   }
-  set types(inTypes:Array<string>) {
-    this._types = inTypes;
+  set types(types:Array<string>) {
+    this._types = types;
+    this.filtersUpdated.emit("types");
   }
-  get frequencies():Array<string> {
+  get frequencies() {
     return this._frequencies;
   }
-  set frequencies(inFrequencies:Array<string>) {
-    this._frequencies = inFrequencies;
+  set frequencies(frequencies:Array<string>) {
+    this._frequencies = frequencies;
+    this.filtersUpdated.emit("frequencies");
   }
 }

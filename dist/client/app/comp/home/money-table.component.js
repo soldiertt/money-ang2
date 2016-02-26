@@ -1,4 +1,4 @@
-System.register(['angular2/core', './tx-details.component', "../../model/core/money-enums", '../../service/display-param.service', '../../service/category-rest.service', '../../service/preference-rest.service', '../../service/form-utils.service', '../directive/tooltip.directive', '../../pipe/money-pipes'], function(exports_1) {
+System.register(['angular2/core', './tx-details.component', "../../model/core/money-enums", '../../service/display-param.service', '../../service/category-rest.service', '../../service/preference-rest.service', '../../service/form-utils.service', '../directive/tooltip.directive', '../directive/money-icon.directive', '../../pipe/money-pipes'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, tx_details_component_1, money_enums_1, display_param_service_1, category_rest_service_1, preference_rest_service_1, form_utils_service_1, tooltip_directive_1, money_pipes_1;
+    var core_1, tx_details_component_1, money_enums_1, display_param_service_1, category_rest_service_1, preference_rest_service_1, form_utils_service_1, tooltip_directive_1, money_icon_directive_1, money_pipes_1;
     var MoneyTableComponent;
     return {
         setters:[
@@ -36,6 +36,9 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
             function (tooltip_directive_1_1) {
                 tooltip_directive_1 = tooltip_directive_1_1;
             },
+            function (money_icon_directive_1_1) {
+                money_icon_directive_1 = money_icon_directive_1_1;
+            },
             function (money_pipes_1_1) {
                 money_pipes_1 = money_pipes_1_1;
             }],
@@ -48,14 +51,22 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
                     this._prefRestService = _prefRestService;
                     this._formUtilsService = _formUtilsService;
                     this.categories = [];
+                    this.totals = new Map();
+                    this.initTotals(false);
                     this.months = this._formUtilsService.getAppMonths();
+                    this.displayParamService.filtersUpdated.subscribe(function (item) { return _this.filtersUpdated(item); });
                     this._prefRestService.getPref().subscribe(function (preference) {
                         _this.workingYear = preference.workingYear;
                         _categoryRestService.listForYear(_this.workingYear).subscribe(function (categories) {
                             _this.categories = categories;
+                            _this.computeTotals();
                         });
                     });
                 }
+                MoneyTableComponent.prototype.filtersUpdated = function (item) {
+                    this.initTotals(true);
+                    this.computeSubTotals();
+                };
                 MoneyTableComponent.prototype.findTx = function (categoryId, period) {
                     if (!period.txList) {
                         this._categoryRestService.findAllTxForPeriod(categoryId, period.id).subscribe(function (categ) {
@@ -76,12 +87,66 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
                         return period.index == actualdate.getMonth();
                     }
                 };
+                MoneyTableComponent.prototype.initTotals = function (onlySubTotals) {
+                    for (var _i = 0, _a = this.displayParamService.types; _i < _a.length; _i++) {
+                        var type = _a[_i];
+                        if (!onlySubTotals) {
+                            for (var _b = 0, _c = this.displayParamService.frequencies; _b < _c.length; _b++) {
+                                var freq = _c[_b];
+                                this.totals.set(type + '-' + freq, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+                            }
+                        }
+                        this.totals.set(type, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+                    }
+                    this.totals.set("GLOBAL", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+                };
+                MoneyTableComponent.prototype.computeTotals = function () {
+                    var _this = this;
+                    this.categories.forEach(function (categ) {
+                        // FILTER ON YEAR periods
+                        var filteredPeriods = categ.periods.filter(function (period) { return period.year == _this.workingYear; });
+                        // MONTHLY
+                        if (categ.frequency == money_enums_1.CatFrequency.MONTHLY) {
+                            for (var periodIndex = 0; periodIndex < categ.nbPeriods; periodIndex++) {
+                                // ** TYPE-FREQUENCY totals **
+                                _this.totals.get(categ.type + "-" + categ.frequency)[periodIndex] += filteredPeriods[periodIndex].total;
+                            }
+                        }
+                        else if (categ.frequency == money_enums_1.CatFrequency.QUARTER) {
+                            for (var periodIndex = 0; periodIndex < categ.nbPeriods; periodIndex++) {
+                                for (var i = 0; i < 3; i++) {
+                                    // ** TYPE-FREQUENCY totals **
+                                    _this.totals.get(categ.type + "-" + categ.frequency)[(periodIndex * 3) + i] += filteredPeriods[periodIndex].total / 3;
+                                }
+                            }
+                        }
+                        else if (categ.frequency == money_enums_1.CatFrequency.YEARLY) {
+                            for (var i = 0; i < 12; i++) {
+                                // ** TYPE-FREQUENCY totals **
+                                _this.totals.get(categ.type + "-" + categ.frequency)[i] += filteredPeriods[0].total / 12;
+                            }
+                        }
+                    });
+                    this.computeSubTotals();
+                };
+                MoneyTableComponent.prototype.computeSubTotals = function () {
+                    for (var _i = 0, _a = this.displayParamService.types; _i < _a.length; _i++) {
+                        var type = _a[_i];
+                        for (var _b = 0, _c = this.displayParamService.frequencies; _b < _c.length; _b++) {
+                            var freq = _c[_b];
+                            for (var i = 0; i < 12; i++) {
+                                this.totals.get(type)[i] += this.totals.get(type + "-" + freq)[i];
+                                this.totals.get("GLOBAL")[i] += this.totals.get(type + "-" + freq)[i];
+                            }
+                        }
+                    }
+                };
                 MoneyTableComponent = __decorate([
                     core_1.Component({
                         selector: 'money-table',
                         templateUrl: 'html/home/money-table.html',
-                        styleUrls: ['css/tooltip.css'],
-                        directives: [tooltip_directive_1.TooltipDirective, tx_details_component_1.TxDetailsComponent],
+                        styleUrls: ['css/money-table.css', 'css/tooltip.css'],
+                        directives: [tooltip_directive_1.TooltipDirective, tx_details_component_1.TxDetailsComponent, money_icon_directive_1.MoneyIconDirective],
                         pipes: [money_pipes_1.CatfilterPipe, money_pipes_1.CategorySorterPipe, money_pipes_1.PeriodFilterPipe],
                         encapsulation: core_1.ViewEncapsulation.None
                     }), 
