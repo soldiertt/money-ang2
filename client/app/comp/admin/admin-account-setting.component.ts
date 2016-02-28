@@ -94,7 +94,7 @@ export class AdminAccountSettingComponent {
     let adminCsvComp = this;
     let uploadCallback = function(response: any) {
       let allLines:Array<string> = JSON.parse(response);
-      adminCsvComp.fileFirstLines = allLines.slice(0, 10);
+      adminCsvComp.fileFirstLines = allLines.slice(0, 15);
       adminCsvComp.updateTokens(adminCsvComp);
     };
 

@@ -14,8 +14,8 @@
       {{category.name}}
     </td>
     <td *ngFor="#period of category.periods | periodFilter : workingYear" [attr.colspan]="12/category.nbPeriods"
-      class="money-cell" [class.current]="isCurrentPeriod(category, period)" tooltip="{{period.total > 0}}" (click)="findTx(category.id, period)">
-      <div *ngIf="period.total > 0">
+      class="money-cell" [class.current]="isCurrentPeriod(category, period)" tooltip="{{period.total != 0}}" (click)="findTx(category.id, period)">
+      <div *ngIf="period.total != 0">
         {{period.total | number:'1.2-2'}} €
         <money-tx-details [txList]="period.txList"></money-tx-details>
       </div>

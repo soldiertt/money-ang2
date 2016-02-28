@@ -1,5 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
+import {Observable} from 'rxjs/Observable'
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/forkJoin';
 
 import {AccountSetting}             from '../../model/core/account-setting.class'
 import {Tx}                         from '../../model/core/tx.class'
@@ -25,7 +27,7 @@ import {CatfilterPipe}              from '../../pipe/money-pipes'
 export class ImportComponent implements OnInit {
 
   txFormDataList:Array<TxFormData> = [];
-  refList:Array<string> = [];
+  pendingTxList:Array<Tx> = [];
   yearCategories:Array<Category>;
   months:Array<Object>;
   years:Array<number>;
@@ -48,30 +50,57 @@ export class ImportComponent implements OnInit {
       });
 
       this._accountSettingRestService.list().subscribe(accounts => {
-        accounts.forEach(account => {
-          this._csvReaderRestService.list(preference.csvPath, account).subscribe(csvLines => {
 
-            let txList:Array<Tx> = csvLines.map(csvLine => TxMapper.mapLineToTx(csvLine, account));
-            txList.sort((a:Tx, b:Tx) => {
-              if (a.date > b.date) {
-                return 1;
-              } else if (a.date < b.date) {
-                return -1;
-              } else {
-                return 0;
-              }
-            });
-            txList.forEach(tx => {
-              this._txrefRestService.readByRef(tx.ref).subscribe(foundRef => {
-                if (!foundRef && this.refList.indexOf(tx.ref) == -1 && this.txFormDataList.length < 10) {
-                  this.txFormDataList.push(new TxFormData(tx));
-                  this.refList.push(tx.ref);
-                }
-              });
-            });
+        let readLinesJobs:Array<Observable<any>> = [];
+        accounts.forEach(account => {
+          readLinesJobs.push(this._csvReaderRestService.list(preference.csvPath, account));
+        });
+        Observable.forkJoin(readLinesJobs).subscribe(linesByAccountArray => {
+          linesByAccountArray.forEach(linesByAccount => {
+            this.pendingTxList = this.pendingTxList.concat(linesByAccount.csvLines.map(csvLine => TxMapper.mapLineToTx(csvLine, linesByAccount.account)));
           });
-        })
+          this.reducePendingTxList();
+        });
       })
+    });
+  }
+
+  reducePendingTxList() {
+    // 1. Remove duplicates Tx with identical refs (e.a. same tx exported twice)
+    this.pendingTxList = this.pendingTxList.reduce((reduced, tx) => {
+      if (!reduced.some(tx2 => { return tx2.ref === tx.ref; })) {
+         reduced.push(tx);
+      }
+      return reduced;
+    }, []);
+
+    // 2. sort list by date
+    this.pendingTxList.sort((a:Tx, b:Tx) => {
+      if (a.date > b.date) {
+        return 1;
+      } else if (a.date < b.date) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+
+    // 3. Check if Tx already in DB
+    this._txrefRestService.readByRefs(this.pendingTxList).subscribe(foundRefs => {
+      this.pendingTxList = this.pendingTxList.filter(tx => foundRefs.indexOf(tx.ref) == -1);
+      this.populateTxToDisplay();
+    });
+  }
+
+  populateTxToDisplay() {
+
+    this.pendingTxList = this.pendingTxList.filter(tx => {
+      if (this.txFormDataList.length < 10) {
+        this.txFormDataList.push(new TxFormData(tx));
+        return false;
+      } else {
+        return true;
+      }
     });
   }
 
@@ -92,35 +121,40 @@ export class ImportComponent implements OnInit {
   }
 
   saveAllTx() {
-    for (let txFormData of this.txFormDataList) {
-      if (txFormData.categoryLink.categoryId) {
-        let comptaDate: Date;
-        if (txFormData.comptaDate) {
-          comptaDate = new Date(txFormData.comptaYear, txFormData.comptaMonth, 1);
-        } else {
-          comptaDate = txFormData.tx.date;
-        }
-        txFormData.categoryLink.categoryYear = comptaDate.getFullYear();
-        (function(comp: ImportComponent, inComptaDate: Date, txFormData: TxFormData) {
-          comp._categoryRestService.existsCategoryForYear(txFormData.categoryLink.categoryId, inComptaDate.getFullYear()).subscribe(category => {
-            if (category) {
-              if (category.frequency == CatFrequency.MONTHLY) {
-                txFormData.categoryLink.periodIndex = inComptaDate.getMonth();
-              } else if (category.frequency == CatFrequency.QUARTER) {
-                txFormData.categoryLink.periodIndex = Math.floor((inComptaDate.getMonth() + 3) / 3) - 1;
-              } else if (category.frequency == CatFrequency.YEARLY) {
-                txFormData.categoryLink.periodIndex = 0;
-              }
-              comp._txrefRestService.create(new Txref(txFormData.tx.ref)).subscribe(txrefAdded => {
-                console.log("Added tx ref");
-              });
-              comp._categoryRestService.addTx(txFormData).subscribe(txAdded => {
-                console.log("Added tx");
-              });
-            }
-          });
-        })(this, comptaDate, txFormData);
+    let toSaveList:Array<TxFormData> = this.txFormDataList.filter(txFormData => { if (txFormData.categoryLink.categoryId) { return true; } else { return false}; });
+    toSaveList.forEach((txFormData, elemIndex) => {
+
+      let comptaDate: Date;
+      if (txFormData.comptaDate) {
+        comptaDate = new Date(txFormData.comptaYear, txFormData.comptaMonth, 1);
+      } else {
+        comptaDate = txFormData.tx.date;
       }
-    }
+      txFormData.categoryLink.categoryYear = comptaDate.getFullYear();
+      (function(comp: ImportComponent, inComptaDate: Date, txFormData: TxFormData, elemIndex: number) {
+        comp._categoryRestService.existsCategoryForYear(txFormData.categoryLink.categoryId, inComptaDate.getFullYear()).subscribe(category => {
+          if (category) {
+            if (category.frequency == CatFrequency.MONTHLY) {
+              txFormData.categoryLink.periodIndex = inComptaDate.getMonth();
+            } else if (category.frequency == CatFrequency.QUARTER) {
+              txFormData.categoryLink.periodIndex = Math.floor((inComptaDate.getMonth() + 3) / 3) - 1;
+            } else if (category.frequency == CatFrequency.YEARLY) {
+              txFormData.categoryLink.periodIndex = 0;
+            }
+            comp._txrefRestService.create(new Txref(txFormData.tx.ref)).subscribe(txrefAdded => {
+              console.log("Added tx ref");
+            });
+            comp._categoryRestService.addTx(txFormData).subscribe(txAdded => {
+              console.log("Added tx");
+            });
+          } else {
+            console.error("Error adding tx with ref ", txFormData.tx.ref, "category", txFormData.categoryLink.categoryId, "not available for year", inComptaDate.getFullYear());
+          }
+        });
+      })(this, comptaDate, txFormData, elemIndex);
+
+    });
+    this.txFormDataList = this.txFormDataList.filter(txFormData => { if (txFormData.categoryLink.categoryId) { return false; } else { return true}; });
+    this.populateTxToDisplay();
   }
 }

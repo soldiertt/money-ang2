@@ -49,7 +49,11 @@ export class AccountFormValidator {
           break;
       }
     }
-    if (amount != 1 || comm != 1 || date != 1 || desc > 1 || id !=1 || thirdPartyAccountName != 1 || thirdPartyAccountNumber != 1) {
+    if (amount != 1 || comm != 1 || date != 1 || desc > 1
+      || id > 1
+      || (id != 1 && !component.accountSetting.generateIdentifier)
+      || (id == 1 && component.accountSetting.generateIdentifier)
+      || thirdPartyAccountName != 1 || thirdPartyAccountNumber != 1) {
       mappingOk = false;
     }
     if (mappingOk) {

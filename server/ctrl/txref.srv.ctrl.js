@@ -11,8 +11,21 @@ basicCrudCtrl.findByRef = function (req, res, next, ref) {
   });
 };
 
-basicCrudCtrl.readByRef = function (req, res) {
-  res.json(req.object);
-};
+basicCrudCtrl.find = function (req, res) {
+  var txrefList = req.query.txref;
+  Txref.find({
+        ref: { $in: txrefList }
+      }
+  ).exec(function (err, references) {
+    if (err) {
+      return res.status(400).send({
+        message: getErrorMessage(err)
+      });
+    } else {
+      res.json(references);
+    }
+  });
+
+}
 
 module.exports = basicCrudCtrl;

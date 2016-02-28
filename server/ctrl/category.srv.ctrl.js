@@ -12,7 +12,7 @@ basicCrudCtrl.addTx = function (req, res) {
                   },
                   {
                     $push: { "periods.$.txList" : tx },
-                    $inc: { "periods.$.total" : Math.abs(tx.amount) }
+                    $inc: { "periods.$.total" : tx.amount }
                   },
                   function (err) {
                     if (err) {
@@ -58,6 +58,7 @@ basicCrudCtrl.searchTx = function (req, res) {
   var categoryId = req.query.categoryId;
   var years = req.query.years;
   var periodId = req.query.periodId;
+
   if (categoryId && years) {
     //Check if category contains any Tx for a array of years
     Category.findOne({
@@ -67,42 +68,41 @@ basicCrudCtrl.searchTx = function (req, res) {
                           txList: { $exists: true, $ne: [] }
                         }
           }
-        }
-    ).exec(function (err, categories) {
-      if (err) {
-        return res.status(400).send({
-          message: getErrorMessage(err)
-        });
-      } else {
-        res.json(categories);
-      }
+        }, function (err, category) {
+          if (err) {
+            return res.status(400).send({
+              message: basicCrudCtrl.getErrorMessage(err)
+            });
+          } else {
+            res.json(category);
+          }
     });
   } else if (categoryId && periodId) {
     // Retrieve all Tx for a given period.
-    Category.findOne({ _id: categoryId, 'periods._id' : periodId }, {'periods.$' : 1 }).exec(function (err, categories) {
+    console.log("find Tx for given category and period", categoryId, periodId);
+    Category.findOne({ _id: categoryId, 'periods._id' : periodId }, {'periods.$' : 1 }, function (err, category) {
       if (err) {
         return res.status(400).send({
-          message: getErrorMessage(err)
+          message: basicCrudCtrl.getErrorMessage(err)
         });
       } else {
-        res.json(categories);
+        res.json(category);
       }
     });
   }
 };
 
 basicCrudCtrl.update = function (req, res) {
-    var category = req.category;
-    category.years = req.body.years;
-    category.save(function (err) {
-        if (err) {
-            return res.status(400).send({
-                message: getErrorMessage(err)
-            });
-        } else {
-            res.json(category);
-        }
-    });
+  var category = req.object;
+  Category.findOneAndUpdate({ _id: category.id }, { $set: {years: req.body.years} }).exec(function(err, categ) {
+            if (err) {
+              return res.status(400).send({
+                message: basicCrudCtrl.getErrorMessage(err)
+              });
+            } else {
+              res.json(categ);
+            }
+          });
 };
 
 module.exports = basicCrudCtrl;

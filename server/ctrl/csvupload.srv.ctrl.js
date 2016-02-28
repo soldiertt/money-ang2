@@ -4,7 +4,7 @@ exports.upload = function (req, res) {
    console.log(req.file);
    var tmp_path = req.file.path;
    var firstlines = [],
-        maxlines = 10,
+        maxlines = 15,
         linenumber = 0;
    readEachLine(tmp_path, 'utf8', function(line) {
      if (++linenumber <= maxlines) {

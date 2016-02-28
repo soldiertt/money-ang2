@@ -57,9 +57,14 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                     years.forEach(function (year) {
                         yearsParam += "&years=" + year;
                     });
-                    return this._http.get('/restapi/tx/search?categoryId=' + categoryId + yearsParam)
-                        .map(function (res) { return res.json(); })
-                        .map(function (categs) { return categs.length > 0; });
+                    return this._http.get('/restapi/tx/search?categoryId=' + categoryId + yearsParam).map(function (res) {
+                        if (res) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    });
                 };
                 CategoryRestService.prototype.findAllTxForPeriod = function (categoryId, periodId) {
                     return this._http.get('/restapi/tx/search?categoryId=' + categoryId + "&periodId=" + periodId)

@@ -28,7 +28,9 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map', 'rxj
                 CsvReaderRestService.prototype.list = function (rootPath, accountSetting) {
                     return this._http.get('/restapi/csvreader?rootPath=' + encodeURIComponent(rootPath)
                         + "&startsWith=" + accountSetting.fileStartsWith + "&headerLinesCount=" + accountSetting.headerLinesCount)
-                        .map(function (res) { return res.json(); });
+                        .map(function (res) {
+                        return { account: accountSetting, csvLines: res.json() };
+                    });
                 };
                 CsvReaderRestService = __decorate([
                     core_1.Injectable(), 

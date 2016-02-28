@@ -18,7 +18,7 @@ export class CategoryRestService {
       return this._http.get('/restapi/category/search?year=' + year).map(res => res.json());
     }
 
-    existsCategoryForYear(categoryId:string ,year: number): Observable<any> {
+    existsCategoryForYear(categoryId:string, year: number): Observable<any> {
       return this._http.get('/restapi/category/search?id=' + categoryId  + '&year=' + year).map(res => {
         if (res) {
           return res.json();
@@ -49,9 +49,13 @@ export class CategoryRestService {
       years.forEach(year => {
         yearsParam += "&years=" + year;
       });
-      return this._http.get('/restapi/tx/search?categoryId=' + categoryId  + yearsParam)
-        .map(res => res.json())
-        .map(categs => categs.length > 0);
+      return this._http.get('/restapi/tx/search?categoryId=' + categoryId  + yearsParam).map(res => {
+        if (res) {
+          return true;
+        } else {
+          return false;
+        }
+      });
     }
 
     findAllTxForPeriod(categoryId: string, periodId: string) {

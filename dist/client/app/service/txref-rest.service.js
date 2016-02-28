@@ -24,8 +24,14 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                 function TxrefRestService(_http) {
                     this._http = _http;
                 }
-                TxrefRestService.prototype.readByRef = function (txRef) {
-                    return this._http.get('/restapi/txref/ref/' + txRef).map(function (res) { return res.json(); });
+                TxrefRestService.prototype.readByRefs = function (txList) {
+                    var txRefsParam = "";
+                    txList.forEach(function (tx) {
+                        txRefsParam += "&txref=" + tx.ref;
+                    });
+                    return this._http.get('/restapi/txref/find?' + txRefsParam.substr(1, txRefsParam.length - 1))
+                        .map(function (res) { return res.json(); })
+                        .map(function (res) { return res.map(function (txref) { return txref.ref; }); });
                 };
                 TxrefRestService.prototype.create = function (txRef) {
                     return this._http.post('/restapi/txref', JSON.stringify(txRef));

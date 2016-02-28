@@ -2,6 +2,7 @@ import {Injectable} from 'angular2/core'
 import {Http} from 'angular2/http'
 import {Observable} from 'rxjs/Observable'
 import 'rxjs/add/operator/map';
+import {Tx} from '../model/core/tx.class'
 import {Txref} from '../model/core/txref.class'
 
 @Injectable()
@@ -9,8 +10,14 @@ export class TxrefRestService {
     constructor(private _http: Http) {
     }
 
-    readByRef(txRef: string) {
-      return this._http.get('/restapi/txref/ref/' + txRef).map(res => res.json());
+    readByRefs(txList: Array<Tx>): Observable<any> {
+      let txRefsParam = "";
+      txList.forEach(tx => {
+        txRefsParam += "&txref=" + tx.ref;
+      });
+      return this._http.get('/restapi/txref/find?' + txRefsParam.substr(1, txRefsParam.length - 1))
+        .map(res => res.json())
+        .map(res => res.map(txref => txref.ref));
     }
 
     create(txRef: Txref): Observable<any> {

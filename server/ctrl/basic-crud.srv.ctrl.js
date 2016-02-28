@@ -52,16 +52,16 @@ module.exports = function(ObjectModel, objectName) {
   };
 
   var findByID = function (req, res, next, id) {
-      ObjectModel.findById(id).exec(function (err, object) {
-          if (err) {
-              return next(err);
-          }
-          if (!object) {
-              return next(new Error('Failed to load ' + objectName + ' ' + id));
-          }
-          req.object = object;
-          next();
-      });
+    ObjectModel.findById(id).exec(function (err, object) {
+      if (err) {
+        return next(err);
+      }
+      if (!object) {
+        return next(new Error('Failed to load ' + objectName + ' ' + id));
+      }
+      req.object = object;
+      next();
+    });
   };
 
   var read = function (req, res) {

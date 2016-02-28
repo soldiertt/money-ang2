@@ -81,6 +81,7 @@
             </tr>
           </tbody>
         </table>
+        <input type="checkbox" name="generateIdentifier" [(ngModel)]="accountSetting.generateIdentifier" (ngModelChange)="onMappingChange($event)" /> Generate reference (check only if no reference field in your csv export file !)
         <input type="hidden" ngControl="fieldMapping" />
         <display-error control="fieldMapping" error="wrongMapping">Wrong mapping</display-error>
       </div>

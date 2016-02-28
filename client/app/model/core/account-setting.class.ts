@@ -8,11 +8,13 @@ export class AccountSetting {
   headerLinesCount: number;
   fieldSeparator:string;
   fieldMappings: Array<FieldMapping>;
+  generateIdentifier: boolean;
 
   constructor() {
     this.headerLinesCount = 0;
     this.fieldSeparator = ";";
     this.fieldMappings = [];
+    this.generateIdentifier = false;
   }
 
 }

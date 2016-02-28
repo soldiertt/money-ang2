@@ -15,6 +15,9 @@ System.register(['../core/tx.class'], function(exports_1) {
                     var outTx = new tx_class_1.Tx();
                     outTx.ownAccount.name = setting.name;
                     outTx.ownAccount.number = setting.accountNumber;
+                    if (setting.generateIdentifier) {
+                        outTx.ref = this.hashString(csvLine);
+                    }
                     setting.fieldMappings.forEach(function (mapping) {
                         switch (mapping.value) {
                             case 'id':
@@ -57,6 +60,17 @@ System.register(['../core/tx.class'], function(exports_1) {
                         }
                     });
                     return outTx;
+                };
+                TxMapper.hashString = function (chaine) {
+                    var hash = 0, i, chr, len;
+                    if (chaine.length === 0)
+                        return String(hash);
+                    for (i = 0, len = chaine.length; i < len; i++) {
+                        chr = chaine.charCodeAt(i);
+                        hash = ((hash << 5) - hash) + chr;
+                        hash |= 0; // Convert to 32bit integer
+                    }
+                    return String(hash);
                 };
                 return TxMapper;
             })();

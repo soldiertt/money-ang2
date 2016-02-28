@@ -2,12 +2,11 @@ var txrefCtrl = require('../ctrl/txref.srv.ctrl');
 
 module.exports = function (app) {
     app.route('/restapi/txref')
-        .post(txrefCtrl.create);
-    app.route('/restapi/txref/ref/:txref')
-        .get(txrefCtrl.read)
-        .delete(txrefCtrl.delete);
-    app.route('/restapi/txref/:txrefId')
-        .get(txrefCtrl.readByRef);
-    app.param('txrefId', txrefCtrl.findByID);
+      .post(txrefCtrl.create);
+    app.route('/restapi/txref/find')
+      .get(txrefCtrl.find);
+    app.route('/restapi/txref/:txref')
+      .get(txrefCtrl.read)
+      .delete(txrefCtrl.delete);
     app.param('txref', txrefCtrl.findByRef);
 };

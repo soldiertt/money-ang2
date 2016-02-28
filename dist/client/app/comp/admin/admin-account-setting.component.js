@@ -117,7 +117,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../mod
                     var adminCsvComp = this;
                     var uploadCallback = function (response) {
                         var allLines = JSON.parse(response);
-                        adminCsvComp.fileFirstLines = allLines.slice(0, 10);
+                        adminCsvComp.fileFirstLines = allLines.slice(0, 15);
                         adminCsvComp.updateTokens(adminCsvComp);
                     };
                     item.callback = uploadCallback;

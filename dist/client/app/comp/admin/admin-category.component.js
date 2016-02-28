@@ -93,6 +93,51 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                         _this._formUtilsService.reset(_this.createForm, "name", "type", "frequency", "years");
                     }, function (err) { return console.log(err); });
                 };
+                /** TEMP ***************************************/
+                AdminCategoryComponent.prototype.bulkCreate = function ($event) {
+                    $event.preventDefault();
+                    var categs = [];
+                    categs.push(new category_class_1.Category("Assurance voiture", money_enums_1.CatType.FIXED, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Crèche Liam", money_enums_1.CatType.FIXED, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Crédit Hypoth. Argenta", money_enums_1.CatType.FIXED, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Electricité", money_enums_1.CatType.FIXED, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Li Yun : Beobank", money_enums_1.CatType.FIXED, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Li Yun : Proximus", money_enums_1.CatType.FIXED, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Maylee : repas/garderies", money_enums_1.CatType.FIXED, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Syndicat Smals", money_enums_1.CatType.FIXED, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("TV / Internet / Tel.", money_enums_1.CatType.FIXED, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Charges Verdurmen-Remy", money_enums_1.CatType.FIXED, money_enums_1.CatFrequency.QUARTER, [2016]));
+                    categs.push(new category_class_1.Category("Li Yun : syndicat CSC", money_enums_1.CatType.FIXED, money_enums_1.CatFrequency.QUARTER, [2016]));
+                    categs.push(new category_class_1.Category("Mutuelle FMSB", money_enums_1.CatType.FIXED, money_enums_1.CatFrequency.QUARTER, [2016]));
+                    categs.push(new category_class_1.Category("Ass. home Argenta", money_enums_1.CatType.FIXED, money_enums_1.CatFrequency.YEARLY, [2016]));
+                    categs.push(new category_class_1.Category("Ass. vie Argenta", money_enums_1.CatType.FIXED, money_enums_1.CatFrequency.YEARLY, [2016]));
+                    categs.push(new category_class_1.Category("Précompte immobilier", money_enums_1.CatType.FIXED, money_enums_1.CatFrequency.YEARLY, [2016]));
+                    categs.push(new category_class_1.Category("Contributions voiture", money_enums_1.CatType.FIXED, money_enums_1.CatFrequency.YEARLY, [2016]));
+                    categs.push(new category_class_1.Category("Décompte des charges", money_enums_1.CatType.FIXED, money_enums_1.CatFrequency.YEARLY, [2016]));
+                    categs.push(new category_class_1.Category("Autres entrants", money_enums_1.CatType.INCOMING, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Salaire SMALS", money_enums_1.CatType.INCOMING, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Remb. FMSB", money_enums_1.CatType.INCOMING, money_enums_1.CatFrequency.QUARTER, [2016]));
+                    categs.push(new category_class_1.Category("Contributions", money_enums_1.CatType.INCOMING, money_enums_1.CatFrequency.YEARLY, [2016]));
+                    categs.push(new category_class_1.Category("Argent de poche", money_enums_1.CatType.OTHER, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Carburant", money_enums_1.CatType.OTHER, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Divers", money_enums_1.CatType.OTHER, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Frais enfants", money_enums_1.CatType.OTHER, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Informatique / Loisirs", money_enums_1.CatType.OTHER, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Li Yun", money_enums_1.CatType.OTHER, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Nourriture", money_enums_1.CatType.OTHER, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Pharmacie / Médecins", money_enums_1.CatType.OTHER, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Resto / Sorties", money_enums_1.CatType.OTHER, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Vêtements / acc.", money_enums_1.CatType.OTHER, money_enums_1.CatFrequency.MONTHLY, [2016]));
+                    categs.push(new category_class_1.Category("Frais voitures", money_enums_1.CatType.OTHER, money_enums_1.CatFrequency.QUARTER, [2016]));
+                    categs.push(new category_class_1.Category("Mobilier / Accessoires", money_enums_1.CatType.OTHER, money_enums_1.CatFrequency.QUARTER, [2016]));
+                    for (var _i = 0; _i < categs.length; _i++) {
+                        var newCateg = categs[_i];
+                        this._categoryRestService.create(newCateg).subscribe(function (response) {
+                            console.log(newCateg.name, "created");
+                        }, function (err) { return console.log(err); });
+                    }
+                };
+                /** TEMP ***************************************/
                 AdminCategoryComponent.prototype.onEdit = function (category) {
                     this.editedCat = category;
                     this.editForm.controls['years'].updateValue(category.years);
@@ -114,7 +159,7 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                             else {
                                 _this.updateOk(controls);
                             }
-                        });
+                        }, function (err) { return console.log(err); });
                     }
                     else {
                         this.updateOk(controls);

@@ -79,6 +79,51 @@ export class AdminCategoryComponent {
       }, err => console.log(err));
     }
 
+    /** TEMP ***************************************/
+    bulkCreate($event) {
+      $event.preventDefault();
+      let categs:Array<Category> = [];
+      categs.push(new Category("Assurance voiture", CatType.FIXED, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Crèche Liam", CatType.FIXED, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Crédit Hypoth. Argenta", CatType.FIXED, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Electricité", CatType.FIXED, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Li Yun : Beobank", CatType.FIXED, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Li Yun : Proximus", CatType.FIXED, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Maylee : repas/garderies", CatType.FIXED, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Syndicat Smals", CatType.FIXED, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("TV / Internet / Tel.", CatType.FIXED, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Charges Verdurmen-Remy", CatType.FIXED, CatFrequency.QUARTER, [2016]));
+      categs.push(new Category("Li Yun : syndicat CSC", CatType.FIXED, CatFrequency.QUARTER, [2016]));
+      categs.push(new Category("Mutuelle FMSB", CatType.FIXED, CatFrequency.QUARTER, [2016]));
+      categs.push(new Category("Ass. home Argenta", CatType.FIXED, CatFrequency.YEARLY, [2016]));
+      categs.push(new Category("Ass. vie Argenta", CatType.FIXED, CatFrequency.YEARLY, [2016]));
+      categs.push(new Category("Précompte immobilier", CatType.FIXED, CatFrequency.YEARLY, [2016]));
+      categs.push(new Category("Contributions voiture", CatType.FIXED, CatFrequency.YEARLY, [2016]));
+      categs.push(new Category("Décompte des charges", CatType.FIXED, CatFrequency.YEARLY, [2016]));
+      categs.push(new Category("Autres entrants", CatType.INCOMING, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Salaire SMALS", CatType.INCOMING, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Remb. FMSB", CatType.INCOMING, CatFrequency.QUARTER, [2016]));
+      categs.push(new Category("Contributions", CatType.INCOMING, CatFrequency.YEARLY, [2016]));
+      categs.push(new Category("Argent de poche", CatType.OTHER, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Carburant", CatType.OTHER, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Divers", CatType.OTHER, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Frais enfants", CatType.OTHER, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Informatique / Loisirs", CatType.OTHER, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Li Yun", CatType.OTHER, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Nourriture", CatType.OTHER, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Pharmacie / Médecins", CatType.OTHER, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Resto / Sorties", CatType.OTHER, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Vêtements / acc.", CatType.OTHER, CatFrequency.MONTHLY, [2016]));
+      categs.push(new Category("Frais voitures", CatType.OTHER, CatFrequency.QUARTER, [2016]));
+      categs.push(new Category("Mobilier / Accessoires", CatType.OTHER, CatFrequency.QUARTER, [2016]));
+      for (let newCateg of categs) {
+        this._categoryRestService.create(newCateg).subscribe(response => {
+          console.log(newCateg.name, "created");
+        }, err => console.log(err));
+      }
+    }
+    /** TEMP ***************************************/
+
     onEdit(category: Category): void {
       this.editedCat = category;
       (<Control> this.editForm.controls['years']).updateValue(category.years);
@@ -100,7 +145,7 @@ export class AdminCategoryComponent {
           } else {
             this.updateOk(controls);
           }
-        });
+        }, err => console.log(err));
       } else {
         this.updateOk(controls);
       }

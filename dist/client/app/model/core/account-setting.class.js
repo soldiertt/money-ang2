@@ -8,6 +8,7 @@ System.register([], function(exports_1) {
                     this.headerLinesCount = 0;
                     this.fieldSeparator = ";";
                     this.fieldMappings = [];
+                    this.generateIdentifier = false;
                 }
                 return AccountSetting;
             })();

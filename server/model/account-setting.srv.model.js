@@ -29,6 +29,10 @@ var AccountSettingSchema = new Schema({
       type:String,
       required: 'Field separator is required'
     },
+    generateIdentifier: {
+      type:Boolean,
+      required: 'Generate identifier is required'
+    },
     fieldMappings: {
       type:[FieldMapping],
       required: 'Field mappings are required'

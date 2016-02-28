@@ -14,7 +14,9 @@ export class CsvReaderRestService {
     list(rootPath:string, accountSetting: AccountSetting): Observable<any> {
       return this._http.get('/restapi/csvreader?rootPath=' + encodeURIComponent(rootPath)
         + "&startsWith=" + accountSetting.fileStartsWith + "&headerLinesCount=" + accountSetting.headerLinesCount)
-        .map(res => res.json());
+        .map(res => {
+          return { account: accountSetting, csvLines: res.json() };
+        });
     }
 
 }
