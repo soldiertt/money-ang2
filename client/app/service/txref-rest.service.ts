@@ -24,4 +24,7 @@ export class TxrefRestService {
       return this._http.post('/restapi/txref', JSON.stringify(txRef));
     }
 
+    deleteByTxref(txref: string): Observable<any> {
+      return this._http.delete('/restapi/txref/' + txref);
+    }
 }

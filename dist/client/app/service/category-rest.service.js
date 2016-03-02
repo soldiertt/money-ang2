@@ -52,13 +52,16 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                 CategoryRestService.prototype.addTx = function (txFormData) {
                     return this._http.post('/restapi/category/addtx', JSON.stringify(txFormData));
                 };
+                CategoryRestService.prototype.removeTx = function (periodId, tx) {
+                    return this._http.post('/restapi/category/removetx/' + periodId, JSON.stringify(tx));
+                };
                 CategoryRestService.prototype.existsTxForYears = function (categoryId, years) {
                     var yearsParam = "";
                     years.forEach(function (year) {
                         yearsParam += "&years=" + year;
                     });
                     return this._http.get('/restapi/tx/search?categoryId=' + categoryId + yearsParam).map(function (res) {
-                        if (res) {
+                        if (res.json()) {
                             return true;
                         }
                         else {

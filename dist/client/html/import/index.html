@@ -14,7 +14,7 @@
     <tbody>
       <tr *ngFor="#txFormData of txFormDataList">
         <td class="center">{{txFormData.tx.date | date:"longDate"}}</td>
-        <td class="center">{{txFormData.tx.amount | number:'1.2-2'}} €</td>
+        <td class="center">{{txFormData.tx.amount / 100 | number:'1.2-2'}} €</td>
         <td>{{txFormData.tx.thirdPartyAccount.name}} <span *ngIf="txFormData.tx.communication != ''" class="glyphicon glyphicon-info-sign" title="{{txFormData.tx.communication}}"></span></td>
         <td>{{txFormData.tx.comment}}</td>
         <!-- COLUMN TO SELECT CATEGORY -->
@@ -50,7 +50,7 @@
           <div>
             <select class="form-control" [(ngModel)]="txFormData.categoryLink.categoryId">
               <option value="" disabled selected>Select a category ...</option>
-              <option *ngFor="#cat of yearCategories | catfilter : [txFormData.categoryType] : [txFormData.categoryFrequency]" [value]="cat.id">{{cat.name}}</option>
+              <option *ngFor="#cat of yearCategories | catfilter : [txFormData.categoryType] : [txFormData.categoryFrequency] | categorySorter" [value]="cat.id">{{cat.name}}</option>
             </select>
           </div>
         </td>

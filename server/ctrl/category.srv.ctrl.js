@@ -26,6 +26,36 @@ basicCrudCtrl.addTx = function (req, res) {
   );
 };
 
+basicCrudCtrl.removeTx = function (req, res) {
+  var tx = req.body;
+  var periodId = req.params.periodId;
+  Category.update({ "periods._id" : periodId },
+                  {
+                    $pull: { "periods.$.txList" : { _id : tx.id} },
+                    $inc: { "periods.$.total" : -tx.amount }
+                  },
+                  function (err) {
+                    if (err) {
+                      return res.status(400).send({
+                        message: basicCrudCtrl.getErrorMessage(err)
+                      });
+                    } else {
+                      res.json(tx);
+                    }
+                  }
+  );
+  /*category.periods.id(periodId).txList.id(txId).remove();
+  category.save(function (err) {
+    if (err) {
+      return res.status(400).send({
+        message: basicCrudCtrl.getErrorMessage(err)
+      });
+    } else {
+      res.json(category);
+    }
+  });*/
+};
+
 basicCrudCtrl.search = function (req, res) {
   var year = req.query.year;
   if (req.query.id) {
@@ -94,6 +124,19 @@ basicCrudCtrl.searchTx = function (req, res) {
 
 basicCrudCtrl.update = function (req, res) {
   var category = req.object;
+  category.years = req.body.years;
+  category.periods = req.body.periods;
+  category.save(function (err) {
+      if (err) {
+          return res.status(400).send({
+              message: getErrorMessage(err)
+          });
+      } else {
+          res.json(category);
+      }
+  });
+
+  /*var category = req.object;
   Category.findOneAndUpdate({ _id: category.id }, { $set: {years: req.body.years} }).exec(function(err, categ) {
             if (err) {
               return res.status(400).send({
@@ -102,7 +145,7 @@ basicCrudCtrl.update = function (req, res) {
             } else {
               res.json(categ);
             }
-          });
+          });*/
 };
 
 module.exports = basicCrudCtrl;

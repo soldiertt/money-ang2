@@ -118,7 +118,7 @@ export class AdminCategoryComponent {
       categs.push(new Category("Mobilier / Accessoires", CatType.OTHER, CatFrequency.QUARTER, [2016]));
       for (let newCateg of categs) {
         this._categoryRestService.create(newCateg).subscribe(response => {
-          console.log(newCateg.name, "created");
+          //Success
         }, err => console.log(err));
       }
     }
@@ -137,22 +137,25 @@ export class AdminCategoryComponent {
 
     onUpdate(): void {
       let controls = this.editForm.controls;
-      let removedYears = this._categoryYearsChecker.removedYears(this.editedCat.years, controls['years'].value);
+      let removedYears: Array<number> = this._categoryYearsChecker.removedYears(this.editedCat.years, controls['years'].value);
+      let addedYears: Array<number> = this._categoryYearsChecker.addedYears(this.editedCat.years, controls['years'].value);
       if (removedYears.length > 0) {
         this._categoryRestService.existsTxForYears(this.editedCat.id, removedYears).subscribe(exists => {
           if (exists) {
             this.txExistsForRemovedYears = true;
           } else {
-            this.updateOk(controls);
+            this.updateOk(controls, removedYears, addedYears);
           }
         }, err => console.log(err));
       } else {
-        this.updateOk(controls);
+        this.updateOk(controls, removedYears, addedYears);
       }
     }
 
-    updateOk(controls):void {
+    updateOk(controls, removedYears: Array<number>, addedYears: Array<number>):void {
       this.txExistsForRemovedYears = false;
+      this.editedCat = this._categoryYearsChecker.addMissingPeriods(this.editedCat, addedYears);
+      this.editedCat = this._categoryYearsChecker.removedOldPeriods(this.editedCat, removedYears);
       this.editedCat.years = controls['years'].value;
       this._categoryRestService.update(this.editedCat).subscribe(response => {
         this.editedCat = undefined;

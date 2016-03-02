@@ -3,26 +3,26 @@ import {Observable} from 'rxjs/Observable'
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/forkJoin';
 
-import {AccountSetting}             from '../../model/core/account-setting.class'
-import {Tx}                         from '../../model/core/tx.class'
-import {Category}                   from '../../model/core/category.class'
-import {CatType, CatFrequency}      from '../../model/core/money-enums'
-import {Txref}                      from '../../model/core/txref.class'
-import {TxMapper}                   from '../../model/utils/tx-mapper.class'
-import {TxFormData}                 from '../../model/formutil/tx-form-data.class'
-import {PreferenceRestService}      from '../../service/preference-rest.service'
-import {AccountSettingRestService}  from '../../service/account-setting-rest.service'
-import {CategoryRestService}        from '../../service/category-rest.service'
-import {CsvReaderRestService}       from '../../service/csv-reader-rest.service'
-import {TxrefRestService}           from '../../service/txref-rest.service'
-import {FormUtilsService}           from '../../service/form-utils.service'
-import {CatfilterPipe}              from '../../pipe/money-pipes'
+import {AccountSetting}                     from '../../model/core/account-setting.class'
+import {Tx}                                 from '../../model/core/tx.class'
+import {Category}                           from '../../model/core/category.class'
+import {CatType, CatFrequency}              from '../../model/core/money-enums'
+import {Txref}                              from '../../model/core/txref.class'
+import {TxMapper}                           from '../../model/utils/tx-mapper.class'
+import {TxFormData}                         from '../../model/formutil/tx-form-data.class'
+import {PreferenceRestService}              from '../../service/preference-rest.service'
+import {AccountSettingRestService}          from '../../service/account-setting-rest.service'
+import {CategoryRestService}                from '../../service/category-rest.service'
+import {CsvReaderRestService}               from '../../service/csv-reader-rest.service'
+import {TxrefRestService}                   from '../../service/txref-rest.service'
+import {FormUtilsService}                   from '../../service/form-utils.service'
+import {CatfilterPipe, CategorySorterPipe}  from '../../pipe/money-pipes'
 
 @Component({
   selector: 'money-import',
   templateUrl: 'html/import/index.html',
   styleUrls: ['css/import.css'],
-  pipes: [CatfilterPipe]
+  pipes: [CatfilterPipe, CategorySorterPipe]
 })
 export class ImportComponent implements OnInit {
 

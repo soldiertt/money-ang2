@@ -195,7 +195,7 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/map', 'r
                         selector: 'money-import',
                         templateUrl: 'html/import/index.html',
                         styleUrls: ['css/import.css'],
-                        pipes: [money_pipes_1.CatfilterPipe]
+                        pipes: [money_pipes_1.CatfilterPipe, money_pipes_1.CategorySorterPipe]
                     }), 
                     __metadata('design:paramtypes', [preference_rest_service_1.PreferenceRestService, account_setting_rest_service_1.AccountSettingRestService, csv_reader_rest_service_1.CsvReaderRestService, txref_rest_service_1.TxrefRestService, category_rest_service_1.CategoryRestService, form_utils_service_1.FormUtilsService])
                 ], ImportComponent);

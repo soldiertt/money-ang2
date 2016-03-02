@@ -3,6 +3,7 @@ import {Http} from 'angular2/http'
 import {Observable} from 'rxjs/Observable'
 import 'rxjs/add/operator/map';
 import {Category} from '../model/core/category.class'
+import {Tx} from '../model/core/tx.class'
 import {TxFormData} from '../model/formutil/tx-form-data.class'
 
 @Injectable()
@@ -36,12 +37,16 @@ export class CategoryRestService {
       return this._http.put('/restapi/category/' + categ.id, JSON.stringify(categ));
     }
 
-    delete(categId: String): Observable<any> {
+    delete(categId: string): Observable<any> {
       return this._http.delete('/restapi/category/' + categId);
     }
 
     addTx(txFormData: TxFormData): Observable<any> {
       return this._http.post('/restapi/category/addtx', JSON.stringify(txFormData));
+    }
+
+    removeTx(periodId: string, tx: Tx): Observable<any> {
+      return this._http.post('/restapi/category/removetx/' + periodId , JSON.stringify(tx));
     }
 
     existsTxForYears(categoryId: string, years: Array<number>) {
@@ -50,7 +55,7 @@ export class CategoryRestService {
         yearsParam += "&years=" + year;
       });
       return this._http.get('/restapi/tx/search?categoryId=' + categoryId  + yearsParam).map(res => {
-        if (res) {
+        if (res.json()) {
           return true;
         } else {
           return false;

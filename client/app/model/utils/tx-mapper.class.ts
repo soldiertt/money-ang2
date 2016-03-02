@@ -19,7 +19,7 @@ export class TxMapper {
         case 'amount':
           if (mapping.isBelgianNumber) {
             let amountStr = tokens[mapping.index].replace(/[.]/g, '').replace(/,/g, '.');
-            outTx.amount = Number(amountStr);
+            outTx.amount = Number(amountStr) * 100; //!! Store cents to avoid operations problems !
           }
           break;
         case 'communication':

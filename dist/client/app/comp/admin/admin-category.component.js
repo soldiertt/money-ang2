@@ -133,7 +133,7 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                     for (var _i = 0; _i < categs.length; _i++) {
                         var newCateg = categs[_i];
                         this._categoryRestService.create(newCateg).subscribe(function (response) {
-                            console.log(newCateg.name, "created");
+                            //Success
                         }, function (err) { return console.log(err); });
                     }
                 };
@@ -151,23 +151,26 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                     var _this = this;
                     var controls = this.editForm.controls;
                     var removedYears = this._categoryYearsChecker.removedYears(this.editedCat.years, controls['years'].value);
+                    var addedYears = this._categoryYearsChecker.addedYears(this.editedCat.years, controls['years'].value);
                     if (removedYears.length > 0) {
                         this._categoryRestService.existsTxForYears(this.editedCat.id, removedYears).subscribe(function (exists) {
                             if (exists) {
                                 _this.txExistsForRemovedYears = true;
                             }
                             else {
-                                _this.updateOk(controls);
+                                _this.updateOk(controls, removedYears, addedYears);
                             }
                         }, function (err) { return console.log(err); });
                     }
                     else {
-                        this.updateOk(controls);
+                        this.updateOk(controls, removedYears, addedYears);
                     }
                 };
-                AdminCategoryComponent.prototype.updateOk = function (controls) {
+                AdminCategoryComponent.prototype.updateOk = function (controls, removedYears, addedYears) {
                     var _this = this;
                     this.txExistsForRemovedYears = false;
+                    this.editedCat = this._categoryYearsChecker.addMissingPeriods(this.editedCat, addedYears);
+                    this.editedCat = this._categoryYearsChecker.removedOldPeriods(this.editedCat, removedYears);
                     this.editedCat.years = controls['years'].value;
                     this._categoryRestService.update(this.editedCat).subscribe(function (response) {
                         _this.editedCat = undefined;

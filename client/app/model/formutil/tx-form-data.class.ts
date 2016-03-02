@@ -34,9 +34,9 @@ export class TxFormData {
 
   resetComptaDate() {
     this.comptaDate = false;
-    //Set default compta month and year to one month ago (most current)
-    let now = new Date();
-    let oneMonthAgoDate = new Date(now.setMonth(now.getMonth() - 1));
+    //Set default compta month and year to one month ago from tx date (most current)
+    let txDate = new Date(this.tx.date.getTime());
+    let oneMonthAgoDate = new Date(txDate.setMonth(txDate.getMonth() - 1));
     this.comptaMonth = oneMonthAgoDate.getMonth();
     this.comptaYear = oneMonthAgoDate.getFullYear();
   }

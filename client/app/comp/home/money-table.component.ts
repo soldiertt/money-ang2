@@ -45,11 +45,15 @@ export class MoneyTableComponent {
     });
   }
 
-  filtersUpdated(item:string) {
+  /**
+    We subscribe to filtersUpdated event of displayParamService
+  **/
+  private filtersUpdated(item:string) {
     this.initTotals(true);
     this.computeSubTotals();
   }
 
+  /** When cell is clicked **/
   findTx(categoryId:string, period: Period) {
     if (!period.txList) {
       this._categoryRestService.findAllTxForPeriod(categoryId, period.id).subscribe(categ => {
@@ -58,6 +62,17 @@ export class MoneyTableComponent {
     }
   }
 
+
+  /** list on event txDeleted of money-tx-details component **/
+  onTxDeleted($event: Array<any>) {
+    let [period, tx] = $event;
+    period.txList = undefined;
+    period.total = period.total - tx.amount;
+    this.initTotals(false);
+    this.computeTotals();
+  }
+
+  /** for css class **/
   isCurrentPeriod(categ: Category, period: Period): boolean {
     let actualdate = new Date();
     let actualYear = actualdate.getFullYear();
@@ -70,7 +85,26 @@ export class MoneyTableComponent {
     }
   }
 
-  initTotals(onlySubTotals: boolean) {
+  /** for css class **/
+  isUnpaidPeriod(categ: Category, period: Period): boolean {
+    if (categ.type == CatType.FIXED && period.total == 0) {
+      let actualdate = new Date();
+      let actualYear = actualdate.getFullYear();
+      if (period.year < actualYear) {
+        return true;
+      } else if (categ.frequency == CatFrequency.YEARLY) {
+        return false;
+      } else if (categ.frequency == CatFrequency.QUARTER) {
+        return period.index < (Math.floor((actualdate.getMonth() + 3) / 3) - 1);
+      } else if (categ.frequency == CatFrequency.MONTHLY) {
+        return period.index < actualdate.getMonth();
+      }
+    } else {
+      return false;
+    }
+  }
+
+  private initTotals(onlySubTotals: boolean) {
     for (let type of this.displayParamService.types) {
       if (!onlySubTotals) {
         for (let freq of this.displayParamService.frequencies) {
@@ -82,7 +116,7 @@ export class MoneyTableComponent {
     this.totals.set("GLOBAL", [0,0,0,0,0,0,0,0,0,0,0,0]);
   }
 
-  computeTotals() {
+  private computeTotals() {
     this.categories.forEach(categ => {
       // FILTER ON YEAR periods
       let filteredPeriods = categ.periods.filter(period => period.year == this.workingYear);
@@ -111,7 +145,7 @@ export class MoneyTableComponent {
     this.computeSubTotals();
   }
 
-  computeSubTotals() {
+  private computeSubTotals() {
     for (let type of this.displayParamService.types) {
       for (let freq of this.displayParamService.frequencies) {
         for (let i = 0; i < 12; i++) {
@@ -121,4 +155,5 @@ export class MoneyTableComponent {
       }
     }
   }
+
 }

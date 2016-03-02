@@ -26,7 +26,7 @@ System.register(['../core/tx.class'], function(exports_1) {
                             case 'amount':
                                 if (mapping.isBelgianNumber) {
                                     var amountStr = tokens[mapping.index].replace(/[.]/g, '').replace(/,/g, '.');
-                                    outTx.amount = Number(amountStr);
+                                    outTx.amount = Number(amountStr) * 100; //!! Store cents to avoid operations problems !
                                 }
                                 break;
                             case 'communication':

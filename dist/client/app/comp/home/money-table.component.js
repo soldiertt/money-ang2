@@ -63,10 +63,14 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
                         });
                     });
                 }
+                /**
+                  We subscribe to filtersUpdated event of displayParamService
+                **/
                 MoneyTableComponent.prototype.filtersUpdated = function (item) {
                     this.initTotals(true);
                     this.computeSubTotals();
                 };
+                /** When cell is clicked **/
                 MoneyTableComponent.prototype.findTx = function (categoryId, period) {
                     if (!period.txList) {
                         this._categoryRestService.findAllTxForPeriod(categoryId, period.id).subscribe(function (categ) {
@@ -74,6 +78,15 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
                         });
                     }
                 };
+                /** list on event txDeleted of money-tx-details component **/
+                MoneyTableComponent.prototype.onTxDeleted = function ($event) {
+                    var period = $event[0], tx = $event[1];
+                    period.txList = undefined;
+                    period.total = period.total - tx.amount;
+                    this.initTotals(false);
+                    this.computeTotals();
+                };
+                /** for css class **/
                 MoneyTableComponent.prototype.isCurrentPeriod = function (categ, period) {
                     var actualdate = new Date();
                     var actualYear = actualdate.getFullYear();
@@ -85,6 +98,28 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
                     }
                     else if (categ.frequency == money_enums_1.CatFrequency.MONTHLY) {
                         return period.index == actualdate.getMonth();
+                    }
+                };
+                /** for css class **/
+                MoneyTableComponent.prototype.isUnpaidPeriod = function (categ, period) {
+                    if (categ.type == money_enums_1.CatType.FIXED && period.total == 0) {
+                        var actualdate = new Date();
+                        var actualYear = actualdate.getFullYear();
+                        if (period.year < actualYear) {
+                            return true;
+                        }
+                        else if (categ.frequency == money_enums_1.CatFrequency.YEARLY) {
+                            return false;
+                        }
+                        else if (categ.frequency == money_enums_1.CatFrequency.QUARTER) {
+                            return period.index < (Math.floor((actualdate.getMonth() + 3) / 3) - 1);
+                        }
+                        else if (categ.frequency == money_enums_1.CatFrequency.MONTHLY) {
+                            return period.index < actualdate.getMonth();
+                        }
+                    }
+                    else {
+                        return false;
                     }
                 };
                 MoneyTableComponent.prototype.initTotals = function (onlySubTotals) {

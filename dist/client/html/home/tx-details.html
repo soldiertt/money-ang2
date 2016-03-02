@@ -6,14 +6,16 @@
       <th>Third Party</th>
       <th>Amount</th>
       <th>Comment</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="#tx of txList">
       <td>{{stringAsDate(tx.date) | date:"longDate"}}</td>
       <td>{{tx.thirdPartyAccount.name}}</td>
-      <td>{{tx.amount |  number:'1.2-2'}} €</td>
+      <td>{{tx.amount / 100 |  number:'1.2-2'}} €</td>
       <td>{{tx.comment}}</td>
+      <td><span class="glyphicon glyphicon-trash" (click)="onDeleteTx(tx)"></span></td>
     </tr>
   </tbody>
 </table>

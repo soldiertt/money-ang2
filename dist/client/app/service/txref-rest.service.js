@@ -36,6 +36,9 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                 TxrefRestService.prototype.create = function (txRef) {
                     return this._http.post('/restapi/txref', JSON.stringify(txRef));
                 };
+                TxrefRestService.prototype.deleteByTxref = function (txref) {
+                    return this._http.delete('/restapi/txref/' + txref);
+                };
                 TxrefRestService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

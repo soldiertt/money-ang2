@@ -28,9 +28,9 @@ System.register(['../core/money-enums'], function(exports_1) {
                 }
                 TxFormData.prototype.resetComptaDate = function () {
                     this.comptaDate = false;
-                    //Set default compta month and year to one month ago (most current)
-                    var now = new Date();
-                    var oneMonthAgoDate = new Date(now.setMonth(now.getMonth() - 1));
+                    //Set default compta month and year to one month ago from tx date (most current)
+                    var txDate = new Date(this.tx.date.getTime());
+                    var oneMonthAgoDate = new Date(txDate.setMonth(txDate.getMonth() - 1));
                     this.comptaMonth = oneMonthAgoDate.getMonth();
                     this.comptaYear = oneMonthAgoDate.getFullYear();
                 };

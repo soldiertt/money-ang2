@@ -12,6 +12,10 @@
   background-color: antiquewhite;
 }
 
+.money-cell.unpaid {
+  background-color: indianred;
+}
+
 .total-table {
   width: 100%;
   border: 2px solid #ddd;

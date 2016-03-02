@@ -6,6 +6,8 @@ module.exports = function (app) {
       .post(categoryCtrl.create);
     app.route('/restapi/category/addtx')
       .post(categoryCtrl.addTx);
+    app.route('/restapi/category/removetx/:periodId')
+      .post(categoryCtrl.removeTx);
     app.route('/restapi/category/search')
       .get(categoryCtrl.search);
     app.route('/restapi/tx/search')

@@ -36,8 +36,8 @@ System.register(['angular2/core', '../core/category.class'], function(exports_1)
                     });
                     return category;
                 };
-                CategoryYearsChecker.prototype.removedOldPeriods = function (category, deletedYears) {
-                    category.periods = category.periods.filter(function (period) { return deletedYears.indexOf(period.year) == -1; });
+                CategoryYearsChecker.prototype.removedOldPeriods = function (category, removedYears) {
+                    category.periods = category.periods.filter(function (period) { return removedYears.indexOf(period.year) == -1; });
                     return category;
                 };
                 CategoryYearsChecker = __decorate([

@@ -14,10 +14,11 @@
       {{category.name}}
     </td>
     <td *ngFor="#period of category.periods | periodFilter : workingYear" [attr.colspan]="12/category.nbPeriods"
-      class="money-cell" [class.current]="isCurrentPeriod(category, period)" tooltip="{{period.total != 0}}" (click)="findTx(category.id, period)">
+      class="money-cell" [class.current]="isCurrentPeriod(category, period)" [class.unpaid]="isUnpaidPeriod(category, period)"
+      tooltip="{{period.total != 0}}" (click)="findTx(category.id, period)">
       <div *ngIf="period.total != 0">
-        {{period.total | number:'1.2-2'}} €
-        <money-tx-details [txList]="period.txList"></money-tx-details>
+        {{period.total / 100 | number:'1.2-2'}} €
+        <money-tx-details [txList]="period.txList" [period]="period" (txDeleted)="onTxDeleted($event)"></money-tx-details>
       </div>
     </td>
   </tr>
@@ -37,21 +38,21 @@
       <tr>
         <td>{{displayedType}}-{{displayedFreq}}</td>
         <td *ngFor="#total of totals.get(displayedType + '-' + displayedFreq)">
-          {{total | number:'1.2-2'}} €
+          {{total / 100 | number:'1.2-2'}} €
         </td>
       </tr>
     </template>
     <tr class="total-row-medium">
       <td>{{displayedType}}</td>
       <td *ngFor="#total of totals.get(displayedType)">
-        {{total | number:'1.2-2'}} €
+        {{total / 100 | number:'1.2-2'}} €
       </td>
     </tr>
   </template>
   <tr class="total-row-large">
     <td>GLOBAL</td>
     <td *ngFor="#total of totals.get('GLOBAL')">
-      {{total | number:'1.2-2'}} €
+      {{total / 100 | number:'1.2-2'}} €
     </td>
   </tr>
 </tbody>
