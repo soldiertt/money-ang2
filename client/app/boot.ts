@@ -8,6 +8,7 @@ import {CategoryRestService} from './service/category-rest.service'
 import {AccountSettingRestService} from './service/account-setting-rest.service'
 import {PreferenceRestService} from './service/preference-rest.service'
 import {TxrefRestService} from './service/txref-rest.service'
+import {RuleRestService} from './service/rule-rest.service'
 import {CsvReaderRestService} from './service/csv-reader-rest.service'
 import {FormUtilsService} from './service/form-utils.service'
 import {CategoryYearsChecker} from './model/utils/category-years-checker'
@@ -20,6 +21,7 @@ bootstrap(AppComponent, [
   AccountSettingRestService,
   PreferenceRestService,
   TxrefRestService,
+  RuleRestService,
   CsvReaderRestService,
   FormUtilsService,
   CategoryYearsChecker,

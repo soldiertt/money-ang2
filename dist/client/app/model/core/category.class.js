@@ -13,10 +13,12 @@ System.register(['./money-enums'], function(exports_1) {
                     this.index = index;
                     this.total = 0;
                     this.txList = [];
+                    this.markAsPaid = false;
                 }
                 Period.prototype.addTx = function (tx) {
                     this.txList.push(tx);
                     this.total += tx.amount;
+                    this.markAsPaid = false; // true => only for no tx periods
                 };
                 return Period;
             })();

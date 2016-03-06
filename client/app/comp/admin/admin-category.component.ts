@@ -40,7 +40,7 @@ export class AdminCategoryComponent {
         name: fb.control('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])),
         type: fb.control('', Validators.required),
         frequency: fb.control('', Validators.required),
-        years: fb.control([], Validators.compose([Validators.required]))
+        years: fb.control([], Validators.required)
       });
 
       this.editForm = fb.group({

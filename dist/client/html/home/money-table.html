@@ -15,10 +15,13 @@
     </td>
     <td *ngFor="#period of category.periods | periodFilter : workingYear" [attr.colspan]="12/category.nbPeriods"
       class="money-cell" [class.current]="isCurrentPeriod(category, period)" [class.unpaid]="isUnpaidPeriod(category, period)"
-      tooltip="{{period.total != 0}}" (click)="findTx(category.id, period)">
+      tooltip="{{period.total != 0}}" (click)="findTx(category.id, period)" (dblclick)="markPeriodAsPaid(category, period)">
       <div *ngIf="period.total != 0">
         {{period.total / 100 | number:'1.2-2'}} €
         <money-tx-details [txList]="period.txList" [period]="period" (txDeleted)="onTxDeleted($event)"></money-tx-details>
+      </div>
+      <div *ngIf="period.total == 0 && period.markAsPaid">
+        [PAID]
       </div>
     </td>
   </tr>

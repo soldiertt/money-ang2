@@ -78,6 +78,20 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
                         });
                     }
                 };
+                MoneyTableComponent.prototype.markPeriodAsPaid = function (category, period) {
+                    if (this.isUnpaidPeriod(category, period)) {
+                        period.markAsPaid = true;
+                        this._categoryRestService.update(category).subscribe(function (data) {
+                            console.log("category updated");
+                        });
+                    }
+                    else if (period.total == 0 && period.markAsPaid) {
+                        period.markAsPaid = false;
+                        this._categoryRestService.update(category).subscribe(function (data) {
+                            console.log("category updated");
+                        });
+                    }
+                };
                 /** list on event txDeleted of money-tx-details component **/
                 MoneyTableComponent.prototype.onTxDeleted = function ($event) {
                     var period = $event[0], tx = $event[1];
@@ -102,7 +116,7 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
                 };
                 /** for css class **/
                 MoneyTableComponent.prototype.isUnpaidPeriod = function (categ, period) {
-                    if (categ.type == money_enums_1.CatType.FIXED && period.total == 0) {
+                    if (categ.type == money_enums_1.CatType.FIXED && period.total == 0 && !period.markAsPaid) {
                         var actualdate = new Date();
                         var actualYear = actualdate.getFullYear();
                         if (period.year < actualYear) {

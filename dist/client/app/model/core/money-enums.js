@@ -1,5 +1,5 @@
 System.register([], function(exports_1) {
-    var CatType, CatFrequency;
+    var CatType, CatFrequency, CondOperator, CondFieldType;
     return {
         setters:[],
         execute: function() {
@@ -17,6 +17,18 @@ System.register([], function(exports_1) {
             })(CatFrequency || (CatFrequency = {}));
             exports_1("CatFrequency", CatFrequency);
             ;
+            (function (CondOperator) {
+                CondOperator[CondOperator["EQUAL"] = "EQUAL"] = "EQUAL";
+                CondOperator[CondOperator["GREATERTHAN"] = "GREATERTHAN"] = "GREATERTHAN";
+                CondOperator[CondOperator["LOWERTHAN"] = "LOWERTHAN"] = "LOWERTHAN";
+                CondOperator[CondOperator["CONTAINS"] = "CONTAINS"] = "CONTAINS";
+            })(CondOperator || (CondOperator = {}));
+            exports_1("CondOperator", CondOperator);
+            (function (CondFieldType) {
+                CondFieldType[CondFieldType["NUMBER"] = "NUMBER"] = "NUMBER";
+                CondFieldType[CondFieldType["STRING"] = "STRING"] = "STRING";
+            })(CondFieldType || (CondFieldType = {}));
+            exports_1("CondFieldType", CondFieldType);
         }
     }
 });

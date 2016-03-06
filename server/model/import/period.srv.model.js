@@ -17,6 +17,9 @@ var PeriodSchema = new Schema({
   },
   txList: {
     type: [Transaction]
+  },
+  markAsPaid: {
+    type: Boolean
   }
 });
 

@@ -58,7 +58,7 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                         name: fb.control('', common_1.Validators.compose([common_1.Validators.required, common_1.Validators.minLength(3), common_1.Validators.maxLength(50)])),
                         type: fb.control('', common_1.Validators.required),
                         frequency: fb.control('', common_1.Validators.required),
-                        years: fb.control([], common_1.Validators.compose([common_1.Validators.required]))
+                        years: fb.control([], common_1.Validators.required)
                     });
                     this.editForm = fb.group({
                         years: fb.control([], common_1.Validators.compose([common_1.Validators.required]))

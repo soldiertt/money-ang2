@@ -44,6 +44,7 @@ module.exports = function (db) {
     require('../routes/preference.srv.route.js')(app);
     require('../routes/csvreader.srv.route.js')(app);
     require('../routes/txref.srv.route.js')(app);
+    require('../routes/rule.srv.route.js')(app);
 
     app.use(express.static('./dist/client'));
     app.use('/lib', express.static('./node_modules'));

@@ -62,6 +62,19 @@ export class MoneyTableComponent {
     }
   }
 
+  markPeriodAsPaid(category: Category, period: Period) {
+    if (this.isUnpaidPeriod(category, period)) {
+      period.markAsPaid = true;
+      this._categoryRestService.update(category).subscribe(data => {
+        console.log("category updated");
+      });
+    } else if (period.total == 0 && period.markAsPaid)  {
+      period.markAsPaid = false;
+      this._categoryRestService.update(category).subscribe(data => {
+        console.log("category updated");
+      });
+    }
+  }
 
   /** list on event txDeleted of money-tx-details component **/
   onTxDeleted($event: Array<any>) {
@@ -87,7 +100,7 @@ export class MoneyTableComponent {
 
   /** for css class **/
   isUnpaidPeriod(categ: Category, period: Period): boolean {
-    if (categ.type == CatType.FIXED && period.total == 0) {
+    if (categ.type == CatType.FIXED && period.total == 0 && !period.markAsPaid) {
       let actualdate = new Date();
       let actualYear = actualdate.getFullYear();
       if (period.year < actualYear) {

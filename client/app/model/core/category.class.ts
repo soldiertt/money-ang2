@@ -7,17 +7,20 @@ export class Period {
   index:number;
   total:number;
   txList:Array<Tx>;
+  markAsPaid: boolean;
 
   constructor(year:number, index:number) {
     this.year = year;
     this.index = index;
     this.total = 0;
     this.txList = [];
+    this.markAsPaid = false;
   }
 
   addTx(tx:Tx) {
     this.txList.push(tx);
     this.total += tx.amount;
+    this.markAsPaid = false; // true => only for no tx periods
   }
 }
 

@@ -8,5 +8,6 @@ module.exports = function() {
     require('../model/txref.srv.model');
     require('../model/account-setting.srv.model');
     require('../model/preference.srv.model');
+    require('../model/rule.srv.model');
     return db;
 };
