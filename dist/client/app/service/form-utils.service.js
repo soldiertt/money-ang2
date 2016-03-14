@@ -1,4 +1,6 @@
-System.register(['angular2/core'], function(exports_1) {
+System.register(['angular2/core'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -24,8 +26,8 @@ System.register(['angular2/core'], function(exports_1) {
                     for (var _i = 1; _i < arguments.length; _i++) {
                         controlNames[_i - 1] = arguments[_i];
                     }
-                    for (var _a = 0; _a < controlNames.length; _a++) {
-                        var controlName = controlNames[_a];
+                    for (var _a = 0, controlNames_1 = controlNames; _a < controlNames_1.length; _a++) {
+                        var controlName = controlNames_1[_a];
                         form.controls[controlName].updateValue('');
                     }
                 };
@@ -49,7 +51,7 @@ System.register(['angular2/core'], function(exports_1) {
                     __metadata('design:paramtypes', [])
                 ], FormUtilsService);
                 return FormUtilsService;
-            })();
+            }());
             exports_1("FormUtilsService", FormUtilsService);
         }
     }

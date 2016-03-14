@@ -14,7 +14,7 @@
   "author": "Soldiertt",
   "license": "ISC",
   "dependencies": {
-    "angular2": "*",
+    "angular2": "2.0.0-beta.1",
     "body-parser": "^1.12.3",
     "bootstrap": "^3.3.6",
     "compression": "^1.4.3",

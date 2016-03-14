@@ -1,4 +1,6 @@
-System.register(['../core/money-enums'], function(exports_1) {
+System.register(['../core/money-enums'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var money_enums_1;
     var CategoryLink, TxFormData;
     return {
@@ -12,7 +14,7 @@ System.register(['../core/money-enums'], function(exports_1) {
                     this.categoryId = "";
                 }
                 return CategoryLink;
-            })();
+            }());
             TxFormData = (function () {
                 function TxFormData(tx) {
                     this.tx = tx;
@@ -35,7 +37,7 @@ System.register(['../core/money-enums'], function(exports_1) {
                     this.comptaYear = oneMonthAgoDate.getFullYear();
                 };
                 return TxFormData;
-            })();
+            }());
             exports_1("TxFormData", TxFormData);
         }
     }

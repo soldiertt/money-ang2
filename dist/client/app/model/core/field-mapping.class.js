@@ -1,4 +1,6 @@
-System.register([], function(exports_1) {
+System.register([], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var FieldMapping;
     return {
         setters:[],
@@ -13,7 +15,7 @@ System.register([], function(exports_1) {
                     this.isBelgianNumber = false;
                 }
                 return FieldMapping;
-            })();
+            }());
             exports_1("FieldMapping", FieldMapping);
         }
     }

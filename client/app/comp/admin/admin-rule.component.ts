@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, ElementRef} from 'angular2/core';
 import {Control, FormBuilder, Validators, ControlGroup} from 'angular2/common';
 import {Condition, Rule}              from '../../model/core/rule.class'
 import {Category}                     from '../../model/core/category.class'
@@ -9,6 +9,7 @@ import {RuleRestService}              from '../../service/rule-rest.service'
 import {CategoryRestService}          from '../../service/category-rest.service'
 import {DisplayErrorDirective}        from '../directive/display-error.directive'
 import {CatfilterPipe, CategorySorterPipe}  from '../../pipe/money-pipes'
+//import {TOOLTIP_DIRECTIVES}           from 'ng2-bootstrap/ng2-bootstrap';
 
 class FieldHelper {
   index: number;
@@ -26,7 +27,7 @@ class FieldHelper {
 @Component({
     selector: 'money-admin-rule',
     templateUrl: 'html/admin/rule.html',
-    directives: [DisplayErrorDirective],
+    directives: [DisplayErrorDirective], //TOOLTIP_DIRECTIVES
     pipes: [CatfilterPipe, CategorySorterPipe]
 })
 export class AdminRuleComponent {
@@ -43,7 +44,8 @@ export class AdminRuleComponent {
 
   constructor(private _ruleRestService : RuleRestService,
     private _categoryRestService : CategoryRestService,
-    fb: FormBuilder) {
+    fb: FormBuilder,
+    private elementRef:ElementRef) {
 
     this._categoryRestService.list().subscribe(categories => {
       this.categories = categories;
@@ -142,5 +144,20 @@ export class AdminRuleComponent {
       this.rules.splice(j, 1);
       console.log("Rule deleted");
     }, err => console.log(err))
+  }
+
+  getConditionsForRule(rule: Rule): string {
+    let tooltip = "";
+    for (let cond of rule.conditions) {
+      if (tooltip != "") {
+        tooltip += " and ";
+      }
+      if (cond.fieldType == CondFieldType.STRING) {
+        tooltip += cond.fieldName + " " + cond.operator + " '" + cond.valueStr + "'";
+      } else if (cond.fieldType == CondFieldType.NUMBER) {
+        tooltip += cond.fieldName + " " + cond.operator + " '" + cond.valueNum + "'";
+      }
+    }
+    return tooltip
   }
 }

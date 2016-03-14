@@ -1,4 +1,6 @@
-System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../model/formutil/multipart-uploader.class', '../../model/formutil/multipart-item.class', '../../model/core/account-setting.class', '../../model/core/field-mapping.class', '../../model/validation/account-form-validator.class', '../../service/account-setting-rest.service', '../../service/form-utils.service', '../directive/display-error.directive'], function(exports_1) {
+System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../model/formutil/multipart-uploader.class', '../../model/formutil/multipart-item.class', '../../model/core/account-setting.class', '../../model/core/field-mapping.class', '../../model/validation/account-form-validator.class', '../../service/account-setting-rest.service', '../../service/form-utils.service', '../directive/display-error.directive'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -155,7 +157,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../mod
                     __metadata('design:paramtypes', [http_1.Http, common_1.FormBuilder, account_setting_rest_service_1.AccountSettingRestService, form_utils_service_1.FormUtilsService])
                 ], AdminAccountSettingComponent);
                 return AdminAccountSettingComponent;
-            })();
+            }());
             exports_1("AdminAccountSettingComponent", AdminAccountSettingComponent);
         }
     }

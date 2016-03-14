@@ -1,4 +1,6 @@
-System.register([], function(exports_1) {
+System.register([], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var Condition, Rule;
     return {
         setters:[],
@@ -8,7 +10,7 @@ System.register([], function(exports_1) {
                     this.availableOperators = [];
                 }
                 return Condition;
-            })();
+            }());
             exports_1("Condition", Condition);
             Rule = (function () {
                 function Rule() {
@@ -16,7 +18,7 @@ System.register([], function(exports_1) {
                     this.isActive = true;
                 }
                 return Rule;
-            })();
+            }());
             exports_1("Rule", Rule);
         }
     }

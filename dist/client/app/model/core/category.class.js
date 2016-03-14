@@ -1,4 +1,6 @@
-System.register(['./money-enums'], function(exports_1) {
+System.register(['./money-enums'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var money_enums_1;
     var Period, Category;
     return {
@@ -21,7 +23,7 @@ System.register(['./money-enums'], function(exports_1) {
                     this.markAsPaid = false; // true => only for no tx periods
                 };
                 return Period;
-            })();
+            }());
             exports_1("Period", Period);
             Category = (function () {
                 function Category(name, type, frequency, years) {
@@ -48,7 +50,7 @@ System.register(['./money-enums'], function(exports_1) {
                     }
                 };
                 return Category;
-            })();
+            }());
             exports_1("Category", Category);
         }
     }

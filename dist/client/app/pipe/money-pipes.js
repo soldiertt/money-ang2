@@ -1,4 +1,6 @@
-System.register(["angular2/core"], function(exports_1) {
+System.register(["angular2/core"], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -60,15 +62,15 @@ System.register(["angular2/core"], function(exports_1) {
                     __metadata('design:paramtypes', [])
                 ], CategorySorterPipe);
                 return CategorySorterPipe;
-            })();
+            }());
             exports_1("CategorySorterPipe", CategorySorterPipe);
             PeriodFilterPipe = (function () {
                 function PeriodFilterPipe() {
                 }
                 PeriodFilterPipe.prototype.transform = function (periods, args) {
                     if (periods) {
-                        var year = args[0];
-                        return periods.filter(function (period) { return period.year == year; });
+                        var year_1 = args[0];
+                        return periods.filter(function (period) { return period.year == year_1; });
                     }
                     else {
                         return periods;
@@ -81,15 +83,15 @@ System.register(["angular2/core"], function(exports_1) {
                     __metadata('design:paramtypes', [])
                 ], PeriodFilterPipe);
                 return PeriodFilterPipe;
-            })();
+            }());
             exports_1("PeriodFilterPipe", PeriodFilterPipe);
             CatfilterPipe = (function () {
                 function CatfilterPipe() {
                 }
                 CatfilterPipe.prototype.transform = function (categories, args) {
                     if (categories) {
-                        var types = args[0], frequencies = args[1];
-                        return categories.filter(function (item) { return types.indexOf(item.type) !== -1 && frequencies.indexOf(item.frequency) !== -1; });
+                        var types_1 = args[0], frequencies_1 = args[1];
+                        return categories.filter(function (item) { return types_1.indexOf(item.type) !== -1 && frequencies_1.indexOf(item.frequency) !== -1; });
                     }
                     else {
                         return categories;
@@ -102,7 +104,7 @@ System.register(["angular2/core"], function(exports_1) {
                     __metadata('design:paramtypes', [])
                 ], CatfilterPipe);
                 return CatfilterPipe;
-            })();
+            }());
             exports_1("CatfilterPipe", CatfilterPipe);
         }
     }

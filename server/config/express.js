@@ -4,16 +4,13 @@ var config = require('./config'),
     morgan = require('morgan'), // http request logger
     compress = require('compression'),
     bodyParser = require('body-parser'),
-    methodOverride = require('method-override'),
-    session = require('express-session'),
-    MongoStore = require('connect-mongo')(session);
+    methodOverride = require('method-override');
+    //session = require('express-session'),
+    //MongoStore = require('connect-mongo')(session);
 
 module.exports = function (db) {
     var app = express(),
-        server = http.createServer(app),
-        mongoStore = new MongoStore({
-            mongooseConnection: db.connection
-        });
+        server = http.createServer(app);
 
     if (process.env.NODE_ENV === 'development') {
         app.use(morgan('dev'));
@@ -27,12 +24,12 @@ module.exports = function (db) {
     app.use(bodyParser.json());
     app.use(methodOverride());
 
-    app.use(session({
-        saveUninitialized: true,
-        resave: true,
-        secret: config.sessionSecret,
-        store: mongoStore
-    }));
+    //app.use(session({
+    //    saveUninitialized: true,
+    //    resave: true,
+    //    secret: config.sessionSecret
+    //    store: new MongoStore({ mongooseConnection: db.connection })
+    //}));
 
     app.set('views', './server/views');
     app.set('view engine', config.viewEngine);

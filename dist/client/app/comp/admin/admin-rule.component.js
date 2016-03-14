@@ -1,4 +1,6 @@
-System.register(['angular2/core', 'angular2/common', '../../model/core/rule.class', '../../model/formutil/operator-helper.class', '../../model/core/money-enums', '../../model/validation/rule-condition-validator.class', '../../service/rule-rest.service', '../../service/category-rest.service', '../directive/display-error.directive', '../../pipe/money-pipes'], function(exports_1) {
+System.register(['angular2/core', 'angular2/common', '../../model/core/rule.class', '../../model/formutil/operator-helper.class', '../../model/core/money-enums', '../../model/validation/rule-condition-validator.class', '../../service/rule-rest.service', '../../service/category-rest.service', '../directive/display-error.directive', '../../pipe/money-pipes'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -43,6 +45,7 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/rule.clas
                 money_pipes_1 = money_pipes_1_1;
             }],
         execute: function() {
+            //import {TOOLTIP_DIRECTIVES}           from 'ng2-bootstrap/ng2-bootstrap';
             FieldHelper = (function () {
                 function FieldHelper(index, name, label, type) {
                     this.index = index;
@@ -51,12 +54,13 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/rule.clas
                     this.type = type;
                 }
                 return FieldHelper;
-            })();
+            }());
             AdminRuleComponent = (function () {
-                function AdminRuleComponent(_ruleRestService, _categoryRestService, fb) {
+                function AdminRuleComponent(_ruleRestService, _categoryRestService, fb, elementRef) {
                     var _this = this;
                     this._ruleRestService = _ruleRestService;
                     this._categoryRestService = _categoryRestService;
+                    this.elementRef = elementRef;
                     this.newRule = new rule_class_1.Rule();
                     this.fieldNames = [];
                     this.stringOperators = [];
@@ -146,6 +150,22 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/rule.clas
                         console.log("Rule deleted");
                     }, function (err) { return console.log(err); });
                 };
+                AdminRuleComponent.prototype.getConditionsForRule = function (rule) {
+                    var tooltip = "";
+                    for (var _i = 0, _a = rule.conditions; _i < _a.length; _i++) {
+                        var cond = _a[_i];
+                        if (tooltip != "") {
+                            tooltip += " and ";
+                        }
+                        if (cond.fieldType == money_enums_1.CondFieldType.STRING) {
+                            tooltip += cond.fieldName + " " + cond.operator + " '" + cond.valueStr + "'";
+                        }
+                        else if (cond.fieldType == money_enums_1.CondFieldType.NUMBER) {
+                            tooltip += cond.fieldName + " " + cond.operator + " '" + cond.valueNum + "'";
+                        }
+                    }
+                    return tooltip;
+                };
                 AdminRuleComponent = __decorate([
                     core_1.Component({
                         selector: 'money-admin-rule',
@@ -153,10 +173,10 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/rule.clas
                         directives: [display_error_directive_1.DisplayErrorDirective],
                         pipes: [money_pipes_1.CatfilterPipe, money_pipes_1.CategorySorterPipe]
                     }), 
-                    __metadata('design:paramtypes', [rule_rest_service_1.RuleRestService, category_rest_service_1.CategoryRestService, common_1.FormBuilder])
+                    __metadata('design:paramtypes', [rule_rest_service_1.RuleRestService, category_rest_service_1.CategoryRestService, common_1.FormBuilder, core_1.ElementRef])
                 ], AdminRuleComponent);
                 return AdminRuleComponent;
-            })();
+            }());
             exports_1("AdminRuleComponent", AdminRuleComponent);
         }
     }

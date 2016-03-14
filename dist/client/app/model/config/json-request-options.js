@@ -1,4 +1,6 @@
-System.register(['angular2/http'], function(exports_1) {
+System.register(['angular2/http'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -23,7 +25,7 @@ System.register(['angular2/http'], function(exports_1) {
                     });
                 }
                 return JsonRequestOptions;
-            })(http_1.RequestOptions);
+            }(http_1.RequestOptions));
             exports_1("JsonRequestOptions", JsonRequestOptions);
         }
     }

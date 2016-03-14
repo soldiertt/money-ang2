@@ -1,4 +1,6 @@
-System.register(['angular2/core', 'angular2/common', '../../model/core/category.class', '../../model/core/money-enums', '../../model/utils/category-years-checker', '../../service/category-rest.service', '../../service/form-utils.service', '../directive/display-error.directive', '../directive/focus-on-init.directive', '../../pipe/money-pipes'], function(exports_1) {
+System.register(['angular2/core', 'angular2/common', '../../model/core/category.class', '../../model/core/money-enums', '../../model/utils/category-years-checker', '../../service/category-rest.service', '../../service/form-utils.service', '../directive/display-error.directive', '../directive/focus-on-init.directive', '../../pipe/money-pipes'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -130,8 +132,8 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                     categs.push(new category_class_1.Category("Vêtements / acc.", money_enums_1.CatType.OTHER, money_enums_1.CatFrequency.MONTHLY, [2016]));
                     categs.push(new category_class_1.Category("Frais voitures", money_enums_1.CatType.OTHER, money_enums_1.CatFrequency.QUARTER, [2016]));
                     categs.push(new category_class_1.Category("Mobilier / Accessoires", money_enums_1.CatType.OTHER, money_enums_1.CatFrequency.QUARTER, [2016]));
-                    for (var _i = 0; _i < categs.length; _i++) {
-                        var newCateg = categs[_i];
+                    for (var _i = 0, categs_1 = categs; _i < categs_1.length; _i++) {
+                        var newCateg = categs_1[_i];
                         this._categoryRestService.create(newCateg).subscribe(function (response) {
                             //Success
                         }, function (err) { return console.log(err); });
@@ -198,7 +200,7 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                     __metadata('design:paramtypes', [category_rest_service_1.CategoryRestService, form_utils_service_1.FormUtilsService, category_years_checker_1.CategoryYearsChecker, common_1.FormBuilder])
                 ], AdminCategoryComponent);
                 return AdminCategoryComponent;
-            })();
+            }());
             exports_1("AdminCategoryComponent", AdminCategoryComponent);
         }
     }

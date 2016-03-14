@@ -1,4 +1,6 @@
-System.register(['angular2/core', './tx-details.component', "../../model/core/money-enums", '../../service/display-param.service', '../../service/category-rest.service', '../../service/preference-rest.service', '../../service/form-utils.service', '../directive/tooltip.directive', '../directive/money-icon.directive', '../../pipe/money-pipes'], function(exports_1) {
+System.register(['angular2/core', './tx-details.component', "../../model/core/money-enums", '../../service/display-param.service', '../../service/category-rest.service', '../../service/preference-rest.service', '../../service/form-utils.service', '../directive/tooltip.directive', '../directive/money-icon.directive', '../../pipe/money-pipes'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -202,7 +204,7 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
                     __metadata('design:paramtypes', [display_param_service_1.DisplayParamService, category_rest_service_1.CategoryRestService, preference_rest_service_1.PreferenceRestService, form_utils_service_1.FormUtilsService])
                 ], MoneyTableComponent);
                 return MoneyTableComponent;
-            })();
+            }());
             exports_1("MoneyTableComponent", MoneyTableComponent);
         }
     }
