@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../../service/display-param.service'], function(exports_1, context_1) {
+System.register(['angular2/core', '../../service/display-param.service', '../../service/form-utils.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', '../../service/display-param.service'], functi
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, display_param_service_1;
+    var core_1, display_param_service_1, form_utils_service_1;
     var TableFilterFormComponent;
     return {
         setters:[
@@ -19,11 +19,15 @@ System.register(['angular2/core', '../../service/display-param.service'], functi
             },
             function (display_param_service_1_1) {
                 display_param_service_1 = display_param_service_1_1;
+            },
+            function (form_utils_service_1_1) {
+                form_utils_service_1 = form_utils_service_1_1;
             }],
         execute: function() {
             TableFilterFormComponent = (function () {
-                function TableFilterFormComponent(displayParamService) {
+                function TableFilterFormComponent(displayParamService, formUtilsService) {
                     this.displayParamService = displayParamService;
+                    this.formUtilsService = formUtilsService;
                     this.catTypeFixed = true;
                     this.catTypeOther = true;
                     this.catTypeIncoming = true;
@@ -31,6 +35,7 @@ System.register(['angular2/core', '../../service/display-param.service'], functi
                     this.catFreqQuarter = true;
                     this.catFreqYearly = true;
                     this._displayTotals = true;
+                    this.allYears = this.formUtilsService.getAppYears();
                 }
                 TableFilterFormComponent.prototype.onFilterUpdated = function ($event) {
                     var types = [];
@@ -72,7 +77,7 @@ System.register(['angular2/core', '../../service/display-param.service'], functi
                         selector: 'money-table-filter-form',
                         templateUrl: 'html/home/table-filter-form.html'
                     }), 
-                    __metadata('design:paramtypes', [display_param_service_1.DisplayParamService])
+                    __metadata('design:paramtypes', [display_param_service_1.DisplayParamService, form_utils_service_1.FormUtilsService])
                 ], TableFilterFormComponent);
                 return TableFilterFormComponent;
             }());

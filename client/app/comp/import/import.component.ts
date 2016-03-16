@@ -15,6 +15,7 @@ import {AccountSettingRestService}          from '../../service/account-setting-
 import {CategoryRestService}                from '../../service/category-rest.service'
 import {CsvReaderRestService}               from '../../service/csv-reader-rest.service'
 import {TxrefRestService}                   from '../../service/txref-rest.service'
+import {RuleService}                        from '../../service/rule.service'
 import {FormUtilsService}                   from '../../service/form-utils.service'
 import {CatfilterPipe, CategorySorterPipe}  from '../../pipe/money-pipes'
 
@@ -28,7 +29,7 @@ export class ImportComponent implements OnInit {
 
   txFormDataList:Array<TxFormData> = [];
   pendingTxList:Array<Tx> = [];
-  yearCategories:Array<Category>;
+  allCategories:Array<Category>;
   months:Array<Object>;
   years:Array<number>;
 
@@ -37,17 +38,19 @@ export class ImportComponent implements OnInit {
     private _csvReaderRestService: CsvReaderRestService,
     private _txrefRestService: TxrefRestService,
     private _categoryRestService : CategoryRestService,
-    private _formUtilsService: FormUtilsService) {
+    private _formUtilsService: FormUtilsService,
+    private _ruleService: RuleService) {
       this.months = this._formUtilsService.getAppMonths();
       this.years = this._formUtilsService.getAppYears();
   }
 
   ngOnInit() {
-    this._prefRestService.getPref().subscribe(preference => {
 
-      this._categoryRestService.listForYear(preference.workingYear).subscribe(categories => {
-        this.yearCategories = categories;
-      });
+    this._categoryRestService.list().subscribe(categories => {
+      this.allCategories = categories;
+    });
+
+    this._prefRestService.getPref().subscribe(preference => {
 
       this._accountSettingRestService.list().subscribe(accounts => {
 
@@ -93,10 +96,10 @@ export class ImportComponent implements OnInit {
   }
 
   populateTxToDisplay() {
-
     this.pendingTxList = this.pendingTxList.filter(tx => {
       if (this.txFormDataList.length < 10) {
-        this.txFormDataList.push(new TxFormData(tx));
+        let txFormData = this._ruleService.applyRules(tx, true);
+        this.txFormDataList.push(txFormData);
         return false;
       } else {
         return true;
@@ -120,9 +123,17 @@ export class ImportComponent implements OnInit {
     }
   }
 
+  getTxYear(txFormData: TxFormData): number {
+    if (txFormData.comptaDate) {
+      return txFormData.comptaYear;
+    } else {
+      return txFormData.tx.date.getFullYear();
+    }
+  }
+
   saveAllTx() {
     let toSaveList:Array<TxFormData> = this.txFormDataList.filter(txFormData => { if (txFormData.categoryLink.categoryId) { return true; } else { return false}; });
-    toSaveList.forEach((txFormData, elemIndex) => {
+    toSaveList.forEach(txFormData => {
 
       let comptaDate: Date;
       if (txFormData.comptaDate) {
@@ -131,7 +142,7 @@ export class ImportComponent implements OnInit {
         comptaDate = txFormData.tx.date;
       }
       txFormData.categoryLink.categoryYear = comptaDate.getFullYear();
-      (function(comp: ImportComponent, inComptaDate: Date, txFormData: TxFormData, elemIndex: number) {
+      (function(comp: ImportComponent, inComptaDate: Date, txFormData: TxFormData) {
         comp._categoryRestService.existsCategoryForYear(txFormData.categoryLink.categoryId, inComptaDate.getFullYear()).subscribe(category => {
           if (category) {
             if (category.frequency == CatFrequency.MONTHLY) {
@@ -151,7 +162,7 @@ export class ImportComponent implements OnInit {
             console.error("Error adding tx with ref ", txFormData.tx.ref, "category", txFormData.categoryLink.categoryId, "not available for year", inComptaDate.getFullYear());
           }
         });
-      })(this, comptaDate, txFormData, elemIndex);
+      })(this, comptaDate, txFormData);
 
     });
     this.txFormDataList = this.txFormDataList.filter(txFormData => { if (txFormData.categoryLink.categoryId) { return false; } else { return true}; });

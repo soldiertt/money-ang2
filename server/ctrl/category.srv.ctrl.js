@@ -129,7 +129,7 @@ basicCrudCtrl.update = function (req, res) {
   category.save(function (err) {
       if (err) {
           return res.status(400).send({
-              message: getErrorMessage(err)
+              message: basicCrudCtrl.getErrorMessage(err)
           });
       } else {
           res.json(category);

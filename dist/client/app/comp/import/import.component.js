@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/map', 'rxjs/add/observable/forkJoin', '../../model/core/money-enums', '../../model/core/txref.class', '../../model/utils/tx-mapper.class', '../../model/formutil/tx-form-data.class', '../../service/preference-rest.service', '../../service/account-setting-rest.service', '../../service/category-rest.service', '../../service/csv-reader-rest.service', '../../service/txref-rest.service', '../../service/form-utils.service', '../../pipe/money-pipes'], function(exports_1, context_1) {
+System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/map', 'rxjs/add/observable/forkJoin', '../../model/core/money-enums', '../../model/core/txref.class', '../../model/utils/tx-mapper.class', '../../service/preference-rest.service', '../../service/account-setting-rest.service', '../../service/category-rest.service', '../../service/csv-reader-rest.service', '../../service/txref-rest.service', '../../service/rule.service', '../../service/form-utils.service', '../../pipe/money-pipes'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/map', 'r
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, Observable_1, money_enums_1, txref_class_1, tx_mapper_class_1, tx_form_data_class_1, preference_rest_service_1, account_setting_rest_service_1, category_rest_service_1, csv_reader_rest_service_1, txref_rest_service_1, form_utils_service_1, money_pipes_1;
+    var core_1, Observable_1, money_enums_1, txref_class_1, tx_mapper_class_1, preference_rest_service_1, account_setting_rest_service_1, category_rest_service_1, csv_reader_rest_service_1, txref_rest_service_1, rule_service_1, form_utils_service_1, money_pipes_1;
     var ImportComponent;
     return {
         setters:[
@@ -31,9 +31,6 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/map', 'r
             function (tx_mapper_class_1_1) {
                 tx_mapper_class_1 = tx_mapper_class_1_1;
             },
-            function (tx_form_data_class_1_1) {
-                tx_form_data_class_1 = tx_form_data_class_1_1;
-            },
             function (preference_rest_service_1_1) {
                 preference_rest_service_1 = preference_rest_service_1_1;
             },
@@ -49,6 +46,9 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/map', 'r
             function (txref_rest_service_1_1) {
                 txref_rest_service_1 = txref_rest_service_1_1;
             },
+            function (rule_service_1_1) {
+                rule_service_1 = rule_service_1_1;
+            },
             function (form_utils_service_1_1) {
                 form_utils_service_1 = form_utils_service_1_1;
             },
@@ -57,13 +57,14 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/map', 'r
             }],
         execute: function() {
             ImportComponent = (function () {
-                function ImportComponent(_prefRestService, _accountSettingRestService, _csvReaderRestService, _txrefRestService, _categoryRestService, _formUtilsService) {
+                function ImportComponent(_prefRestService, _accountSettingRestService, _csvReaderRestService, _txrefRestService, _categoryRestService, _formUtilsService, _ruleService) {
                     this._prefRestService = _prefRestService;
                     this._accountSettingRestService = _accountSettingRestService;
                     this._csvReaderRestService = _csvReaderRestService;
                     this._txrefRestService = _txrefRestService;
                     this._categoryRestService = _categoryRestService;
                     this._formUtilsService = _formUtilsService;
+                    this._ruleService = _ruleService;
                     this.txFormDataList = [];
                     this.pendingTxList = [];
                     this.months = this._formUtilsService.getAppMonths();
@@ -71,10 +72,10 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/map', 'r
                 }
                 ImportComponent.prototype.ngOnInit = function () {
                     var _this = this;
+                    this._categoryRestService.list().subscribe(function (categories) {
+                        _this.allCategories = categories;
+                    });
                     this._prefRestService.getPref().subscribe(function (preference) {
-                        _this._categoryRestService.listForYear(preference.workingYear).subscribe(function (categories) {
-                            _this.yearCategories = categories;
-                        });
                         _this._accountSettingRestService.list().subscribe(function (accounts) {
                             var readLinesJobs = [];
                             accounts.forEach(function (account) {
@@ -120,7 +121,8 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/map', 'r
                     var _this = this;
                     this.pendingTxList = this.pendingTxList.filter(function (tx) {
                         if (_this.txFormDataList.length < 10) {
-                            _this.txFormDataList.push(new tx_form_data_class_1.TxFormData(tx));
+                            var txFormData = _this._ruleService.applyRules(tx, true);
+                            _this.txFormDataList.push(txFormData);
                             return false;
                         }
                         else {
@@ -142,6 +144,14 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/map', 'r
                         txFormData.resetComptaDate();
                     }
                 };
+                ImportComponent.prototype.getTxYear = function (txFormData) {
+                    if (txFormData.comptaDate) {
+                        return txFormData.comptaYear;
+                    }
+                    else {
+                        return txFormData.tx.date.getFullYear();
+                    }
+                };
                 ImportComponent.prototype.saveAllTx = function () {
                     var _this = this;
                     var toSaveList = this.txFormDataList.filter(function (txFormData) { if (txFormData.categoryLink.categoryId) {
@@ -150,7 +160,7 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/map', 'r
                     else {
                         return false;
                     } ; });
-                    toSaveList.forEach(function (txFormData, elemIndex) {
+                    toSaveList.forEach(function (txFormData) {
                         var comptaDate;
                         if (txFormData.comptaDate) {
                             comptaDate = new Date(txFormData.comptaYear, txFormData.comptaMonth, 1);
@@ -159,7 +169,7 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/map', 'r
                             comptaDate = txFormData.tx.date;
                         }
                         txFormData.categoryLink.categoryYear = comptaDate.getFullYear();
-                        (function (comp, inComptaDate, txFormData, elemIndex) {
+                        (function (comp, inComptaDate, txFormData) {
                             comp._categoryRestService.existsCategoryForYear(txFormData.categoryLink.categoryId, inComptaDate.getFullYear()).subscribe(function (category) {
                                 if (category) {
                                     if (category.frequency == money_enums_1.CatFrequency.MONTHLY) {
@@ -182,7 +192,7 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/map', 'r
                                     console.error("Error adding tx with ref ", txFormData.tx.ref, "category", txFormData.categoryLink.categoryId, "not available for year", inComptaDate.getFullYear());
                                 }
                             });
-                        })(_this, comptaDate, txFormData, elemIndex);
+                        })(_this, comptaDate, txFormData);
                     });
                     this.txFormDataList = this.txFormDataList.filter(function (txFormData) { if (txFormData.categoryLink.categoryId) {
                         return false;
@@ -199,7 +209,7 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/map', 'r
                         styleUrls: ['css/import.css'],
                         pipes: [money_pipes_1.CatfilterPipe, money_pipes_1.CategorySorterPipe]
                     }), 
-                    __metadata('design:paramtypes', [preference_rest_service_1.PreferenceRestService, account_setting_rest_service_1.AccountSettingRestService, csv_reader_rest_service_1.CsvReaderRestService, txref_rest_service_1.TxrefRestService, category_rest_service_1.CategoryRestService, form_utils_service_1.FormUtilsService])
+                    __metadata('design:paramtypes', [preference_rest_service_1.PreferenceRestService, account_setting_rest_service_1.AccountSettingRestService, csv_reader_rest_service_1.CsvReaderRestService, txref_rest_service_1.TxrefRestService, category_rest_service_1.CategoryRestService, form_utils_service_1.FormUtilsService, rule_service_1.RuleService])
                 ], ImportComponent);
                 return ImportComponent;
             }());

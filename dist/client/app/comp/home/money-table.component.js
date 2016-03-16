@@ -1,4 +1,4 @@
-System.register(['angular2/core', './tx-details.component', "../../model/core/money-enums", '../../service/display-param.service', '../../service/category-rest.service', '../../service/preference-rest.service', '../../service/form-utils.service', '../directive/tooltip.directive', '../directive/money-icon.directive', '../../pipe/money-pipes'], function(exports_1, context_1) {
+System.register(['angular2/core', './tx-details.component', "../../model/core/money-enums", '../../service/display-param.service', '../../service/category-rest.service', '../../service/form-utils.service', '../directive/tooltip.directive', '../directive/money-icon.directive', '../../pipe/money-pipes'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, tx_details_component_1, money_enums_1, display_param_service_1, category_rest_service_1, preference_rest_service_1, form_utils_service_1, tooltip_directive_1, money_icon_directive_1, money_pipes_1;
+    var core_1, tx_details_component_1, money_enums_1, display_param_service_1, category_rest_service_1, form_utils_service_1, tooltip_directive_1, money_icon_directive_1, money_pipes_1;
     var MoneyTableComponent;
     return {
         setters:[
@@ -29,9 +29,6 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
             function (category_rest_service_1_1) {
                 category_rest_service_1 = category_rest_service_1_1;
             },
-            function (preference_rest_service_1_1) {
-                preference_rest_service_1 = preference_rest_service_1_1;
-            },
             function (form_utils_service_1_1) {
                 form_utils_service_1 = form_utils_service_1_1;
             },
@@ -46,31 +43,37 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
             }],
         execute: function() {
             MoneyTableComponent = (function () {
-                function MoneyTableComponent(displayParamService, _categoryRestService, _prefRestService, _formUtilsService) {
+                function MoneyTableComponent(displayParamService, _categoryRestService, _formUtilsService) {
                     var _this = this;
                     this.displayParamService = displayParamService;
                     this._categoryRestService = _categoryRestService;
-                    this._prefRestService = _prefRestService;
                     this._formUtilsService = _formUtilsService;
                     this.categories = [];
                     this.totals = new Map();
-                    this.initTotals(false);
                     this.months = this._formUtilsService.getAppMonths();
                     this.displayParamService.filtersUpdated.subscribe(function (item) { return _this.filtersUpdated(item); });
-                    this._prefRestService.getPref().subscribe(function (preference) {
-                        _this.workingYear = preference.workingYear;
-                        _categoryRestService.listForYear(_this.workingYear).subscribe(function (categories) {
-                            _this.categories = categories;
-                            _this.computeTotals();
-                        });
-                    });
+                    this.displayCategories();
                 }
+                MoneyTableComponent.prototype.displayCategories = function () {
+                    var _this = this;
+                    this.initTotals(false);
+                    this._categoryRestService.listForYear(this.displayParamService.year).subscribe(function (categories) {
+                        _this.categories = categories;
+                        _this.computeTotals();
+                    });
+                };
                 /**
                   We subscribe to filtersUpdated event of displayParamService
                 **/
                 MoneyTableComponent.prototype.filtersUpdated = function (item) {
-                    this.initTotals(true);
-                    this.computeSubTotals();
+                    if (item == "year") {
+                        // full reload
+                        this.displayCategories();
+                    }
+                    else {
+                        this.initTotals(true);
+                        this.computeSubTotals();
+                    }
                 };
                 /** When cell is clicked **/
                 MoneyTableComponent.prototype.findTx = function (categoryId, period) {
@@ -110,10 +113,10 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
                         return period.year == actualYear;
                     }
                     else if (categ.frequency == money_enums_1.CatFrequency.QUARTER) {
-                        return period.index == (Math.floor((actualdate.getMonth() + 3) / 3) - 1);
+                        return period.year == actualYear && period.index == (Math.floor((actualdate.getMonth() + 3) / 3) - 1);
                     }
                     else if (categ.frequency == money_enums_1.CatFrequency.MONTHLY) {
-                        return period.index == actualdate.getMonth();
+                        return period.year == actualYear && period.index == actualdate.getMonth();
                     }
                 };
                 /** for css class **/
@@ -155,7 +158,7 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
                     var _this = this;
                     this.categories.forEach(function (categ) {
                         // FILTER ON YEAR periods
-                        var filteredPeriods = categ.periods.filter(function (period) { return period.year == _this.workingYear; });
+                        var filteredPeriods = categ.periods.filter(function (period) { return period.year == _this.displayParamService.year; });
                         // MONTHLY
                         if (categ.frequency == money_enums_1.CatFrequency.MONTHLY) {
                             for (var periodIndex = 0; periodIndex < categ.nbPeriods; periodIndex++) {
@@ -201,7 +204,7 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
                         pipes: [money_pipes_1.CatfilterPipe, money_pipes_1.CategorySorterPipe, money_pipes_1.PeriodFilterPipe],
                         encapsulation: core_1.ViewEncapsulation.None
                     }), 
-                    __metadata('design:paramtypes', [display_param_service_1.DisplayParamService, category_rest_service_1.CategoryRestService, preference_rest_service_1.PreferenceRestService, form_utils_service_1.FormUtilsService])
+                    __metadata('design:paramtypes', [display_param_service_1.DisplayParamService, category_rest_service_1.CategoryRestService, form_utils_service_1.FormUtilsService])
                 ], MoneyTableComponent);
                 return MoneyTableComponent;
             }());

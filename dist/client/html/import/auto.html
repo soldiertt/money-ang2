@@ -1,0 +1,7 @@
+<div>
+  <button (click)="runAutoImport()">Import</button>
+  <h1 class="import-title">Import result log</h1>
+  <div class="run-output">
+    <div *ngFor="#logLine of importLog" [ngClass]="logLine.className">{{logLine.content}}</div>
+  </div>
+</div>

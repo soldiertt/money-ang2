@@ -21,7 +21,7 @@ export class Rule {
   id: string;
   name: string;
   conditions: Array<Condition>;
-  category: string; //Category id
+  category: any; //Either category id or category Object
   isActive: boolean;
 
   constructor() {

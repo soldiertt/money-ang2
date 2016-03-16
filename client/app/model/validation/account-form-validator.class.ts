@@ -97,7 +97,7 @@ export class AccountFormValidator {
     }
     let amountStr: string = component.lineTokens[mapping.index];
     amountStr = amountStr.replace(/[.]/g, '').replace(/,/g, '.');
-    if (!Number.isNaN(Number(amountStr))) {
+    if (!isNaN(Number(amountStr))) {
       mapping.isBelgianNumber = true;
     }
     return mapping.isBelgianNumber;

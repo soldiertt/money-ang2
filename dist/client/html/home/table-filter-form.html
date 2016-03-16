@@ -1,6 +1,14 @@
 <div class="col-md-2">
 <form>
   <fieldset class="fields-group">
+    <legend>Year</legend>
+    <div>
+      <select [(ngModel)]="displayParamService.year">
+        <option *ngFor="#year of allYears" [value]="year">{{year}}</option>
+      </select>
+    </div>
+  </fieldset>
+  <fieldset class="fields-group">
     <legend>Category type</legend>
     <div>
       <input type="checkbox" id="category-type-fixed" [(ngModel)]="catTypeFixed" (ngModelChange)="onFilterUpdated($event)" />

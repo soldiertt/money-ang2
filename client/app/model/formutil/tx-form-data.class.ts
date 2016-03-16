@@ -18,7 +18,9 @@ export class TxFormData {
   comptaDate:boolean;
   comptaMonth:number;
   comptaYear:number;
+  appliedRule: string;
   tx: Tx;
+
 
   constructor(tx: Tx) {
     this.tx = tx;

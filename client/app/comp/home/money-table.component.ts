@@ -6,7 +6,6 @@ import {Tx}                     from "../../model/core/tx.class"
 import {CatFrequency, CatType}  from "../../model/core/money-enums"
 import {DisplayParamService}    from '../../service/display-param.service' // Used in view
 import {CategoryRestService}    from '../../service/category-rest.service'
-import {PreferenceRestService}  from '../../service/preference-rest.service'
 import {FormUtilsService}       from '../../service/form-utils.service'
 import {TooltipDirective}       from '../directive/tooltip.directive'
 import {MoneyIconDirective}     from '../directive/money-icon.directive'
@@ -24,24 +23,21 @@ export class MoneyTableComponent {
   months: Array<string>;
   categories: Array<Category> = [];
   totals:Map<string, Array<number>> = new Map<string, Array<number>>();
-  workingYear: number;
 
   constructor(public displayParamService: DisplayParamService,
     private _categoryRestService: CategoryRestService,
-    private _prefRestService: PreferenceRestService,
     private _formUtilsService: FormUtilsService) {
 
-    this.initTotals(false);
     this.months = this._formUtilsService.getAppMonths();
-
     this.displayParamService.filtersUpdated.subscribe(item => this.filtersUpdated(item));
+    this.displayCategories();
+  }
 
-    this._prefRestService.getPref().subscribe(preference => {
-      this.workingYear = preference.workingYear;
-      _categoryRestService.listForYear(this.workingYear).subscribe(categories => {
-        this.categories = categories;
-        this.computeTotals();
-      });
+  displayCategories() {
+    this.initTotals(false);
+    this._categoryRestService.listForYear(this.displayParamService.year).subscribe(categories => {
+      this.categories = categories;
+      this.computeTotals();
     });
   }
 
@@ -49,8 +45,13 @@ export class MoneyTableComponent {
     We subscribe to filtersUpdated event of displayParamService
   **/
   private filtersUpdated(item:string) {
-    this.initTotals(true);
-    this.computeSubTotals();
+    if (item == "year") {
+      // full reload
+      this.displayCategories();
+    } else {
+      this.initTotals(true);
+      this.computeSubTotals();
+    }
   }
 
   /** When cell is clicked **/
@@ -92,9 +93,9 @@ export class MoneyTableComponent {
     if (categ.frequency == CatFrequency.YEARLY) {
       return period.year == actualYear;
     } else if (categ.frequency == CatFrequency.QUARTER) {
-      return period.index == (Math.floor((actualdate.getMonth() + 3) / 3) - 1);
+      return period.year == actualYear && period.index == (Math.floor((actualdate.getMonth() + 3) / 3) - 1);
     } else if (categ.frequency == CatFrequency.MONTHLY) {
-      return period.index == actualdate.getMonth();
+      return period.year == actualYear && period.index == actualdate.getMonth();
     }
   }
 
@@ -132,7 +133,7 @@ export class MoneyTableComponent {
   private computeTotals() {
     this.categories.forEach(categ => {
       // FILTER ON YEAR periods
-      let filteredPeriods = categ.periods.filter(period => period.year == this.workingYear);
+      let filteredPeriods = categ.periods.filter(period => period.year == this.displayParamService.year);
       // MONTHLY
       if (categ.frequency == CatFrequency.MONTHLY) {
         for (let periodIndex = 0; periodIndex < categ.nbPeriods; periodIndex++) {

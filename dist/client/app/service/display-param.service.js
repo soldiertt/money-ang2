@@ -24,7 +24,19 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     this._frequencies = ["MONTHLY", "QUARTER", "YEARLY"];
                     this.showTotals = true;
                     this.filtersUpdated = new core_1.EventEmitter();
+                    this._year = (new Date()).getFullYear();
                 }
+                Object.defineProperty(DisplayParamService.prototype, "year", {
+                    get: function () {
+                        return this._year;
+                    },
+                    set: function (year) {
+                        this._year = year;
+                        this.filtersUpdated.emit("year");
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
                 Object.defineProperty(DisplayParamService.prototype, "types", {
                     get: function () {
                         return this._types;

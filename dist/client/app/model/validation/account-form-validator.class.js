@@ -100,7 +100,7 @@ System.register([], function(exports_1, context_1) {
                     }
                     var amountStr = component.lineTokens[mapping.index];
                     amountStr = amountStr.replace(/[.]/g, '').replace(/,/g, '.');
-                    if (!Number.isNaN(Number(amountStr))) {
+                    if (!isNaN(Number(amountStr))) {
                         mapping.isBelgianNumber = true;
                     }
                     return mapping.isBelgianNumber;

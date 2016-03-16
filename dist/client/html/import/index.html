@@ -22,10 +22,10 @@
           <div>
             <!-- CATEGORY TYPE -->
             <span *ngIf="txFormData.tx.amount < 0">
-              <input type="radio" name="cat-type-{{txFormData.tx.ref}}" id="cat-type-fixed-{{txFormData.tx.ref}}" value="FIXED" (change)="catTypeChanged($event, txFormData)" />
+              <input type="radio" name="cat-type-{{txFormData.tx.ref}}" id="cat-type-fixed-{{txFormData.tx.ref}}" [checked]="'FIXED' === txFormData.categoryType" value="FIXED" (change)="catTypeChanged($event, txFormData)" />
               <label [attr.for]="'cat-type-fixed-' + txFormData.tx.ref" class="label-std">Fixed</label>
               <span class="spacer-span"></span>
-              <input type="radio" name="cat-type-{{txFormData.tx.ref}}" id="cat-type-other-{{txFormData.tx.ref}}" value="OTHER" checked="checked" (change)="catTypeChanged($event, txFormData)" />
+              <input type="radio" name="cat-type-{{txFormData.tx.ref}}" id="cat-type-other-{{txFormData.tx.ref}}" [checked]="'OTHER' === txFormData.categoryType" value="OTHER" (change)="catTypeChanged($event, txFormData)" />
               <label [attr.for]="'cat-type-other-' + txFormData.tx.ref" class="label-std">Other</label>
             </span>
             <span *ngIf="txFormData.tx.amount > 0">
@@ -35,13 +35,13 @@
           </div>
           <div>
             <!-- CATEGORY FREQUENCY -->
-            <input type="radio" name="cat-freq-{{txFormData.tx.ref}}" id="cat-freq-monthly-{{txFormData.tx.ref}}" value="MONTHLY" checked="checked" (change)="catFrequencyChanged($event, txFormData)" />
+            <input type="radio" name="cat-freq-{{txFormData.tx.ref}}" id="cat-freq-monthly-{{txFormData.tx.ref}}" value="MONTHLY" [checked]="'MONTHLY' === txFormData.categoryFrequency" (change)="catFrequencyChanged($event, txFormData)" />
             <label [attr.for]="'cat-freq-monthly-' + txFormData.tx.ref" class="label-std">M</label>
             <span class="spacer-span"></span>
-            <input type="radio" name="cat-freq-{{txFormData.tx.ref}}" id="cat-freq-quarter-{{txFormData.tx.ref}}" value="QUARTER" (change)="catFrequencyChanged($event, txFormData)" />
+            <input type="radio" name="cat-freq-{{txFormData.tx.ref}}" id="cat-freq-quarter-{{txFormData.tx.ref}}" value="QUARTER" [checked]="'QUARTER' === txFormData.categoryFrequency" (change)="catFrequencyChanged($event, txFormData)" />
             <label [attr.for]="'cat-freq-quarter-' + txFormData.tx.ref" class="label-std">Q</label>
             <span class="spacer-span"></span>
-            <input type="radio" name="cat-freq-{{txFormData.tx.ref}}" id="cat-freq-yearly-{{txFormData.tx.ref}}" value="YEARLY" (change)="catFrequencyChanged($event, txFormData)" />
+            <input type="radio" name="cat-freq-{{txFormData.tx.ref}}" id="cat-freq-yearly-{{txFormData.tx.ref}}" value="YEARLY" [checked]="'YEARLY' === txFormData.categoryFrequency" (change)="catFrequencyChanged($event, txFormData)" />
             <label [attr.for]="'cat-freq-yearly-' + txFormData.tx.ref" class="label-std">Y</label>
           </div>
         </td>
@@ -50,7 +50,7 @@
           <div>
             <select class="form-control" [(ngModel)]="txFormData.categoryLink.categoryId">
               <option value="" disabled selected>Select a category ...</option>
-              <option *ngFor="#cat of yearCategories | catfilter : [txFormData.categoryType] : [txFormData.categoryFrequency] | categorySorter" [value]="cat.id">{{cat.name}}</option>
+              <option *ngFor="#cat of allCategories | catfilter : [txFormData.categoryType] : [txFormData.categoryFrequency] : [getTxYear(txFormData)] | categorySorter" [value]="cat.id">{{cat.name}}</option>
             </select>
           </div>
         </td>

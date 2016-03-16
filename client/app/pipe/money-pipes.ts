@@ -57,8 +57,12 @@ export class PeriodFilterPipe {
 export class CatfilterPipe {
   transform(categories, args){
     if (categories) {
-      let [types, frequencies] = args;
-      return categories.filter((item)=> types.indexOf(item.type) !== -1 && frequencies.indexOf(item.frequency) !== -1 );
+      let [types, frequencies, years] = args;
+      let filtered = categories.filter((item)=> types.indexOf(item.type) !== -1 && frequencies.indexOf(item.frequency) !== -1 );
+      if (years) {
+        filtered = filtered.filter((item)=> years.every((year) => item.years.indexOf(year) != -1));
+      }
+      return filtered;
     } else {
       return categories;
     }

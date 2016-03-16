@@ -13,7 +13,7 @@
       <money-icon [icon-class]="'cat-freq-' + category.frequency + '-icon'"></money-icon>
       {{category.name}}
     </td>
-    <td *ngFor="#period of category.periods | periodFilter : workingYear" [attr.colspan]="12/category.nbPeriods"
+    <td *ngFor="#period of category.periods | periodFilter : displayParamService.year" [attr.colspan]="12/category.nbPeriods"
       class="money-cell" [class.current]="isCurrentPeriod(category, period)" [class.unpaid]="isUnpaidPeriod(category, period)"
       tooltip="{{period.total != 0}}" (click)="findTx(category.id, period)" (dblclick)="markPeriodAsPaid(category, period)">
       <div *ngIf="period.total != 0">

@@ -3,11 +3,23 @@ import {Observable} from 'rxjs/Observable'
 
 @Injectable()
 export class DisplayParamService {
-  _types:Array<string> = ["FIXED", "OTHER", "INCOMING"];
-  _frequencies:Array<string> = ["MONTHLY", "QUARTER", "YEARLY"];
+  private _year:number;
+  private _types:Array<string> = ["FIXED", "OTHER", "INCOMING"];
+  private _frequencies:Array<string> = ["MONTHLY", "QUARTER", "YEARLY"];
   showTotals: boolean = true;
   filtersUpdated: EventEmitter<string> = new EventEmitter<string>();
 
+  constructor() {
+    this._year = (new Date()).getFullYear();
+  }
+
+  get year() {
+    return this._year;
+  }
+  set year(year:number) {
+    this._year = year;
+    this.filtersUpdated.emit("year");
+  }
   get types() {
     return this._types;
   }

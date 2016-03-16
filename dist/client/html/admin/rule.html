@@ -95,7 +95,7 @@
     <tr *ngFor="#rule of rules, #j = index">
       <td>{{rule.name}}</td>
       <td>{{rule.category.type}}/{{rule.category.frequency}}/{{rule.category.name}}
-        <span class="glyphicon glyphicon-info-sign"></span> <!-- [tooltip]="getConditionsForRule(rule)" tooltipPlacement="right"-->
+        <span class="glyphicon glyphicon-info-sign" title="{{getConditionsForRule(rule)}}"></span> <!-- [tooltip]="getConditionsForRule(rule)" tooltipPlacement="right"-->
       </td>
       <td>{{rule.isActive?'ENABLED':'DISABLED'}}</td>
       <td>

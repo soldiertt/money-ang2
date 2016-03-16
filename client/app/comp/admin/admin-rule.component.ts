@@ -6,6 +6,7 @@ import {OperatorHelper}               from '../../model/formutil/operator-helper
 import {CondFieldType, CondOperator, CatType, CatFrequency}  from '../../model/core/money-enums'
 import {RuleConditionValidator}       from '../../model/validation/rule-condition-validator.class'
 import {RuleRestService}              from '../../service/rule-rest.service'
+import {RuleService}                  from '../../service/rule.service'
 import {CategoryRestService}          from '../../service/category-rest.service'
 import {DisplayErrorDirective}        from '../directive/display-error.directive'
 import {CatfilterPipe, CategorySorterPipe}  from '../../pipe/money-pipes'
@@ -45,7 +46,8 @@ export class AdminRuleComponent {
   constructor(private _ruleRestService : RuleRestService,
     private _categoryRestService : CategoryRestService,
     fb: FormBuilder,
-    private elementRef:ElementRef) {
+    private elementRef:ElementRef,
+    private _ruleService:RuleService) {
 
     this._categoryRestService.list().subscribe(categories => {
       this.categories = categories;
@@ -122,6 +124,7 @@ export class AdminRuleComponent {
       newrule.category = this.categories.filter(category => category.id == this.newRule.category).pop();
       this.rules.push(newrule);
       console.log("Rule added");
+      this._ruleService.reloadRules();
     }, err => console.log(err));
   }
 
