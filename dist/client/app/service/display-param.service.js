@@ -20,8 +20,12 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         execute: function() {
             DisplayParamService = (function () {
                 function DisplayParamService() {
-                    this._types = ["FIXED", "OTHER", "INCOMING"];
-                    this._frequencies = ["MONTHLY", "QUARTER", "YEARLY"];
+                    this.catTypeFixed = true;
+                    this.catTypeOther = true;
+                    this.catTypeIncoming = true;
+                    this.catFreqMonthly = true;
+                    this.catFreqQuarter = true;
+                    this.catFreqYearly = true;
                     this.showTotals = true;
                     this.filtersUpdated = new core_1.EventEmitter();
                     this._year = (new Date()).getFullYear();
@@ -37,24 +41,39 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     enumerable: true,
                     configurable: true
                 });
+                DisplayParamService.prototype.hasChanged = function () {
+                    this.filtersUpdated.emit("update");
+                };
                 Object.defineProperty(DisplayParamService.prototype, "types", {
                     get: function () {
-                        return this._types;
-                    },
-                    set: function (types) {
-                        this._types = types;
-                        this.filtersUpdated.emit("types");
+                        var types = [];
+                        if (this.catTypeFixed) {
+                            types.push("FIXED");
+                        }
+                        if (this.catTypeOther) {
+                            types.push("OTHER");
+                        }
+                        if (this.catTypeIncoming) {
+                            types.push("INCOMING");
+                        }
+                        return types;
                     },
                     enumerable: true,
                     configurable: true
                 });
                 Object.defineProperty(DisplayParamService.prototype, "frequencies", {
                     get: function () {
-                        return this._frequencies;
-                    },
-                    set: function (frequencies) {
-                        this._frequencies = frequencies;
-                        this.filtersUpdated.emit("frequencies");
+                        var frequencies = [];
+                        if (this.catFreqMonthly) {
+                            frequencies.push("MONTHLY");
+                        }
+                        if (this.catFreqQuarter) {
+                            frequencies.push("QUARTER");
+                        }
+                        if (this.catFreqYearly) {
+                            frequencies.push("YEARLY");
+                        }
+                        return frequencies;
                     },
                     enumerable: true,
                     configurable: true

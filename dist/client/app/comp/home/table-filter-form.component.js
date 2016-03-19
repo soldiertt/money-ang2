@@ -28,50 +28,11 @@ System.register(['angular2/core', '../../service/display-param.service', '../../
                 function TableFilterFormComponent(displayParamService, formUtilsService) {
                     this.displayParamService = displayParamService;
                     this.formUtilsService = formUtilsService;
-                    this.catTypeFixed = true;
-                    this.catTypeOther = true;
-                    this.catTypeIncoming = true;
-                    this.catFreqMonthly = true;
-                    this.catFreqQuarter = true;
-                    this.catFreqYearly = true;
-                    this._displayTotals = true;
                     this.allYears = this.formUtilsService.getAppYears();
                 }
                 TableFilterFormComponent.prototype.onFilterUpdated = function ($event) {
-                    var types = [];
-                    var frequencies = [];
-                    if (this.catTypeFixed) {
-                        types.push("FIXED");
-                    }
-                    if (this.catTypeOther) {
-                        types.push("OTHER");
-                    }
-                    if (this.catTypeIncoming) {
-                        types.push("INCOMING");
-                    }
-                    if (this.catFreqMonthly) {
-                        frequencies.push("MONTHLY");
-                    }
-                    if (this.catFreqQuarter) {
-                        frequencies.push("QUARTER");
-                    }
-                    if (this.catFreqYearly) {
-                        frequencies.push("YEARLY");
-                    }
-                    this.displayParamService.types = types;
-                    this.displayParamService.frequencies = frequencies;
+                    this.displayParamService.hasChanged();
                 };
-                Object.defineProperty(TableFilterFormComponent.prototype, "displayTotals", {
-                    get: function () {
-                        return this._displayTotals;
-                    },
-                    set: function (value) {
-                        this._displayTotals = value;
-                        this.displayParamService.showTotals = value;
-                    },
-                    enumerable: true,
-                    configurable: true
-                });
                 TableFilterFormComponent = __decorate([
                     core_1.Component({
                         selector: 'money-table-filter-form',

@@ -65,6 +65,7 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/rule.clas
                     this._categoryRestService = _categoryRestService;
                     this.elementRef = elementRef;
                     this._ruleService = _ruleService;
+                    this.formMode = "create";
                     this.newRule = new rule_class_1.Rule();
                     this.fieldNames = [];
                     this.stringOperators = [];
@@ -101,12 +102,6 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/rule.clas
                     condition.fieldType = this.fieldNames[$event.target.value].type;
                     condition.valueStr = undefined;
                     condition.valueNum = undefined;
-                    if (condition.fieldType == money_enums_1.CondFieldType.STRING) {
-                        condition.availableOperators = this.stringOperators;
-                    }
-                    else if (condition.fieldType == money_enums_1.CondFieldType.NUMBER) {
-                        condition.availableOperators = this.numOperators;
-                    }
                     this.dummyFieldConditionsControl.updateValue($event); //Just to fire change detection
                 };
                 AdminRuleComponent.prototype.onConditionUpdated = function ($event) {
@@ -122,19 +117,33 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/rule.clas
                     this.dummyFieldConditionsControl.updateValue("remove"); //Just to fire change detection
                 };
                 AdminRuleComponent.prototype.onCatTypeChanged = function ($event) {
-                    this.categoryType = money_enums_1.CatType[$event.target.value];
+                    this.newRule.category.type = money_enums_1.CatType[$event.target.value];
                 };
                 AdminRuleComponent.prototype.onCatFrequencyChanged = function ($event) {
-                    this.categoryFrequency = money_enums_1.CatFrequency[$event.target.value];
+                    this.newRule.category.frequency = money_enums_1.CatFrequency[$event.target.value];
                 };
-                AdminRuleComponent.prototype.onCreate = function () {
+                /** Create or Update **/
+                AdminRuleComponent.prototype.onSubmit = function () {
                     var _this = this;
-                    this._ruleRestService.create(this.newRule).subscribe(function (newrule) {
-                        newrule.category = _this.categories.filter(function (category) { return category.id == _this.newRule.category; }).pop();
-                        _this.rules.push(newrule);
-                        console.log("Rule added");
-                        _this._ruleService.reloadRules();
-                    }, function (err) { return console.log(err); });
+                    if (this.formMode == 'create') {
+                        this._ruleRestService.create(this.newRule).subscribe(function (newrule) {
+                            newrule.category = _this.categories.filter(function (category) { return category.id == _this.newRule.categoryId; }).pop();
+                            _this.rules.push(newrule);
+                            console.log("Rule added");
+                            _this._ruleService.reloadRules(); //force cache cleanup
+                            _this.newRule = new rule_class_1.Rule();
+                        }, function (err) { return console.log(err); });
+                    }
+                    else if (this.formMode == 'edit') {
+                        this._ruleRestService.update(this.newRule).subscribe(function (updatedrule) {
+                            updatedrule.category = _this.categories.filter(function (category) { return category.id == _this.newRule.categoryId; }).pop();
+                            _this.rules[_this.editedRuleIndex] = updatedrule;
+                            console.log("Rule updated");
+                            _this._ruleService.reloadRules(); //force cache cleanup
+                            _this.newRule = new rule_class_1.Rule();
+                            _this.formMode = "create";
+                        }, function (err) { return console.log(err); });
+                    }
                 };
                 AdminRuleComponent.prototype.onDisable = function (rule) {
                     rule.isActive = false;
@@ -154,6 +163,17 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/rule.clas
                         _this.rules.splice(j, 1);
                         console.log("Rule deleted");
                     }, function (err) { return console.log(err); });
+                };
+                AdminRuleComponent.prototype.onEdit = function (rule, j) {
+                    this.editedRuleIndex = j;
+                    this.formMode = "edit";
+                    this.newRule = rule;
+                    this.dummyFieldConditionsControl.updateValue(j); //Just to fire change detection
+                };
+                AdminRuleComponent.prototype.onCancelEdit = function ($event) {
+                    $event.preventDefault();
+                    this.newRule = new rule_class_1.Rule();
+                    this.formMode = "create";
                 };
                 AdminRuleComponent.prototype.getConditionsForRule = function (rule) {
                     var tooltip = "";

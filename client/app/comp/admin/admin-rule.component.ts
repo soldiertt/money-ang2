@@ -32,14 +32,14 @@ class FieldHelper {
     pipes: [CatfilterPipe, CategorySorterPipe]
 })
 export class AdminRuleComponent {
+  formMode: string = "create";
   createForm: ControlGroup;
   newRule: Rule = new Rule();
+  editedRuleIndex: number;
   fieldNames: Array<FieldHelper> = [];
   stringOperators:Array<OperatorHelper> = [];
   numOperators:Array<OperatorHelper> = [];
   dummyFieldConditionsControl: Control;
-  categoryType: CatType;
-  categoryFrequency: CatFrequency;
   categories: Array<Category>;
   rules: Array<any>; //Rules populated with category
 
@@ -88,11 +88,6 @@ export class AdminRuleComponent {
     condition.fieldType = this.fieldNames[$event.target.value].type;
     condition.valueStr = undefined;
     condition.valueNum = undefined;
-    if (condition.fieldType == CondFieldType.STRING) {
-      condition.availableOperators = this.stringOperators;
-    } else if (condition.fieldType == CondFieldType.NUMBER) {
-      condition.availableOperators = this.numOperators;
-    }
     this.dummyFieldConditionsControl.updateValue($event); //Just to fire change detection
   }
 
@@ -112,20 +107,33 @@ export class AdminRuleComponent {
   }
 
   onCatTypeChanged($event) {
-    this.categoryType = CatType[<string>$event.target.value];
+    this.newRule.category.type = CatType[<string>$event.target.value];
   }
 
   onCatFrequencyChanged($event) {
-    this.categoryFrequency = CatFrequency[<string>$event.target.value];
+    this.newRule.category.frequency = CatFrequency[<string>$event.target.value];
   }
 
-  onCreate() {
-    this._ruleRestService.create(this.newRule).subscribe(newrule => {
-      newrule.category = this.categories.filter(category => category.id == this.newRule.category).pop();
-      this.rules.push(newrule);
-      console.log("Rule added");
-      this._ruleService.reloadRules();
-    }, err => console.log(err));
+  /** Create or Update **/
+  onSubmit() {
+    if (this.formMode == 'create') {
+      this._ruleRestService.create(this.newRule).subscribe(newrule => {
+        newrule.category = this.categories.filter(category => category.id == this.newRule.categoryId).pop();
+        this.rules.push(newrule);
+        console.log("Rule added");
+        this._ruleService.reloadRules(); //force cache cleanup
+        this.newRule = new Rule();
+      }, err => console.log(err));
+    } else if (this.formMode == 'edit') {
+      this._ruleRestService.update(this.newRule).subscribe(updatedrule => {
+        updatedrule.category = this.categories.filter(category => category.id == this.newRule.categoryId).pop();
+        this.rules[this.editedRuleIndex] = updatedrule;
+        console.log("Rule updated");
+        this._ruleService.reloadRules(); //force cache cleanup
+        this.newRule = new Rule();
+        this.formMode = "create";
+      }, err => console.log(err));
+    }
   }
 
   onDisable(rule: Rule) {
@@ -149,6 +157,19 @@ export class AdminRuleComponent {
     }, err => console.log(err))
   }
 
+  onEdit(rule: Rule, j: number) {
+    this.editedRuleIndex = j;
+    this.formMode = "edit";
+    this.newRule = rule;
+    this.dummyFieldConditionsControl.updateValue(j); //Just to fire change detection
+  }
+
+  onCancelEdit($event) {
+    $event.preventDefault();
+    this.newRule = new Rule();
+    this.formMode = "create";
+  }
+
   getConditionsForRule(rule: Rule): string {
     let tooltip = "";
     for (let cond of rule.conditions) {
@@ -161,6 +182,6 @@ export class AdminRuleComponent {
         tooltip += cond.fieldName + " " + cond.operator + " '" + cond.valueNum + "'";
       }
     }
-    return tooltip
+    return tooltip;
   }
 }

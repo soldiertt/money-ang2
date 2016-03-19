@@ -47,11 +47,11 @@ export class RuleService {
           let categ: Category = <Category> rule.category;
           out.categoryType = categ.type;
           out.categoryFrequency = categ.frequency;
-          out.categoryLink.categoryId = categ.id;
+          out.categoryLink.categoryId = rule.categoryId;
           out.appliedRule = rule.name;
           if (checkCategoryExists) {
             (function(comp:RuleService, out: TxFormData, categ: Category) {
-              comp._categoryRestService.existsCategoryForYear(categ.id, out.tx.date.getFullYear()).subscribe(category => {
+              comp._categoryRestService.existsCategoryForYear(out.categoryLink.categoryId, out.tx.date.getFullYear()).subscribe(category => {
                 if (!category) {
                   out.categoryLink.categoryId="";
                   console.warn("Cannot apply rule cause category", categ.name, "is not available for year", out.tx.date.getFullYear());

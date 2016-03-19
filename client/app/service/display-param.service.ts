@@ -4,8 +4,12 @@ import {Observable} from 'rxjs/Observable'
 @Injectable()
 export class DisplayParamService {
   private _year:number;
-  private _types:Array<string> = ["FIXED", "OTHER", "INCOMING"];
-  private _frequencies:Array<string> = ["MONTHLY", "QUARTER", "YEARLY"];
+  catTypeFixed:boolean = true;
+  catTypeOther:boolean = true;
+  catTypeIncoming:boolean = true;
+  catFreqMonthly:boolean = true;
+  catFreqQuarter:boolean = true;
+  catFreqYearly:boolean = true;
   showTotals: boolean = true;
   filtersUpdated: EventEmitter<string> = new EventEmitter<string>();
 
@@ -16,22 +20,30 @@ export class DisplayParamService {
   get year() {
     return this._year;
   }
+
   set year(year:number) {
     this._year = year;
     this.filtersUpdated.emit("year");
   }
+
+  hasChanged() {
+    this.filtersUpdated.emit("update");
+  }
+
   get types() {
-    return this._types;
+    let types = [];
+    if (this.catTypeFixed)    { types.push("FIXED");          }
+    if (this.catTypeOther)    { types.push("OTHER");          }
+    if (this.catTypeIncoming) { types.push("INCOMING");       }
+    return types;
   }
-  set types(types:Array<string>) {
-    this._types = types;
-    this.filtersUpdated.emit("types");
-  }
+
   get frequencies() {
-    return this._frequencies;
+    let frequencies = [];
+    if (this.catFreqMonthly)  { frequencies.push("MONTHLY");  }
+    if (this.catFreqQuarter)  { frequencies.push("QUARTER");  }
+    if (this.catFreqYearly)   { frequencies.push("YEARLY");   }
+    return frequencies;
   }
-  set frequencies(frequencies:Array<string>) {
-    this._frequencies = frequencies;
-    this.filtersUpdated.emit("frequencies");
-  }
+
 }

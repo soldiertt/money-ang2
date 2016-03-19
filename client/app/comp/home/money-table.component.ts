@@ -111,7 +111,7 @@ export class MoneyTableComponent {
       } else if (categ.frequency == CatFrequency.QUARTER) {
         return period.index < (Math.floor((actualdate.getMonth() + 3) / 3) - 1);
       } else if (categ.frequency == CatFrequency.MONTHLY) {
-        return period.index < actualdate.getMonth();
+        return period.index <= actualdate.getMonth();
       }
     } else {
       return false;
@@ -119,9 +119,9 @@ export class MoneyTableComponent {
   }
 
   private initTotals(onlySubTotals: boolean) {
-    for (let type of this.displayParamService.types) {
+    for (let type of ["FIXED", "OTHER", "INCOMING"]) {
       if (!onlySubTotals) {
-        for (let freq of this.displayParamService.frequencies) {
+        for (let freq of ["MONTHLY", "QUARTER", "YEARLY"]) {
           this.totals.set(type + '-' + freq, [0,0,0,0,0,0,0,0,0,0,0,0]);
         }
       }

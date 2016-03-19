@@ -36,7 +36,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                     return this._http.delete('/restapi/rule/' + ruleId);
                 };
                 RuleRestService.prototype.update = function (rule) {
-                    return this._http.put('/restapi/rule/' + rule.id, JSON.stringify(rule));
+                    return this._http.put('/restapi/rule/' + rule.id, JSON.stringify(rule)).map(function (res) { return res.json(); });
                 };
                 RuleRestService = __decorate([
                     core_1.Injectable(), 

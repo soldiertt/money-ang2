@@ -5,7 +5,7 @@ basicCrudCtrl.update = function (req, res) {
     var rule = req.object;
     rule.name = req.body.name;
     rule.conditions = req.body.conditions;
-    rule.category = req.body.category;
+    rule.categoryId = req.body.categoryId;
     rule.isActive = req.body.isActive;
     rule.save(function (err) {
         if (err) {
@@ -19,17 +19,23 @@ basicCrudCtrl.update = function (req, res) {
 };
 
 basicCrudCtrl.list = function (req, res) {
-    var queryObj = {};
+  var queryObj = {};
 
-    Rule.find(queryObj).populate('category').exec(function (err, objectList) {
-        if (err) {
-            return res.status(400).send({
-                message: getErrorMessage(err)
-            });
-        } else {
-            res.json(objectList);
-        }
-    });
+  Rule.find(queryObj).populate('categoryId', '-periods').lean().exec(function (err, objectList) {
+    if (err) {
+      return res.status(400).send({
+        message: getErrorMessage(err)
+      });
+    } else {
+      objectList = objectList.map(function(elem) {
+        elem.id = elem._id;
+        elem.category = elem.categoryId; // id was populated with object
+        elem.categoryId = elem.category._id;
+        return elem;
+      });
+      res.json(objectList);
+    }
+  });
 };
 
 module.exports = basicCrudCtrl;

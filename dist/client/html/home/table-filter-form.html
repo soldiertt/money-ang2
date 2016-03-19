@@ -11,37 +11,37 @@
   <fieldset class="fields-group">
     <legend>Category type</legend>
     <div>
-      <input type="checkbox" id="category-type-fixed" [(ngModel)]="catTypeFixed" (ngModelChange)="onFilterUpdated($event)" />
+      <input type="checkbox" id="category-type-fixed" [(ngModel)]="displayParamService.catTypeFixed" (ngModelChange)="onFilterUpdated($event)" />
       <label for="category-type-fixed">Fixed</label>
     </div>
     <div>
-      <input type="checkbox" id="category-type-other" [(ngModel)]="catTypeOther" (ngModelChange)="onFilterUpdated($event)" />
+      <input type="checkbox" id="category-type-other" [(ngModel)]="displayParamService.catTypeOther" (ngModelChange)="onFilterUpdated($event)" />
       <label for="category-type-other">Other</label>
     </div>
     <div>
-      <input type="checkbox" id="category-type-incoming" [(ngModel)]="catTypeIncoming" (ngModelChange)="onFilterUpdated($event)" />
+      <input type="checkbox" id="category-type-incoming" [(ngModel)]="displayParamService.catTypeIncoming" (ngModelChange)="onFilterUpdated($event)" />
       <label for="category-type-incoming">Incoming</label>
     </div>
   </fieldset>
   <fieldset class="fields-group">
     <legend>Category frequency</legend>
     <div>
-      <input type="checkbox" id="category-freq-monthly" [(ngModel)]="catFreqMonthly" (ngModelChange)="onFilterUpdated($event)" />
+      <input type="checkbox" id="category-freq-monthly" [(ngModel)]="displayParamService.catFreqMonthly" (ngModelChange)="onFilterUpdated($event)" />
       <label for="category-freq-monthly">Monthly</label>
     </div>
     <div>
-      <input type="checkbox" id="category-freq-quarter" [(ngModel)]="catFreqQuarter" (ngModelChange)="onFilterUpdated($event)" />
+      <input type="checkbox" id="category-freq-quarter" [(ngModel)]="displayParamService.catFreqQuarter" (ngModelChange)="onFilterUpdated($event)" />
       <label for="category-freq-quarter">Quarter</label>
     </div>
     <div>
-      <input type="checkbox" id="category-freq-yearly" [(ngModel)]="catFreqYearly" (ngModelChange)="onFilterUpdated($event)" />
+      <input type="checkbox" id="category-freq-yearly" [(ngModel)]="displayParamService.catFreqYearly" (ngModelChange)="onFilterUpdated($event)" />
       <label for="category-freq-yearly">Yearly</label>
     </div>
   </fieldset>
   <fieldset class="fields-group">
     <legend>Totals</legend>
     <div>
-      <input type="checkbox" id="display-totals" [(ngModel)]="displayTotals" />
+      <input type="checkbox" id="display-totals" [(ngModel)]="displayParamService.showTotals" />
       <label for="display-totals">Display totals</label>
     </div>
   </fieldset>

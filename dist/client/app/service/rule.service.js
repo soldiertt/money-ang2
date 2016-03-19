@@ -69,11 +69,11 @@ System.register(['angular2/core', './rule-rest.service', './category-rest.servic
                                 var categ = rule.category;
                                 out.categoryType = categ.type;
                                 out.categoryFrequency = categ.frequency;
-                                out.categoryLink.categoryId = categ.id;
+                                out.categoryLink.categoryId = rule.categoryId;
                                 out.appliedRule = rule.name;
                                 if (checkCategoryExists) {
                                     (function (comp, out, categ) {
-                                        comp._categoryRestService.existsCategoryForYear(categ.id, out.tx.date.getFullYear()).subscribe(function (category) {
+                                        comp._categoryRestService.existsCategoryForYear(out.categoryLink.categoryId, out.tx.date.getFullYear()).subscribe(function (category) {
                                             if (!category) {
                                                 out.categoryLink.categoryId = "";
                                                 console.warn("Cannot apply rule cause category", categ.name, "is not available for year", out.tx.date.getFullYear());

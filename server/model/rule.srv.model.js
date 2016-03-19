@@ -12,7 +12,7 @@ var RuleSchema = new Schema({
       type: [Condition],
       required: 'Conditions are required'
     },
-    category: {
+    categoryId: {
       type: Schema.ObjectId,
       required: 'Category is required',
       ref: 'Category'

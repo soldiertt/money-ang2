@@ -22,6 +22,6 @@ export class RuleRestService {
     }
 
     update(rule: Rule): Observable<any> {
-      return this._http.put('/restapi/rule/' + rule.id, JSON.stringify(rule));
+      return this._http.put('/restapi/rule/' + rule.id, JSON.stringify(rule)).map(res => res.json());
     }
 }

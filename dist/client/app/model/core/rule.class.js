@@ -1,13 +1,16 @@
-System.register([], function(exports_1, context_1) {
+System.register(['./category.class'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
+    var category_class_1;
     var Condition, Rule;
     return {
-        setters:[],
+        setters:[
+            function (category_class_1_1) {
+                category_class_1 = category_class_1_1;
+            }],
         execute: function() {
             Condition = (function () {
                 function Condition() {
-                    this.availableOperators = [];
                 }
                 return Condition;
             }());
@@ -16,6 +19,7 @@ System.register([], function(exports_1, context_1) {
                 function Rule() {
                     this.conditions = [new Condition()];
                     this.isActive = true;
+                    this.category = new category_class_1.Category(null, null, null, []);
                 }
                 return Rule;
             }());

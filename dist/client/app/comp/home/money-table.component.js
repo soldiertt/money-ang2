@@ -134,7 +134,7 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
                             return period.index < (Math.floor((actualdate.getMonth() + 3) / 3) - 1);
                         }
                         else if (categ.frequency == money_enums_1.CatFrequency.MONTHLY) {
-                            return period.index < actualdate.getMonth();
+                            return period.index <= actualdate.getMonth();
                         }
                     }
                     else {
@@ -142,10 +142,10 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
                     }
                 };
                 MoneyTableComponent.prototype.initTotals = function (onlySubTotals) {
-                    for (var _i = 0, _a = this.displayParamService.types; _i < _a.length; _i++) {
+                    for (var _i = 0, _a = ["FIXED", "OTHER", "INCOMING"]; _i < _a.length; _i++) {
                         var type = _a[_i];
                         if (!onlySubTotals) {
-                            for (var _b = 0, _c = this.displayParamService.frequencies; _b < _c.length; _b++) {
+                            for (var _b = 0, _c = ["MONTHLY", "QUARTER", "YEARLY"]; _b < _c.length; _b++) {
                                 var freq = _c[_b];
                                 this.totals.set(type + '-' + freq, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
                             }

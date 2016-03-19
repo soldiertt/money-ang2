@@ -6,13 +6,11 @@ export class Condition {
   id: string;
   fieldName: string;
   fieldType: CondFieldType;
-  availableOperators: Array<OperatorHelper>; //Not saved in DB
   operator: CondOperator;
   valueStr: string;
   valueNum: number;
 
   constructor() {
-    this.availableOperators = [];
   }
 
 }
@@ -21,11 +19,13 @@ export class Rule {
   id: string;
   name: string;
   conditions: Array<Condition>;
-  category: any; //Either category id or category Object
+  categoryId: string; //must match mongoose model
+  category: Category; //returned by populated field, not saved in DB
   isActive: boolean;
 
   constructor() {
     this.conditions = [new Condition()];
     this.isActive = true;
+    this.category = new Category(null, null, null, []);
   }
 }
