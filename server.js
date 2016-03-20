@@ -4,8 +4,8 @@ var mongoose = require('./server/config/mongoose'),
 
 var db = mongoose(),
     app = express(db),
-    port = 3000,
-    ipaddress = "127.0.0.1";
+    port = process.env.NODE_PORT || 3000,
+    ipaddress = process.env.NODE_IP || "127.0.0.1";
 
 app.listen(port, ipaddress);
 module.exports = app;

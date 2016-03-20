@@ -6,10 +6,6 @@ var PreferenceSchema = new Schema({
       type: String,
       required: 'Csv path is required',
       trim: true
-    },
-    workingYear: {
-      type: Number,
-      required: 'Working year is required',
     }
 });
 

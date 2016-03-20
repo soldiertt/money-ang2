@@ -4,7 +4,6 @@ var Preference = require('mongoose').model('Preference'),
 basicCrudCtrl.update = function (req, res) {
     var preference = req.object;
     preference.csvPath = req.body.csvPath;
-    preference.workingYear = req.body.workingYear;
     preference.save(function (err) {
         if (err) {
             return res.status(400).send({
