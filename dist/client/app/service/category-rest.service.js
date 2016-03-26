@@ -48,6 +48,10 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                 CategoryRestService.prototype.update = function (categ) {
                     return this._http.put('/restapi/category/' + categ.id, JSON.stringify(categ));
                 };
+                CategoryRestService.prototype.updatePeriodMarkAsPaid = function (categId, periodId, markAsPaid) {
+                    var updateData = { 'categoryId': categId, 'periodId': periodId, 'markAsPaid': markAsPaid };
+                    return this._http.put('/restapi/category/period/markAsPaid', JSON.stringify(updateData)).map(function (res) { return res.json(); });
+                };
                 CategoryRestService.prototype.delete = function (categId) {
                     return this._http.delete('/restapi/category/' + categId);
                 };

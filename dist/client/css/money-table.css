@@ -1,6 +1,37 @@
+.app-table {
+  border: 2px solid #032137;
+  color: #29516D;
+}
+
+.app-table thead {
+  background-color: #29516D;
+  color:white;
+}
+
+.app-table thead>tr>th {
+  border-bottom-width: 1px;
+  border: 1px solid #032137;
+}
+
+.app-table td {
+  border: 1px solid #032137;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #C1D1DD;
+}
+
+.table-striped>tbody>tr:nth-of-type(even) {
+    background-color: #9BB5C6;
+}
+
 .month-col {
   min-width: 80px;
   text-align: center;
+}
+
+.name-col {
+  font-weight: bold;
 }
 
 .money-cell {
@@ -9,35 +40,53 @@
 }
 
 .money-cell.current {
-  background-color: antiquewhite;
+  background-color: #486E88;
+  color:white;
 }
 
 .money-cell.unpaid {
   background-color: indianred;
 }
 
+/** TOTALS TABLE **/
+
 .total-table {
   width: 100%;
-  border: 2px solid #ddd;
+  border: 2px solid #032137;
+  color: white;
   margin-bottom: 20px;
+}
+
+.total-table thead {
+  background-color: #29516D;
+  color:white;
 }
 
 .total-table td {
   padding: 0px;
-  border: 1px solid #ddd;
-  text-align: center;
-}
-.total-table th {
-  padding: 3px;
-  border: 2px solid #ddd;
+  border: 1px solid #032137;
   text-align: center;
 }
 
+.total-table th {
+  padding: 3px;
+  text-align: center;
+  border: 1px solid #032137;
+}
+
+.total-row {
+  background-color: #C1D1DD;
+}
+
+.total-row td {
+  color: #29516D;
+}
+
 .total-row-medium {
-  background-color: darkseagreen;
+  background-color: #708EA4;
 }
 .total-row-large {
-  background-color: burlywood;
+  background-color: #29516D;
 }
 .total-row-large td {
   font-weight: bold;

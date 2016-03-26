@@ -77,7 +77,7 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
                 };
                 /** When cell is clicked **/
                 MoneyTableComponent.prototype.findTx = function (categoryId, period) {
-                    if (!period.txList) {
+                    if (period.total != 0 && !period.txList) {
                         this._categoryRestService.findAllTxForPeriod(categoryId, period.id).subscribe(function (categ) {
                             period.txList = categ.periods[0].txList;
                         });
@@ -86,15 +86,15 @@ System.register(['angular2/core', './tx-details.component', "../../model/core/mo
                 MoneyTableComponent.prototype.markPeriodAsPaid = function (category, period) {
                     if (this.isUnpaidPeriod(category, period)) {
                         period.markAsPaid = true;
-                        this._categoryRestService.update(category).subscribe(function (data) {
+                        this._categoryRestService.updatePeriodMarkAsPaid(category.id, period.id, true).subscribe(function (data) {
                             console.log("category updated");
-                        });
+                        }, function (err) { return console.log(err); });
                     }
                     else if (period.total == 0 && period.markAsPaid) {
                         period.markAsPaid = false;
-                        this._categoryRestService.update(category).subscribe(function (data) {
+                        this._categoryRestService.updatePeriodMarkAsPaid(category.id, period.id, false).subscribe(function (data) {
                             console.log("category updated");
-                        });
+                        }, function (err) { return console.log(err); });
                     }
                 };
                 /** list on event txDeleted of money-tx-details component **/

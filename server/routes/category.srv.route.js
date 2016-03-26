@@ -12,6 +12,8 @@ module.exports = function (app) {
       .get(categoryCtrl.search);
     app.route('/restapi/tx/search')
       .get(categoryCtrl.searchTx);
+    app.route('/restapi/category/period/markAsPaid')
+      .put(categoryCtrl.updatePeriodMarkAsPaid);
     app.route('/restapi/category/:categoryId')
       .get(categoryCtrl.read)
       .put(categoryCtrl.update)

@@ -5,10 +5,10 @@
 
 .moneytooltip .tooltipcontent {
   z-index: 10;
-  background-color: cadetblue;
+  background-color: #123752;
   display: none;
   margin-top: 15px;
-  padding: 7px;
+  padding: 5px;
   position: absolute;
   border-radius: 8px;
   -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.50);
@@ -26,7 +26,7 @@
 .moneytooltip .tooltipcontent:after {
   border-left: solid transparent 10px;
   border-right: solid transparent 10px;
-  border-bottom: solid cadetblue 10px;
+  border-bottom: solid #123752 10px;
   top: -10px;
   content: " ";
   height: 0;
@@ -57,9 +57,16 @@
   margin-bottom: 0px;
   width: 450px;
   font-size: 11px;
+  border:0;
 }
 
 .table-tooltip th {
   text-align: center;
-  background-color: khaki;
+  background-color: #29516D;
+  border:1px solid #032137;
+}
+
+.table-tooltip td {
+  border:1px solid #032137;
+  color: black;
 }

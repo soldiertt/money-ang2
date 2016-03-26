@@ -56,6 +56,29 @@ basicCrudCtrl.removeTx = function (req, res) {
   });*/
 };
 
+basicCrudCtrl.updatePeriodMarkAsPaid = function (req, res) {
+  var categoryId = req.body.categoryId;
+  var periodId = req.body.periodId;
+  var markAsPaid = req.body.markAsPaid;
+  Category.findOneAndUpdate(
+    { "_id": categoryId, "periods._id": periodId },
+    {
+        "$set": {
+            "periods.$.markAsPaid": markAsPaid
+        }
+    },
+    function(err,doc) {
+      if (err) {
+        return res.status(400).send({
+          message: basicCrudCtrl.getErrorMessage(err)
+        });
+      } else {
+        res.json(doc);
+      }
+    }
+  );
+};
+
 basicCrudCtrl.search = function (req, res) {
   var year = req.query.year;
   if (req.query.id) {
@@ -126,13 +149,14 @@ basicCrudCtrl.update = function (req, res) {
   var category = req.object;
   category.years = req.body.years;
   category.periods = req.body.periods;
+  console.log(category);
   category.save(function (err) {
       if (err) {
-          return res.status(400).send({
-              message: basicCrudCtrl.getErrorMessage(err)
-          });
+        return res.status(400).send({
+          message: basicCrudCtrl.getErrorMessage(err)
+        });
       } else {
-          res.json(category);
+        res.json(category);
       }
   });
 

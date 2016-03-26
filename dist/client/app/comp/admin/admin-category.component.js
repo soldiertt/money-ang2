@@ -165,7 +165,13 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                         }, function (err) { return console.log(err); });
                     }
                     else {
-                        this.updateOk(controls, removedYears, addedYears);
+                        if (addedYears.length > 0) {
+                            this.updateOk(controls, removedYears, addedYears);
+                        }
+                        else {
+                            //Nothing change
+                            this.editedCat = undefined;
+                        }
                     }
                 };
                 AdminCategoryComponent.prototype.updateOk = function (controls, removedYears, addedYears) {
@@ -182,9 +188,16 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/category.
                     var _this = this;
                     var categIndex = this.categories.indexOf(category);
                     if (categIndex > -1) {
-                        this._categoryRestService.delete(category.id).subscribe(function (response) {
-                            _this.categories.splice(categIndex, 1);
-                        });
+                        this._categoryRestService.existsTxForYears(category.id, category.years).subscribe(function (exists) {
+                            if (exists) {
+                                console.error("Cannot delete category containing transactions !");
+                            }
+                            else {
+                                _this._categoryRestService.delete(category.id).subscribe(function (response) {
+                                    _this.categories.splice(categIndex, 1);
+                                });
+                            }
+                        }, function (err) { return console.log(err); });
                     }
                     else {
                         console.error("Cannot find category to delete with id ", category.id);

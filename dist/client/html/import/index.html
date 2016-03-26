@@ -1,5 +1,11 @@
 <div>
-  <table class="table table-striped table-bordered table-valign-middle">
+  <div class="import-actions" *ngIf="txFormDataList.length > 0">
+    <button (click)="saveAllTx()" class="btn btn-default">Save all</button>
+  </div>
+  <div *ngIf="txFormDataList.length == 0">
+    There is no transaction to import.
+  </div>
+  <table class="table table-striped app-table table-valign-middle" *ngIf="txFormDataList.length > 0">
     <thead>
       <tr>
         <th class="col-md-1 center">Date</th>
@@ -67,7 +73,7 @@
       </tr>
     </tbody>
   </table>
-  <div style="text-align:right;" *ngIf="txFormDataList.length > 0">
+  <div class="import-actions" style="text-align:right;" *ngIf="txFormDataList.length > 0">
     <button (click)="saveAllTx()" class="btn btn-default">Save all</button>
   </div>
 </div>

@@ -37,6 +37,11 @@ export class CategoryRestService {
       return this._http.put('/restapi/category/' + categ.id, JSON.stringify(categ));
     }
 
+    updatePeriodMarkAsPaid(categId: string, periodId: string, markAsPaid: boolean): Observable<any> {
+      let updateData = {'categoryId': categId, 'periodId': periodId, 'markAsPaid': markAsPaid};
+      return this._http.put('/restapi/category/period/markAsPaid', JSON.stringify(updateData)).map(res => res.json());
+    }
+
     delete(categId: string): Observable<any> {
       return this._http.delete('/restapi/category/' + categId);
     }

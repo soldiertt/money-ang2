@@ -1,7 +1,10 @@
 .fileheader {
-  font-family: 'Courier New'
+  font-family: 'Courier New';
+  font-size: 0.8em;
+  background-color: #fff;
+  line-height: 18px;
 }
 
 .csvline-header {
-  background-color: red;
+  background-color: #d496c6;
 }

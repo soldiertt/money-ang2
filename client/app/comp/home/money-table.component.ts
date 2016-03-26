@@ -56,7 +56,7 @@ export class MoneyTableComponent {
 
   /** When cell is clicked **/
   findTx(categoryId:string, period: Period) {
-    if (!period.txList) {
+    if (period.total != 0 && !period.txList) {
       this._categoryRestService.findAllTxForPeriod(categoryId, period.id).subscribe(categ => {
         period.txList = categ.periods[0].txList;
       });
@@ -66,14 +66,14 @@ export class MoneyTableComponent {
   markPeriodAsPaid(category: Category, period: Period) {
     if (this.isUnpaidPeriod(category, period)) {
       period.markAsPaid = true;
-      this._categoryRestService.update(category).subscribe(data => {
+      this._categoryRestService.updatePeriodMarkAsPaid(category.id, period.id, true).subscribe(data => {
         console.log("category updated");
-      });
+      }, err => console.log(err));
     } else if (period.total == 0 && period.markAsPaid)  {
       period.markAsPaid = false;
-      this._categoryRestService.update(category).subscribe(data => {
+      this._categoryRestService.updatePeriodMarkAsPaid(category.id, period.id, false).subscribe(data => {
         console.log("category updated");
-      });
+      }, err => console.log(err));
     }
   }
 

@@ -4,7 +4,8 @@ import {FormUtilsService} from '../../service/form-utils.service'
 
 @Component({
     selector: 'money-table-filter-form',
-    templateUrl: 'html/home/table-filter-form.html'
+    templateUrl: 'html/home/table-filter-form.html',
+    styleUrls: ['css/table-filter-form.css']
 })
 export class TableFilterFormComponent {
     allYears: Array<number>;

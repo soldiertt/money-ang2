@@ -148,7 +148,12 @@ export class AdminCategoryComponent {
           }
         }, err => console.log(err));
       } else {
-        this.updateOk(controls, removedYears, addedYears);
+        if (addedYears.length > 0) {
+          this.updateOk(controls, removedYears, addedYears);
+        } else {
+          //Nothing change
+          this.editedCat = undefined;
+        }
       }
     }
 
@@ -165,9 +170,16 @@ export class AdminCategoryComponent {
     onDelete(category: Category) {
       let categIndex = this.categories.indexOf(category);
       if (categIndex > -1) {
-        this._categoryRestService.delete(category.id).subscribe(response => {
-          this.categories.splice(categIndex, 1);
-        })
+
+        this._categoryRestService.existsTxForYears(category.id, category.years).subscribe(exists => {
+          if (exists) {
+            console.error("Cannot delete category containing transactions !");
+          } else {
+            this._categoryRestService.delete(category.id).subscribe(response => {
+              this.categories.splice(categIndex, 1);
+            })
+          }
+        }, err => console.log(err));
       } else {
         console.error("Cannot find category to delete with id ", category.id);
       }

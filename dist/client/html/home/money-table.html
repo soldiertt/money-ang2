@@ -1,5 +1,5 @@
 <div class="col-md-10">
-<table class="table table-striped table-bordered">
+<table class="table table-striped app-table">
 <thead>
   <tr>
     <th>Catégories</th>
@@ -8,7 +8,7 @@
 </thead>
 <tbody>
   <tr *ngFor="#category of categories | categorySorter | catfilter : displayParamService.types : displayParamService.frequencies">
-    <td>
+    <td class="name-col">
       <money-icon [icon-class]="'cat-type-' + category.type + '-icon'"></money-icon>
       <money-icon [icon-class]="'cat-freq-' + category.frequency + '-icon'"></money-icon>
       {{category.name}}
@@ -38,7 +38,7 @@
 <tbody>
   <template ngFor #displayedType [ngForOf]="displayParamService.types">
     <template ngFor #displayedFreq [ngForOf]="displayParamService.frequencies">
-      <tr>
+      <tr class="total-row">
         <td>{{displayedType}}-{{displayedFreq}}</td>
         <td *ngFor="#total of totals.get(displayedType + '-' + displayedFreq)">
           {{total / 100 | number:'1.2-2'}} €

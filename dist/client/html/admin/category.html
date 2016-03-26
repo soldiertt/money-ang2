@@ -1,7 +1,7 @@
-<div>
-<h2>Administration des catégories</h2>
+<div class="content-large">
+<h1>Manage categories</h1>
 <!-- CREATION FORM -->
-<form (submit)="onCreate();nameCtrl.focus()" [ngFormModel]="createForm" class="form-horizontal">
+<form (ngSubmit)="onCreate();nameCtrl.focus()" [ngFormModel]="createForm" class="form-horizontal">
   <div class="form-group">
     <label for="cat-name" class="control-label col-sm-2">Name *</label>
     <div class="col-sm-10">
@@ -51,7 +51,7 @@
 <!-- END CREATION FORM -->
 
 <!-- CATEGORIES LIST -->
-<table class="table table-striped table-bordered">
+<table class="table table-striped app-table">
   <thead>
     <tr>
       <th>Name</th>
@@ -69,7 +69,7 @@
       <td>
         <div *ngIf="editedCat?.id != category.id">{{category.years.join(",")}} <span (click)="onEdit(category)">Edit</span></div>
         <div *ngIf="editedCat?.id == category.id">
-          <form [ngFormModel]="editForm" (submit)="onUpdate()">
+          <form [ngFormModel]="editForm" (ngSubmit)="onUpdate()">
             <select multiple class="form-control" (change)="yearsEditValueChange($event)" focusOnInit>
               <option *ngFor="#year of yearList" [value]="year" [attr.selected]="category.years.indexOf(year) != -1 ? true : null">{{year}}</option>
             </select>
@@ -79,7 +79,7 @@
           </form>
         </div>
       </td>
-      <td><span (click)="onDelete(category)">Del</span></td>
+      <td><span class="glyphicon glyphicon-trash action-link" (click)="onDelete(category)" title="Delete"></span></td>
     </tr>
   </tbody>
 </table>

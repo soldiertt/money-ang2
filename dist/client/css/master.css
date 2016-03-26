@@ -12,19 +12,90 @@ main {
   margin-right: 15px;
 }
 
+h1 {
+  border-bottom: 1px solid #123752;
+  font-size: 2em;
+  margin-bottom: 20px;
+  color:#123752;
+}
+
+.content-small {
+  max-width: 1000px;
+  margin: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f2f5f7;
+}
+
+.content-large {
+  max-width: 1200px;
+  margin: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #e5ecf1;
+}
+
+.action-link {
+  cursor:pointer;
+}
+
+.navbar {
+  background-image: -webkit-linear-gradient(top,#29516D 0,#123752 100%);
+  background-image: -o-linear-gradient(top,#29516D 0,#123752 100%);
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#29516D),to(#123752));
+  background-image: linear-gradient(to bottom,#29516D 0,#123752 100%);
+
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
+  color: white;
+}
+
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+  color: #ddd;
+}
+
+.navbar-default .navbar-nav>li>a.router-link-active {
+  color: #fff;
+  font-style: italic;
+}
+
+.dropdown-menu {
+  background-image: -webkit-linear-gradient(top,#29516D 0,#123752 100%);
+  background-image: -o-linear-gradient(top,#29516D 0,#123752 100%);
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#29516D),to(#123752));
+  background-image: linear-gradient(to bottom,#29516D 0,#123752 100%);
+}
+
+.dropdown-menu>li>a {
+  color: white;
+}
+
+.dropdown-menu>li>a.router-link-active {
+  font-style: italic;
+}
+
 .router-link-active {
-  background-image: linear-gradient(to bottom,#dbdbdb 0,#e2e2e2 100%);
+  background-image: linear-gradient(to bottom,#708EA4 0,#486E88 100%);
   box-shadow: inset 0 3px 9px rgba(0,0,0,.075);
   color: #555;
 }
 
 .footer {
+  padding: 10px;
   position: absolute;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 60px;
-  background-color: #d5d5d5;
+  background-image: -webkit-linear-gradient(top,#29516D 0,#123752 100%);
+  background-image: -o-linear-gradient(top,#29516D 0,#123752 100%);
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#29516D),to(#123752));
+  background-image: linear-gradient(to bottom,#29516D 0,#123752 100%);
+  color: white;
+  font-size: 0.85em;
 }
 
 fieldset {
