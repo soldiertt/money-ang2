@@ -9,10 +9,11 @@
     "removeComments": false,
     "noImplicitAny": false,
     "rootDir": ".",
-    "outDir":"dist"
+    "outDir":"../dist/client"
   },
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "typings"
   ]
 }

@@ -2,6 +2,7 @@ import {Injectable} from 'angular2/core'
 import {Http} from 'angular2/http'
 import {Observable} from 'rxjs/Observable'
 import 'rxjs/add/operator/map';
+
 import {Preference} from '../model/core/preference.class'
 
 @Injectable()

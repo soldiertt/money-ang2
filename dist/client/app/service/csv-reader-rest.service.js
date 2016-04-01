@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map', 'rxjs/add/observable/fromArray'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -20,8 +20,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map', 'rxj
             function (http_1_1) {
                 http_1 = http_1_1;
             },
-            function (_1) {},
-            function (_2) {}],
+            function (_1) {}],
         execute: function() {
             CsvReaderRestService = (function () {
                 function CsvReaderRestService(_http) {

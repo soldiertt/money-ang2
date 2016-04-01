@@ -1,10 +1,10 @@
 import {Injectable} from 'angular2/core'
 import {Http} from 'angular2/http'
 import {Observable} from 'rxjs/Observable'
-import 'rxjs/add/operator/map';
 import {Category} from '../model/core/category.class'
 import {Tx} from '../model/core/tx.class'
 import {TxFormData} from '../model/formutil/tx-form-data.class'
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CategoryRestService {

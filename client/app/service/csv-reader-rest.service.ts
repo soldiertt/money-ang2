@@ -2,7 +2,7 @@ import {Injectable} from 'angular2/core'
 import {Http} from 'angular2/http'
 import {Observable} from 'rxjs/Observable'
 import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/fromArray';
+
 import {AccountSetting} from '../model/core/account-setting.class'
 import {TxMapper} from '../model/utils/tx-mapper.class'
 

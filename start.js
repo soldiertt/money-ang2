@@ -36,6 +36,6 @@ if (cluster.isMaster) {
     });
   }
 } else {
-  //require('./app.js');
+  process.env.NODE_ENV = process.env.NODE_ENV || 'development';
   require('./server.js');
 }

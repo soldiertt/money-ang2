@@ -1,6 +1,5 @@
 import {Component, OnInit} from 'angular2/core';
 import {Observable} from 'rxjs/Observable'
-import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/forkJoin';
 
 import {AccountSetting}                     from '../../model/core/account-setting.class'
@@ -18,6 +17,7 @@ import {TxrefRestService}                   from '../../service/txref-rest.servi
 import {RuleService}                        from '../../service/rule.service'
 import {FormUtilsService}                   from '../../service/form-utils.service'
 import {CatfilterPipe, CategorySorterPipe}  from '../../pipe/money-pipes'
+
 
 @Component({
   selector: 'money-import',

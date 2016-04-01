@@ -22,7 +22,6 @@
     <script src="/lib/angular2/bundles/angular2.dev.js"></script>
     <script src="/lib/angular2/bundles/router.dev.js"></script>
     <script src="/lib/angular2/bundles/http.dev.js"></script>
-
     <!-- 2. Configure SystemJS -->
     <script>
       System.config({
@@ -33,10 +32,8 @@
           }
         }
       });
-      System.import('app/boot')
-            .then(null, console.error.bind(console));
+      System.import('app/boot').then(null, console.error.bind(console));
     </script>
-
   </head>
   <body>
     <money-app>loading...</money-app>
