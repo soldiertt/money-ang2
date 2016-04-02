@@ -146,15 +146,19 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/rule.clas
                     }
                 };
                 AdminRuleComponent.prototype.onDisable = function (rule) {
+                    var _this = this;
                     rule.isActive = false;
                     this._ruleRestService.update(rule).subscribe(function (data) {
                         console.log("Rule updated");
+                        _this._ruleService.reloadRules(); //force cache cleanup
                     }, function (err) { return console.log(err); });
                 };
                 AdminRuleComponent.prototype.onEnable = function (rule) {
+                    var _this = this;
                     rule.isActive = true;
                     this._ruleRestService.update(rule).subscribe(function (data) {
                         console.log("Rule updated");
+                        _this._ruleService.reloadRules(); //force cache cleanup
                     }, function (err) { return console.log(err); });
                 };
                 AdminRuleComponent.prototype.onDelete = function (rule, j) {
@@ -162,6 +166,7 @@ System.register(['angular2/core', 'angular2/common', '../../model/core/rule.clas
                     this._ruleRestService.delete(rule.id).subscribe(function (data) {
                         _this.rules.splice(j, 1);
                         console.log("Rule deleted");
+                        _this._ruleService.reloadRules(); //force cache cleanup
                     }, function (err) { return console.log(err); });
                 };
                 AdminRuleComponent.prototype.onEdit = function (rule, j) {

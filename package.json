@@ -4,10 +4,8 @@
   "description": "",
   "main": "start.js",
   "scripts": {
-    "tsc:w": "tsc -w",
-    "start": "node --use_strict start.js",
-    "start2": "node --use_strict dist/server/start.js",
-    "dev": "concurrent \"npm run tsc:w\" \"node --use_strict start.js\" "
+    "tsc-client": "tsc -p client",
+    "start": "node --use_strict dist/server/start.js"
   },
   "keywords": [],
   "author": "Soldiertt",
@@ -21,6 +19,12 @@
     "es6-promise": "^3.0.2",
     "es6-shim": "^0.35.0",
     "express": "^4.12.3",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-html-replace": "^1.5.5",
+    "gulp-rename": "^1.2.2",
+    "gulp-typescript": "^2.12.1",
+    "gulp-uglify": "^1.5.3",
     "jquery": "^2.2.0",
     "method-override": "^2.3.2",
     "mongoose": "^4.4.10",
@@ -33,7 +37,6 @@
     "zone.js": "0.6.8"
   },
   "devDependencies": {
-    "concurrently": "^1.0.0",
     "typescript": "^1.8.9"
   }
 }

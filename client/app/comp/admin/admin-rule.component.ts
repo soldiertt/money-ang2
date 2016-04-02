@@ -140,6 +140,7 @@ export class AdminRuleComponent {
     rule.isActive = false;
     this._ruleRestService.update(rule).subscribe(data => {
       console.log("Rule updated");
+      this._ruleService.reloadRules(); //force cache cleanup
     }, err => console.log(err))
   }
 
@@ -147,6 +148,7 @@ export class AdminRuleComponent {
     rule.isActive = true;
     this._ruleRestService.update(rule).subscribe(data => {
       console.log("Rule updated");
+      this._ruleService.reloadRules(); //force cache cleanup
     }, err => console.log(err))
   }
 
@@ -154,6 +156,7 @@ export class AdminRuleComponent {
     this._ruleRestService.delete(rule.id).subscribe(data => {
       this.rules.splice(j, 1);
       console.log("Rule deleted");
+      this._ruleService.reloadRules(); //force cache cleanup
     }, err => console.log(err))
   }
 
