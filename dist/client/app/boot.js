@@ -1,8 +1,8 @@
 ///<reference path="../../node_modules/angular2/typings/browser.d.ts"/>
-System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/platform/browser', './comp/app.component', './service/display-param.service', './service/category-rest.service', './service/account-setting-rest.service', './service/preference-rest.service', './service/txref-rest.service', './service/rule-rest.service', './service/rule.service', './service/csv-reader-rest.service', './service/form-utils.service', './model/utils/category-years-checker', './model/config/json-request-options'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/platform/browser', './comp/app.component', './service/display-param.service', './service/category-rest.service', './service/account-setting-rest.service', './service/preference-rest.service', './service/txref-rest.service', './service/rule-rest.service', './service/rule.service', './service/csv-reader-rest.service', './service/form-utils.service', './service/upload-csv.service', './model/utils/category-years-checker', './model/config/json-request-options'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var core_1, router_1, http_1, browser_1, app_component_1, display_param_service_1, category_rest_service_1, account_setting_rest_service_1, preference_rest_service_1, txref_rest_service_1, rule_rest_service_1, rule_service_1, csv_reader_rest_service_1, form_utils_service_1, category_years_checker_1, json_request_options_1;
+    var core_1, router_1, http_1, browser_1, app_component_1, display_param_service_1, category_rest_service_1, account_setting_rest_service_1, preference_rest_service_1, txref_rest_service_1, rule_rest_service_1, rule_service_1, csv_reader_rest_service_1, form_utils_service_1, upload_csv_service_1, category_years_checker_1, json_request_options_1;
     return {
         setters:[
             function (core_1_1) {
@@ -47,6 +47,9 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
             function (form_utils_service_1_1) {
                 form_utils_service_1 = form_utils_service_1_1;
             },
+            function (upload_csv_service_1_1) {
+                upload_csv_service_1 = upload_csv_service_1_1;
+            },
             function (category_years_checker_1_1) {
                 category_years_checker_1 = category_years_checker_1_1;
             },
@@ -64,6 +67,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                 rule_service_1.RuleService,
                 csv_reader_rest_service_1.CsvReaderRestService,
                 form_utils_service_1.FormUtilsService,
+                upload_csv_service_1.UploadCsvService,
                 category_years_checker_1.CategoryYearsChecker,
                 router_1.ROUTER_PROVIDERS,
                 http_1.HTTP_PROVIDERS,

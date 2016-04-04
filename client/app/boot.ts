@@ -14,6 +14,7 @@ import {RuleRestService}            from './service/rule-rest.service'
 import {RuleService}                from './service/rule.service'
 import {CsvReaderRestService}       from './service/csv-reader-rest.service'
 import {FormUtilsService}           from './service/form-utils.service'
+import {UploadCsvService}           from './service/upload-csv.service'
 import {CategoryYearsChecker}       from './model/utils/category-years-checker'
 import {JsonRequestOptions}         from './model/config/json-request-options'
 
@@ -28,6 +29,7 @@ bootstrap(AppComponent, [
   RuleService,
   CsvReaderRestService,
   FormUtilsService,
+  UploadCsvService,
   CategoryYearsChecker,
   ROUTER_PROVIDERS,
   HTTP_PROVIDERS,

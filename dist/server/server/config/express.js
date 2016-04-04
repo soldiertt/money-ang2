@@ -37,11 +37,6 @@ function default_1() {
     csvreader_srv_route_1.default(app);
     txref_srv_route_1.default(app);
     rule_srv_route_1.default(app);
-    app.use(function errorHandler(err, req, res, next) {
-        res.writeHead(500, { "Content-Type": "application/json" });
-        var error = { error: err.message };
-        res.end(JSON.stringify(error));
-    });
     app.use(express.static('./dist/client'));
     app.use('/lib', express.static('./node_modules'));
     return server;

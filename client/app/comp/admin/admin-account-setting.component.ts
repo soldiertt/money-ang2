@@ -2,13 +2,12 @@ import {Component}                  from 'angular2/core'
 import {Control, ControlGroup, FormBuilder, Validators} from 'angular2/common'
 import {Http, RequestOptions, RequestMethod, Headers} from 'angular2/http'
 
-import {MultipartUploader}          from '../../model/formutil/multipart-uploader.class'
-import {MultipartItem}              from '../../model/formutil/multipart-item.class'
 import {AccountSetting}             from '../../model/core/account-setting.class'
 import {FieldMapping}               from '../../model/core/field-mapping.class'
 import {AccountFormValidator}       from '../../model/validation/account-form-validator.class'
 import {AccountSettingRestService}  from '../../service/account-setting-rest.service'
 import {FormUtilsService}           from '../../service/form-utils.service'
+import {UploadCsvService}           from "../../service/upload-csv.service";
 import {DisplayErrorDirective}      from '../directive/display-error.directive'
 
 @Component({
@@ -25,7 +24,11 @@ export class AdminAccountSettingComponent {
   accountSetting: AccountSetting = new AccountSetting();
   allAccountSettings: Array<AccountSetting>;
 
-  constructor(private _http: Http, fb: FormBuilder, private _accountSettingRestService: AccountSettingRestService, private _formUtilsService: FormUtilsService) {
+  constructor(private _http: Http, fb: FormBuilder,
+    private _accountSettingRestService: AccountSettingRestService,
+    private _formUtilsService: FormUtilsService,
+    private _uploadCsvService: UploadCsvService) {
+
     let accountFormValidator = new AccountFormValidator(this);
     this.dummyFieldMappingControl = fb.control('', accountFormValidator.validate);
     this.dummyFieldMappingControl.markAsDirty();
@@ -72,8 +75,20 @@ export class AdminAccountSettingComponent {
   }
 
   onCsvSampleUpload(fileinput: any) {
-    const UPLOAD_URL = "/upload";
-    let sampleCsvFile : File = fileinput.target.files[0];
+    const UPLOAD_URL = "/uploadsample";
+    let sampleCsvFile : File = fileinput.target.files[0],
+        adminCsvComp = this,
+        successCallback = function(response: any) {
+          (<Control> adminCsvComp.accountForm.controls['csvfile']).setErrors(undefined);
+          let allLines:Array<string> = JSON.parse(response);
+          adminCsvComp.fileFirstLines = allLines.slice(0, 15);
+          adminCsvComp.updateTokens(adminCsvComp);
+        },
+        failureCallback = function(response: any) {
+          (<Control> adminCsvComp.accountForm.controls['csvfile']).setErrors({'uploadfailed': true});
+        }
+
+    this._uploadCsvService.uploadFile(UPLOAD_URL, sampleCsvFile, successCallback, failureCallback);
     /** NOT YET ANGULAR2 WAY TO DO THIS, SO USE THIRD PARTY LIB USING XMLHttpRequest
     see https://github.com/wangzilong/angular2-multipartForm **/
     /*let formData:FormData = new FormData("name", this.file);
@@ -86,20 +101,6 @@ export class AdminAccountSettingComponent {
     .subscribe(response => {
       console.log(response.json());
     })*/
-    let uploader:MultipartUploader = new MultipartUploader({url: UPLOAD_URL});
-    let item:MultipartItem = new MultipartItem(uploader);
-    item.formData = new FormData();
-    item.formData.append("csvfile",  sampleCsvFile);
-
-    let adminCsvComp = this;
-    let uploadCallback = function(response: any) {
-      let allLines:Array<string> = JSON.parse(response);
-      adminCsvComp.fileFirstLines = allLines.slice(0, 15);
-      adminCsvComp.updateTokens(adminCsvComp);
-    };
-
-    item.callback = uploadCallback;
-    item.upload();
   }
 
   createAccount() {

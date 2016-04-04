@@ -23,6 +23,7 @@
     <label class="control-label col-sm-3">Select a sample csv file *</label>
     <div class="col-sm-9">
       <input type="file" name="csvfile" ngControl="csvfile" (change)="onCsvSampleUpload($event)" class="form-control">
+      <display-error control="csvfile" error="uploadfailed">Upload failed, please check your file is a valid csv.</display-error>
     </div>
   </div>
   <div *ngIf="fileFirstLines">

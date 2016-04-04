@@ -42,6 +42,12 @@ export default function () {
     txrefRoute(app);
     ruleRoute(app);
 
+    app.use(function errorHandler(err, req, res, next) {
+      res.writeHead(500, {"Content-Type": "application/json"});
+      let error = {error: err.message};
+      res.end(JSON.stringify(error));
+    });
+
     app.use(express.static('./dist/client'));
     app.use('/lib', express.static('./node_modules'));
 

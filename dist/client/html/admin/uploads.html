@@ -1,0 +1,12 @@
+<div class="content-large">
+<h1>Manage uploads</h1>
+<form [ngFormModel]="uploadForm" class="form-horizontal">
+  <div class="form-group">
+    <label class="control-label col-sm-3">Select a csv file *</label>
+    <div class="col-sm-9">
+      <input type="file" name="csvfile" ngControl="csvfile" (change)="onCsvUpload($event)" class="form-control">
+      <display-error control="csvfile" error="uploadfailed">Upload failed, please check your file is a valid csv.</display-error>
+    </div>
+  </div>
+</form>
+</div>

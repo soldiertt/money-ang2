@@ -9,8 +9,7 @@
     "removeComments": false,
     "noImplicitAny": false,
     "rootDir": ".",
-    "outDir":"../dist/client",
-    "out":"money-bundle.min.js"
+    "outDir":"../dist/client"
   },
   "exclude": [
     "node_modules",

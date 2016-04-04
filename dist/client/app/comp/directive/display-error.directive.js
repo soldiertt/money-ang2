@@ -36,7 +36,7 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1, contex
                 // the div in the template will only be added if
                 // the control is dirty and has the specified error
                 DisplayErrorDirective.prototype.isDisplayed = function () {
-                    return this.control.dirty && this.control.hasError(this.error);
+                    return (this.control.dirty || this.controlName == 'csvfile') && this.control.hasError(this.error);
                 };
                 __decorate([
                     core_1.Input('control'), 

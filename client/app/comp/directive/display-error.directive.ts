@@ -19,6 +19,6 @@ export class DisplayErrorDirective implements OnInit {
   // the div in the template will only be added if
   // the control is dirty and has the specified error
   isDisplayed() {
-    return this.control.dirty && this.control.hasError(this.error);
+    return (this.control.dirty || this.controlName == 'csvfile') && this.control.hasError(this.error);
   }
 }

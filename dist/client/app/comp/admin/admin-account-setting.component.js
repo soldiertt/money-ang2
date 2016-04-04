@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../model/formutil/multipart-uploader.class', '../../model/formutil/multipart-item.class', '../../model/core/account-setting.class', '../../model/core/field-mapping.class', '../../model/validation/account-form-validator.class', '../../service/account-setting-rest.service', '../../service/form-utils.service', '../directive/display-error.directive'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../model/core/account-setting.class', '../../model/core/field-mapping.class', '../../model/validation/account-form-validator.class', '../../service/account-setting-rest.service', '../../service/form-utils.service', "../../service/upload-csv.service", '../directive/display-error.directive'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../mod
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, http_1, multipart_uploader_class_1, multipart_item_class_1, account_setting_class_1, field_mapping_class_1, account_form_validator_class_1, account_setting_rest_service_1, form_utils_service_1, display_error_directive_1;
+    var core_1, common_1, http_1, account_setting_class_1, field_mapping_class_1, account_form_validator_class_1, account_setting_rest_service_1, form_utils_service_1, upload_csv_service_1, display_error_directive_1;
     var AdminAccountSettingComponent;
     return {
         setters:[
@@ -22,12 +22,6 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../mod
             },
             function (http_1_1) {
                 http_1 = http_1_1;
-            },
-            function (multipart_uploader_class_1_1) {
-                multipart_uploader_class_1 = multipart_uploader_class_1_1;
-            },
-            function (multipart_item_class_1_1) {
-                multipart_item_class_1 = multipart_item_class_1_1;
             },
             function (account_setting_class_1_1) {
                 account_setting_class_1 = account_setting_class_1_1;
@@ -44,16 +38,20 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../mod
             function (form_utils_service_1_1) {
                 form_utils_service_1 = form_utils_service_1_1;
             },
+            function (upload_csv_service_1_1) {
+                upload_csv_service_1 = upload_csv_service_1_1;
+            },
             function (display_error_directive_1_1) {
                 display_error_directive_1 = display_error_directive_1_1;
             }],
         execute: function() {
             AdminAccountSettingComponent = (function () {
-                function AdminAccountSettingComponent(_http, fb, _accountSettingRestService, _formUtilsService) {
+                function AdminAccountSettingComponent(_http, fb, _accountSettingRestService, _formUtilsService, _uploadCsvService) {
                     var _this = this;
                     this._http = _http;
                     this._accountSettingRestService = _accountSettingRestService;
                     this._formUtilsService = _formUtilsService;
+                    this._uploadCsvService = _uploadCsvService;
                     this.accountSetting = new account_setting_class_1.AccountSetting();
                     var accountFormValidator = new account_form_validator_class_1.AccountFormValidator(this);
                     this.dummyFieldMappingControl = fb.control('', accountFormValidator.validate);
@@ -98,8 +96,16 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../mod
                     this.dummyFieldMappingControl.updateValue($event); //Just to fire change detection
                 };
                 AdminAccountSettingComponent.prototype.onCsvSampleUpload = function (fileinput) {
-                    var UPLOAD_URL = "/upload";
-                    var sampleCsvFile = fileinput.target.files[0];
+                    var UPLOAD_URL = "/uploadsample";
+                    var sampleCsvFile = fileinput.target.files[0], adminCsvComp = this, successCallback = function (response) {
+                        adminCsvComp.accountForm.controls['csvfile'].setErrors(undefined);
+                        var allLines = JSON.parse(response);
+                        adminCsvComp.fileFirstLines = allLines.slice(0, 15);
+                        adminCsvComp.updateTokens(adminCsvComp);
+                    }, failureCallback = function (response) {
+                        adminCsvComp.accountForm.controls['csvfile'].setErrors({ 'uploadfailed': true });
+                    };
+                    this._uploadCsvService.uploadFile(UPLOAD_URL, sampleCsvFile, successCallback, failureCallback);
                     /** NOT YET ANGULAR2 WAY TO DO THIS, SO USE THIRD PARTY LIB USING XMLHttpRequest
                     see https://github.com/wangzilong/angular2-multipartForm **/
                     /*let formData:FormData = new FormData("name", this.file);
@@ -112,18 +118,6 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../mod
                     .subscribe(response => {
                       console.log(response.json());
                     })*/
-                    var uploader = new multipart_uploader_class_1.MultipartUploader({ url: UPLOAD_URL });
-                    var item = new multipart_item_class_1.MultipartItem(uploader);
-                    item.formData = new FormData();
-                    item.formData.append("csvfile", sampleCsvFile);
-                    var adminCsvComp = this;
-                    var uploadCallback = function (response) {
-                        var allLines = JSON.parse(response);
-                        adminCsvComp.fileFirstLines = allLines.slice(0, 15);
-                        adminCsvComp.updateTokens(adminCsvComp);
-                    };
-                    item.callback = uploadCallback;
-                    item.upload();
                 };
                 AdminAccountSettingComponent.prototype.createAccount = function () {
                     var _this = this;
@@ -154,7 +148,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', '../../mod
                         styleUrls: ['css/admin/account-setting.css'],
                         directives: [display_error_directive_1.DisplayErrorDirective]
                     }), 
-                    __metadata('design:paramtypes', [http_1.Http, common_1.FormBuilder, account_setting_rest_service_1.AccountSettingRestService, form_utils_service_1.FormUtilsService])
+                    __metadata('design:paramtypes', [http_1.Http, common_1.FormBuilder, account_setting_rest_service_1.AccountSettingRestService, form_utils_service_1.FormUtilsService, upload_csv_service_1.UploadCsvService])
                 ], AdminAccountSettingComponent);
                 return AdminAccountSettingComponent;
             }());
