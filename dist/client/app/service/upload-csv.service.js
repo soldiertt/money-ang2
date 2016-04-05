@@ -37,11 +37,12 @@ System.register(['angular2/core', 'angular2/http', '../model/formutil/multipart-
                     item.formData = new FormData();
                     item.formData.append("csvfile", file);
                     var uploadCallback = function (response) {
+                        var resp = JSON.parse(response);
                         if (!item.isError) {
-                            successCallback(response);
+                            successCallback(resp);
                         }
                         else {
-                            failureCallback(response);
+                            failureCallback(resp);
                         }
                     };
                     item.callback = uploadCallback;

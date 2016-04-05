@@ -9,7 +9,7 @@ import {PreferenceRestService} from '../../service/preference-rest.service'
   directives: []
 })
 export class PreferencesComponent implements OnInit {
-  preference: Preference = new Preference();
+  preference: Preference  = new Preference();
 
   constructor(private _preferenceRestService: PreferenceRestService) {
   }
@@ -26,7 +26,6 @@ export class PreferencesComponent implements OnInit {
   }
 
   onSave() {
-    //if (this.preference.workingYear <= new Date().getFullYear() && this.preference.workingYear > 2000) {
     if (this.preference.id) {
       this._preferenceRestService.update(this.preference).subscribe(response => {
         this.preference = response.json();
@@ -38,8 +37,6 @@ export class PreferencesComponent implements OnInit {
         console.log("Preferences were saved");
       });
     }
-    //} else {
-    //  console.error("Invalid year");
-    //}
   }
+
 }

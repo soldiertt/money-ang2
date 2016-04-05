@@ -6,7 +6,7 @@ var CsvFilesCtrl = (function () {
     function CsvFilesCtrl() {
     }
     CsvFilesCtrl.prototype.readLines = function (req, res) {
-        var rootPath = req.query.rootPath, startsWith = req.query.startsWith, headerLinesCount = req.query.headerLinesCount, csvLines = [];
+        var rootPath = this.getRootPath(req), startsWith = req.query.startsWith, headerLinesCount = req.query.headerLinesCount, csvLines = [];
         fs.readdir(rootPath, function (err, files) {
             if (err)
                 throw err;
@@ -23,15 +23,11 @@ var CsvFilesCtrl = (function () {
                     });
                 }
             });
-            res.writeHead(200, { "Content-Type": "application/json" });
-            res.end(JSON.stringify(csvLines));
+            res.json(csvLines);
         });
     };
     CsvFilesCtrl.prototype.listNames = function (req, res) {
-        var rootPath = req.query.rootPath, fileNames = [];
-        if (!rootPath) {
-            rootPath = fs.realpathSync('uploads/csv/');
-        }
+        var rootPath = this.getRootPath(req), fileNames = [];
         fs.readdir(rootPath, function (err, files) {
             if (err)
                 throw err;
@@ -42,11 +38,28 @@ var CsvFilesCtrl = (function () {
                     fileNames.push(name);
                 }
             });
-            res.writeHead(200, { "Content-Type": "application/json" });
-            res.end(JSON.stringify(fileNames));
+            res.json(fileNames);
         });
     };
+    CsvFilesCtrl.prototype.getDefaultPath = function (req, res) {
+        var response = { path: fs.realpathSync('uploads/csv/') };
+        res.json(response);
+    };
     CsvFilesCtrl.prototype.deleteFile = function (req, res) {
+        var fileName = req.params.fileName;
+        var rootPath = fs.realpathSync('uploads/csv/');
+        fs.unlink(path.join(rootPath, fileName), function () {
+            console.log("File deleted", fileName);
+        });
+        var response = { status: "ok" };
+        res.json(response);
+    };
+    CsvFilesCtrl.prototype.getRootPath = function (req) {
+        var rootPath = req.query.rootPath;
+        if (!rootPath) {
+            rootPath = fs.realpathSync('uploads/csv/');
+        }
+        return rootPath;
     };
     return CsvFilesCtrl;
 }());

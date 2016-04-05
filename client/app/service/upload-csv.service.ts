@@ -16,10 +16,11 @@ export class UploadCsvService {
       item.formData.append("csvfile",  file);
 
       let uploadCallback = function(response: any) {
+        let resp = JSON.parse(response);
         if (!item.isError) {
-          successCallback(response);
+          successCallback(resp);
         } else {
-          failureCallback(response);
+          failureCallback(resp);
         }
       };
 

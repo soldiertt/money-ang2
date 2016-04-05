@@ -5,9 +5,7 @@ var csvUploadCtrl = (function () {
     function csvUploadCtrl() {
     }
     csvUploadCtrl.prototype.fileFilter = function (req, file, cb) {
-        console.log("filter");
         if (file.originalname.indexOf(".csv") == file.originalname.length - 4) {
-            console.log("filterOK");
             cb(null, true);
         }
         else {
@@ -38,15 +36,11 @@ var csvUploadCtrl = (function () {
                 firstlines.push(line);
             }
         });
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify(firstlines));
+        res.json(firstlines);
     };
     csvUploadCtrl.prototype.uploadCsv = function (req, res) {
-        var tmp_path = req.file.path;
-        var origName = req.file.originalname;
-        res.writeHead(200, { "Content-Type": "application/json" });
-        var status = { status: "ok" };
-        res.end(JSON.stringify(status));
+        var response = { status: "ok", fileName: req.file.filename };
+        res.json(response);
     };
     return csvUploadCtrl;
 }());

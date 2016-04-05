@@ -12,7 +12,7 @@ import {TxFormData}                         from '../../model/formutil/tx-form-d
 import {PreferenceRestService}              from '../../service/preference-rest.service'
 import {AccountSettingRestService}          from '../../service/account-setting-rest.service'
 import {CategoryRestService}                from '../../service/category-rest.service'
-import {CsvReaderRestService}               from '../../service/csv-reader-rest.service'
+import {CsvFilesRestService}               from '../../service/csv-files-rest.service'
 import {TxrefRestService}                   from '../../service/txref-rest.service'
 import {RuleService}                        from '../../service/rule.service'
 import {FormUtilsService}                   from '../../service/form-utils.service'
@@ -35,7 +35,7 @@ export class ImportComponent implements OnInit {
 
   constructor(private _prefRestService: PreferenceRestService,
     private _accountSettingRestService: AccountSettingRestService,
-    private _csvReaderRestService: CsvReaderRestService,
+    private _csvFilesRestService: CsvFilesRestService,
     private _txrefRestService: TxrefRestService,
     private _categoryRestService : CategoryRestService,
     private _formUtilsService: FormUtilsService,
@@ -56,7 +56,11 @@ export class ImportComponent implements OnInit {
 
         let readLinesJobs:Array<Observable<any>> = [];
         accounts.forEach(account => {
-          readLinesJobs.push(this._csvReaderRestService.list(preference.csvPath, account));
+          if (preference.useDefaultCsvPath) {
+            readLinesJobs.push(this._csvFilesRestService.getCsvLines(account));
+          } else {
+            readLinesJobs.push(this._csvFilesRestService.getCsvLines(account, preference.csvPath));
+          }
         });
         Observable.forkJoin(readLinesJobs).subscribe(linesByAccountArray => {
           linesByAccountArray.forEach(linesByAccount => {

@@ -4,9 +4,7 @@ import * as multer from 'multer';
 export default class csvUploadCtrl {
 
   private fileFilter(req, file, cb) {
-    console.log("filter")
     if (file.originalname.indexOf(".csv") == file.originalname.length - 4) {
-      console.log("filterOK")
       cb(null, true);
     } else {
       cb(null, false);
@@ -40,16 +38,12 @@ export default class csvUploadCtrl {
         firstlines.push(line);
       }
     })
-    res.writeHead(200, {"Content-Type": "application/json"});
-    res.end(JSON.stringify(firstlines));
+    res.json(firstlines);
   }
 
   uploadCsv(req, res) {
-    let tmp_path = req.file.path;
-    let origName = req.file.originalname;
-    res.writeHead(200, {"Content-Type": "application/json"});
-    let status = { status: "ok" };
-    res.end(JSON.stringify(status));
+    let response = { status: "ok", fileName : req.file.filename };
+    res.json(response);
   }
 
 }

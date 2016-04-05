@@ -11,7 +11,7 @@ var category_srv_route_1 = require('../routes/category.srv.route');
 var account_setting_srv_route_1 = require('../routes/account-setting.srv.route');
 var csvupload_srv_route_1 = require('../routes/csvupload.srv.route');
 var preference_srv_route_1 = require('../routes/preference.srv.route');
-var csvreader_srv_route_1 = require('../routes/csvreader.srv.route');
+var csvfiles_srv_route_1 = require('../routes/csvfiles.srv.route');
 var txref_srv_route_1 = require('../routes/txref.srv.route');
 var rule_srv_route_1 = require('../routes/rule.srv.route');
 function default_1() {
@@ -34,7 +34,7 @@ function default_1() {
     account_setting_srv_route_1.default(app);
     csvupload_srv_route_1.default(app);
     preference_srv_route_1.default(app);
-    csvreader_srv_route_1.default(app);
+    csvfiles_srv_route_1.default(app);
     txref_srv_route_1.default(app);
     rule_srv_route_1.default(app);
     app.use(function errorHandler(err, req, res, next) {

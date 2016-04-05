@@ -10,7 +10,7 @@ import categoryRoute from '../routes/category.srv.route';
 import accountSettingRoute from '../routes/account-setting.srv.route';
 import csvUploadRoute from '../routes/csvupload.srv.route';
 import preferenceRoute from '../routes/preference.srv.route';
-import csvReaderRoute from '../routes/csvreader.srv.route';
+import csvFilesRoute from '../routes/csvfiles.srv.route';
 import txrefRoute from '../routes/txref.srv.route';
 import ruleRoute from '../routes/rule.srv.route';
 
@@ -38,7 +38,7 @@ export default function () {
     accountSettingRoute(app);
     csvUploadRoute(app);
     preferenceRoute(app);
-    csvReaderRoute(app);
+    csvFilesRoute(app);
     txrefRoute(app);
     ruleRoute(app);
 

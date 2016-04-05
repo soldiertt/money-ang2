@@ -10,15 +10,16 @@ export default class PreferenceCtrl extends BasicCrudCtrl {
 
   update (req, res) {
     var preference = req.object;
+    preference.useDefaultCsvPath = req.body.useDefaultCsvPath;
     preference.csvPath = req.body.csvPath;
     preference.save(function (err) {
-        if (err) {
-            return res.status(400).send({
-                message: this.getErrorMessage(err)
-            });
-        } else {
-            res.json(preference);
-        }
+      if (err) {
+        return res.status(400).send({
+          message: this.getErrorMessage(err)
+        });
+      } else {
+        res.json(preference);
+      }
     });
   }
 }

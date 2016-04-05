@@ -1,0 +1,10 @@
+.ospath {
+  font-family: 'verdana';
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+/** Override bootstrap style **/
+.alert {
+  margin-bottom: 10px;
+}

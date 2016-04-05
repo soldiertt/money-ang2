@@ -14,6 +14,7 @@ var PreferenceCtrl = (function (_super) {
     }
     PreferenceCtrl.prototype.update = function (req, res) {
         var preference = req.object;
+        preference.useDefaultCsvPath = req.body.useDefaultCsvPath;
         preference.csvPath = req.body.csvPath;
         preference.save(function (err) {
             if (err) {

@@ -43,7 +43,6 @@ System.register(['angular2/core', '../../model/core/preference.class', '../../se
                 };
                 PreferencesComponent.prototype.onSave = function () {
                     var _this = this;
-                    //if (this.preference.workingYear <= new Date().getFullYear() && this.preference.workingYear > 2000) {
                     if (this.preference.id) {
                         this._preferenceRestService.update(this.preference).subscribe(function (response) {
                             _this.preference = response.json();
@@ -56,9 +55,6 @@ System.register(['angular2/core', '../../model/core/preference.class', '../../se
                             console.log("Preferences were saved");
                         });
                     }
-                    //} else {
-                    //  console.error("Invalid year");
-                    //}
                 };
                 PreferencesComponent = __decorate([
                     core_1.Component({

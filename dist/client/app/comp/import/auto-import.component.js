@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/observable/forkJoin', '../../model/core/money-enums', '../../model/core/txref.class', '../../model/utils/tx-mapper.class', '../../service/preference-rest.service', '../../service/account-setting-rest.service', '../../service/category-rest.service', '../../service/csv-reader-rest.service', '../../service/txref-rest.service', '../../service/rule.service'], function(exports_1, context_1) {
+System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/observable/forkJoin', '../../model/core/money-enums', '../../model/core/txref.class', '../../model/utils/tx-mapper.class', '../../service/preference-rest.service', '../../service/account-setting-rest.service', '../../service/category-rest.service', '../../service/csv-files-rest.service', '../../service/txref-rest.service', '../../service/rule.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/observable/forkJo
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, Observable_1, money_enums_1, txref_class_1, tx_mapper_class_1, preference_rest_service_1, account_setting_rest_service_1, category_rest_service_1, csv_reader_rest_service_1, txref_rest_service_1, rule_service_1;
+    var core_1, Observable_1, money_enums_1, txref_class_1, tx_mapper_class_1, preference_rest_service_1, account_setting_rest_service_1, category_rest_service_1, csv_files_rest_service_1, txref_rest_service_1, rule_service_1;
     var LogLine, AutoImportComponent;
     return {
         setters:[
@@ -39,8 +39,8 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/observable/forkJo
             function (category_rest_service_1_1) {
                 category_rest_service_1 = category_rest_service_1_1;
             },
-            function (csv_reader_rest_service_1_1) {
-                csv_reader_rest_service_1 = csv_reader_rest_service_1_1;
+            function (csv_files_rest_service_1_1) {
+                csv_files_rest_service_1 = csv_files_rest_service_1_1;
             },
             function (txref_rest_service_1_1) {
                 txref_rest_service_1 = txref_rest_service_1_1;
@@ -57,10 +57,10 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/observable/forkJo
                 return LogLine;
             }());
             AutoImportComponent = (function () {
-                function AutoImportComponent(_prefRestService, _accountSettingRestService, _csvReaderRestService, _txrefRestService, _categoryRestService, _ruleService) {
+                function AutoImportComponent(_prefRestService, _accountSettingRestService, _csvFilesRestService, _txrefRestService, _categoryRestService, _ruleService) {
                     this._prefRestService = _prefRestService;
                     this._accountSettingRestService = _accountSettingRestService;
-                    this._csvReaderRestService = _csvReaderRestService;
+                    this._csvFilesRestService = _csvFilesRestService;
                     this._txrefRestService = _txrefRestService;
                     this._categoryRestService = _categoryRestService;
                     this._ruleService = _ruleService;
@@ -74,7 +74,12 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/observable/forkJo
                         _this._accountSettingRestService.list().subscribe(function (accounts) {
                             var readLinesJobs = [];
                             accounts.forEach(function (account) {
-                                readLinesJobs.push(_this._csvReaderRestService.list(preference.csvPath, account));
+                                if (preference.useDefaultCsvPath) {
+                                    readLinesJobs.push(_this._csvFilesRestService.getCsvLines(account));
+                                }
+                                else {
+                                    readLinesJobs.push(_this._csvFilesRestService.getCsvLines(account, preference.csvPath));
+                                }
                             });
                             Observable_1.Observable.forkJoin(readLinesJobs).subscribe(function (linesByAccountArray) {
                                 linesByAccountArray.forEach(function (linesByAccount) {
@@ -158,7 +163,7 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/observable/forkJo
                         templateUrl: 'html/import/auto.html',
                         styleUrls: ['css/import.css']
                     }), 
-                    __metadata('design:paramtypes', [preference_rest_service_1.PreferenceRestService, account_setting_rest_service_1.AccountSettingRestService, csv_reader_rest_service_1.CsvReaderRestService, txref_rest_service_1.TxrefRestService, category_rest_service_1.CategoryRestService, rule_service_1.RuleService])
+                    __metadata('design:paramtypes', [preference_rest_service_1.PreferenceRestService, account_setting_rest_service_1.AccountSettingRestService, csv_files_rest_service_1.CsvFilesRestService, txref_rest_service_1.TxrefRestService, category_rest_service_1.CategoryRestService, rule_service_1.RuleService])
                 ], AutoImportComponent);
                 return AutoImportComponent;
             }());

@@ -11,7 +11,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, http_1;
-    var CsvReaderRestService;
+    var CsvFilesRestService;
     return {
         setters:[
             function (core_1_1) {
@@ -22,34 +22,39 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
             },
             function (_1) {}],
         execute: function() {
-            CsvReaderRestService = (function () {
-                function CsvReaderRestService(_http) {
+            CsvFilesRestService = (function () {
+                function CsvFilesRestService(_http) {
                     this._http = _http;
                 }
-                CsvReaderRestService.prototype.getCsvLines = function (rootPath, accountSetting) {
-                    return this._http.get('/restapi/csv/getlines?rootPath=' + encodeURIComponent(rootPath)
-                        + "&startsWith=" + accountSetting.fileStartsWith + "&headerLinesCount=" + accountSetting.headerLinesCount)
-                        .map(function (res) {
+                CsvFilesRestService.prototype.getCsvLines = function (accountSetting, rootPath) {
+                    var url = "/restapi/csv/getlines?startsWith=" + accountSetting.fileStartsWith + "&headerLinesCount=" + accountSetting.headerLinesCount;
+                    if (rootPath) {
+                        url += "&rootPath=" + encodeURIComponent(rootPath);
+                    }
+                    return this._http.get(url).map(function (res) {
                         return { account: accountSetting, csvLines: res.json() };
                     });
                 };
-                CsvReaderRestService.prototype.getCsvNames = function (rootPath) {
+                CsvFilesRestService.prototype.getCsvNames = function (rootPath) {
                     var url = '/restapi/csv/getnames';
                     if (rootPath) {
                         url += '?rootPath=' + encodeURIComponent(rootPath);
                     }
                     return this._http.get(url).map(function (res) { return res.json(); });
                 };
-                CsvReaderRestService.prototype.deleteFile = function (fileName) {
+                CsvFilesRestService.prototype.deleteFile = function (fileName) {
                     return this._http.delete('/restapi/csv/delete/' + fileName).map(function (res) { return res.json(); });
                 };
-                CsvReaderRestService = __decorate([
+                CsvFilesRestService.prototype.getDefaultCsvPath = function () {
+                    return this._http.get('/restapi/csv/defaultpath').map(function (res) { return res.json(); });
+                };
+                CsvFilesRestService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])
-                ], CsvReaderRestService);
-                return CsvReaderRestService;
+                ], CsvFilesRestService);
+                return CsvFilesRestService;
             }());
-            exports_1("CsvReaderRestService", CsvReaderRestService);
+            exports_1("CsvFilesRestService", CsvFilesRestService);
         }
     }
 });

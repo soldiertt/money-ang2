@@ -1,12 +1,31 @@
 <div class="content-large">
 <h1>Manage uploads</h1>
+<div class="alert alert-info">The default csv path is : <span class="ospath">{{defaultCsvPath}}</span></div>
 <form [ngFormModel]="uploadForm" class="form-horizontal">
   <div class="form-group">
-    <label class="control-label col-sm-3">Select a csv file *</label>
-    <div class="col-sm-9">
+    <label class="control-label col-sm-2">Add a csv file *</label>
+    <div class="col-sm-10">
       <input type="file" name="csvfile" ngControl="csvfile" (change)="onCsvUpload($event)" class="form-control">
       <display-error control="csvfile" error="uploadfailed">Upload failed, please check your file is a valid csv.</display-error>
     </div>
   </div>
 </form>
+<table class="table table-striped app-table">
+  <thead>
+    <tr>
+      <th>Filenames</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="#file of csvFilenames">
+      <td>
+        {{file}}
+      </td>
+      <td>
+        <span class="glyphicon glyphicon-trash action-link" (click)="onDelete(file)" title="Delete"></span>
+      </td>
+    </tr>
+  </tbody>
+</table>
 </div>

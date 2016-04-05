@@ -16,13 +16,13 @@ export default class AccountSettingCtrl extends BasicCrudCtrl {
     accountSetting.fieldSeparator = req.body.fieldSeparator;
     accountSetting.fieldMappings = req.body.fieldMappings;
     accountSetting.save(function (err) {
-        if (err) {
-            return res.status(400).send({
-                message: this.getErrorMessage(err)
-            });
-        } else {
-            res.json(accountSetting);
-        }
+      if (err) {
+        return res.status(400).send({
+          message: this.getErrorMessage(err)
+        });
+      } else {
+        res.json(accountSetting);
+      }
     });
   }
 }

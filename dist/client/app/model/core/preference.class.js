@@ -7,6 +7,7 @@ System.register([], function(exports_1, context_1) {
         execute: function() {
             Preference = (function () {
                 function Preference() {
+                    this.useDefaultCsvPath = true;
                 }
                 return Preference;
             }());
