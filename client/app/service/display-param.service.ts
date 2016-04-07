@@ -1,16 +1,11 @@
 import {Injectable, EventEmitter} from 'angular2/core';
 import {Observable} from 'rxjs/Observable'
+import {FilterPreset} from "../model/core/filter-preset.class";
 
 @Injectable()
 export class DisplayParamService {
   private _year:number;
-  catTypeFixed:boolean = true;
-  catTypeOther:boolean = true;
-  catTypeIncoming:boolean = true;
-  catFreqMonthly:boolean = true;
-  catFreqQuarter:boolean = true;
-  catFreqYearly:boolean = true;
-  showTotals: boolean = true;
+  filterPreset: FilterPreset = new FilterPreset();
   filtersUpdated: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {
@@ -32,17 +27,17 @@ export class DisplayParamService {
 
   get types() {
     let types = [];
-    if (this.catTypeFixed)    { types.push("FIXED");          }
-    if (this.catTypeOther)    { types.push("OTHER");          }
-    if (this.catTypeIncoming) { types.push("INCOMING");       }
+    if (this.filterPreset.catTypeFixed)    { types.push("FIXED");          }
+    if (this.filterPreset.catTypeOther)    { types.push("OTHER");          }
+    if (this.filterPreset.catTypeIncoming) { types.push("INCOMING");       }
     return types;
   }
 
   get frequencies() {
     let frequencies = [];
-    if (this.catFreqMonthly)  { frequencies.push("MONTHLY");  }
-    if (this.catFreqQuarter)  { frequencies.push("QUARTER");  }
-    if (this.catFreqYearly)   { frequencies.push("YEARLY");   }
+    if (this.filterPreset.catFreqMonthly)  { frequencies.push("MONTHLY");  }
+    if (this.filterPreset.catFreqQuarter)  { frequencies.push("QUARTER");  }
+    if (this.filterPreset.catFreqYearly)   { frequencies.push("YEARLY");   }
     return frequencies;
   }
 

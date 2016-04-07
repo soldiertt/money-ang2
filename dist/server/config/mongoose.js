@@ -6,6 +6,7 @@ var txref_srv_model_1 = require('../model/txref.srv.model');
 var account_setting_srv_model_1 = require('../model/account-setting.srv.model');
 var preference_srv_model_1 = require('../model/preference.srv.model');
 var rule_srv_model_1 = require('../model/rule.srv.model');
+var filter_preset_srv_model_1 = require('../model/filter-preset.srv.model');
 function default_1() {
     console.log(config_1.default().db);
     var db = mongoose.connect(config_1.default().db);
@@ -14,6 +15,7 @@ function default_1() {
     mongoose.model('AccountSetting', account_setting_srv_model_1.default);
     mongoose.model('Preference', preference_srv_model_1.default);
     mongoose.model('Rule', rule_srv_model_1.default);
+    mongoose.model('FilterPreset', filter_preset_srv_model_1.default);
     return db;
 }
 Object.defineProperty(exports, "__esModule", { value: true });

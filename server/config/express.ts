@@ -1,18 +1,19 @@
-import config from './config';
-import * as http from 'http';
-import * as express from 'express';
-import * as morgan from 'morgan';
-import * as compress from 'compression';
-import * as bodyParser from 'body-parser';
+import config             from './config';
+import * as http          from 'http';
+import * as express       from 'express';
+import * as morgan        from 'morgan';
+import * as compress      from 'compression';
+import * as bodyParser    from 'body-parser';
 import * as methodOverride from 'method-override';
-import indexRoute from '../routes/index.srv.route';
-import categoryRoute from '../routes/category.srv.route';
+import indexRoute         from '../routes/index.srv.route';
+import categoryRoute      from '../routes/category.srv.route';
 import accountSettingRoute from '../routes/account-setting.srv.route';
-import csvUploadRoute from '../routes/csvupload.srv.route';
-import preferenceRoute from '../routes/preference.srv.route';
-import csvFilesRoute from '../routes/csvfiles.srv.route';
-import txrefRoute from '../routes/txref.srv.route';
-import ruleRoute from '../routes/rule.srv.route';
+import csvUploadRoute     from '../routes/csvupload.srv.route';
+import preferenceRoute    from '../routes/preference.srv.route';
+import csvFilesRoute      from '../routes/csvfiles.srv.route';
+import txrefRoute         from '../routes/txref.srv.route';
+import ruleRoute          from '../routes/rule.srv.route';
+import filterPresetRoute  from '../routes/filter-preset.srv.route';
 
 export default function () {
     var app = express(),
@@ -41,6 +42,7 @@ export default function () {
     csvFilesRoute(app);
     txrefRoute(app);
     ruleRoute(app);
+    filterPresetRoute(app);
 
     app.use(function errorHandler(err, req, res, next) {
       res.writeHead(500, {"Content-Type": "application/json"});

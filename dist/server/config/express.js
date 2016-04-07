@@ -14,6 +14,7 @@ var preference_srv_route_1 = require('../routes/preference.srv.route');
 var csvfiles_srv_route_1 = require('../routes/csvfiles.srv.route');
 var txref_srv_route_1 = require('../routes/txref.srv.route');
 var rule_srv_route_1 = require('../routes/rule.srv.route');
+var filter_preset_srv_route_1 = require('../routes/filter-preset.srv.route');
 function default_1() {
     var app = express(), server = http.createServer(app);
     if (process.env.NODE_ENV === 'development') {
@@ -37,6 +38,7 @@ function default_1() {
     csvfiles_srv_route_1.default(app);
     txref_srv_route_1.default(app);
     rule_srv_route_1.default(app);
+    filter_preset_srv_route_1.default(app);
     app.use(function errorHandler(err, req, res, next) {
         res.writeHead(500, { "Content-Type": "application/json" });
         var error = { error: err.message };

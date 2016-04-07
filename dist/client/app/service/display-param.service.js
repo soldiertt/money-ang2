@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', "../model/core/filter-preset.class"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,23 +10,20 @@ System.register(['angular2/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, filter_preset_class_1;
     var DisplayParamService;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (filter_preset_class_1_1) {
+                filter_preset_class_1 = filter_preset_class_1_1;
             }],
         execute: function() {
             DisplayParamService = (function () {
                 function DisplayParamService() {
-                    this.catTypeFixed = true;
-                    this.catTypeOther = true;
-                    this.catTypeIncoming = true;
-                    this.catFreqMonthly = true;
-                    this.catFreqQuarter = true;
-                    this.catFreqYearly = true;
-                    this.showTotals = true;
+                    this.filterPreset = new filter_preset_class_1.FilterPreset();
                     this.filtersUpdated = new core_1.EventEmitter();
                     this._year = (new Date()).getFullYear();
                 }
@@ -47,13 +44,13 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 Object.defineProperty(DisplayParamService.prototype, "types", {
                     get: function () {
                         var types = [];
-                        if (this.catTypeFixed) {
+                        if (this.filterPreset.catTypeFixed) {
                             types.push("FIXED");
                         }
-                        if (this.catTypeOther) {
+                        if (this.filterPreset.catTypeOther) {
                             types.push("OTHER");
                         }
-                        if (this.catTypeIncoming) {
+                        if (this.filterPreset.catTypeIncoming) {
                             types.push("INCOMING");
                         }
                         return types;
@@ -64,13 +61,13 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 Object.defineProperty(DisplayParamService.prototype, "frequencies", {
                     get: function () {
                         var frequencies = [];
-                        if (this.catFreqMonthly) {
+                        if (this.filterPreset.catFreqMonthly) {
                             frequencies.push("MONTHLY");
                         }
-                        if (this.catFreqQuarter) {
+                        if (this.filterPreset.catFreqQuarter) {
                             frequencies.push("QUARTER");
                         }
-                        if (this.catFreqYearly) {
+                        if (this.filterPreset.catFreqYearly) {
                             frequencies.push("YEARLY");
                         }
                         return frequencies;

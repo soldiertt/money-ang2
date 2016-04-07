@@ -1,0 +1,34 @@
+<div class="content-large">
+<h1>Manage filter presets</h1>
+<table class="table table-striped app-table">
+  <thead>
+    <tr>
+      <th>Preset name</th>
+      <th>Filters</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="#preset of filterPresets, #i = index">
+      <td>
+        <div *ngIf="editedPreset?.id != preset.id">{{preset.name}} <span class="glyphicon glyphicon-pencil action-link" (click)="onEdit(preset)"></span></div>
+        <div *ngIf="editedPreset?.id == preset.id">
+          <form [ngFormModel]="editForm" (ngSubmit)="onUpdate()">
+            <input type="text" class="form-control" ngControl="presetName" [(ngModel)]="editedPreset.name" focusOnInit />
+            <display-error control="presetName" error="required">Name is required</display-error>
+            <input type="submit" value="Ok" [disabled]="!editForm.valid" class="btn btn-primary" /> <a href (click)="onCancelEdit($event)">Cancel</a>
+          </form>
+        </div>
+      </td>
+      <td>
+        {{preset.catTypeFixed?'FIXED':''}} / {{preset.catTypeOther?'OTHER':''}} / {{preset.catTypeIncoming?'INCOMING':''}} -
+        {{preset.catFreqMonthly?'Monthly':''}} / {{preset.catFreqQuarter?'Quarter':''}} / {{preset.catFreqYearly?'Yearly':''}} -
+        {{preset.showTotals?'Show totals':''}}
+      </td>
+      <td>
+        <span class="glyphicon glyphicon-trash action-link" (click)="onDelete(preset, i)" title="Delete"></span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
