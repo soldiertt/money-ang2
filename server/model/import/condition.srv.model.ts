@@ -1,18 +1,18 @@
-import {Schema} from 'mongoose';
+import {Schema} from "mongoose";
 
 let conditionSchema = new Schema({
   fieldName: {
     type: String,
-    required: 'Field name is required'
+    required: "Field name is required"
   },
   fieldType: {
     type: String,
-    required: 'Filed type is required',
+    required: "Filed type is required",
     enum: ["STRING", "NUMBER"]
   },
   operator: {
     type: String,
-    required: 'Operator is required',
+    required: "Operator is required",
     enum: ["EQUAL", "GREATERTHAN", "LOWERTHAN", "CONTAINS"]
   },
   valueStr: {
@@ -23,7 +23,7 @@ let conditionSchema = new Schema({
   }
 });
 
-conditionSchema.set('toJSON', {
+conditionSchema.set("toJSON", {
   getters: true
 });
 

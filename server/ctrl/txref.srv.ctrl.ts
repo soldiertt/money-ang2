@@ -1,11 +1,11 @@
-import * as mongoose from 'mongoose';
-import BasicCrudCtrl from './basic-crud.srv.ctrl';
+import * as mongoose from "mongoose";
+import BasicCrudCtrl from "./basic-crud.srv.ctrl";
 
 export default class TxrefCtrl extends BasicCrudCtrl {
 
   constructor() {
-    let Txref = mongoose.model('Txref');
-    super(Txref, 'Txref');
+    let Txref = mongoose.model("Txref");
+    super(Txref, "Txref");
   }
 
   findByRef (req, res, next, ref) {

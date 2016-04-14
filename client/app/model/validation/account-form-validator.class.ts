@@ -1,6 +1,6 @@
-import {Control} from 'angular2/common'
-import {AdminAccountSettingComponent} from '../../comp/admin/admin-account-setting.component'
-import {FieldMapping} from '../core/field-mapping.class'
+import {Control} from "angular2/common";
+import {AdminAccountSettingComponent} from "../../comp/admin/admin-account-setting.component";
+import {FieldMapping} from "../core/field-mapping.class";
 
 export class AccountFormValidator {
   public validate: (control: Control) => Object;
@@ -9,21 +9,21 @@ export class AccountFormValidator {
     let validator = this;
     validator.validate = (control: Control) => {
       return validator.validateMapping(component);
-    }
+    };
   }
 
   validateMapping(component: AdminAccountSettingComponent): Object {
-    let amount:number = 0;
-    let comm:number = 0;
-    let date:number = 0;
-    let desc:number = 0;
-    let id:number = 0;
+    let amount: number = 0;
+    let comm: number = 0;
+    let date: number = 0;
+    let desc: number = 0;
+    let id: number = 0;
     let thirdPartyAccountName: number = 0;
     let thirdPartyAccountNumber: number = 0;
     let mappingOk: boolean = true;
 
     for (let mapper of component.accountSetting.fieldMappings) {
-      switch(mapper.value) {
+      switch (mapper.value) {
         case "ignore" :
           break;
         case "amount":
@@ -49,11 +49,11 @@ export class AccountFormValidator {
           break;
       }
     }
-    if (amount != 1 || comm != 1 || date != 1 || desc > 1
+    if (amount !== 1 || comm !== 1 || date !== 1 || desc > 1
       || id > 1
-      || (id != 1 && !component.accountSetting.generateIdentifier)
-      || (id == 1 && component.accountSetting.generateIdentifier)
-      || thirdPartyAccountName != 1 || thirdPartyAccountNumber != 1) {
+      || (id !== 1 && !component.accountSetting.generateIdentifier)
+      || (id === 1 && component.accountSetting.generateIdentifier)
+      || thirdPartyAccountName !== 1 || thirdPartyAccountNumber !== 1) {
       mappingOk = false;
     }
     if (mappingOk) {
@@ -74,7 +74,7 @@ export class AccountFormValidator {
   validTxDate(component: AdminAccountSettingComponent): boolean {
     let mapping: FieldMapping;
     for (let mapper of component.accountSetting.fieldMappings) {
-      if (mapper.value == 'date') {
+      if (mapper.value === "date") {
         mapping = mapper;
       }
     }
@@ -91,12 +91,12 @@ export class AccountFormValidator {
   validAmount(component: AdminAccountSettingComponent): boolean {
     let mapping: FieldMapping;
     for (let mapper of component.accountSetting.fieldMappings) {
-      if (mapper.value == 'amount') {
+      if (mapper.value === "amount") {
         mapping = mapper;
       }
     }
     let amountStr: string = component.lineTokens[mapping.index];
-    amountStr = amountStr.replace(/[.]/g, '').replace(/,/g, '.');
+    amountStr = amountStr.replace(/[.]/g, "").replace(/,/g, ".");
     if (!isNaN(Number(amountStr))) {
       mapping.isBelgianNumber = true;
     }
@@ -104,21 +104,21 @@ export class AccountFormValidator {
   }
 
   isDateDMY(str) {
-    var parms = str.split(/[\.\-\/]/);
-    var yyyy = parseInt(parms[2],10);
-    var mm   = parseInt(parms[1],10);
-    var dd   = parseInt(parms[0],10);
-    var date = new Date(yyyy,mm-1,dd,0,0,0,0);
-    return mm === (date.getMonth()+1) && dd === date.getDate() && yyyy === date.getFullYear();
+    let parms = str.split(/[\.\-\/]/);
+    let yyyy = parseInt(parms[2], 10);
+    let mm   = parseInt(parms[1], 10);
+    let dd   = parseInt(parms[0], 10);
+    let date = new Date(yyyy, mm - 1, dd, 0, 0, 0, 0);
+    return mm === (date.getMonth() + 1) && dd === date.getDate() && yyyy === date.getFullYear();
   }
 
   isDateYMD(str) {
-    var parms = str.split(/[\.\-\/]/);
-    var yyyy = parseInt(parms[0],10);
-    var mm   = parseInt(parms[1],10);
-    var dd   = parseInt(parms[2],10);
-    var date = new Date(yyyy,mm-1,dd,0,0,0,0);
-    return mm === (date.getMonth()+1) && dd === date.getDate() && yyyy === date.getFullYear();
+    let parms = str.split(/[\.\-\/]/);
+    let yyyy = parseInt(parms[0], 10);
+    let mm   = parseInt(parms[1], 10);
+    let dd   = parseInt(parms[2], 10);
+    let date = new Date(yyyy, mm - 1, dd, 0, 0, 0, 0);
+    return mm === (date.getMonth() + 1) && dd === date.getDate() && yyyy === date.getFullYear();
   }
 
   isValidNumber(control: Control) {

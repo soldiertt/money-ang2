@@ -4,13 +4,13 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var mongoose = require('mongoose');
-var basic_crud_srv_ctrl_1 = require('./basic-crud.srv.ctrl');
+var mongoose = require("mongoose");
+var basic_crud_srv_ctrl_1 = require("./basic-crud.srv.ctrl");
 var CategoryCtrl = (function (_super) {
     __extends(CategoryCtrl, _super);
     function CategoryCtrl() {
-        var categoryModel = mongoose.model('Category');
-        _super.call(this, categoryModel, 'Category');
+        var categoryModel = mongoose.model("Category");
+        _super.call(this, categoryModel, "Category");
     }
     CategoryCtrl.prototype.addTx = function (req, res) {
         var tx = req.body.tx;
@@ -87,7 +87,7 @@ var CategoryCtrl = (function (_super) {
         }
         else {
             // Find all categories for a specific year
-            this.objectModel.find({ years: year }, '-periods.txList').exec(function (err, categories) {
+            this.objectModel.find({ years: year }, "-periods.txList").exec(function (err, categories) {
                 if (err) {
                     return res.status(400).send({
                         message: this.getErrorMessage(err)
@@ -104,7 +104,7 @@ var CategoryCtrl = (function (_super) {
         var years = req.query.years;
         var periodId = req.query.periodId;
         if (categoryId && years) {
-            //Check if category contains any Tx for a array of years
+            // Check if category contains any Tx for a array of years
             this.objectModel.findOne({
                 _id: categoryId,
                 periods: {
@@ -126,7 +126,7 @@ var CategoryCtrl = (function (_super) {
         else if (categoryId && periodId) {
             // Retrieve all Tx for a given period.
             console.log("find Tx for given category and period", categoryId, periodId);
-            this.objectModel.findOne({ _id: categoryId, 'periods._id': periodId }, { 'periods.$': 1 }, function (err, category) {
+            this.objectModel.findOne({ _id: categoryId, "periods._id": periodId }, { "periods.$": 1 }, function (err, category) {
                 if (err) {
                     return res.status(400).send({
                         message: this.getErrorMessage(err)

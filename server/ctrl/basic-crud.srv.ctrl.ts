@@ -9,17 +9,17 @@ export default class BasicCrudCtrl {
   }
 
   getErrorMessage(err) {
-    let message:string = '',
+    let message: string = "",
         errName: string;
 
     if (err.code) {
       switch (err.code) {
         case 11000:
         case 11001:
-          message = this.objectName + ' already exists';
+          message = this.objectName + " already exists";
           break;
         default:
-          message = 'Something went wrong';
+          message = "Something went wrong";
       }
     } else if (err.errors) {
       for (errName in err.errors) {
@@ -28,7 +28,7 @@ export default class BasicCrudCtrl {
         }
       }
     } else {
-      message = 'Unknown server error';
+      message = "Unknown server error";
     }
     return message;
   };
@@ -66,7 +66,7 @@ export default class BasicCrudCtrl {
         return next(err);
       }
       if (!object) {
-        return next(new Error('Failed to load ' + this.objectName + ' ' + id));
+        return next(new Error("Failed to load " + this.objectName + " " + id));
       }
       req.object = object;
       next();

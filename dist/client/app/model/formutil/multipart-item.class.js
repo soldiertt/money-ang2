@@ -8,9 +8,9 @@ System.register([], function(exports_1, context_1) {
             MultipartItem = (function () {
                 function MultipartItem(uploader) {
                     this.uploader = uploader;
-                    this.alias = 'file';
-                    this.url = '/';
-                    this.method = 'POST';
+                    this.alias = "file";
+                    this.url = "/";
+                    this.method = "POST";
                     this.headers = [];
                     this.withCredentials = true;
                     this.formData = null;

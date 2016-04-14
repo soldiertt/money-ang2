@@ -1,18 +1,18 @@
-import {Schema} from 'mongoose';
-import txSchema from './tx.srv.model';
+import {Schema} from "mongoose";
+import txSchema from "./tx.srv.model";
 
-var periodSchema = new Schema({
+let periodSchema = new Schema({
   year: {
-    type:Number,
-    required: 'Year is required'
+    type: Number,
+    required: "Year is required"
   },
   index: {
-    type:Number,
-    required: 'Period index is required'
+    type: Number,
+    required: "Period index is required"
   },
   total: {
     type: Number,
-    required: 'Total is required'
+    required: "Total is required"
   },
   txList: {
     type: [txSchema]
@@ -22,7 +22,7 @@ var periodSchema = new Schema({
   }
 });
 
-periodSchema.set('toJSON', {
+periodSchema.set("toJSON", {
   getters: true
 });
 

@@ -1,12 +1,12 @@
 export class FilterPreset {
   id: string;
   name: string;
-  catTypeFixed:boolean = true;
-  catTypeOther:boolean = true;
-  catTypeIncoming:boolean = true;
-  catFreqMonthly:boolean = true;
-  catFreqQuarter:boolean = true;
-  catFreqYearly:boolean = true;
+  catTypeFixed: boolean = true;
+  catTypeOther: boolean = true;
+  catTypeIncoming: boolean = true;
+  catFreqMonthly: boolean = true;
+  catFreqQuarter: boolean = true;
+  catFreqYearly: boolean = true;
   showTotals: boolean = true;
 
   constructor() {
@@ -26,13 +26,13 @@ export class FilterPreset {
 
   static getKey(preset: FilterPreset): string {
     let key = "";
-    key += preset.catTypeFixed?'Y':'N';
-    key += preset.catTypeOther?'Y':'N';
-    key += preset.catTypeIncoming?'Y':'N';
-    key += preset.catFreqMonthly?'Y':'N';
-    key += preset.catFreqQuarter?'Y':'N';
-    key += preset.catFreqYearly?'Y':'N';
-    key += preset.showTotals?'Y':'N';
+    key += preset.catTypeFixed ? "Y" : "N";
+    key += preset.catTypeOther ? "Y" : "N";
+    key += preset.catTypeIncoming ? "Y" : "N";
+    key += preset.catFreqMonthly ? "Y" : "N";
+    key += preset.catFreqQuarter ? "Y" : "N";
+    key += preset.catFreqYearly ? "Y" : "N";
+    key += preset.showTotals ? "Y" : "N";
     return key;
   }
 }

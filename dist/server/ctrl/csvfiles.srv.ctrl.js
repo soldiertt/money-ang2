@@ -1,7 +1,7 @@
 "use strict";
-var fs = require('fs');
-var path = require('path');
-var readEachLine = require('read-each-line');
+var fs = require("fs");
+var path = require("path");
+var readEachLine = require("read-each-line");
 var CsvFilesCtrl = (function () {
     function CsvFilesCtrl() {
     }
@@ -13,10 +13,10 @@ var CsvFilesCtrl = (function () {
             files.forEach(function (name) {
                 var filePath = path.join(rootPath, name);
                 var stat = fs.statSync(filePath);
-                if (stat.isFile() && name.indexOf(startsWith) == 0 && name.indexOf(".csv") == (name.length - 4)) {
+                if (stat.isFile() && name.indexOf(startsWith) === 0 && name.indexOf(".csv") === (name.length - 4)) {
                     console.log("reading", filePath);
                     var linenumber_1 = 0;
-                    readEachLine(filePath, 'utf8', function (line) {
+                    readEachLine(filePath, "utf8", function (line) {
                         if (++linenumber_1 > headerLinesCount) {
                             csvLines.push(line);
                         }
@@ -34,7 +34,7 @@ var CsvFilesCtrl = (function () {
             files.forEach(function (name) {
                 var filePath = path.join(rootPath, name);
                 var stat = fs.statSync(filePath);
-                if (stat.isFile() && name.indexOf(".csv") == (name.length - 4)) {
+                if (stat.isFile() && name.indexOf(".csv") === (name.length - 4)) {
                     fileNames.push(name);
                 }
             });
@@ -42,12 +42,12 @@ var CsvFilesCtrl = (function () {
         });
     };
     CsvFilesCtrl.prototype.getDefaultPath = function (req, res) {
-        var response = { path: fs.realpathSync('uploads/csv/') };
+        var response = { path: fs.realpathSync("uploads/csv/") };
         res.json(response);
     };
     CsvFilesCtrl.prototype.deleteFile = function (req, res) {
         var fileName = req.params.fileName;
-        var rootPath = fs.realpathSync('uploads/csv/');
+        var rootPath = fs.realpathSync("uploads/csv/");
         fs.unlink(path.join(rootPath, fileName), function () {
             console.log("File deleted", fileName);
         });
@@ -57,7 +57,7 @@ var CsvFilesCtrl = (function () {
     CsvFilesCtrl.prototype.getRootPath = function (req) {
         var rootPath = req.query.rootPath;
         if (!rootPath) {
-            rootPath = fs.realpathSync('uploads/csv/');
+            rootPath = fs.realpathSync("uploads/csv/");
         }
         return rootPath;
     };

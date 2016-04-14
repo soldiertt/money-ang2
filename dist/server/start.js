@@ -1,13 +1,13 @@
 "use strict";
-var cluster = require('cluster');
-var server_1 = require('./server');
+var cluster = require("cluster");
+var server_1 = require("./server");
 var stopSignals = [
-    'SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 'SIGABRT',
-    'SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV', 'SIGUSR2', 'SIGTERM'
-], production = process.env.NODE_ENV == 'production';
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+    "SIGHUP", "SIGINT", "SIGQUIT", "SIGILL", "SIGTRAP", "SIGABRT",
+    "SIGBUS", "SIGFPE", "SIGUSR1", "SIGSEGV", "SIGUSR2", "SIGTERM"
+], production = process.env.NODE_ENV === "production";
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
 var stopping = false;
-cluster.on('disconnect', function (worker) {
+cluster.on("disconnect", function (worker) {
     if (production) {
         if (!stopping) {
             cluster.fork();
@@ -29,7 +29,7 @@ if (cluster.isMaster) {
                 console.log("Got " + signal + ", stopping workers...");
                 stopping = true;
                 cluster.disconnect(function () {
-                    console.log('All workers stopped, exiting.');
+                    console.log("All workers stopped, exiting.");
                     process.exit(0);
                 });
             });
@@ -39,5 +39,5 @@ if (cluster.isMaster) {
 else {
     var port = process.env.NODE_PORT || 3000, ipaddress = process.env.NODE_IP || "127.0.0.1";
     server_1.default.listen(port, ipaddress);
-    console.log('Server running at http://' + ipaddress + ':' + port + '/');
+    console.log("Server running at http://" + ipaddress + ":" + port + "/");
 }

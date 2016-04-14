@@ -1,4 +1,4 @@
-System.register(['../core/tx.class'], function(exports_1, context_1) {
+System.register(["../core/tx.class"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var tx_class_1;
@@ -22,19 +22,19 @@ System.register(['../core/tx.class'], function(exports_1, context_1) {
                     }
                     setting.fieldMappings.forEach(function (mapping) {
                         switch (mapping.value) {
-                            case 'id':
+                            case "id":
                                 outTx.ref = tokens[mapping.index];
                                 break;
-                            case 'amount':
+                            case "amount":
                                 if (mapping.isBelgianNumber) {
-                                    var amountStr = tokens[mapping.index].replace(/[.]/g, '').replace(/,/g, '.');
-                                    outTx.amount = Number(amountStr) * 100; //!! Store cents to avoid operations problems !
+                                    var amountStr = tokens[mapping.index].replace(/[.]/g, "").replace(/,/g, ".");
+                                    outTx.amount = Number(amountStr) * 100; // !! Store cents to avoid operations problems !
                                 }
                                 break;
-                            case 'communication':
+                            case "communication":
                                 outTx.communication = tokens[mapping.index].trim();
                                 break;
-                            case 'date':
+                            case "date":
                                 var dateStr = tokens[mapping.index];
                                 var parms = dateStr.split(/[\.\-\/]/);
                                 var yyyy = void 0, mm = void 0, dd = void 0;
@@ -50,13 +50,13 @@ System.register(['../core/tx.class'], function(exports_1, context_1) {
                                 }
                                 outTx.date = new Date(yyyy, mm - 1, dd, 0, 0, 0, 0);
                                 break;
-                            case 'description':
+                            case "description":
                                 outTx.comment = tokens[mapping.index];
                                 break;
-                            case 'third-party-account-name':
+                            case "third-party-account-name":
                                 outTx.thirdPartyAccount.name = tokens[mapping.index];
                                 break;
-                            case 'third-party-account-number':
+                            case "third-party-account-number":
                                 outTx.thirdPartyAccount.number = tokens[mapping.index];
                                 break;
                         }

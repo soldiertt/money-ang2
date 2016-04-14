@@ -1,42 +1,42 @@
-import {Schema} from 'mongoose';
-import periodSchema from './import/period.srv.model';
+import {Schema} from "mongoose";
+import periodSchema from "./import/period.srv.model";
 
 let categorySchema = new Schema({
   name: {
     type: String,
-    required: 'Name is required',
+    required: "Name is required",
     unique: true,
     trim: true
   },
   frequency: {
     type: String,
-    required: 'Frequency is required',
+    required: "Frequency is required",
     enum: ["MONTHLY", "QUARTER", "YEARLY"]
   },
   years: {
     type: [Number],
-    required: 'Year is required',
+    required: "Year is required",
     min: 2000,
     max: 3000
   },
   type: {
     type: String,
-    required: 'Type is required',
+    required: "Type is required",
     enum: ["FIXED", "OTHER", "INCOMING"]
   },
   nbPeriods: {
     type: Number,
-    required: 'Nb periods is required',
+    required: "Nb periods is required",
     min: 1,
     max: 12
   },
   periods: {
     type: [periodSchema],
-    required: 'Periods are required'
+    required: "Periods are required"
   }
 });
 
-categorySchema.set('toJSON', {
+categorySchema.set("toJSON", {
   getters: true
 });
 

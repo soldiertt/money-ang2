@@ -4,13 +4,13 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var mongoose = require('mongoose');
-var basic_crud_srv_ctrl_1 = require('./basic-crud.srv.ctrl');
+var mongoose = require("mongoose");
+var basic_crud_srv_ctrl_1 = require("./basic-crud.srv.ctrl");
 var PreferenceCtrl = (function (_super) {
     __extends(PreferenceCtrl, _super);
     function PreferenceCtrl() {
-        var Preference = mongoose.model('Preference');
-        _super.call(this, Preference, 'Preference');
+        var Preference = mongoose.model("Preference");
+        _super.call(this, Preference, "Preference");
     }
     PreferenceCtrl.prototype.update = function (req, res) {
         var preference = req.object;

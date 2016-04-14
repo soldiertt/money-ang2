@@ -1,7 +1,7 @@
-import {Component, Directive, ElementRef} from 'angular2/core';
+import {Component, Directive, ElementRef} from "angular2/core";
 
 @Directive({
-  selector: '[focusOnInit]'
+  selector: "[focusOnInit]"
 })
 export class FocusOnInitDirective {
 

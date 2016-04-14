@@ -1,13 +1,13 @@
 class Account {
-  name:string;
-  number:string;
+  name: string;
+  number: string;
 }
 
 export class Tx {
   id: string;
   ref: string;
   date: Date;
-  amount:number;
+  amount: number;
   ownAccount: Account;
   thirdPartyAccount: Account;
   communication: string;

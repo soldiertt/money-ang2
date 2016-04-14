@@ -1,13 +1,13 @@
-import {Component} from 'angular2/core';
-import {Control, ControlGroup, FormBuilder, Validators} from 'angular2/common'
-import {UploadCsvService}           from "../../service/upload-csv.service"
-import {DisplayErrorDirective}      from '../directive/display-error.directive'
+import {Component} from "angular2/core";
+import {Control, ControlGroup, FormBuilder, Validators} from "angular2/common";
+import {UploadCsvService}           from "../../service/upload-csv.service";
+import {DisplayErrorDirective}      from "../directive/display-error.directive";
 import {CsvFilesRestService}       from "../../service/csv-files-rest.service";
 
 @Component({
-    selector: 'money-admin-uploads',
-    templateUrl: 'html/admin/uploads.html',
-    styleUrls : ['css/admin/uploads.css'],
+    selector: "money-admin-uploads",
+    templateUrl: "html/admin/uploads.html",
+    styleUrls : ["css/admin/uploads.css"],
     directives: [DisplayErrorDirective]
 })
 export class AdminUploadsComponent {
@@ -18,7 +18,7 @@ export class AdminUploadsComponent {
 
   constructor(fb: FormBuilder, private _uploadCsvService: UploadCsvService, private _csvFilesRestService: CsvFilesRestService) {
     this.uploadForm = fb.group({
-      csvfile: fb.control('')
+      csvfile: fb.control("")
     });
     this._csvFilesRestService.getCsvNames().subscribe(fileNames => {
       this.csvFilenames = fileNames;
@@ -30,15 +30,15 @@ export class AdminUploadsComponent {
 
   onCsvUpload(fileinput: any) {
     const UPLOAD_URL = "/uploadcsv";
-    let csvFile : File = fileinput.target.files[0],
+    let csvFile: File = fileinput.target.files[0],
         adminUploadComp = this,
         successCallback = function(response: any) {
-          (<Control> adminUploadComp.uploadForm.controls['csvfile']).setErrors(undefined);
+          (<Control> adminUploadComp.uploadForm.controls["csvfile"]).setErrors(undefined);
           adminUploadComp.csvFilenames.push(response.fileName);
         },
         failureCallback = function(response: any) {
-          (<Control> adminUploadComp.uploadForm.controls['csvfile']).setErrors({'uploadfailed': true});
-        }
+          (<Control> adminUploadComp.uploadForm.controls["csvfile"]).setErrors({"uploadfailed": true});
+        };
 
     this._uploadCsvService.uploadFile(UPLOAD_URL, csvFile, successCallback, failureCallback);
   }

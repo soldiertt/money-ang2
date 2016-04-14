@@ -32,12 +32,12 @@ System.register([], function(exports_1, context_1) {
                     if (!headers) {
                         return parsed;
                     }
-                    headers.split('\n').map(function (line) {
-                        i = line.indexOf(':');
+                    headers.split("\n").map(function (line) {
+                        i = line.indexOf(":");
                         key = line.slice(0, i).trim().toLowerCase();
                         val = line.slice(i + 1).trim();
                         if (key) {
-                            parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
+                            parsed[key] = parsed[key] ? parsed[key] + ", " + val : val;
                         }
                     });
                     return parsed;
@@ -55,9 +55,9 @@ System.register([], function(exports_1, context_1) {
                     var _this = this;
                     console.debug("multipart-uploader.ts & _xhrTransport() ==>.");
                     var xhr = item._xhr = new XMLHttpRequest();
-                    //if (item.formData.length === 0){
-                    //  throw new TypeError('Invalid form,form is empty.');
-                    //}
+                    // if (item.formData.length === 0){
+                    //  throw new TypeError("Invalid form,form is empty.");
+                    // }
                     this._onBeforeUploadItem(item);
                     xhr.upload.onprogress = function (event) {
                     };
@@ -65,8 +65,8 @@ System.register([], function(exports_1, context_1) {
                         console.debug("multipart-uploader.ts & _xhrTransport.onload() ==>");
                         var headers = _this._parseHeaders(xhr.getAllResponseHeaders());
                         var response = _this._transformResponse(xhr.response, headers);
-                        var gist = _this._isSuccessCode(xhr.status) ? 'Success' : 'Error';
-                        var method = '_on' + gist + 'Item';
+                        var gist = _this._isSuccessCode(xhr.status) ? "Success" : "Error";
+                        var method = "_on" + gist + "Item";
                         _this[method](item, response, xhr.status, headers);
                         _this._onCompleteItem(item, response, xhr.status, headers);
                     };
@@ -75,19 +75,19 @@ System.register([], function(exports_1, context_1) {
                         var headers = _this._parseHeaders(xhr.getAllResponseHeaders());
                         var response = _this._transformResponse(xhr.response, headers);
                         _this._onErrorItem(item, response, xhr.status, headers);
-                        //this._onCompleteItem(item, response, xhr.status, headers);
+                        // this._onCompleteItem(item, response, xhr.status, headers);
                     };
                     xhr.onabort = function () {
                         console.debug("multipart-uploader.ts & _xhrTransport.onabort() ==>");
                         var headers = _this._parseHeaders(xhr.getAllResponseHeaders());
                         var response = _this._transformResponse(xhr.response, headers);
-                        //this._onCancelItem(item, response, xhr.status, headers);
+                        // this._onCancelItem(item, response, xhr.status, headers);
                         _this._onCompleteItem(item, response, xhr.status, headers);
                     };
                     xhr.open(item.method, this.url, true);
                     xhr.withCredentials = item.withCredentials;
                     if (this.authToken) {
-                        xhr.setRequestHeader('Authorization', this.authToken);
+                        xhr.setRequestHeader("Authorization", this.authToken);
                     }
                     console.debug("multipart-uploader.ts & _xhrTransport() send...");
                     xhr.send(item.formData);
@@ -119,7 +119,7 @@ System.register([], function(exports_1, context_1) {
                     item._onComplete(response, status, headers);
                     this.onCompleteItem(item, response, status, headers);
                     this.isUploading = false;
-                    //this.progress = this._getTotalProgress();
+                    // this.progress = this._getTotalProgress();
                     this._render();
                 };
                 return MultipartUploader;

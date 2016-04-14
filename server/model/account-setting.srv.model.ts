@@ -1,44 +1,44 @@
-import {Schema} from 'mongoose';
-import fieldMappingSchema from './import/field-mapping.srv.model';
+import {Schema} from "mongoose";
+import fieldMappingSchema from "./import/field-mapping.srv.model";
 
 let accountSettingSchema = new Schema({
     name: {
       type: String,
-      required: 'Account name is required',
+      required: "Account name is required",
       unique: true,
       trim: true
     },
     fileStartsWith: {
       type: String,
-      required: 'File starts with is required',
+      required: "File starts with is required",
       unique: true,
       trim: true
     },
     accountNumber: {
       type: String,
-      required: 'Account number is required',
+      required: "Account number is required",
       unique: true,
       trim: true
     },
     headerLinesCount: {
       type: Number,
-      required: 'Header lines count is required'
+      required: "Header lines count is required"
     },
     fieldSeparator: {
-      type:String,
-      required: 'Field separator is required'
+      type: String,
+      required: "Field separator is required"
     },
     generateIdentifier: {
-      type:Boolean,
-      required: 'Generate identifier is required'
+      type: Boolean,
+      required: "Generate identifier is required"
     },
     fieldMappings: {
-      type:[fieldMappingSchema],
-      required: 'Field mappings are required'
+      type: [fieldMappingSchema],
+      required: "Field mappings are required"
     }
 });
 
-accountSettingSchema.set('toJSON', {
+accountSettingSchema.set("toJSON", {
     getters: true
 });
 

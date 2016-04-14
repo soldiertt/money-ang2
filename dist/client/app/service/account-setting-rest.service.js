@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], function(exports_1, context_1) {
+System.register(["angular2/core", "angular2/http", "rxjs/add/operator/map"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -27,13 +27,13 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                     this._http = _http;
                 }
                 AccountSettingRestService.prototype.list = function () {
-                    return this._http.get('/restapi/account-setting').map(function (res) { return res.json(); });
+                    return this._http.get("/restapi/account-setting").map(function (res) { return res.json(); });
                 };
                 AccountSettingRestService.prototype.create = function (newAccountSetting) {
-                    return this._http.post('/restapi/account-setting', JSON.stringify(newAccountSetting));
+                    return this._http.post("/restapi/account-setting", JSON.stringify(newAccountSetting));
                 };
                 AccountSettingRestService.prototype.delete = function (accountSettingId) {
-                    return this._http.delete('/restapi/account-setting/' + accountSettingId);
+                    return this._http.delete("/restapi/account-setting/" + accountSettingId);
                 };
                 AccountSettingRestService = __decorate([
                     core_1.Injectable(), 

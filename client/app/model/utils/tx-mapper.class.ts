@@ -1,10 +1,10 @@
-import {Tx} from '../core/tx.class'
-import {AccountSetting} from '../core/account-setting.class'
+import {Tx} from "../core/tx.class";
+import {AccountSetting} from "../core/account-setting.class";
 
 export class TxMapper {
 
-  public static mapLineToTx(csvLine:string, setting: AccountSetting): Tx {
-    let tokens:Array<string> = csvLine.split(setting.fieldSeparator);
+  public static mapLineToTx(csvLine: string, setting: AccountSetting): Tx {
+    let tokens: Array<string> = csvLine.split(setting.fieldSeparator);
     let outTx: Tx = new Tx();
     outTx.ownAccount.name = setting.name;
     outTx.ownAccount.number = setting.accountNumber;
@@ -13,40 +13,40 @@ export class TxMapper {
     }
     setting.fieldMappings.forEach(function(mapping) {
       switch (mapping.value) {
-        case 'id':
+        case "id":
           outTx.ref = tokens[mapping.index];
           break;
-        case 'amount':
+        case "amount":
           if (mapping.isBelgianNumber) {
-            let amountStr = tokens[mapping.index].replace(/[.]/g, '').replace(/,/g, '.');
-            outTx.amount = Number(amountStr) * 100; //!! Store cents to avoid operations problems !
+            let amountStr = tokens[mapping.index].replace(/[.]/g, "").replace(/,/g, ".");
+            outTx.amount = Number(amountStr) * 100; // !! Store cents to avoid operations problems !
           }
           break;
-        case 'communication':
+        case "communication":
           outTx.communication = tokens[mapping.index].trim();
           break;
-        case 'date':
+        case "date":
           let dateStr = tokens[mapping.index];
           let parms = dateStr.split(/[\.\-\/]/);
           let yyyy, mm, dd;
           if (mapping.isDateDMY) {
-            yyyy = parseInt(parms[2],10);
-            mm   = parseInt(parms[1],10);
-            dd   = parseInt(parms[0],10);
+            yyyy = parseInt(parms[2], 10);
+            mm   = parseInt(parms[1], 10);
+            dd   = parseInt(parms[0], 10);
           } else if (mapping.isDateYMD) {
-            yyyy = parseInt(parms[0],10);
-            mm   = parseInt(parms[1],10);
-            dd   = parseInt(parms[2],10);
+            yyyy = parseInt(parms[0], 10);
+            mm   = parseInt(parms[1], 10);
+            dd   = parseInt(parms[2], 10);
           }
-          outTx.date = new Date(yyyy,mm-1,dd,0,0,0,0);
+          outTx.date = new Date(yyyy, mm - 1, dd, 0, 0, 0, 0);
           break;
-        case 'description':
+        case "description":
           outTx.comment = tokens[mapping.index];
           break;
-        case 'third-party-account-name':
+        case "third-party-account-name":
           outTx.thirdPartyAccount.name = tokens[mapping.index];
           break;
-        case 'third-party-account-number':
+        case "third-party-account-number":
           outTx.thirdPartyAccount.number = tokens[mapping.index];
           break;
       }

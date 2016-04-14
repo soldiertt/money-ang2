@@ -1,6 +1,6 @@
-import {CondOperator, CondFieldType} from './money-enums'
-import {Category}         from './category.class';
-import {OperatorHelper}   from '../formutil/operator-helper.class'
+import {CondOperator, CondFieldType} from "./money-enums";
+import {Category}         from "./category.class";
+import {OperatorHelper}   from "../formutil/operator-helper.class";
 
 export class Condition {
   id: string;
@@ -19,8 +19,8 @@ export class Rule {
   id: string;
   name: string;
   conditions: Array<Condition>;
-  categoryId: string; //must match mongoose model
-  category: Category; //returned by populated field, not saved in DB
+  categoryId: string; // must match mongoose model
+  category: Category; // returned by populated field, not saved in DB
   isActive: boolean;
 
   constructor() {

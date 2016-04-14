@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], function(exports_1, context_1) {
+System.register(["angular2/core", "angular2/http", "rxjs/add/operator/map"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -27,7 +27,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                     this._http = _http;
                 }
                 PreferenceRestService.prototype.list = function () {
-                    return this._http.get('/restapi/preference');
+                    return this._http.get("/restapi/preference");
                 };
                 PreferenceRestService.prototype.getPref = function () {
                     return this.list().map(function (res) {
@@ -44,10 +44,10 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                     });
                 };
                 PreferenceRestService.prototype.create = function (newPreference) {
-                    return this._http.post('/restapi/preference', JSON.stringify(newPreference));
+                    return this._http.post("/restapi/preference", JSON.stringify(newPreference));
                 };
                 PreferenceRestService.prototype.update = function (newPreference) {
-                    return this._http.put('/restapi/preference/' + newPreference.id, JSON.stringify(newPreference));
+                    return this._http.put("/restapi/preference/" + newPreference.id, JSON.stringify(newPreference));
                 };
                 PreferenceRestService = __decorate([
                     core_1.Injectable(), 

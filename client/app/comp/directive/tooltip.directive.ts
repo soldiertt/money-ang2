@@ -1,12 +1,12 @@
-import {Directive, ElementRef, HostListener, ViewEncapsulation} from 'angular2/core'
+import {Directive, ElementRef, HostListener, ViewEncapsulation} from "angular2/core";
 
 @Directive({
-  selector: '[tooltip]',
-  inputs: ['isActive : tooltip'],
-  host:  {'[class.moneytooltip]':'isActive == "true"', '[class.showtooltip]':'displayed', '[class.displayleft]':'displayLeft', '[tabindex]':'1'}
+  selector: "[tooltip]",
+  inputs: ["isActive : tooltip"],
+  host:  {"[class.moneytooltip]": "isActive == 'true'", "[class.showtooltip]": "displayed", "[class.displayleft]": "displayLeft", "[tabindex]": "1"}
 })
 export class TooltipDirective {
-  isActive: string; //Is mapped to a string and not converted to boolean :-(
+  isActive: string; // Is mapped to a string and not converted to boolean :-(
   displayed: boolean = false;
   autoClose: any;
   displayLeft: boolean = false;
@@ -14,9 +14,9 @@ export class TooltipDirective {
   constructor(el: ElementRef) {
   }
 
-  @HostListener('click', ["$event"])
+  @HostListener("click", ["$event"])
   enable($event) {
-    if (this.isActive == "true") {
+    if (this.isActive === "true") {
       if ($event.clientX - $event.offsetX + 450 > window.innerWidth) {
         this.displayLeft = true;
       } else {
@@ -32,17 +32,17 @@ export class TooltipDirective {
     return false;
   }
 
-  @HostListener('mouseout')
+  @HostListener("mouseout")
   startAutoClose() {
     this.autoClose = setTimeout(() => { this.displayed = false; }, 1000);
   }
 
-  @HostListener('mouseover')
+  @HostListener("mouseover")
   cancelAutoClose() {
     clearTimeout(this.autoClose);
   }
 
-  @HostListener('blur')
+  @HostListener("blur")
   close() {
     this.displayed = false;
   }

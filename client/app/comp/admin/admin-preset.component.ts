@@ -1,27 +1,28 @@
-import {Component} from 'angular2/core';
-import {ControlGroup, Control, FormBuilder, Validators} from 'angular2/common'
-import {FilterPreset} from '../../model/core/filter-preset.class';
+import {Component} from "angular2/core";
+import {ControlGroup, Control, FormBuilder, Validators} from "angular2/common";
+import {FilterPreset} from "../../model/core/filter-preset.class";
 import {FilterPresetRestService}    from "../../service/filter-preset-rest.service";
-import {DisplayErrorDirective}  from '../directive/display-error.directive'
-import {FocusOnInitDirective}   from '../directive/focus-on-init.directive'
+import {DisplayErrorDirective}  from "../directive/display-error.directive";
+import {FocusOnInitDirective}   from "../directive/focus-on-init.directive";
+import {AdminMenuComponent}     from "./admin-menu.component";
 
 @Component({
-    selector: 'money-admin-preset',
-    templateUrl: 'html/admin/preset.html',
-    directives: [DisplayErrorDirective, FocusOnInitDirective]
+    selector: "money-admin-preset",
+    templateUrl: "html/admin/preset.html",
+    directives: [DisplayErrorDirective, FocusOnInitDirective, AdminMenuComponent]
 })
 export class AdminPresetComponent {
 
   editForm: ControlGroup;
   filterPresets: Array<FilterPreset> = [];
-  editedPreset : FilterPreset;
+  editedPreset: FilterPreset;
 
   constructor(private _filterPresetRestService: FilterPresetRestService, fb: FormBuilder) {
     this._filterPresetRestService.list().subscribe(allPresets => {
       this.filterPresets = allPresets;
     });
     this.editForm = fb.group({
-      presetName: fb.control('', Validators.required)
+      presetName: fb.control("", Validators.required)
     });
   }
 
@@ -43,7 +44,7 @@ export class AdminPresetComponent {
 
   onUpdate(): void {
     if (this.editedPreset) {
-      this._filterPresetRestService.update(this.editedPreset).subscribe(preset=> {
+      this._filterPresetRestService.update(this.editedPreset).subscribe(preset => {
         console.log("Preset updated");
         this.editedPreset = undefined;
       });

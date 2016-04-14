@@ -1,10 +1,10 @@
-import {Injectable, EventEmitter} from 'angular2/core';
-import {Observable} from 'rxjs/Observable'
+import {Injectable, EventEmitter} from "angular2/core";
+import {Observable} from "rxjs/Observable";
 import {FilterPreset} from "../model/core/filter-preset.class";
 
 @Injectable()
 export class DisplayParamService {
-  private _year:number;
+  private _year: number;
   filterPreset: FilterPreset = new FilterPreset();
   filtersUpdated: EventEmitter<string> = new EventEmitter<string>();
 
@@ -16,7 +16,7 @@ export class DisplayParamService {
     return this._year;
   }
 
-  set year(year:number) {
+  set year(year: number) {
     this._year = year;
     this.filtersUpdated.emit("year");
   }

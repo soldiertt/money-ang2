@@ -1,9 +1,9 @@
-import {Injectable} from 'angular2/core'
-import {Http} from 'angular2/http'
-import {Observable} from 'rxjs/Observable'
-import 'rxjs/add/operator/map';
+import {Injectable} from "angular2/core";
+import {Http} from "angular2/http";
+import {Observable} from "rxjs/Observable";
+import "rxjs/add/operator/map";
 
-import {AccountSetting} from '../model/core/account-setting.class'
+import {AccountSetting} from "../model/core/account-setting.class";
 
 @Injectable()
 export class AccountSettingRestService {
@@ -11,14 +11,14 @@ export class AccountSettingRestService {
     }
 
     list(): Observable<any> {
-      return this._http.get('/restapi/account-setting').map(res => res.json());
+      return this._http.get("/restapi/account-setting").map(res => res.json());
     }
 
     create(newAccountSetting: AccountSetting): Observable<any> {
-      return this._http.post('/restapi/account-setting', JSON.stringify(newAccountSetting));
+      return this._http.post("/restapi/account-setting", JSON.stringify(newAccountSetting));
     }
 
     delete(accountSettingId: String): Observable<any> {
-      return this._http.delete('/restapi/account-setting/' + accountSettingId);
+      return this._http.delete("/restapi/account-setting/" + accountSettingId);
     }
 }

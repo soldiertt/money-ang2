@@ -1,11 +1,11 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit} from "angular2/core";
 
-import {Preference} from '../../model/core/preference.class'
-import {PreferenceRestService} from '../../service/preference-rest.service'
+import {Preference} from "../../model/core/preference.class";
+import {PreferenceRestService} from "../../service/preference-rest.service";
 
 @Component({
-  selector: 'money-preferences',
-  templateUrl: 'html/preferences/index.html',
+  selector: "money-preferences",
+  templateUrl: "html/preferences/index.html",
   directives: []
 })
 export class PreferencesComponent implements OnInit {
@@ -16,7 +16,7 @@ export class PreferencesComponent implements OnInit {
 
   ngOnInit() {
     this._preferenceRestService.list().subscribe(data => {
-      let prefList:Array<Preference> = data.json();
+      let prefList: Array<Preference> = data.json();
       if (prefList.length > 0) {
         this.preference = prefList[0];
       } else {

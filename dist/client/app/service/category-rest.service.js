@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], function(exports_1, context_1) {
+System.register(["angular2/core", "angular2/http", "rxjs/add/operator/map"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -27,13 +27,13 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                     this._http = _http;
                 }
                 CategoryRestService.prototype.list = function () {
-                    return this._http.get('/restapi/category').map(function (res) { return res.json(); });
+                    return this._http.get("/restapi/category").map(function (res) { return res.json(); });
                 };
                 CategoryRestService.prototype.listForYear = function (year) {
-                    return this._http.get('/restapi/category/search?year=' + year).map(function (res) { return res.json(); });
+                    return this._http.get("/restapi/category/search?year=" + year).map(function (res) { return res.json(); });
                 };
                 CategoryRestService.prototype.existsCategoryForYear = function (categoryId, year) {
-                    return this._http.get('/restapi/category/search?id=' + categoryId + '&year=' + year).map(function (res) {
+                    return this._http.get("/restapi/category/search?id=" + categoryId + "&year=" + year).map(function (res) {
                         if (res) {
                             return res.json();
                         }
@@ -43,30 +43,30 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                     });
                 };
                 CategoryRestService.prototype.create = function (newCateg) {
-                    return this._http.post('/restapi/category', JSON.stringify(newCateg));
+                    return this._http.post("/restapi/category", JSON.stringify(newCateg));
                 };
                 CategoryRestService.prototype.update = function (categ) {
-                    return this._http.put('/restapi/category/' + categ.id, JSON.stringify(categ));
+                    return this._http.put("/restapi/category/" + categ.id, JSON.stringify(categ));
                 };
                 CategoryRestService.prototype.updatePeriodMarkAsPaid = function (categId, periodId, markAsPaid) {
-                    var updateData = { 'categoryId': categId, 'periodId': periodId, 'markAsPaid': markAsPaid };
-                    return this._http.put('/restapi/category/period/markAsPaid', JSON.stringify(updateData)).map(function (res) { return res.json(); });
+                    var updateData = { "categoryId": categId, "periodId": periodId, "markAsPaid": markAsPaid };
+                    return this._http.put("/restapi/category/period/markAsPaid", JSON.stringify(updateData)).map(function (res) { return res.json(); });
                 };
                 CategoryRestService.prototype.delete = function (categId) {
-                    return this._http.delete('/restapi/category/' + categId);
+                    return this._http.delete("/restapi/category/" + categId);
                 };
                 CategoryRestService.prototype.addTx = function (txFormData) {
-                    return this._http.post('/restapi/category/addtx', JSON.stringify(txFormData));
+                    return this._http.post("/restapi/category/addtx", JSON.stringify(txFormData));
                 };
                 CategoryRestService.prototype.removeTx = function (periodId, tx) {
-                    return this._http.post('/restapi/category/removetx/' + periodId, JSON.stringify(tx));
+                    return this._http.post("/restapi/category/removetx/" + periodId, JSON.stringify(tx));
                 };
                 CategoryRestService.prototype.existsTxForYears = function (categoryId, years) {
                     var yearsParam = "";
                     years.forEach(function (year) {
                         yearsParam += "&years=" + year;
                     });
-                    return this._http.get('/restapi/tx/search?categoryId=' + categoryId + yearsParam).map(function (res) {
+                    return this._http.get("/restapi/tx/search?categoryId=" + categoryId + yearsParam).map(function (res) {
                         if (res.json()) {
                             return true;
                         }
@@ -76,7 +76,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                     });
                 };
                 CategoryRestService.prototype.findAllTxForPeriod = function (categoryId, periodId) {
-                    return this._http.get('/restapi/tx/search?categoryId=' + categoryId + "&periodId=" + periodId)
+                    return this._http.get("/restapi/tx/search?categoryId=" + categoryId + "&periodId=" + periodId)
                         .map(function (res) { return res.json(); });
                 };
                 CategoryRestService = __decorate([

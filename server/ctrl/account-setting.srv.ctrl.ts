@@ -1,15 +1,15 @@
-import * as mongoose from 'mongoose';
-import BasicCrudCtrl from './basic-crud.srv.ctrl';
+import * as mongoose from "mongoose";
+import BasicCrudCtrl from "./basic-crud.srv.ctrl";
 
 export default class AccountSettingCtrl extends BasicCrudCtrl {
 
   constructor() {
-    let AccountSetting = mongoose.model('AccountSetting');
-    super(AccountSetting, 'AccountSetting');
+    let AccountSetting = mongoose.model("AccountSetting");
+    super(AccountSetting, "AccountSetting");
   }
 
   update(req, res) {
-    var accountSetting = req.accountSetting;
+    let accountSetting = req.accountSetting;
     accountSetting.name = req.body.name;
     accountSetting.accountNumber = req.body.accountNumber;
     accountSetting.headerLinesCount = req.body.headerLinesCount;

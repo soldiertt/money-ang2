@@ -11,31 +11,34 @@ System.register(["angular2/core"], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var MoneyIconDirective;
+    var AdminMenuComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            MoneyIconDirective = (function () {
-                function MoneyIconDirective() {
+            AdminMenuComponent = (function () {
+                function AdminMenuComponent() {
                 }
+                AdminMenuComponent.prototype.isCurrent = function (item) {
+                    return item === this.current;
+                };
                 __decorate([
-                    core_1.Input("icon-class"), 
+                    core_1.Input("current"), 
                     __metadata('design:type', String)
-                ], MoneyIconDirective.prototype, "iconClass", void 0);
-                MoneyIconDirective = __decorate([
+                ], AdminMenuComponent.prototype, "current", void 0);
+                AdminMenuComponent = __decorate([
                     core_1.Component({
-                        selector: "money-icon",
-                        template: "<span [ngClass]=\"[\"money-icon\",iconClass.toLowerCase()]\"></span>",
-                        styleUrls: ["css/money-icon.css"]
+                        selector: "money-admin-menu",
+                        templateUrl: "html/admin/leftmenu.html",
+                        styleUrls: ["css/admin/menu.css"]
                     }), 
                     __metadata('design:paramtypes', [])
-                ], MoneyIconDirective);
-                return MoneyIconDirective;
+                ], AdminMenuComponent);
+                return AdminMenuComponent;
             }());
-            exports_1("MoneyIconDirective", MoneyIconDirective);
+            exports_1("AdminMenuComponent", AdminMenuComponent);
         }
     }
 });

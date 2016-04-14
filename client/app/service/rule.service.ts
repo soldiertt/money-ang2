@@ -1,16 +1,16 @@
-import {Injectable} from 'angular2/core'
-import {RuleRestService}      from './rule-rest.service'
-import {CategoryRestService}  from './category-rest.service'
-import {Tx}                   from '../model/core/tx.class'
-import {Category}             from '../model/core/category.class'
-import {TxFormData}           from '../model/formutil/tx-form-data.class'
-import {Rule, Condition}      from '../model/core/rule.class'
-import {CondOperator, CondFieldType} from '../model/core/money-enums'
+import {Injectable} from "angular2/core";
+import {RuleRestService}      from "./rule-rest.service";
+import {CategoryRestService}  from "./category-rest.service";
+import {Tx}                   from "../model/core/tx.class";
+import {Category}             from "../model/core/category.class";
+import {TxFormData}           from "../model/formutil/tx-form-data.class";
+import {Rule, Condition}      from "../model/core/rule.class";
+import {CondOperator, CondFieldType} from "../model/core/money-enums";
 
 @Injectable()
 export class RuleService {
 
-  allRules:Array<Rule>;
+  allRules: Array<Rule>;
 
   constructor(private _ruleRestService: RuleRestService,
     private _categoryRestService: CategoryRestService) {
@@ -20,11 +20,11 @@ export class RuleService {
   reloadRules() {
     this._ruleRestService.list().subscribe(rules => {
       this.allRules = rules;
-    })
+    });
   }
 
-  applyRules(tx: Tx, checkCategoryExists:boolean = false): TxFormData {
-    let out:TxFormData = new TxFormData(tx);
+  applyRules(tx: Tx, checkCategoryExists: boolean = false): TxFormData {
+    let out: TxFormData = new TxFormData(tx);
     this.allRules.forEach(rule => {
       if (rule.isActive) {
         let match = true;
@@ -50,10 +50,10 @@ export class RuleService {
           out.categoryLink.categoryId = rule.categoryId;
           out.appliedRule = rule.name;
           if (checkCategoryExists) {
-            (function(comp:RuleService, out: TxFormData, categ: Category) {
+            (function(comp: RuleService, out: TxFormData, categ: Category) {
               comp._categoryRestService.existsCategoryForYear(out.categoryLink.categoryId, out.tx.date.getFullYear()).subscribe(category => {
                 if (!category) {
-                  out.categoryLink.categoryId="";
+                  out.categoryLink.categoryId = "";
                   console.warn("Cannot apply rule cause category", categ.name, "is not available for year", out.tx.date.getFullYear());
                 }
               });
@@ -67,32 +67,32 @@ export class RuleService {
 
   getField(tx: Tx, fieldName: string): any {
     switch (fieldName) {
-      case 'amount':
+      case "amount":
         return tx.amount;
-      case 'comment':
+      case "comment":
         return tx.comment;
-      case 'thirdPartyAccountName':
+      case "thirdPartyAccountName":
         return tx.thirdPartyAccount.name;
-      case 'thirdPartyAccountNumber':
+      case "thirdPartyAccountNumber":
         return tx.thirdPartyAccount.number;
-      case 'communication':
+      case "communication":
         return tx.communication;
     }
   }
 
-  matchStrCondition(match:boolean, condition:Condition, txField): boolean {
+  matchStrCondition(match: boolean, condition: Condition, txField): boolean {
     switch (condition.operator) {
       case CondOperator.EQUAL:
         match = match && (txField === condition.valueStr);
         break;
       case CondOperator.CONTAINS:
-        match = match && (txField.indexOf(condition.valueStr) != -1);
+        match = match && (txField.indexOf(condition.valueStr) !== -1);
         break;
     }
     return match;
   }
 
-  matchNumCondition(match:boolean, condition:Condition, txField): boolean {
+  matchNumCondition(match: boolean, condition: Condition, txField): boolean {
     switch (condition.operator) {
       case CondOperator.EQUAL :
         match = match && (Math.abs(txField) === (condition.valueNum * 100));

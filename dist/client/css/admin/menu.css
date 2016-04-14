@@ -1,0 +1,64 @@
+.admin-menu {
+  padding: 0;
+  /*background-image: -webkit-linear-gradient(top,#708EA4 0,#708EA4 100%);
+  background-image: -o-linear-gradient(top,#708EA4 0,#708EA4 100%);
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#708EA4),to(#708EA4));
+  background-image: linear-gradient(to bottom,#708EA4 0,#708EA4 100%);*/
+  background-color: #E5ECF1;
+  border: 2px solid #29516D;
+  border-radius: 8px;
+  color:white;
+  float:left;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.admin-menu label {
+  display: block;
+  text-align: center;
+  background-color: #29516D;
+  font-size: 1.5em;
+  font-weight: normal;
+  color:#fff;
+}
+
+.admin-menu .menu-content {
+  padding:10px 20px 10px 20px;
+}
+
+.admin-menu ul {
+  list-style-type: none;
+  margin:0;
+  padding:0;
+}
+
+.admin-menu ul li {
+  margin-top:15px;
+  margin-bottom:15px;
+  padding:5px 10px 5px 10px;
+  background-image: -webkit-linear-gradient(top,#29516D 0,#123752 100%);
+  background-image: -o-linear-gradient(top,#29516D 0,#123752 100%);
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#29516D),to(#123752));
+  background-image: linear-gradient(to bottom,#29516D 0,#123752 100%);
+  border-radius: 4px;
+}
+
+.admin-menu ul li a {
+  color: white;
+  display: inline-block;
+  width: 100%;
+}
+
+
+.admin-menu ul li.money-link-active {
+  color: #fff;
+  font-style: italic;
+  background-image: linear-gradient(to bottom,#708EA4 0,#486E88 100%);
+  box-shadow: inset 0 3px 9px rgba(0,0,0,.075);
+  border: 1px solid #aaa;
+}
+
+.admin-menu ul li.money-link-active>a {
+  cursor: default;
+  text-decoration: none;
+}

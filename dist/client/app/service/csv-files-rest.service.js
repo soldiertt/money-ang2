@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], function(exports_1, context_1) {
+System.register(["angular2/core", "angular2/http", "rxjs/add/operator/map"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -36,17 +36,17 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                     });
                 };
                 CsvFilesRestService.prototype.getCsvNames = function (rootPath) {
-                    var url = '/restapi/csv/getnames';
+                    var url = "/restapi/csv/getnames";
                     if (rootPath) {
-                        url += '?rootPath=' + encodeURIComponent(rootPath);
+                        url += "?rootPath=" + encodeURIComponent(rootPath);
                     }
                     return this._http.get(url).map(function (res) { return res.json(); });
                 };
                 CsvFilesRestService.prototype.deleteFile = function (fileName) {
-                    return this._http.delete('/restapi/csv/delete/' + fileName).map(function (res) { return res.json(); });
+                    return this._http.delete("/restapi/csv/delete/" + fileName).map(function (res) { return res.json(); });
                 };
                 CsvFilesRestService.prototype.getDefaultCsvPath = function () {
-                    return this._http.get('/restapi/csv/defaultpath').map(function (res) { return res.json(); });
+                    return this._http.get("/restapi/csv/defaultpath").map(function (res) { return res.json(); });
                 };
                 CsvFilesRestService = __decorate([
                     core_1.Injectable(), 

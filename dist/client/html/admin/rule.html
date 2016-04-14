@@ -1,4 +1,5 @@
-<div class="content-large">
+<money-admin-menu [current]="'rule'"></money-admin-menu>
+<div class="content-large content-left">
 <h1>Rules management</h1>
 <!-- CREATION FORM -->
 <form (ngSubmit)="onSubmit();nameCtrl.focus()" [ngFormModel]="createForm" class="form-horizontal">

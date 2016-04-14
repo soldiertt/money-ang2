@@ -1,6 +1,6 @@
-import {Control} from 'angular2/common'
-import {AdminRuleComponent} from '../../comp/admin/admin-rule.component'
-import {CondFieldType, CondOperator}  from '../../model/core/money-enums'
+import {Control} from "angular2/common";
+import {AdminRuleComponent} from "../../comp/admin/admin-rule.component";
+import {CondFieldType, CondOperator}  from "../../model/core/money-enums";
 
 export class RuleConditionValidator {
   public validate: (control: Control) => Object;
@@ -9,7 +9,7 @@ export class RuleConditionValidator {
     let validator = this;
     validator.validate = (control: Control) => {
       return validator.validateConditions(component);
-    }
+    };
   }
 
   validateConditions(component: AdminRuleComponent): Object {

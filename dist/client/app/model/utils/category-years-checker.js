@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../core/category.class'], function(exports_1, context_1) {
+System.register(["angular2/core", "../core/category.class"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -25,10 +25,10 @@ System.register(['angular2/core', '../core/category.class'], function(exports_1,
                 function CategoryYearsChecker() {
                 }
                 CategoryYearsChecker.prototype.removedYears = function (oldYears, newYears) {
-                    return oldYears.filter(function (oldYear) { return newYears.indexOf(oldYear) == -1; });
+                    return oldYears.filter(function (oldYear) { return newYears.indexOf(oldYear) === -1; });
                 };
                 CategoryYearsChecker.prototype.addedYears = function (oldYears, newYears) {
-                    return newYears.filter(function (newYear) { return oldYears.indexOf(newYear) == -1; });
+                    return newYears.filter(function (newYear) { return oldYears.indexOf(newYear) === -1; });
                 };
                 CategoryYearsChecker.prototype.addMissingPeriods = function (category, addedYears) {
                     addedYears.forEach(function (addedYear) {

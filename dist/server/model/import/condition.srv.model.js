@@ -1,18 +1,18 @@
 "use strict";
-var mongoose_1 = require('mongoose');
+var mongoose_1 = require("mongoose");
 var conditionSchema = new mongoose_1.Schema({
     fieldName: {
         type: String,
-        required: 'Field name is required'
+        required: "Field name is required"
     },
     fieldType: {
         type: String,
-        required: 'Filed type is required',
+        required: "Filed type is required",
         enum: ["STRING", "NUMBER"]
     },
     operator: {
         type: String,
-        required: 'Operator is required',
+        required: "Operator is required",
         enum: ["EQUAL", "GREATERTHAN", "LOWERTHAN", "CONTAINS"]
     },
     valueStr: {
@@ -22,7 +22,7 @@ var conditionSchema = new mongoose_1.Schema({
         type: Number
     }
 });
-conditionSchema.set('toJSON', {
+conditionSchema.set("toJSON", {
     getters: true
 });
 Object.defineProperty(exports, "__esModule", { value: true });

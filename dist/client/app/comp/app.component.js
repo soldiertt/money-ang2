@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './home/home.component', './import/import.component', './import/auto-import.component', './preferences/preferences.component', './admin/admin-category.component', './admin/admin-rule.component', './admin/admin-account-setting.component', "./admin/admin-uploads.component", "./admin/admin-preset.component"], function(exports_1, context_1) {
+System.register(["angular2/core", "angular2/router", "./home/home.component", "./import/import.component", "./import/auto-import.component", "./preferences/preferences.component", "./admin/admin-category.component", "./admin/admin-rule.component", "./admin/admin-account-setting.component", "./admin/admin-uploads.component", "./admin/admin-preset.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -53,22 +53,21 @@ System.register(['angular2/core', 'angular2/router', './home/home.component', '.
                 }
                 AppComponent = __decorate([
                     router_1.RouteConfig([
-                        new router_1.Route({ path: '/home', component: home_component_1.HomeComponent, name: 'Home', useAsDefault: true }),
-                        new router_1.Route({ path: '/import', component: import_component_1.ImportComponent, name: 'Import' }),
-                        new router_1.Route({ path: '/auto-import', component: auto_import_component_1.AutoImportComponent, name: 'AutoImport' }),
-                        new router_1.Route({ path: '/uploads', component: admin_uploads_component_1.AdminUploadsComponent, name: 'Uploads' }),
-                        new router_1.Route({ path: '/preferences', component: preferences_component_1.PreferencesComponent, name: 'Preferences' }),
-                        new router_1.Route({ path: '/admin-category', component: admin_category_component_1.AdminCategoryComponent, name: 'AdminCategory' }),
-                        new router_1.Route({ path: '/admin-account-setting', component: admin_account_setting_component_1.AdminAccountSettingComponent, name: 'AdminAccountSetting' }),
-                        new router_1.Route({ path: '/admin-rule', component: admin_rule_component_1.AdminRuleComponent, name: 'AdminRule' }),
-                        new router_1.Route({ path: '/admin-preset', component: admin_preset_component_1.AdminPresetComponent, name: 'AdminPreset' })
+                        new router_1.Route({ path: "/home", component: home_component_1.HomeComponent, name: "Home", useAsDefault: true }),
+                        new router_1.Route({ path: "/import", component: import_component_1.ImportComponent, name: "Import" }),
+                        new router_1.Route({ path: "/auto-import", component: auto_import_component_1.AutoImportComponent, name: "AutoImport" }),
+                        new router_1.Route({ path: "/uploads", component: admin_uploads_component_1.AdminUploadsComponent, name: "Uploads" }),
+                        new router_1.Route({ path: "/preferences", component: preferences_component_1.PreferencesComponent, name: "Preferences" }),
+                        new router_1.Route({ path: "/admin-category", component: admin_category_component_1.AdminCategoryComponent, name: "AdminCategory" }),
+                        new router_1.Route({ path: "/admin-account-setting", component: admin_account_setting_component_1.AdminAccountSettingComponent, name: "AdminAccountSetting" }),
+                        new router_1.Route({ path: "/admin-rule", component: admin_rule_component_1.AdminRuleComponent, name: "AdminRule" }),
+                        new router_1.Route({ path: "/admin-preset", component: admin_preset_component_1.AdminPresetComponent, name: "AdminPreset" })
                     ]),
                     core_1.Component({
-                        selector: 'money-app',
-                        templateUrl: 'html/index.html',
+                        selector: "money-app",
+                        templateUrl: "html/index.html",
                         encapsulation: core_1.ViewEncapsulation.None,
-                        styleUrls: ['css/master.css'],
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        styleUrls: ["css/master.css"]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

@@ -1,20 +1,21 @@
-import {Component}                  from 'angular2/core'
-import {Control, ControlGroup, FormBuilder, Validators} from 'angular2/common'
-import {Http, RequestOptions, RequestMethod, Headers} from 'angular2/http'
+import {Component}                  from "angular2/core";
+import {Control, ControlGroup, FormBuilder, Validators} from "angular2/common";
+import {Http, RequestOptions, RequestMethod, Headers} from "angular2/http";
 
-import {AccountSetting}             from '../../model/core/account-setting.class'
-import {FieldMapping}               from '../../model/core/field-mapping.class'
-import {AccountFormValidator}       from '../../model/validation/account-form-validator.class'
-import {AccountSettingRestService}  from '../../service/account-setting-rest.service'
-import {FormUtilsService}           from '../../service/form-utils.service'
+import {AccountSetting}             from "../../model/core/account-setting.class";
+import {FieldMapping}               from "../../model/core/field-mapping.class";
+import {AccountFormValidator}       from "../../model/validation/account-form-validator.class";
+import {AccountSettingRestService}  from "../../service/account-setting-rest.service";
+import {FormUtilsService}           from "../../service/form-utils.service";
 import {UploadCsvService}           from "../../service/upload-csv.service";
-import {DisplayErrorDirective}      from '../directive/display-error.directive'
+import {DisplayErrorDirective}      from "../directive/display-error.directive";
+import {AdminMenuComponent}         from "./admin-menu.component";
 
 @Component({
-    selector: 'money-admin-account-setting',
-    templateUrl: 'html/admin/account-setting.html',
-    styleUrls : ['css/admin/account-setting.css'],
-    directives: [DisplayErrorDirective]
+    selector: "money-admin-account-setting",
+    templateUrl: "html/admin/account-setting.html",
+    styleUrls : ["css/admin/account-setting.css"],
+    directives: [DisplayErrorDirective, AdminMenuComponent]
 })
 export class AdminAccountSettingComponent {
   accountForm: ControlGroup;
@@ -30,15 +31,15 @@ export class AdminAccountSettingComponent {
     private _uploadCsvService: UploadCsvService) {
 
     let accountFormValidator = new AccountFormValidator(this);
-    this.dummyFieldMappingControl = fb.control('', accountFormValidator.validate);
+    this.dummyFieldMappingControl = fb.control("", accountFormValidator.validate);
     this.dummyFieldMappingControl.markAsDirty();
     this.accountForm = fb.group({
-      name: fb.control('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])),
-      accountNumber: fb.control('', Validators.compose([Validators.required, Validators.minLength(16), Validators.maxLength(16)])),
-      csvfile: fb.control(''),
-      fileStartsWith: fb.control('', Validators.compose([Validators.required])),
-      headerLinesCount: fb.control('', accountFormValidator.isValidNumber),
-      fieldSeparator: fb.control('', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(1)])),
+      name: fb.control("", Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])),
+      accountNumber: fb.control("", Validators.compose([Validators.required, Validators.minLength(16), Validators.maxLength(16)])),
+      csvfile: fb.control(""),
+      fileStartsWith: fb.control("", Validators.compose([Validators.required])),
+      headerLinesCount: fb.control("", accountFormValidator.isValidNumber),
+      fieldSeparator: fb.control("", Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(1)])),
       fieldMapping: this.dummyFieldMappingControl
     });
     this._accountSettingRestService.list().subscribe(accountSettings => {
@@ -62,7 +63,7 @@ export class AdminAccountSettingComponent {
       thisComp.accountSetting.fieldMappings = [];
       let index = 0;
       for (let token of thisComp.lineTokens) {
-        thisComp.accountSetting.fieldMappings.push(new FieldMapping('ignore', index++));
+        thisComp.accountSetting.fieldMappings.push(new FieldMapping("ignore", index++));
       }
     }
   }
@@ -71,22 +72,22 @@ export class AdminAccountSettingComponent {
     Called after a mapping select box changed, to force validation computing.
   **/
   onMappingChange($event) {
-    this.dummyFieldMappingControl.updateValue($event); //Just to fire change detection
+    this.dummyFieldMappingControl.updateValue($event); // Just to fire change detection
   }
 
   onCsvSampleUpload(fileinput: any) {
     const UPLOAD_URL = "/uploadsample";
-    let sampleCsvFile : File = fileinput.target.files[0],
+    let sampleCsvFile: File = fileinput.target.files[0],
         adminCsvComp = this,
         successCallback = function(response: any) {
-          (<Control> adminCsvComp.accountForm.controls['csvfile']).setErrors(undefined);
-          let allLines:Array<string> = JSON.parse(response);
+          (<Control> adminCsvComp.accountForm.controls["csvfile"]).setErrors(undefined);
+          let allLines: Array<string> = JSON.parse(response);
           adminCsvComp.fileFirstLines = allLines.slice(0, 15);
           adminCsvComp.updateTokens(adminCsvComp);
         },
         failureCallback = function(response: any) {
-          (<Control> adminCsvComp.accountForm.controls['csvfile']).setErrors({'uploadfailed': true});
-        }
+          (<Control> adminCsvComp.accountForm.controls["csvfile"]).setErrors({"uploadfailed": true});
+        };
 
     this._uploadCsvService.uploadFile(UPLOAD_URL, sampleCsvFile, successCallback, failureCallback);
     /** NOT YET ANGULAR2 WAY TO DO THIS, SO USE THIRD PARTY LIB USING XMLHttpRequest
@@ -94,7 +95,7 @@ export class AdminAccountSettingComponent {
     /*let formData:FormData = new FormData("name", this.file);
     let opts: RequestOptions = new RequestOptions();
     let headers = new Headers();
-    headers.set('Content-Type', 'multipart/form-data');
+    headers.set("Content-Type", "multipart/form-data");
     opts.method = RequestMethod.Post;
     opts.headers = headers;
     this._http.post(this.url, JSON.stringify(formData), { headers: headers })
@@ -109,8 +110,8 @@ export class AdminAccountSettingComponent {
       this.accountSetting = new AccountSetting();
       this.fileFirstLines = undefined;
       this.lineTokens = undefined;
-      this._formUtilsService.reset(this.accountForm, 'csvfile');
-    })
+      this._formUtilsService.reset(this.accountForm, "csvfile");
+    });
   }
 
   onDelete(accountSetting: AccountSetting) {
@@ -118,7 +119,7 @@ export class AdminAccountSettingComponent {
     if (settingIndex > -1) {
       this._accountSettingRestService.delete(accountSetting.id).subscribe(response => {
         this.allAccountSettings.splice(settingIndex, 1);
-      })
+      });
     } else {
       console.error("Cannot find AccountSettingRestService to delete with id ", accountSetting.id);
     }

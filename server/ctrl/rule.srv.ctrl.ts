@@ -1,11 +1,11 @@
-import * as mongoose from 'mongoose';
-import BasicCrudCtrl from './basic-crud.srv.ctrl';
+import * as mongoose from "mongoose";
+import BasicCrudCtrl from "./basic-crud.srv.ctrl";
 
 export default class RuleCtrl extends BasicCrudCtrl {
 
   constructor() {
-    let Rule = mongoose.model('Rule');
-    super(Rule, 'Rule');
+    let Rule = mongoose.model("Rule");
+    super(Rule, "Rule");
   }
 
   update (req, res) {
@@ -27,7 +27,7 @@ export default class RuleCtrl extends BasicCrudCtrl {
 
   list (req, res) {
     let queryObj = {};
-    this.objectModel.find(queryObj).populate('categoryId', '-periods').lean().exec(function (err, objectList) {
+    this.objectModel.find(queryObj).populate("categoryId", "-periods").lean().exec(function (err, objectList) {
       if (err) {
         return res.status(400).send({
           message: this.getErrorMessage(err)

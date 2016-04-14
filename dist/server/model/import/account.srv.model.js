@@ -1,21 +1,21 @@
 "use strict";
-var mongoose_1 = require('mongoose');
+var mongoose_1 = require("mongoose");
 var accountSchema = new mongoose_1.Schema({
     name: {
         type: String,
-        required: 'Account name is required',
+        required: "Account name is required",
         trim: true,
-        default: '[N/A]'
+        default: "[N/A]"
     },
     number: {
         type: String,
-        required: 'Account number is required',
+        required: "Account number is required",
         unique: true,
         trim: true,
-        default: '[N/A]'
+        default: "[N/A]"
     }
 });
-accountSchema.set('toJSON', {
+accountSchema.set("toJSON", {
     getters: true
 });
 Object.defineProperty(exports, "__esModule", { value: true });

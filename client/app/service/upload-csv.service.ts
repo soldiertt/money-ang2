@@ -1,8 +1,8 @@
-import {Injectable} from 'angular2/core'
-import {Http} from 'angular2/http'
+import {Injectable} from "angular2/core";
+import {Http} from "angular2/http";
 
-import {MultipartUploader}          from '../model/formutil/multipart-uploader.class'
-import {MultipartItem}              from '../model/formutil/multipart-item.class'
+import {MultipartUploader}          from "../model/formutil/multipart-uploader.class";
+import {MultipartItem}              from "../model/formutil/multipart-item.class";
 
 @Injectable()
 export class UploadCsvService {
@@ -10,8 +10,8 @@ export class UploadCsvService {
     }
 
     uploadFile(uploadUrl: string, file: File, successCallback: Function, failureCallback: Function) {
-      let uploader:MultipartUploader = new MultipartUploader({url: uploadUrl});
-      let item:MultipartItem = new MultipartItem(uploader);
+      let uploader: MultipartUploader = new MultipartUploader({url: uploadUrl});
+      let item: MultipartItem = new MultipartItem(uploader);
       item.formData = new FormData();
       item.formData.append("csvfile",  file);
 

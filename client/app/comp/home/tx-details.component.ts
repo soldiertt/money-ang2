@@ -1,17 +1,17 @@
-import {Component, Input, Output, EventEmitter} from 'angular2/core'
-import {Tx} from '../../model/core/tx.class'
-import {Category, Period} from '../../model/core/category.class'
-import {CategoryRestService}    from '../../service/category-rest.service'
-import {TxrefRestService}    from '../../service/txref-rest.service'
+import {Component, Input, Output, EventEmitter} from "angular2/core";
+import {Tx} from "../../model/core/tx.class";
+import {Category, Period} from "../../model/core/category.class";
+import {CategoryRestService}    from "../../service/category-rest.service";
+import {TxrefRestService}    from "../../service/txref-rest.service";
 
 @Component({
-    selector: 'money-tx-details',
-    templateUrl: 'html/home/tx-details.html'
+    selector: "money-tx-details",
+    templateUrl: "html/home/tx-details.html"
 })
 export class TxDetailsComponent {
-  @Input() txList : Array<Tx>;
-  @Input() period : Period;
-  @Output('txDeleted') txDeletedEmitter: EventEmitter<any> = new EventEmitter<any>();
+  @Input() txList: Array<Tx>;
+  @Input() period: Period;
+  @Output("txDeleted") txDeletedEmitter: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private _categoryRestService: CategoryRestService, private _txrefRestService: TxrefRestService) {
   }

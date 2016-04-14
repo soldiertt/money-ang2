@@ -49,11 +49,11 @@ System.register([], function(exports_1, context_1) {
                                 break;
                         }
                     }
-                    if (amount != 1 || comm != 1 || date != 1 || desc > 1
+                    if (amount !== 1 || comm !== 1 || date !== 1 || desc > 1
                         || id > 1
-                        || (id != 1 && !component.accountSetting.generateIdentifier)
-                        || (id == 1 && component.accountSetting.generateIdentifier)
-                        || thirdPartyAccountName != 1 || thirdPartyAccountNumber != 1) {
+                        || (id !== 1 && !component.accountSetting.generateIdentifier)
+                        || (id === 1 && component.accountSetting.generateIdentifier)
+                        || thirdPartyAccountName !== 1 || thirdPartyAccountNumber !== 1) {
                         mappingOk = false;
                     }
                     if (mappingOk) {
@@ -77,7 +77,7 @@ System.register([], function(exports_1, context_1) {
                     var mapping;
                     for (var _i = 0, _a = component.accountSetting.fieldMappings; _i < _a.length; _i++) {
                         var mapper = _a[_i];
-                        if (mapper.value == 'date') {
+                        if (mapper.value === "date") {
                             mapping = mapper;
                         }
                     }
@@ -94,12 +94,12 @@ System.register([], function(exports_1, context_1) {
                     var mapping;
                     for (var _i = 0, _a = component.accountSetting.fieldMappings; _i < _a.length; _i++) {
                         var mapper = _a[_i];
-                        if (mapper.value == 'amount') {
+                        if (mapper.value === "amount") {
                             mapping = mapper;
                         }
                     }
                     var amountStr = component.lineTokens[mapping.index];
-                    amountStr = amountStr.replace(/[.]/g, '').replace(/,/g, '.');
+                    amountStr = amountStr.replace(/[.]/g, "").replace(/,/g, ".");
                     if (!isNaN(Number(amountStr))) {
                         mapping.isBelgianNumber = true;
                     }

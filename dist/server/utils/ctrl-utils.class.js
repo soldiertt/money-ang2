@@ -3,7 +3,7 @@ var ControllerUtils = (function () {
     function ControllerUtils() {
     }
     ControllerUtils.jsonResponse = function (res, object) {
-        //res.json(xxx)
+        // res.json(xxx)
     };
     return ControllerUtils;
 }());

@@ -4,13 +4,13 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var mongoose = require('mongoose');
-var basic_crud_srv_ctrl_1 = require('./basic-crud.srv.ctrl');
+var mongoose = require("mongoose");
+var basic_crud_srv_ctrl_1 = require("./basic-crud.srv.ctrl");
 var RuleCtrl = (function (_super) {
     __extends(RuleCtrl, _super);
     function RuleCtrl() {
-        var Rule = mongoose.model('Rule');
-        _super.call(this, Rule, 'Rule');
+        var Rule = mongoose.model("Rule");
+        _super.call(this, Rule, "Rule");
     }
     RuleCtrl.prototype.update = function (req, res) {
         var rule = req.object;
@@ -31,7 +31,7 @@ var RuleCtrl = (function (_super) {
     };
     RuleCtrl.prototype.list = function (req, res) {
         var queryObj = {};
-        this.objectModel.find(queryObj).populate('categoryId', '-periods').lean().exec(function (err, objectList) {
+        this.objectModel.find(queryObj).populate("categoryId", "-periods").lean().exec(function (err, objectList) {
             if (err) {
                 return res.status(400).send({
                     message: this.getErrorMessage(err)

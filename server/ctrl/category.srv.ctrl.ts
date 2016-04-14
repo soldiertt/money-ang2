@@ -1,12 +1,12 @@
-import * as mongoose from 'mongoose';
-import BasicCrudCtrl from './basic-crud.srv.ctrl';
-import txSchema from '../model/import/tx.srv.model';
+import * as mongoose from "mongoose";
+import BasicCrudCtrl from "./basic-crud.srv.ctrl";
+import txSchema from "../model/import/tx.srv.model";
 
 export default class CategoryCtrl extends BasicCrudCtrl {
 
   constructor() {
-    let categoryModel = mongoose.model('Category');
-    super(categoryModel, 'Category');
+    let categoryModel = mongoose.model("Category");
+    super(categoryModel, "Category");
   }
 
   addTx(req, res) {
@@ -54,9 +54,9 @@ export default class CategoryCtrl extends BasicCrudCtrl {
   }
 
   updatePeriodMarkAsPaid (req, res) {
-    var categoryId = req.body.categoryId;
-    var periodId = req.body.periodId;
-    var markAsPaid = req.body.markAsPaid;
+    let categoryId = req.body.categoryId;
+    let periodId = req.body.periodId;
+    let markAsPaid = req.body.markAsPaid;
     this.objectModel.findOneAndUpdate(
       { "_id": categoryId, "periods._id": periodId },
       {
@@ -64,7 +64,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
               "periods.$.markAsPaid": markAsPaid
           }
       },
-      function(err,doc) {
+      function(err, doc) {
         if (err) {
           return res.status(400).send({
             message: this.getErrorMessage(err)
@@ -92,7 +92,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
       });
     } else {
       // Find all categories for a specific year
-      this.objectModel.find({years: year}, '-periods.txList').exec(function (err, categories) {
+      this.objectModel.find({years: year}, "-periods.txList").exec(function (err, categories) {
         if (err) {
           return res.status(400).send({
             message: this.getErrorMessage(err)
@@ -110,7 +110,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
     let periodId = req.query.periodId;
 
     if (categoryId && years) {
-      //Check if category contains any Tx for a array of years
+      // Check if category contains any Tx for a array of years
       this.objectModel.findOne({
             _id: categoryId,
             periods : {
@@ -130,7 +130,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
     } else if (categoryId && periodId) {
       // Retrieve all Tx for a given period.
       console.log("find Tx for given category and period", categoryId, periodId);
-      this.objectModel.findOne({ _id: categoryId, 'periods._id' : periodId }, {'periods.$' : 1 }, function (err, category) {
+      this.objectModel.findOne({ _id: categoryId, "periods._id" : periodId }, {"periods.$" : 1 }, function (err, category) {
         if (err) {
           return res.status(400).send({
             message: this.getErrorMessage(err)
@@ -143,7 +143,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
   }
 
   update (req, res) {
-    var category = req.object;
+    let category = req.object;
     category.years = req.body.years;
     category.periods = req.body.periods;
     console.log(category);

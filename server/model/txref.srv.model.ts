@@ -1,15 +1,15 @@
-import {Schema} from 'mongoose';
+import {Schema} from "mongoose";
 
 let txrefSchema = new Schema({
   ref: {
     type: String,
-    required: 'Ref is required',
+    required: "Ref is required",
     unique: true,
     trim: true
   }
 });
 
-txrefSchema.set('toJSON', {
+txrefSchema.set("toJSON", {
     getters: true
 });
 

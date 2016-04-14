@@ -1,7 +1,7 @@
 export class Preference {
   id: string;
   useDefaultCsvPath: boolean;
-  csvPath:string;
+  csvPath: string;
 
   constructor() {
     this.useDefaultCsvPath = true;

@@ -1,5 +1,5 @@
-import * as indexCtrl from '../ctrl/index.srv.ctrl';
+import * as indexCtrl from "../ctrl/index.srv.ctrl";
 
 export default function(app) {
-    app.get('/', indexCtrl.render);
+    app.get("/", indexCtrl.render);
 };

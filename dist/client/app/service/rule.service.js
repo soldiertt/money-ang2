@@ -1,4 +1,4 @@
-System.register(['angular2/core', './rule-rest.service', './category-rest.service', '../model/formutil/tx-form-data.class', '../model/core/money-enums'], function(exports_1, context_1) {
+System.register(["angular2/core", "./rule-rest.service", "./category-rest.service", "../model/formutil/tx-form-data.class", "../model/core/money-enums"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -88,15 +88,15 @@ System.register(['angular2/core', './rule-rest.service', './category-rest.servic
                 };
                 RuleService.prototype.getField = function (tx, fieldName) {
                     switch (fieldName) {
-                        case 'amount':
+                        case "amount":
                             return tx.amount;
-                        case 'comment':
+                        case "comment":
                             return tx.comment;
-                        case 'thirdPartyAccountName':
+                        case "thirdPartyAccountName":
                             return tx.thirdPartyAccount.name;
-                        case 'thirdPartyAccountNumber':
+                        case "thirdPartyAccountNumber":
                             return tx.thirdPartyAccount.number;
-                        case 'communication':
+                        case "communication":
                             return tx.communication;
                     }
                 };
@@ -106,7 +106,7 @@ System.register(['angular2/core', './rule-rest.service', './category-rest.servic
                             match = match && (txField === condition.valueStr);
                             break;
                         case money_enums_1.CondOperator.CONTAINS:
-                            match = match && (txField.indexOf(condition.valueStr) != -1);
+                            match = match && (txField.indexOf(condition.valueStr) !== -1);
                             break;
                     }
                     return match;

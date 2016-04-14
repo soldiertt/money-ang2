@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(["angular2/core"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -28,7 +28,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     }
                     for (var _a = 0, controlNames_1 = controlNames; _a < controlNames_1.length; _a++) {
                         var controlName = controlNames_1[_a];
-                        form.controls[controlName].updateValue('');
+                        form.controls[controlName].updateValue("");
                     }
                 };
                 FormUtilsService.prototype.getAppYears = function () {

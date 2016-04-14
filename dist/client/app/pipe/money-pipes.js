@@ -70,7 +70,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 PeriodFilterPipe.prototype.transform = function (periods, args) {
                     if (periods) {
                         var year_1 = args[0];
-                        return periods.filter(function (period) { return period.year == year_1; });
+                        return periods.filter(function (period) { return period.year === year_1; });
                     }
                     else {
                         return periods;
@@ -93,7 +93,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                         var types_1 = args[0], frequencies_1 = args[1], years_1 = args[2];
                         var filtered = categories.filter(function (item) { return types_1.indexOf(item.type) !== -1 && frequencies_1.indexOf(item.frequency) !== -1; });
                         if (years_1) {
-                            filtered = filtered.filter(function (item) { return years_1.every(function (year) { return item.years.indexOf(year) != -1; }); });
+                            filtered = filtered.filter(function (item) { return years_1.every(function (year) { return item.years.indexOf(year) !== -1; }); });
                         }
                         return filtered;
                     }

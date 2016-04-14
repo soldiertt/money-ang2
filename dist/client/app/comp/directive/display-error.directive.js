@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common'], function(exports_1, context_1) {
+System.register(["angular2/core", "angular2/common"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -36,10 +36,10 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1, contex
                 // the div in the template will only be added if
                 // the control is dirty and has the specified error
                 DisplayErrorDirective.prototype.isDisplayed = function () {
-                    return (this.control.dirty || this.controlName == 'csvfile') && this.control.hasError(this.error);
+                    return (this.control.dirty || this.controlName === "csvfile") && this.control.hasError(this.error);
                 };
                 __decorate([
-                    core_1.Input('control'), 
+                    core_1.Input("control"), 
                     __metadata('design:type', String)
                 ], DisplayErrorDirective.prototype, "controlName", void 0);
                 __decorate([
@@ -48,7 +48,7 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1, contex
                 ], DisplayErrorDirective.prototype, "error", void 0);
                 DisplayErrorDirective = __decorate([
                     core_1.Component({
-                        selector: 'display-error',
+                        selector: "display-error",
                         template: "<div *ngIf=\"isDisplayed()\" class=\"alert alert-danger\"><ng-content></ng-content></div>"
                     }),
                     __param(0, core_1.Host()), 

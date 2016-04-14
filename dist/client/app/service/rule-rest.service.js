@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], function(exports_1, context_1) {
+System.register(["angular2/core", "angular2/http", "rxjs/add/operator/map"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -27,16 +27,16 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                     this._http = _http;
                 }
                 RuleRestService.prototype.list = function () {
-                    return this._http.get('/restapi/rule').map(function (res) { return res.json(); });
+                    return this._http.get("/restapi/rule").map(function (res) { return res.json(); });
                 };
                 RuleRestService.prototype.create = function (rule) {
-                    return this._http.post('/restapi/rule', JSON.stringify(rule)).map(function (res) { return res.json(); });
+                    return this._http.post("/restapi/rule", JSON.stringify(rule)).map(function (res) { return res.json(); });
                 };
                 RuleRestService.prototype.delete = function (ruleId) {
-                    return this._http.delete('/restapi/rule/' + ruleId);
+                    return this._http.delete("/restapi/rule/" + ruleId);
                 };
                 RuleRestService.prototype.update = function (rule) {
-                    return this._http.put('/restapi/rule/' + rule.id, JSON.stringify(rule)).map(function (res) { return res.json(); });
+                    return this._http.put("/restapi/rule/" + rule.id, JSON.stringify(rule)).map(function (res) { return res.json(); });
                 };
                 RuleRestService = __decorate([
                     core_1.Injectable(), 

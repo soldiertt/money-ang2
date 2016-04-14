@@ -1,4 +1,4 @@
-System.register(['../core/money-enums'], function(exports_1, context_1) {
+System.register(["../core/money-enums"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var money_enums_1;
@@ -30,7 +30,7 @@ System.register(['../core/money-enums'], function(exports_1, context_1) {
                 }
                 TxFormData.prototype.resetComptaDate = function () {
                     this.comptaDate = false;
-                    //Set default compta month and year to one month ago from tx date (most current)
+                    // Set default compta month and year to one month ago from tx date (most current)
                     var txDate = new Date(this.tx.date.getTime());
                     var oneMonthAgoDate = new Date(txDate.setMonth(txDate.getMonth() - 1));
                     this.comptaMonth = oneMonthAgoDate.getMonth();

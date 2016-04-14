@@ -4,13 +4,13 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var mongoose = require('mongoose');
-var basic_crud_srv_ctrl_1 = require('./basic-crud.srv.ctrl');
+var mongoose = require("mongoose");
+var basic_crud_srv_ctrl_1 = require("./basic-crud.srv.ctrl");
 var TxrefCtrl = (function (_super) {
     __extends(TxrefCtrl, _super);
     function TxrefCtrl() {
-        var Txref = mongoose.model('Txref');
-        _super.call(this, Txref, 'Txref');
+        var Txref = mongoose.model("Txref");
+        _super.call(this, Txref, "Txref");
     }
     TxrefCtrl.prototype.findByRef = function (req, res, next, ref) {
         this.objectModel.findOne({ ref: ref }).exec(function (err, object) {

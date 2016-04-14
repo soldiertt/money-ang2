@@ -1,10 +1,10 @@
-import {CatType, CatFrequency} from '../core/money-enums'
-import {Tx} from '../core/tx.class'
+import {CatType, CatFrequency} from "../core/money-enums";
+import {Tx} from "../core/tx.class";
 
 class CategoryLink {
   categoryId: string;
   categoryYear: number;
-  periodIndex:number;
+  periodIndex: number;
 
   constructor() {
     this.categoryId = "";
@@ -12,12 +12,12 @@ class CategoryLink {
 }
 
 export class TxFormData {
-  categoryType:CatType;
-  categoryFrequency:CatFrequency;
-  categoryLink:CategoryLink;
-  comptaDate:boolean;
-  comptaMonth:number;
-  comptaYear:number;
+  categoryType: CatType;
+  categoryFrequency: CatFrequency;
+  categoryLink: CategoryLink;
+  comptaDate: boolean;
+  comptaMonth: number;
+  comptaYear: number;
   appliedRule: string;
   tx: Tx;
 
@@ -36,7 +36,7 @@ export class TxFormData {
 
   resetComptaDate() {
     this.comptaDate = false;
-    //Set default compta month and year to one month ago from tx date (most current)
+    // Set default compta month and year to one month ago from tx date (most current)
     let txDate = new Date(this.tx.date.getTime());
     let oneMonthAgoDate = new Date(txDate.setMonth(txDate.getMonth() - 1));
     this.comptaMonth = oneMonthAgoDate.getMonth();

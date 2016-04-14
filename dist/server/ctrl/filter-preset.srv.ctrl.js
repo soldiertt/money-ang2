@@ -4,13 +4,13 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var mongoose = require('mongoose');
-var basic_crud_srv_ctrl_1 = require('./basic-crud.srv.ctrl');
+var mongoose = require("mongoose");
+var basic_crud_srv_ctrl_1 = require("./basic-crud.srv.ctrl");
 var FilterPresetCtrl = (function (_super) {
     __extends(FilterPresetCtrl, _super);
     function FilterPresetCtrl() {
-        var FilterPreset = mongoose.model('FilterPreset');
-        _super.call(this, FilterPreset, 'FilterPreset');
+        var FilterPreset = mongoose.model("FilterPreset");
+        _super.call(this, FilterPreset, "FilterPreset");
     }
     FilterPresetCtrl.prototype.update = function (req, res) {
         var preset = req.object;

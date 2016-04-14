@@ -1,15 +1,15 @@
-import {CatType, CatFrequency} from './money-enums'
+import {CatType, CatFrequency} from "./money-enums"
 import {Tx} from "./tx.class";
 
 export class Period {
   id: string;
-  year:number;
-  index:number;
-  total:number;
-  txList:Array<Tx>;
+  year: number;
+  index: number;
+  total: number;
+  txList: Array<Tx>;
   markAsPaid: boolean;
 
-  constructor(year:number, index:number) {
+  constructor(year: number, index: number) {
     this.year = year;
     this.index = index;
     this.total = 0;
@@ -17,7 +17,7 @@ export class Period {
     this.markAsPaid = false;
   }
 
-  addTx(tx:Tx) {
+  addTx(tx: Tx) {
     this.txList.push(tx);
     this.total += tx.amount;
     this.markAsPaid = false; // true => only for no tx periods
@@ -27,13 +27,13 @@ export class Period {
 export class Category {
   id: string;
   name: string;
-  type:CatType;
-  frequency:CatFrequency;
+  type: CatType;
+  frequency: CatFrequency;
   years: Array<number>;
   nbPeriods: number;
-  periods:Array<Period>;
+  periods: Array<Period>;
 
-  constructor(name:string, type: CatType, frequency: CatFrequency, years:Array<number>) {
+  constructor(name: string, type: CatType, frequency: CatFrequency, years: Array<number>) {
     this.name = name;
     this.type = type;
     this.frequency = frequency;
@@ -47,8 +47,8 @@ export class Category {
     }
   }
 
-  private _getNbPeriods():number {
-    switch(this.frequency) {
+  private _getNbPeriods(): number {
+    switch (this.frequency) {
       case CatFrequency.MONTHLY:
         return 12;
       case CatFrequency.QUARTER:

@@ -9,7 +9,7 @@ export class CategorySorterPipe {
     transform(array: Array<Category>, args): Array<Category> {
 
       if (array) {
-        array.sort((a:Category, b:Category) => {
+        array.sort((a: Category, b: Category) => {
           if (a.type > b.type) {
             return 1;
           } else if (a.type < b.type) {
@@ -41,10 +41,10 @@ export class CategorySorterPipe {
   name: "periodFilter"
 })
 export class PeriodFilterPipe {
-  transform(periods, args){
+  transform(periods, args) {
     if (periods) {
       let [year] = args;
-      return periods.filter(period => period.year == year);
+      return periods.filter(period => period.year === year);
     } else {
       return periods;
     }
@@ -55,12 +55,12 @@ export class PeriodFilterPipe {
   name: "catfilter"
 })
 export class CatfilterPipe {
-  transform(categories, args){
+  transform(categories, args) {
     if (categories) {
       let [types, frequencies, years] = args;
-      let filtered = categories.filter((item)=> types.indexOf(item.type) !== -1 && frequencies.indexOf(item.frequency) !== -1 );
+      let filtered = categories.filter((item) => types.indexOf(item.type) !== -1 && frequencies.indexOf(item.frequency) !== -1 );
       if (years) {
-        filtered = filtered.filter((item)=> years.every((year) => item.years.indexOf(year) != -1));
+        filtered = filtered.filter((item) => years.every((year) => item.years.indexOf(year) !== -1));
       }
       return filtered;
     } else {

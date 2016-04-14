@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], function(exports_1, context_1) {
+System.register(["angular2/core", "angular2/http", "rxjs/add/operator/map"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -31,15 +31,15 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                     txList.forEach(function (tx) {
                         txRefsParam += "&txref=" + tx.ref;
                     });
-                    return this._http.get('/restapi/txref/find?' + txRefsParam.substr(1, txRefsParam.length - 1))
+                    return this._http.get("/restapi/txref/find?" + txRefsParam.substr(1, txRefsParam.length - 1))
                         .map(function (res) { return res.json(); })
                         .map(function (res) { return res.map(function (txref) { return txref.ref; }); });
                 };
                 TxrefRestService.prototype.create = function (txRef) {
-                    return this._http.post('/restapi/txref', JSON.stringify(txRef));
+                    return this._http.post("/restapi/txref", JSON.stringify(txRef));
                 };
                 TxrefRestService.prototype.deleteByTxref = function (txref) {
-                    return this._http.delete('/restapi/txref/' + txref);
+                    return this._http.delete("/restapi/txref/" + txref);
                 };
                 TxrefRestService = __decorate([
                     core_1.Injectable(), 

@@ -1,6 +1,6 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import * as readEachLine from 'read-each-line';
+import * as fs from "fs";
+import * as path from "path";
+import * as readEachLine from "read-each-line";
 
 export default class CsvFilesCtrl {
 
@@ -14,14 +14,14 @@ export default class CsvFilesCtrl {
       files.forEach(function (name) {
         let filePath = path.join(rootPath, name);
         let stat = fs.statSync(filePath);
-        if (stat.isFile() && name.indexOf(startsWith) == 0 && name.indexOf(".csv") == (name.length - 4)) {
-          console.log("reading",filePath);
+        if (stat.isFile() && name.indexOf(startsWith) === 0 && name.indexOf(".csv") === (name.length - 4)) {
+          console.log("reading", filePath);
           let linenumber = 0;
-          readEachLine(filePath, 'utf8', function(line) {
+          readEachLine(filePath, "utf8", function(line) {
             if (++linenumber > headerLinesCount) {
               csvLines.push(line);
             }
-          })
+          });
         }
       });
       res.json(csvLines);
@@ -29,14 +29,14 @@ export default class CsvFilesCtrl {
   }
 
   listNames(req, res) {
-    let rootPath:string = this.getRootPath(req),
-      fileNames : Array<string> = [];
+    let rootPath: string = this.getRootPath(req),
+      fileNames: Array<string> = [];
     fs.readdir(rootPath, function (err, files) {
       if (err) throw err;
       files.forEach(function (name) {
         let filePath: string = path.join(rootPath, name);
         let stat = fs.statSync(filePath);
-        if (stat.isFile() && name.indexOf(".csv") == (name.length - 4)) {
+        if (stat.isFile() && name.indexOf(".csv") === (name.length - 4)) {
           fileNames.push(name);
         }
       });
@@ -45,13 +45,13 @@ export default class CsvFilesCtrl {
   }
 
   getDefaultPath(req, res) {
-    let response = { path: fs.realpathSync('uploads/csv/') };
+    let response = { path: fs.realpathSync("uploads/csv/") };
     res.json(response);
   }
 
   deleteFile(req, res) {
     let fileName = req.params.fileName;
-    let rootPath = fs.realpathSync('uploads/csv/');
+    let rootPath = fs.realpathSync("uploads/csv/");
     fs.unlink(path.join(rootPath, fileName), () => {
       console.log("File deleted", fileName);
     });
@@ -60,9 +60,9 @@ export default class CsvFilesCtrl {
   }
 
   private getRootPath(req): string {
-    let rootPath:string = req.query.rootPath;
+    let rootPath: string = req.query.rootPath;
     if (!rootPath) {
-      rootPath = fs.realpathSync('uploads/csv/');
+      rootPath = fs.realpathSync("uploads/csv/");
     }
     return rootPath;
   }

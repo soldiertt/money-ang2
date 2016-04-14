@@ -1,29 +1,29 @@
 "use strict";
-var mongoose_1 = require('mongoose');
+var mongoose_1 = require("mongoose");
 var fieldMappingSchema = new mongoose_1.Schema({
     value: {
         type: String,
-        required: 'Value is required',
+        required: "Value is required",
         trim: true
     },
     index: {
         type: Number,
-        required: 'Index is required'
+        required: "Index is required"
     },
     isDateDMY: {
         type: Boolean,
-        required: 'isDateDMY is required'
+        required: "isDateDMY is required"
     },
     isDateYMD: {
         type: Boolean,
-        required: 'isDateYMD is required'
+        required: "isDateYMD is required"
     },
     isBelgianNumber: {
         type: Boolean,
-        required: 'isBelgianNumber is required'
+        required: "isBelgianNumber is required"
     }
 });
-fieldMappingSchema.set('toJSON', {
+fieldMappingSchema.set("toJSON", {
     getters: true
 });
 Object.defineProperty(exports, "__esModule", { value: true });

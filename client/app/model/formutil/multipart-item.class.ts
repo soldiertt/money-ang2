@@ -1,23 +1,23 @@
 import {MultipartUploader} from "./multipart-uploader.class";
 
 export class MultipartItem {
-  public alias:string = 'file';
-  public url:string = '/';
-  public method:string = 'POST';
-  public headers:any = [];
-  public withCredentials:boolean = true;
-  public formData:FormData = null;
-  public isReady:boolean = false;
-  public isUploading:boolean = false;
-  public isUploaded:boolean = false;
-  public isSuccess:boolean = false;
-  public isCancel:boolean = false;
-  public isError:boolean = false;
-  public progress:number = 0;
-  public index:number = null;
-  public callback:Function = null;
+  public alias: string = "file";
+  public url: string = "/";
+  public method: string = "POST";
+  public headers: any = [];
+  public withCredentials: boolean = true;
+  public formData: FormData = null;
+  public isReady: boolean = false;
+  public isUploading: boolean = false;
+  public isUploaded: boolean = false;
+  public isSuccess: boolean = false;
+  public isCancel: boolean = false;
+  public isError: boolean = false;
+  public progress: number = 0;
+  public index: number = null;
+  public callback: Function = null;
 
-  constructor(private uploader:MultipartUploader) {
+  constructor(private uploader: MultipartUploader) {
   }
 
   public upload() {
@@ -25,12 +25,12 @@ export class MultipartItem {
       console.debug("multipart-item.ts & upload() ==>.");
       this.uploader.uploadItem(this);
     } catch (e) {
-      //this.uploader._onCompleteItem(this, '', 0, []);
-      //this.uploader._onErrorItem(this, '', 0, []);
+      //this.uploader._onCompleteItem(this, "", 0, []);
+      //this.uploader._onErrorItem(this, "", 0, []);
     }
   }
 
-  public init(){
+  public init() {
     this.isReady = false;
     this.isUploading = false;
     this.isUploaded = false;
@@ -45,19 +45,19 @@ export class MultipartItem {
   public onBeforeUpload() {
   }
 
-  public onProgress(progress:number) {
+  public onProgress(progress: number) {
   }
 
-  public onSuccess(response:any, status:any, headers:any) {
+  public onSuccess(response: any, status: any, headers: any) {
   }
 
-  public onError(response:any, status:any, headers:any) {
+  public onError(response: any, status: any, headers: any) {
   }
 
-  public onCancel(response:any, status:any, headers:any) {
+  public onCancel(response: any, status: any, headers: any) {
   }
 
-  public onComplete(response:any, status:any, headers:any) {
+  public onComplete(response: any, status: any, headers: any) {
     this.callback(response);
     this.init();
   }
@@ -73,12 +73,12 @@ export class MultipartItem {
     this.onBeforeUpload();
   }
 
-  private _onProgress(progress:number) {
+  private _onProgress(progress: number) {
     this.progress = progress;
     this.onProgress(progress);
   }
 
-  private _onSuccess(response:any, status:any, headers:any) {
+  private _onSuccess(response: any, status: any, headers: any) {
     this.isReady = false;
     this.isUploading = false;
     this.isUploaded = true;
@@ -90,7 +90,7 @@ export class MultipartItem {
     this.onSuccess(response, status, headers);
   }
 
-  private _onError(response:any, status:any, headers:any) {
+  private _onError(response: any, status: any, headers: any) {
     this.isReady = false;
     this.isUploading = false;
     this.isUploaded = true;
@@ -103,7 +103,7 @@ export class MultipartItem {
     this.callback(response);
   }
 
-  private _onCancel(response:any, status:any, headers:any) {
+  private _onCancel(response: any, status: any, headers: any) {
     this.isReady = false;
     this.isUploading = false;
     this.isUploaded = false;
@@ -115,7 +115,7 @@ export class MultipartItem {
     this.onCancel(response, status, headers);
   }
 
-  private _onComplete(response:any, status:any, headers:any) {
+  private _onComplete(response: any, status: any, headers: any) {
     this.onComplete(response, status, headers);
   }
 

@@ -1,8 +1,8 @@
 "use strict";
-var development_1 = require('./env/development');
-var production_1 = require('./env/production');
+var development_1 = require("./env/development");
+var production_1 = require("./env/production");
 function default_1() {
-    if (process.env.NODE_ENV == 'production') {
+    if (process.env.NODE_ENV === "production") {
         return production_1.default;
     }
     else {

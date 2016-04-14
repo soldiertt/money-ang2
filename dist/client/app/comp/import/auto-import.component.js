@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/observable/forkJoin', '../../model/core/money-enums', '../../model/core/txref.class', '../../model/utils/tx-mapper.class', '../../service/preference-rest.service', '../../service/account-setting-rest.service', '../../service/category-rest.service', '../../service/csv-files-rest.service', '../../service/txref-rest.service', '../../service/rule.service'], function(exports_1, context_1) {
+System.register(["angular2/core", "rxjs/Observable", "rxjs/add/observable/forkJoin", "../../model/core/money-enums", "../../model/core/txref.class", "../../model/utils/tx-mapper.class", "../../service/preference-rest.service", "../../service/account-setting-rest.service", "../../service/category-rest.service", "../../service/csv-files-rest.service", "../../service/txref-rest.service", "../../service/rule.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -113,7 +113,7 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/observable/forkJo
                     });
                     // 3. Check if Tx already in DB
                     this._txrefRestService.readByRefs(this.pendingTxList).subscribe(function (foundRefs) {
-                        _this.pendingTxList = _this.pendingTxList.filter(function (tx) { return foundRefs.indexOf(tx.ref) == -1; });
+                        _this.pendingTxList = _this.pendingTxList.filter(function (tx) { return foundRefs.indexOf(tx.ref) === -1; });
                     });
                 };
                 AutoImportComponent.prototype.runAutoImport = function () {
@@ -134,13 +134,13 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/observable/forkJo
                     (function (comp, inComptaDate, txFormData) {
                         comp._categoryRestService.existsCategoryForYear(txFormData.categoryLink.categoryId, inComptaDate.getFullYear()).subscribe(function (category) {
                             if (category) {
-                                if (category.frequency == money_enums_1.CatFrequency.MONTHLY) {
+                                if (category.frequency === money_enums_1.CatFrequency.MONTHLY) {
                                     txFormData.categoryLink.periodIndex = inComptaDate.getMonth();
                                 }
-                                else if (category.frequency == money_enums_1.CatFrequency.QUARTER) {
+                                else if (category.frequency === money_enums_1.CatFrequency.QUARTER) {
                                     txFormData.categoryLink.periodIndex = Math.floor((inComptaDate.getMonth() + 3) / 3) - 1;
                                 }
-                                else if (category.frequency == money_enums_1.CatFrequency.YEARLY) {
+                                else if (category.frequency === money_enums_1.CatFrequency.YEARLY) {
                                     txFormData.categoryLink.periodIndex = 0;
                                 }
                                 comp._txrefRestService.create(new txref_class_1.Txref(txFormData.tx.ref)).subscribe(function (txrefAdded) {
@@ -159,9 +159,9 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/observable/forkJo
                 };
                 AutoImportComponent = __decorate([
                     core_1.Component({
-                        selector: 'money-auto-import',
-                        templateUrl: 'html/import/auto.html',
-                        styleUrls: ['css/import.css']
+                        selector: "money-auto-import",
+                        templateUrl: "html/import/auto.html",
+                        styleUrls: ["css/import.css"]
                     }), 
                     __metadata('design:paramtypes', [preference_rest_service_1.PreferenceRestService, account_setting_rest_service_1.AccountSettingRestService, csv_files_rest_service_1.CsvFilesRestService, txref_rest_service_1.TxrefRestService, category_rest_service_1.CategoryRestService, rule_service_1.RuleService])
                 ], AutoImportComponent);

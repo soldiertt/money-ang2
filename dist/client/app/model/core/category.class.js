@@ -1,4 +1,4 @@
-System.register(['./money-enums'], function(exports_1, context_1) {
+System.register(["./money-enums"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var money_enums_1;

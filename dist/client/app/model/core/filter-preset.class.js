@@ -28,13 +28,13 @@ System.register([], function(exports_1, context_1) {
                 };
                 FilterPreset.getKey = function (preset) {
                     var key = "";
-                    key += preset.catTypeFixed ? 'Y' : 'N';
-                    key += preset.catTypeOther ? 'Y' : 'N';
-                    key += preset.catTypeIncoming ? 'Y' : 'N';
-                    key += preset.catFreqMonthly ? 'Y' : 'N';
-                    key += preset.catFreqQuarter ? 'Y' : 'N';
-                    key += preset.catFreqYearly ? 'Y' : 'N';
-                    key += preset.showTotals ? 'Y' : 'N';
+                    key += preset.catTypeFixed ? "Y" : "N";
+                    key += preset.catTypeOther ? "Y" : "N";
+                    key += preset.catTypeIncoming ? "Y" : "N";
+                    key += preset.catFreqMonthly ? "Y" : "N";
+                    key += preset.catFreqQuarter ? "Y" : "N";
+                    key += preset.catFreqYearly ? "Y" : "N";
+                    key += preset.showTotals ? "Y" : "N";
                     return key;
                 };
                 return FilterPreset;

@@ -1,0 +1,11 @@
+<div class="admin-menu">
+  <label>Administration</label>
+  <div class="menu-content">
+    <ul>
+      <li [class.money-link-active]="isCurrent('accountsetting')"><a [routerLink]="['/AdminAccountSetting']">Account settings</a></li>
+      <li [class.money-link-active]="isCurrent('category')"><a [routerLink]="['/AdminCategory']">Categories</a></li>
+      <li [class.money-link-active]="isCurrent('rule')"><a [routerLink]="['/AdminRule']">Rules</a></li>
+      <li [class.money-link-active]="isCurrent('preset')"><a [routerLink]="['/AdminPreset']">Filter presets</a></li>
+    </ul>
+  </div>
+</div>

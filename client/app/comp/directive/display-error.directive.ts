@@ -1,12 +1,12 @@
-import {Component, OnInit, Input, Host} from 'angular2/core'
-import {AbstractControl, NgFormModel} from 'angular2/common'
+import {Component, OnInit, Input, Host} from "angular2/core";
+import {AbstractControl, NgFormModel} from "angular2/common";
 
 @Component({
-  selector: 'display-error',
+  selector: "display-error",
   template: `<div *ngIf="isDisplayed()" class="alert alert-danger"><ng-content></ng-content></div>`
 })
 export class DisplayErrorDirective implements OnInit {
-  @Input('control') controlName: string;
+  @Input("control") controlName: string;
   @Input() error: string;
   control: AbstractControl;
   // we inject the form model
@@ -19,6 +19,6 @@ export class DisplayErrorDirective implements OnInit {
   // the div in the template will only be added if
   // the control is dirty and has the specified error
   isDisplayed() {
-    return (this.control.dirty || this.controlName == 'csvfile') && this.control.hasError(this.error);
+    return (this.control.dirty || this.controlName === "csvfile") && this.control.hasError(this.error);
   }
 }

@@ -1,9 +1,9 @@
-import {Schema} from 'mongoose';
+import {Schema} from "mongoose";
 
 let preferenceSchema = new Schema({
   useDefaultCsvPath: {
     type: Boolean,
-    required: 'Use default csv path option is required'
+    required: "Use default csv path option is required"
   },
   csvPath: {
     type: String,
@@ -11,7 +11,7 @@ let preferenceSchema = new Schema({
   }
 });
 
-preferenceSchema.set('toJSON', {
+preferenceSchema.set("toJSON", {
     getters: true
 });
 

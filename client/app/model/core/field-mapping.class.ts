@@ -1,11 +1,11 @@
 export class FieldMapping {
-  value:string;
-  index:number;
+  value: string;
+  index: number;
   isDateDMY: boolean;
   isDateYMD: boolean;
   isBelgianNumber: boolean;
 
-  constructor(value:string, index:number) {
+  constructor(value: string, index: number) {
     this.value = value;
     this.index = index;
     this.isDateDMY = false;

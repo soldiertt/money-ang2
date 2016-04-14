@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', "../../service/upload-csv.service", '../directive/display-error.directive', "../../service/csv-files-rest.service"], function(exports_1, context_1) {
+System.register(["angular2/core", "angular2/common", "../../service/upload-csv.service", "../directive/display-error.directive", "../../service/csv-files-rest.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -36,7 +36,7 @@ System.register(['angular2/core', 'angular2/common', "../../service/upload-csv.s
                     this._uploadCsvService = _uploadCsvService;
                     this._csvFilesRestService = _csvFilesRestService;
                     this.uploadForm = fb.group({
-                        csvfile: fb.control('')
+                        csvfile: fb.control("")
                     });
                     this._csvFilesRestService.getCsvNames().subscribe(function (fileNames) {
                         _this.csvFilenames = fileNames;
@@ -48,10 +48,10 @@ System.register(['angular2/core', 'angular2/common', "../../service/upload-csv.s
                 AdminUploadsComponent.prototype.onCsvUpload = function (fileinput) {
                     var UPLOAD_URL = "/uploadcsv";
                     var csvFile = fileinput.target.files[0], adminUploadComp = this, successCallback = function (response) {
-                        adminUploadComp.uploadForm.controls['csvfile'].setErrors(undefined);
+                        adminUploadComp.uploadForm.controls["csvfile"].setErrors(undefined);
                         adminUploadComp.csvFilenames.push(response.fileName);
                     }, failureCallback = function (response) {
-                        adminUploadComp.uploadForm.controls['csvfile'].setErrors({ 'uploadfailed': true });
+                        adminUploadComp.uploadForm.controls["csvfile"].setErrors({ "uploadfailed": true });
                     };
                     this._uploadCsvService.uploadFile(UPLOAD_URL, csvFile, successCallback, failureCallback);
                 };
@@ -64,9 +64,9 @@ System.register(['angular2/core', 'angular2/common', "../../service/upload-csv.s
                 };
                 AdminUploadsComponent = __decorate([
                     core_1.Component({
-                        selector: 'money-admin-uploads',
-                        templateUrl: 'html/admin/uploads.html',
-                        styleUrls: ['css/admin/uploads.css'],
+                        selector: "money-admin-uploads",
+                        templateUrl: "html/admin/uploads.html",
+                        styleUrls: ["css/admin/uploads.css"],
                         directives: [display_error_directive_1.DisplayErrorDirective]
                     }), 
                     __metadata('design:paramtypes', [common_1.FormBuilder, upload_csv_service_1.UploadCsvService, csv_files_rest_service_1.CsvFilesRestService])

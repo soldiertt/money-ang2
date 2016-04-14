@@ -1,43 +1,43 @@
-import {Component, OnInit} from 'angular2/core';
-import {Observable} from 'rxjs/Observable'
-import 'rxjs/add/observable/forkJoin';
+import {Component, OnInit} from "angular2/core";
+import {Observable} from "rxjs/Observable";
+import "rxjs/add/observable/forkJoin";
 
-import {AccountSetting}                     from '../../model/core/account-setting.class'
-import {Tx}                                 from '../../model/core/tx.class'
-import {Category}                           from '../../model/core/category.class'
-import {CatType, CatFrequency}              from '../../model/core/money-enums'
-import {Txref}                              from '../../model/core/txref.class'
-import {TxMapper}                           from '../../model/utils/tx-mapper.class'
-import {TxFormData}                         from '../../model/formutil/tx-form-data.class'
-import {PreferenceRestService}              from '../../service/preference-rest.service'
-import {AccountSettingRestService}          from '../../service/account-setting-rest.service'
-import {CategoryRestService}                from '../../service/category-rest.service'
-import {CsvFilesRestService}               from '../../service/csv-files-rest.service'
-import {TxrefRestService}                   from '../../service/txref-rest.service'
-import {RuleService}                        from '../../service/rule.service'
-import {FormUtilsService}                   from '../../service/form-utils.service'
-import {CatfilterPipe, CategorySorterPipe}  from '../../pipe/money-pipes'
+import {AccountSetting}                     from "../../model/core/account-setting.class";
+import {Tx}                                 from "../../model/core/tx.class";
+import {Category}                           from "../../model/core/category.class";
+import {CatType, CatFrequency}              from "../../model/core/money-enums";
+import {Txref}                              from "../../model/core/txref.class";
+import {TxMapper}                           from "../../model/utils/tx-mapper.class";
+import {TxFormData}                         from "../../model/formutil/tx-form-data.class";
+import {PreferenceRestService}              from "../../service/preference-rest.service";
+import {AccountSettingRestService}          from "../../service/account-setting-rest.service";
+import {CategoryRestService}                from "../../service/category-rest.service";
+import {CsvFilesRestService}               from "../../service/csv-files-rest.service";
+import {TxrefRestService}                   from "../../service/txref-rest.service";
+import {RuleService}                        from "../../service/rule.service";
+import {FormUtilsService}                   from "../../service/form-utils.service";
+import {CatfilterPipe, CategorySorterPipe}  from "../../pipe/money-pipes";
 
 
 @Component({
-  selector: 'money-import',
-  templateUrl: 'html/import/index.html',
-  styleUrls: ['css/import.css'],
+  selector: "money-import",
+  templateUrl: "html/import/index.html",
+  styleUrls: ["css/import.css"],
   pipes: [CatfilterPipe, CategorySorterPipe]
 })
 export class ImportComponent implements OnInit {
 
-  txFormDataList:Array<TxFormData> = [];
-  pendingTxList:Array<Tx> = [];
-  allCategories:Array<Category>;
-  months:Array<Object>;
-  years:Array<number>;
+  txFormDataList: Array<TxFormData> = [];
+  pendingTxList: Array<Tx> = [];
+  allCategories: Array<Category>;
+  months: Array<Object>;
+  years: Array<number>;
 
   constructor(private _prefRestService: PreferenceRestService,
     private _accountSettingRestService: AccountSettingRestService,
     private _csvFilesRestService: CsvFilesRestService,
     private _txrefRestService: TxrefRestService,
-    private _categoryRestService : CategoryRestService,
+    private _categoryRestService: CategoryRestService,
     private _formUtilsService: FormUtilsService,
     private _ruleService: RuleService) {
       this.months = this._formUtilsService.getAppMonths();
@@ -54,7 +54,7 @@ export class ImportComponent implements OnInit {
 
       this._accountSettingRestService.list().subscribe(accounts => {
 
-        let readLinesJobs:Array<Observable<any>> = [];
+        let readLinesJobs: Array<Observable<any>> = [];
         accounts.forEach(account => {
           if (preference.useDefaultCsvPath) {
             readLinesJobs.push(this._csvFilesRestService.getCsvLines(account));
@@ -68,7 +68,7 @@ export class ImportComponent implements OnInit {
           });
           this.reducePendingTxList();
         });
-      })
+      });
     });
   }
 
@@ -82,7 +82,7 @@ export class ImportComponent implements OnInit {
     }, []);
 
     // 2. sort list by date
-    this.pendingTxList.sort((a:Tx, b:Tx) => {
+    this.pendingTxList.sort((a: Tx, b: Tx) => {
       if (a.date > b.date) {
         return 1;
       } else if (a.date < b.date) {
@@ -94,7 +94,7 @@ export class ImportComponent implements OnInit {
 
     // 3. Check if Tx already in DB
     this._txrefRestService.readByRefs(this.pendingTxList).subscribe(foundRefs => {
-      this.pendingTxList = this.pendingTxList.filter(tx => foundRefs.indexOf(tx.ref) == -1);
+      this.pendingTxList = this.pendingTxList.filter(tx => foundRefs.indexOf(tx.ref) === -1);
       this.populateTxToDisplay();
     });
   }
@@ -136,7 +136,7 @@ export class ImportComponent implements OnInit {
   }
 
   saveAllTx() {
-    let toSaveList:Array<TxFormData> = this.txFormDataList.filter(txFormData => { if (txFormData.categoryLink.categoryId) { return true; } else { return false}; });
+    let toSaveList: Array<TxFormData> = this.txFormDataList.filter(txFormData => { if (txFormData.categoryLink.categoryId) { return true; } else { return false; } });
     toSaveList.forEach(txFormData => {
 
       let comptaDate: Date;
@@ -149,11 +149,11 @@ export class ImportComponent implements OnInit {
       (function(comp: ImportComponent, inComptaDate: Date, txFormData: TxFormData) {
         comp._categoryRestService.existsCategoryForYear(txFormData.categoryLink.categoryId, inComptaDate.getFullYear()).subscribe(category => {
           if (category) {
-            if (category.frequency == CatFrequency.MONTHLY) {
+            if (category.frequency === CatFrequency.MONTHLY) {
               txFormData.categoryLink.periodIndex = inComptaDate.getMonth();
-            } else if (category.frequency == CatFrequency.QUARTER) {
+            } else if (category.frequency === CatFrequency.QUARTER) {
               txFormData.categoryLink.periodIndex = Math.floor((inComptaDate.getMonth() + 3) / 3) - 1;
-            } else if (category.frequency == CatFrequency.YEARLY) {
+            } else if (category.frequency === CatFrequency.YEARLY) {
               txFormData.categoryLink.periodIndex = 0;
             }
             comp._txrefRestService.create(new Txref(txFormData.tx.ref)).subscribe(txrefAdded => {
@@ -169,7 +169,7 @@ export class ImportComponent implements OnInit {
       })(this, comptaDate, txFormData);
 
     });
-    this.txFormDataList = this.txFormDataList.filter(txFormData => { if (txFormData.categoryLink.categoryId) { return false; } else { return true}; });
+    this.txFormDataList = this.txFormDataList.filter(txFormData => { if (txFormData.categoryLink.categoryId) { return false; } else { return true; }; });
     this.populateTxToDisplay();
   }
 }
