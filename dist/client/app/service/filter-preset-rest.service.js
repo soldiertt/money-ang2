@@ -48,3 +48,4 @@ System.register(["angular2/core", "angular2/http", "rxjs/add/operator/map"], fun
         }
     }
 });
+//# sourceMappingURL=filter-preset-rest.service.js.map

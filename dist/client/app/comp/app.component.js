@@ -77,3 +77,4 @@ System.register(["angular2/core", "angular2/router", "./home/home.component", ".
         }
     }
 });
+//# sourceMappingURL=app.component.js.map

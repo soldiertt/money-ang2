@@ -27,3 +27,4 @@ System.register(["./category.class"], function(exports_1, context_1) {
         }
     }
 });
+//# sourceMappingURL=rule.class.js.map

@@ -70,3 +70,4 @@ System.register(["angular2/core", "../../model/core/preference.class", "../../se
         }
     }
 });
+//# sourceMappingURL=preferences.component.js.map

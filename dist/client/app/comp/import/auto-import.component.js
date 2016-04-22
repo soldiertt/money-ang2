@@ -171,3 +171,4 @@ System.register(["angular2/core", "rxjs/Observable", "rxjs/add/observable/forkJo
         }
     }
 });
+//# sourceMappingURL=auto-import.component.js.map

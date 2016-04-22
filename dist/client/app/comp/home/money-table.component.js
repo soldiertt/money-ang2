@@ -212,3 +212,4 @@ System.register(["angular2/core", "./tx-details.component", "../../model/core/mo
         }
     }
 });
+//# sourceMappingURL=money-table.component.js.map

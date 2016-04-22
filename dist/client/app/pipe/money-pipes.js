@@ -113,3 +113,4 @@ System.register(["angular2/core"], function(exports_1, context_1) {
         }
     }
 });
+//# sourceMappingURL=money-pipes.js.map

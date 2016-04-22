@@ -100,3 +100,4 @@ System.register(["angular2/core", "angular2/common", "../../model/core/filter-pr
         }
     }
 });
+//# sourceMappingURL=table-filter-form.component.js.map

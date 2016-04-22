@@ -71,3 +71,4 @@ System.register(["angular2/core", "../../model/core/category.class", "../../serv
         }
     }
 });
+//# sourceMappingURL=tx-details.component.js.map

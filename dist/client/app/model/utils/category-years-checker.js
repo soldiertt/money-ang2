@@ -52,3 +52,4 @@ System.register(["angular2/core", "../core/category.class"], function(exports_1,
         }
     }
 });
+//# sourceMappingURL=category-years-checker.js.map

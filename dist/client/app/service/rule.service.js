@@ -135,3 +135,4 @@ System.register(["angular2/core", "./rule-rest.service", "./category-rest.servic
         }
     }
 });
+//# sourceMappingURL=rule.service.js.map

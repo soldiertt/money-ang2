@@ -77,3 +77,4 @@ System.register(["angular2/core", "angular2/common", "../../service/upload-csv.s
         }
     }
 });
+//# sourceMappingURL=admin-uploads.component.js.map

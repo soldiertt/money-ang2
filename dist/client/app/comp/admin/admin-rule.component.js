@@ -213,3 +213,4 @@ System.register(["angular2/core", "angular2/common", "../../model/core/rule.clas
         }
     }
 });
+//# sourceMappingURL=admin-rule.component.js.map

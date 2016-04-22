@@ -84,3 +84,4 @@ System.register(["angular2/core", "angular2/router", "angular2/http", "angular2/
         }
     }
 });
+//# sourceMappingURL=boot.js.map

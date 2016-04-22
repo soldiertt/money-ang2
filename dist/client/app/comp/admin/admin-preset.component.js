@@ -82,3 +82,4 @@ System.register(["angular2/core", "angular2/common", "../../service/filter-prese
         }
     }
 });
+//# sourceMappingURL=admin-preset.component.js.map

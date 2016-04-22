@@ -85,3 +85,4 @@ System.register(["angular2/core", "../model/core/filter-preset.class"], function
         }
     }
 });
+//# sourceMappingURL=display-param.service.js.map

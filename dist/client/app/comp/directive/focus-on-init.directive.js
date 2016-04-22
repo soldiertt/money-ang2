@@ -37,3 +37,4 @@ System.register(["angular2/core"], function(exports_1, context_1) {
         }
     }
 });
+//# sourceMappingURL=focus-on-init.directive.js.map

@@ -30,3 +30,4 @@ System.register(["angular2/http"], function(exports_1, context_1) {
         }
     }
 });
+//# sourceMappingURL=json-request-options.js.map

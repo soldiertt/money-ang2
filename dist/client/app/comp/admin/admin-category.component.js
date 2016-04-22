@@ -221,3 +221,4 @@ System.register(["angular2/core", "angular2/common", "../../model/core/category.
         }
     }
 });
+//# sourceMappingURL=admin-category.component.js.map

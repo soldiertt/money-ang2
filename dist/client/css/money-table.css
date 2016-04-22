@@ -36,6 +36,9 @@
 
 .money-cell {
   text-align: center;
+}
+
+.money-cell:focus {
   outline: none;
 }
 
@@ -63,7 +66,7 @@
 }
 
 .total-table td {
-  padding: 0px;
+  padding: 0;
   border: 1px solid #032137;
   text-align: center;
 }
