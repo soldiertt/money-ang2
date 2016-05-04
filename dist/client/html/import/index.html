@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="#txFormData of txFormDataList">
+      <tr *ngFor="let txFormData of txFormDataList">
         <td class="center">{{txFormData.tx.date | date:"longDate"}}</td>
         <td class="center">{{txFormData.tx.amount / 100 | number:'1.2-2'}} €</td>
         <td>{{txFormData.tx.thirdPartyAccount.name}} <span *ngIf="txFormData.tx.communication != ''" class="glyphicon glyphicon-info-sign" title="{{txFormData.tx.communication}}"></span></td>
@@ -56,7 +56,7 @@
           <div>
             <select class="form-control" [(ngModel)]="txFormData.categoryLink.categoryId">
               <option value="" disabled selected>Select a category ...</option>
-              <option *ngFor="#cat of allCategories | catfilter : [txFormData.categoryType] : [txFormData.categoryFrequency] : [getTxYear(txFormData)] | categorySorter" [value]="cat.id">{{cat.name}}</option>
+              <option *ngFor="let cat of allCategories | catfilter : [txFormData.categoryType] : [txFormData.categoryFrequency] : [getTxYear(txFormData)] | categorySorter" [value]="cat.id">{{cat.name}}</option>
             </select>
           </div>
         </td>
@@ -64,10 +64,10 @@
         <td class="center">
           <input type="checkbox" value="compta" (change)="comptaDateChanged($event, txFormData)" #comptaDateCheck />
           <select [(ngModel)]="txFormData.comptaMonth" [disabled]="!comptaDateCheck.checked" class="form-control form-control-inline input-sm">
-            <option *ngFor="#month of months" [value]="month.value" [attr.selected]="month.value == txFormData.comptaMonth ? 'selected' : undefined">{{month.name}}</option>
+            <option *ngFor="let month of months" [value]="month.value" [attr.selected]="month.value == txFormData.comptaMonth ? 'selected' : undefined">{{month.name}}</option>
           </select>
           <select [(ngModel)]="txFormData.comptaYear" [disabled]="!comptaDateCheck.checked" class="form-control form-control-inline input-sm">
-            <option *ngFor="#year of years" [value]="year" [attr.selected]="year == txFormData.comptaYear ? 'selected' : undefined">{{year}}</option>
+            <option *ngFor="let year of years" [value]="year" [attr.selected]="year == txFormData.comptaYear ? 'selected' : undefined">{{year}}</option>
           </select>
         </td>
       </tr>

@@ -1,4 +1,4 @@
-import {Component, OnInit} from "angular2/core";
+import {Component, OnInit} from "@angular/core";
 
 import {Preference} from "../../model/core/preference.class";
 import {PreferenceRestService} from "../../service/preference-rest.service";

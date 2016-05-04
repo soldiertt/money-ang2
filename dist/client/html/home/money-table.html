@@ -3,17 +3,17 @@
 <thead>
   <tr>
     <th>Catégories</th>
-    <th *ngFor="#month of months" class="month-col">{{month.name}}</th>
+    <th *ngFor="let month of months" class="month-col">{{month.name}}</th>
   </tr>
 </thead>
 <tbody>
-  <tr *ngFor="#category of categories | categorySorter | catfilter : displayParamService.types : displayParamService.frequencies">
+  <tr *ngFor="let category of categories | categorySorter | catfilter : displayParamService.types : displayParamService.frequencies">
     <td class="name-col">
       <money-icon [icon-class]="'cat-type-' + category.type + '-icon'"></money-icon>
       <money-icon [icon-class]="'cat-freq-' + category.frequency + '-icon'"></money-icon>
       {{category.name}}
     </td>
-    <td *ngFor="#period of category.periods | periodFilter : displayParamService.year" [attr.colspan]="12/category.nbPeriods"
+    <td *ngFor="let period of category.periods | periodFilter : displayParamService.year" [attr.colspan]="12/category.nbPeriods"
       class="money-cell" [class.current]="isCurrentPeriod(category, period)" [class.unpaid]="isUnpaidPeriod(category, period)"
       tooltip="{{period.total != 0}}" (click)="findTx(category.id, period)" (dblclick)="markPeriodAsPaid(category, period)">
       <div *ngIf="period.total != 0">
@@ -32,29 +32,29 @@
 <thead>
   <tr>
     <th style="min-width:220px;">TOTALS</th>
-    <th *ngFor="#month of months" class="month-col">{{month.name}}</th>
+    <th *ngFor="let month of months" class="month-col">{{month.name}}</th>
   </tr>
 </thead>
 <tbody>
-  <template ngFor #displayedType [ngForOf]="displayParamService.types">
-    <template ngFor #displayedFreq [ngForOf]="displayParamService.frequencies">
+  <template ngFor let-displayedType [ngForOf]="displayParamService.types">
+    <template ngFor let-displayedFreq [ngForOf]="displayParamService.frequencies">
       <tr class="total-row">
         <td>{{displayedType}}-{{displayedFreq}}</td>
-        <td *ngFor="#total of totals.get(displayedType + '-' + displayedFreq)">
+        <td *ngFor="let total of totals.get(displayedType + '-' + displayedFreq)">
           {{total / 100 | number:'1.2-2'}} €
         </td>
       </tr>
     </template>
     <tr class="total-row-medium">
       <td>{{displayedType}}</td>
-      <td *ngFor="#total of totals.get(displayedType)">
+      <td *ngFor="let total of totals.get(displayedType)">
         {{total / 100 | number:'1.2-2'}} €
       </td>
     </tr>
   </template>
   <tr class="total-row-large">
     <td>GLOBAL</td>
-    <td *ngFor="#total of totals.get('GLOBAL')">
+    <td *ngFor="let total of totals.get('GLOBAL')">
       {{total / 100 | number:'1.2-2'}} €
     </td>
   </tr>

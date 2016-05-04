@@ -1,5 +1,5 @@
-import {Injectable} from "angular2/core";
-import {Control, ControlGroup} from "angular2/common";
+import {Injectable} from "@angular/core";
+import {Control, ControlGroup} from "@angular/common";
 
 @Injectable()
 export class FormUtilsService {

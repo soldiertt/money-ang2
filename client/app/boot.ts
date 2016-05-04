@@ -1,9 +1,11 @@
  ///<reference path="../../node_modules/angular2/typings/browser.d.ts"/>
 
-import {provide, PLATFORM_DIRECTIVES} from "angular2/core";
-import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, ROUTER_PRIMARY_COMPONENT, APP_BASE_HREF, LocationStrategy, HashLocationStrategy} from "angular2/router";
-import {HTTP_PROVIDERS, RequestOptions} from "angular2/http";
-import {bootstrap}                  from "angular2/platform/browser";
+import {provide, PLATFORM_DIRECTIVES} from "@angular/core";
+import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES} from "@angular/router";
+import {LocationStrategy, HashLocationStrategy, APP_BASE_HREF} from "@angular/common";
+import {HTTP_PROVIDERS, RequestOptions} from "@angular/http";
+import {bootstrap}                  from "@angular/platform-browser-dynamic";
+
 import {AppComponent}               from "./comp/app.component";
 import {DisplayParamService}        from "./service/display-param.service";
 import {CategoryRestService}        from "./service/category-rest.service";
@@ -34,7 +36,6 @@ bootstrap(AppComponent, [
   CategoryYearsChecker,
   ROUTER_PROVIDERS,
   HTTP_PROVIDERS,
-  provide(ROUTER_PRIMARY_COMPONENT, {useValue: AppComponent}),
   provide(APP_BASE_HREF, {useValue : "/"}),
   provide(RequestOptions, {useClass: JsonRequestOptions}),
   provide(LocationStrategy, {useClass: HashLocationStrategy}),

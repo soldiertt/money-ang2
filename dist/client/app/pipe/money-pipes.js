@@ -1,4 +1,4 @@
-System.register(["angular2/core"], function(exports_1, context_1) {
+System.register(["@angular/core"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -67,10 +67,9 @@ System.register(["angular2/core"], function(exports_1, context_1) {
             PeriodFilterPipe = (function () {
                 function PeriodFilterPipe() {
                 }
-                PeriodFilterPipe.prototype.transform = function (periods, args) {
+                PeriodFilterPipe.prototype.transform = function (periods, year) {
                     if (periods) {
-                        var year_1 = args[0];
-                        return periods.filter(function (period) { return period.year === year_1; });
+                        return periods.filter(function (period) { return period.year === year; });
                     }
                     else {
                         return periods;
@@ -88,12 +87,11 @@ System.register(["angular2/core"], function(exports_1, context_1) {
             CatfilterPipe = (function () {
                 function CatfilterPipe() {
                 }
-                CatfilterPipe.prototype.transform = function (categories, args) {
+                CatfilterPipe.prototype.transform = function (categories, types, frequencies, years) {
                     if (categories) {
-                        var types_1 = args[0], frequencies_1 = args[1], years_1 = args[2];
-                        var filtered = categories.filter(function (item) { return types_1.indexOf(item.type) !== -1 && frequencies_1.indexOf(item.frequency) !== -1; });
-                        if (years_1) {
-                            filtered = filtered.filter(function (item) { return years_1.every(function (year) { return item.years.indexOf(year) !== -1; }); });
+                        var filtered = categories.filter(function (item) { return types.indexOf(item.type) !== -1 && frequencies.indexOf(item.frequency) !== -1; });
+                        if (years) {
+                            filtered = filtered.filter(function (item) { return years.every(function (year) { return item.years.indexOf(year) !== -1; }); });
                         }
                         return filtered;
                     }

@@ -1,4 +1,4 @@
-import {Control} from "angular2/common";
+import {Control} from "@angular/common";
 import {AdminRuleComponent} from "../../comp/admin/admin-rule.component";
 import {CondFieldType, CondOperator}  from "../../model/core/money-enums";
 

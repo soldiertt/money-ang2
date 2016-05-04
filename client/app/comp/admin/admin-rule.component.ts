@@ -1,5 +1,6 @@
-import {Component, ElementRef} from "angular2/core";
-import {Control, FormBuilder, Validators, ControlGroup} from "angular2/common";
+import {Component, ElementRef} from "@angular/core";
+import {Control, FormBuilder, Validators, ControlGroup} from "@angular/common";
+
 import {Condition, Rule}              from "../../model/core/rule.class";
 import {Category}                     from "../../model/core/category.class";
 import {OperatorHelper}               from "../../model/formutil/operator-helper.class";

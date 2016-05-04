@@ -1,4 +1,4 @@
-System.register(["angular2/core", "angular2/common", "../../model/core/filter-preset.class", "../../service/display-param.service", "../../service/form-utils.service", "../../service/filter-preset-rest.service", "../directive/focus-on-init.directive"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/common", "../../model/core/filter-preset.class", "../../service/display-param.service", "../../service/form-utils.service", "../../service/filter-preset-rest.service", "../directive/focus-on-init.directive"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {

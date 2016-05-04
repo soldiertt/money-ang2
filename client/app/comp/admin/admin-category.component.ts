@@ -1,5 +1,5 @@
-import {Component} from "angular2/core";
-import {AbstractControl, Control, ControlGroup, FormBuilder, Validators} from "angular2/common";
+import {Component} from "@angular/core";
+import {AbstractControl, Control, ControlGroup, FormBuilder, Validators} from "@angular/common";
 
 import {Category}               from "../../model/core/category.class";
 import {CatType, CatFrequency}  from "../../model/core/money-enums";

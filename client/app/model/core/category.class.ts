@@ -1,4 +1,4 @@
-import {CatType, CatFrequency} from "./money-enums"
+import {CatType, CatFrequency} from "./money-enums";
 import {Tx} from "./tx.class";
 
 export class Period {

@@ -1,5 +1,6 @@
-import {Component, ViewEncapsulation} from "angular2/core";
-import {RouteConfig, Route} from "angular2/router";
+import {Component, ViewEncapsulation} from "@angular/core";
+import {Routes} from "@angular/router";
+
 import {HomeComponent}                from "./home/home.component";
 import {ImportComponent}              from "./import/import.component";
 import {AutoImportComponent}          from "./import/auto-import.component";
@@ -10,16 +11,16 @@ import {AdminAccountSettingComponent} from "./admin/admin-account-setting.compon
 import {AdminUploadsComponent}        from "./admin/admin-uploads.component";
 import {AdminPresetComponent}         from "./admin/admin-preset.component";
 
-@RouteConfig([
-new Route({path: "/home", component: HomeComponent, name: "Home", useAsDefault: true}),
-new Route({path: "/import", component: ImportComponent, name: "Import"}),
-new Route({path: "/auto-import", component: AutoImportComponent, name: "AutoImport"}),
-new Route({path: "/uploads", component: AdminUploadsComponent, name: "Uploads"}),
-new Route({path: "/preferences", component: PreferencesComponent, name: "Preferences"}),
-new Route({path: "/admin-category", component: AdminCategoryComponent, name: "AdminCategory"}),
-new Route({path: "/admin-account-setting", component: AdminAccountSettingComponent, name: "AdminAccountSetting"}),
-new Route({path: "/admin-rule", component: AdminRuleComponent, name: "AdminRule"}),
-new Route({path: "/admin-preset", component: AdminPresetComponent, name: "AdminPreset"})
+@Routes([
+  {path: "/home", component: HomeComponent},
+  {path: "/import", component: ImportComponent},
+  {path: "/auto-import", component: AutoImportComponent},
+  {path: "/uploads", component: AdminUploadsComponent},
+  {path: "/preferences", component: PreferencesComponent},
+  {path: "/admin-category", component: AdminCategoryComponent},
+  {path: "/admin-account-setting", component: AdminAccountSettingComponent},
+  {path: "/admin-rule", component: AdminRuleComponent},
+  {path: "/admin-preset", component: AdminPresetComponent}
 ])
 @Component({
     selector: "money-app",

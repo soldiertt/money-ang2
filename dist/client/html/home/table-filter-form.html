@@ -5,7 +5,7 @@
     <div>
       <select ngControl="selectedPreset">
         <option value="" disabled selected>Select preset ...</option>
-        <option *ngFor="#preset of allPresets" [value]="preset.id">{{preset.name}}</option><!-- TODO use [ngValue]="preset" on future release -->
+        <option *ngFor="let preset of allPresets" [value]="preset.id">{{preset.name}}</option><!-- TODO use [ngValue]="preset" on future release -->
       </select>
     </div>
     <div *ngIf="notExistsCurrentFilter()">
@@ -21,7 +21,7 @@
     <legend>Year</legend>
     <div>
       <select [(ngModel)]="displayParamService.year">
-        <option *ngFor="#year of allYears" [value]="year">{{year}}</option>
+        <option *ngFor="let year of allYears" [value]="year">{{year}}</option>
       </select>
     </div>
   </fieldset>

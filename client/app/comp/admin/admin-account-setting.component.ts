@@ -1,6 +1,6 @@
-import {Component}                  from "angular2/core";
-import {Control, ControlGroup, FormBuilder, Validators} from "angular2/common";
-import {Http, RequestOptions, RequestMethod, Headers} from "angular2/http";
+import {Component}                  from "@angular/core";
+import {Control, ControlGroup, FormBuilder, Validators} from "@angular/common";
+import {Http, RequestOptions, RequestMethod, Headers} from "@angular/http";
 
 import {AccountSetting}             from "../../model/core/account-setting.class";
 import {FieldMapping}               from "../../model/core/field-mapping.class";

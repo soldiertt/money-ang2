@@ -20,14 +20,9 @@
     <!-- build:vendor -->
     <!-- IE required polyfills, in this exact order -->
     <script src="/lib/es6-shim/es6-shim.min.js"></script>
-    <script src="/lib/systemjs/dist/system-polyfills.js"></script>
-
-    <script src="/lib/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="/lib/zone.js/dist/zone.js"></script>
+    <script src="/lib/reflect-metadata/Reflect.js"></script>
     <script src="/lib/systemjs/dist/system.src.js"></script>
-    <script src="/lib/rxjs/bundles/Rx.js"></script>
-    <script src="/lib/angular2/bundles/angular2.dev.js"></script>
-    <script src="/lib/angular2/bundles/router.dev.js"></script>
-    <script src="/lib/angular2/bundles/http.dev.js"></script>
     <!-- endbuild -->
 
     <!-- build:app -->
@@ -38,6 +33,9 @@
   <body>
     <money-app>loading...</money-app>
     <!-- build:boot -->
+    <script>
+      System.import('app').catch(function(err){ console.error(err);  });
+    </script>
     <!-- endbuild -->
   </body>
 </html>

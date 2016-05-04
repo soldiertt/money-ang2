@@ -1,4 +1,4 @@
-System.register(["angular2/core", "rxjs/Observable", "rxjs/add/observable/forkJoin", "../../model/core/money-enums", "../../model/core/txref.class", "../../model/utils/tx-mapper.class", "../../service/preference-rest.service", "../../service/account-setting-rest.service", "../../service/category-rest.service", "../../service/csv-files-rest.service", "../../service/txref-rest.service", "../../service/rule.service", "../../service/form-utils.service", "../../pipe/money-pipes"], function(exports_1, context_1) {
+System.register(["@angular/core", "rxjs/Observable", "rxjs/add/observable/forkJoin", "../../model/core/money-enums", "../../model/core/txref.class", "../../model/utils/tx-mapper.class", "../../service/preference-rest.service", "../../service/account-setting-rest.service", "../../service/category-rest.service", "../../service/csv-files-rest.service", "../../service/txref-rest.service", "../../service/rule.service", "../../service/form-utils.service", "../../pipe/money-pipes"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -86,7 +86,8 @@ System.register(["angular2/core", "rxjs/Observable", "rxjs/add/observable/forkJo
                                 }
                             });
                             Observable_1.Observable.forkJoin(readLinesJobs).subscribe(function (linesByAccountArray) {
-                                linesByAccountArray.forEach(function (linesByAccount) {
+                                var effectiveArray = linesByAccountArray;
+                                effectiveArray.forEach(function (linesByAccount) {
                                     _this.pendingTxList = _this.pendingTxList.concat(linesByAccount.csvLines.map(function (csvLine) { return tx_mapper_class_1.TxMapper.mapLineToTx(csvLine, linesByAccount.account); }));
                                 });
                                 _this.reducePendingTxList();

@@ -1,4 +1,4 @@
-System.register(["angular2/core"], function(exports_1, context_1) {
+System.register(["@angular/core"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -28,7 +28,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 MoneyIconDirective = __decorate([
                     core_1.Component({
                         selector: "money-icon",
-                        template: "<span [ngClass]=\"[\"money-icon\",iconClass.toLowerCase()]\"></span>",
+                        template: "<span [ngClass]=\"['money-icon',iconClass.toLowerCase()]\"></span>",
                         styleUrls: ["css/money-icon.css"]
                     }), 
                     __metadata('design:paramtypes', [])

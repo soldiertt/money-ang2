@@ -1,4 +1,4 @@
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 import {RuleRestService}      from "./rule-rest.service";
 import {CategoryRestService}  from "./category-rest.service";
 import {Tx}                   from "../model/core/tx.class";

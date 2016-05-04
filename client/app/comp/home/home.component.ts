@@ -1,4 +1,4 @@
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 
 import {MoneyTableComponent}      from "./money-table.component";
 import {TableFilterFormComponent} from "./table-filter-form.component";

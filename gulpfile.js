@@ -20,12 +20,11 @@ gulp.task('vendor-bundle', function() {
   gulp.src([
     'node_modules/es6-shim/es6-shim.min.js',
     'node_modules/systemjs/dist/system-polyfills.js',
-    'node_modules/angular2/bundles/angular2-polyfills.js',
     'node_modules/systemjs/dist/system.src.js',
     'node_modules/rxjs/bundles/Rx.js',
-    'node_modules/angular2/bundles/angular2.dev.js',
-    'node_modules/angular2/bundles/router.dev.js',
-    'node_modules/angular2/bundles/http.dev.js'
+    'node_modules/@angular/core/index.js',
+    'node_modules/@angular/router/index.js',
+    'node_modules/@angular/http/index.js'
   ])
   .pipe(concat('vendors.min.js'))
   .pipe(uglify({mangle: false}))

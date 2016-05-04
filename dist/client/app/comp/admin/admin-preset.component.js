@@ -1,4 +1,4 @@
-System.register(["angular2/core", "angular2/common", "../../service/filter-preset-rest.service", "../directive/display-error.directive", "../directive/focus-on-init.directive", "./admin-menu.component"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/common", "../../service/filter-preset-rest.service", "../directive/display-error.directive", "../directive/focus-on-init.directive", "./admin-menu.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {

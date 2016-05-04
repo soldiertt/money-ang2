@@ -1,4 +1,4 @@
-import {Control} from "angular2/common";
+import {Control} from "@angular/common";
 import {AdminAccountSettingComponent} from "../../comp/admin/admin-account-setting.component";
 import {FieldMapping} from "../core/field-mapping.class";
 

@@ -1,5 +1,6 @@
-import {Component} from "angular2/core";
-import {Control, ControlGroup, FormBuilder, Validators} from "angular2/common";
+import {Component} from "@angular/core";
+import {Control, ControlGroup, FormBuilder, Validators} from "@angular/common";
+
 import {UploadCsvService}           from "../../service/upload-csv.service";
 import {DisplayErrorDirective}      from "../directive/display-error.directive";
 import {CsvFilesRestService}       from "../../service/csv-files-rest.service";

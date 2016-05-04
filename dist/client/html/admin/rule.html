@@ -13,20 +13,20 @@
     </div>
   </div>
 
-  <div class="form-group" *ngFor="#condition of newRule.conditions, #i = index">
+  <div class="form-group" *ngFor="let condition of newRule.conditions, let i = index">
     <label class="control-label col-sm-2">Condition {{i + 1}} *</label>
     <div class="col-sm-3">
       <select class="form-control" (change)="fieldChanged(condition, $event)">
         <option value="" disabled selected>Select field</option>
-        <option *ngFor="#field of fieldNames" [value]="field.index" [attr.selected]="condition.fieldName == field.name ? true : null">{{field.label}}</option>
+        <option *ngFor="let field of fieldNames" [value]="field.index" [attr.selected]="condition.fieldName == field.name ? true : null">{{field.label}}</option>
       </select>
     </div>
     <div class="col-sm-3">
       <select class="form-control" [(ngModel)]="condition.operator" *ngIf="condition.fieldType == 'STRING'">
-        <option *ngFor="#operator of stringOperators" [value]="operator.operator">{{operator.label}}</option>
+        <option *ngFor="let operator of stringOperators" [value]="operator.operator">{{operator.label}}</option>
       </select>
       <select class="form-control" [(ngModel)]="condition.operator" *ngIf="condition.fieldType == 'NUMBER'">
-        <option *ngFor="#operator of numOperators" [value]="operator.operator">{{operator.label}}</option>
+        <option *ngFor="let operator of numOperators" [value]="operator.operator">{{operator.label}}</option>
       </select>
     </div>
     <div class="col-sm-3">
@@ -71,7 +71,7 @@
     <div class="col-sm-9">
       <select name="cat-id" id="cat-id" ngControl="catId" class="form-control" [(ngModel)]="newRule.categoryId">
         <option value="" disabled selected>Select a category ...</option>
-        <option *ngFor="#cat of categories | catfilter : [newRule.category.type] : [newRule.category.frequency] | categorySorter" [value]="cat.id">{{cat.name}}</option>
+        <option *ngFor="let cat of categories | catfilter : [newRule.category.type] : [newRule.category.frequency] | categorySorter" [value]="cat.id">{{cat.name}}</option>
       </select>
     </div>
   </div>
@@ -98,7 +98,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="#rule of rules, #j = index">
+    <tr *ngFor="let rule of rules, let j = index">
       <td>{{rule.name}}</td>
       <td>{{rule.category.type}}/{{rule.category.frequency}}/{{rule.category.name}}
         <span class="glyphicon glyphicon-info-sign" title="{{getConditionsForRule(rule)}}"></span> <!-- [tooltip]="getConditionsForRule(rule)" tooltipPlacement="right"-->

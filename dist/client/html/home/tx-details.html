@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="#tx of txList">
+    <tr *ngFor="let tx of txList">
       <td>{{stringAsDate(tx.date) | date:"longDate"}}</td>
       <td>{{tx.thirdPartyAccount.name}}</td>
       <td>{{tx.amount / 100 |  number:'1.2-2'}} €</td>

@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Output} from "angular2/core";
-import {Control, ControlGroup, FormBuilder, Validators} from "angular2/common";
+import {Component, EventEmitter, Output} from "@angular/core";
+import {Control, ControlGroup, FormBuilder, Validators} from "@angular/common";
+
 import {FilterPreset}             from "../../model/core/filter-preset.class";
 import {DisplayParamService}      from "../../service/display-param.service";
 import {FormUtilsService}         from "../../service/form-utils.service";

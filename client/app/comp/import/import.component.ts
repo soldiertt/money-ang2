@@ -1,4 +1,4 @@
-import {Component, OnInit} from "angular2/core";
+import {Component, OnInit} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/observable/forkJoin";
 
@@ -63,7 +63,8 @@ export class ImportComponent implements OnInit {
           }
         });
         Observable.forkJoin(readLinesJobs).subscribe(linesByAccountArray => {
-          linesByAccountArray.forEach(linesByAccount => {
+          let effectiveArray = <Array<any>> linesByAccountArray;
+          effectiveArray.forEach(linesByAccount => {
             this.pendingTxList = this.pendingTxList.concat(linesByAccount.csvLines.map(csvLine => TxMapper.mapLineToTx(csvLine, linesByAccount.account)));
           });
           this.reducePendingTxList();

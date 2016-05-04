@@ -1,4 +1,4 @@
-System.register(["angular2/core", "angular2/common", "../../model/core/rule.class", "../../model/formutil/operator-helper.class", "../../model/core/money-enums", "../../model/validation/rule-condition-validator.class", "../../service/rule-rest.service", "../../service/rule.service", "../../service/category-rest.service", "../directive/display-error.directive", "../../pipe/money-pipes", "./admin-menu.component"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/common", "../../model/core/rule.class", "../../model/formutil/operator-helper.class", "../../model/core/money-enums", "../../model/validation/rule-condition-validator.class", "../../service/rule-rest.service", "../../service/rule.service", "../../service/category-rest.service", "../directive/display-error.directive", "../../pipe/money-pipes", "./admin-menu.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {

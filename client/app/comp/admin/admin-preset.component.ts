@@ -1,5 +1,6 @@
-import {Component} from "angular2/core";
-import {ControlGroup, Control, FormBuilder, Validators} from "angular2/common";
+import {Component} from "@angular/core";
+import {ControlGroup, Control, FormBuilder, Validators} from "@angular/common";
+
 import {FilterPreset} from "../../model/core/filter-preset.class";
 import {FilterPresetRestService}    from "../../service/filter-preset-rest.service";
 import {DisplayErrorDirective}  from "../directive/display-error.directive";

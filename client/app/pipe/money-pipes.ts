@@ -1,4 +1,4 @@
-import {Pipe} from "angular2/core";
+import {Pipe} from "@angular/core";
 import {Category} from "../model/core/category.class";
 
 @Pipe({
@@ -41,9 +41,8 @@ export class CategorySorterPipe {
   name: "periodFilter"
 })
 export class PeriodFilterPipe {
-  transform(periods, args) {
+  transform(periods, year) {
     if (periods) {
-      let [year] = args;
       return periods.filter(period => period.year === year);
     } else {
       return periods;
@@ -55,9 +54,8 @@ export class PeriodFilterPipe {
   name: "catfilter"
 })
 export class CatfilterPipe {
-  transform(categories, args) {
+  transform(categories, types, frequencies, years) {
     if (categories) {
-      let [types, frequencies, years] = args;
       let filtered = categories.filter((item) => types.indexOf(item.type) !== -1 && frequencies.indexOf(item.frequency) !== -1 );
       if (years) {
         filtered = filtered.filter((item) => years.every((year) => item.years.indexOf(year) !== -1));

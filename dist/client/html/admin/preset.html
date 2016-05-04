@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="#preset of filterPresets, #i = index">
+    <tr *ngFor="let preset of filterPresets, let i = index">
       <td>
         <div *ngIf="editedPreset?.id != preset.id">{{preset.name}} <span class="glyphicon glyphicon-pencil action-link" (click)="onEdit(preset)"></span></div>
         <div *ngIf="editedPreset?.id == preset.id">

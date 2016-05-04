@@ -1,4 +1,4 @@
-import {Directive, ElementRef, HostListener, ViewEncapsulation} from "angular2/core";
+import {Directive, ElementRef, HostListener, ViewEncapsulation} from "@angular/core";
 
 @Directive({
   selector: "[tooltip]",

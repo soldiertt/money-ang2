@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from "angular2/core";
+import {Component, OnInit, ViewEncapsulation} from "@angular/core";
 
 import {TxDetailsComponent}     from "./tx-details.component";
 import {Category, Period}       from "../../model/core/category.class";

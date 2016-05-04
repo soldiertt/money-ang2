@@ -1,4 +1,4 @@
-System.register(["angular2/core", "angular2/common", "../../service/upload-csv.service", "../directive/display-error.directive", "../../service/csv-files-rest.service"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/common", "../../service/upload-csv.service", "../directive/display-error.directive", "../../service/csv-files-rest.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {

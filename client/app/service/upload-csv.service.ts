@@ -1,5 +1,5 @@
-import {Injectable} from "angular2/core";
-import {Http} from "angular2/http";
+import {Injectable} from "@angular/core";
+import {Http} from "@angular/http";
 
 import {MultipartUploader}          from "../model/formutil/multipart-uploader.class";
 import {MultipartItem}              from "../model/formutil/multipart-item.class";
