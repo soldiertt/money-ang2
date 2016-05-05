@@ -8,12 +8,12 @@ const rename = require('gulp-rename');
 
 gulp.task('app-bundle', function () {
 
-  var tsProject = ts.createProject('client/tsconfig.json',{ outDir: undefined, rootDir: undefined, out: "money-bundle.min.js"});
+  var tsProject = ts.createProject('client/src/ts/tsconfig.json',{ outDir: undefined, rootDir: undefined, out: "money-bundle.min.js"});
 
-  return gulp.src('client/app/**/*.ts')
+  return tsProject.src()
     .pipe(ts(tsProject))
     .pipe(uglify({mangle: false}))
-    .pipe(gulp.dest('dist/client/js'));
+    .pipe(gulp.dest('client/src/dist'));
 });
 
 gulp.task('vendor-bundle', function() {
@@ -28,25 +28,25 @@ gulp.task('vendor-bundle', function() {
   ])
   .pipe(concat('vendors.min.js'))
   .pipe(uglify({mangle: false}))
-  .pipe(gulp.dest('./dist/client/js'));
+  .pipe(gulp.dest('./client/src/assets/js'));
 });
 
 gulp.task('boot-bundle', function() {
-  gulp.src('dist/client/js/system.config.prod.js')
+  gulp.src('client/src/assets/js/system.config.prod.js')
     .pipe(concat('boot.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('./dist/client/js'));
+    .pipe(gulp.dest('./client/src/assets/js'));
  });
 
  gulp.task('html', function() {
-   gulp.src('server/views/index.ejs')
+   gulp.src('server/src/views/index.ejs')
      .pipe(htmlreplace({
-       'vendor': 'js/vendors.min.js',
-       'app': 'js/money-bundle.min.js',
-       'boot': 'js/boot.min.js'
+       'vendor': 'assets/js/vendors.min.js',
+       'app': 'assets/js/money-bundle.min.js',
+       'boot': 'assets/js/boot.min.js'
      }))
      .pipe(rename('index-prod.ejs'))
-     .pipe(gulp.dest('./server/views'));
+     .pipe(gulp.dest('./server/src/views'));
  });
 
  gulp.task('default', ['app-bundle','vendor-bundle', 'boot-bundle', 'html'], function() {
