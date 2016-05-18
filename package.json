@@ -6,6 +6,9 @@
   "scripts": {
     "build-client": "rm -rf client/src/dist && tsc -p client/src/ts",
     "build-server": "rm -rf server/src/dist && tsc -p server/src/ts",
+    "postinstall": "npm run typings-server && npm run typings-client",
+    "typings-server": "cd server/src/ts && typings install",
+    "typings-client": "cd client/src/ts && typings install",
     "test": "karma start karma.conf.js",
     "posttest": "node_modules/.bin/remap-istanbul -i coverage/coverage-final.json -o coverage -t html",
     "start": "node --use_strict server/src/dist/start.js"
