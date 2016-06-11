@@ -37,6 +37,7 @@ export class MoneyTableComponent {
     this.initTotals(false);
     this._categoryRestService.listForYear(this.displayParamService.year).subscribe(categories => {
       this.categories = categories;
+      console.log(categories);
       this.computeTotals();
     });
   }
@@ -133,7 +134,8 @@ export class MoneyTableComponent {
   private computeTotals() {
     this.categories.forEach(categ => {
       // FILTER ON YEAR periods
-      let filteredPeriods = categ.periods.filter(period => period.year === this.displayParamService.year);
+      // !!! this.displayParamService.year stored as string ?? DO NOT USE === in comparaison
+      let filteredPeriods = categ.periods.filter(period => period.year == this.displayParamService.year);
       // MONTHLY
       if (categ.frequency === CatFrequency.MONTHLY) {
         for (let periodIndex = 0; periodIndex < categ.nbPeriods; periodIndex++) {

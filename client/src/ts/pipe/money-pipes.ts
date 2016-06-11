@@ -43,7 +43,8 @@ export class CategorySorterPipe {
 export class PeriodFilterPipe {
   transform(periods, year) {
     if (periods) {
-      return periods.filter(period => period.year === year);
+      // !!! year stored as string ?? DO NOT USE === in comparaison
+      return periods.filter(period => period.year == year);
     } else {
       return periods;
     }

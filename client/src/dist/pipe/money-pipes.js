@@ -69,7 +69,8 @@ System.register(["@angular/core"], function(exports_1, context_1) {
                 }
                 PeriodFilterPipe.prototype.transform = function (periods, year) {
                     if (periods) {
-                        return periods.filter(function (period) { return period.year === year; });
+                        // !!! year stored as string ?? DO NOT USE === in comparaison
+                        return periods.filter(function (period) { return period.year == year; });
                     }
                     else {
                         return periods;

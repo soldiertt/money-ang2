@@ -59,6 +59,7 @@ System.register(["@angular/core", "./tx-details.component", "../../model/core/mo
                     this.initTotals(false);
                     this._categoryRestService.listForYear(this.displayParamService.year).subscribe(function (categories) {
                         _this.categories = categories;
+                        console.log(categories);
                         _this.computeTotals();
                     });
                 };
@@ -158,7 +159,8 @@ System.register(["@angular/core", "./tx-details.component", "../../model/core/mo
                     var _this = this;
                     this.categories.forEach(function (categ) {
                         // FILTER ON YEAR periods
-                        var filteredPeriods = categ.periods.filter(function (period) { return period.year === _this.displayParamService.year; });
+                        // !!! this.displayParamService.year stored as string ?? DO NOT USE === in comparaison
+                        var filteredPeriods = categ.periods.filter(function (period) { return period.year == _this.displayParamService.year; });
                         // MONTHLY
                         if (categ.frequency === money_enums_1.CatFrequency.MONTHLY) {
                             for (var periodIndex = 0; periodIndex < categ.nbPeriods; periodIndex++) {
