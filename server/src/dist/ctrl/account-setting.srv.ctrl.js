@@ -34,3 +34,4 @@ var AccountSettingCtrl = (function (_super) {
 }(basic_crud_srv_ctrl_1.default));
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = AccountSettingCtrl;
+//# sourceMappingURL=account-setting.srv.ctrl.js.map

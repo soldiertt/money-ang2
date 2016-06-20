@@ -93,3 +93,4 @@ var BasicCrudCtrl = (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = BasicCrudCtrl;
 ;
+//# sourceMappingURL=basic-crud.srv.ctrl.js.map

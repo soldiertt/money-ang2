@@ -13,3 +13,4 @@ function render(req, res) {
 }
 exports.render = render;
 ;
+//# sourceMappingURL=index.srv.ctrl.js.map

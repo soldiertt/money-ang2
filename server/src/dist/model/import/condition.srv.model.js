@@ -27,3 +27,4 @@ conditionSchema.set("toJSON", {
 });
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = conditionSchema;
+//# sourceMappingURL=condition.srv.model.js.map

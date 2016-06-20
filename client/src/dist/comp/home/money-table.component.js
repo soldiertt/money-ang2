@@ -59,7 +59,6 @@ System.register(["@angular/core", "./tx-details.component", "../../model/core/mo
                     this.initTotals(false);
                     this._categoryRestService.listForYear(this.displayParamService.year).subscribe(function (categories) {
                         _this.categories = categories;
-                        console.log(categories);
                         _this.computeTotals();
                     });
                 };

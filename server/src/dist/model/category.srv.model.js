@@ -40,3 +40,4 @@ categorySchema.set("toJSON", {
 });
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = categorySchema;
+//# sourceMappingURL=category.srv.model.js.map

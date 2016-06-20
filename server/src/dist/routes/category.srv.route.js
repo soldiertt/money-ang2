@@ -24,3 +24,4 @@ function default_1(app) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = default_1;
 ;
+//# sourceMappingURL=category.srv.route.js.map

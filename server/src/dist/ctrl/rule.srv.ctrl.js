@@ -52,3 +52,4 @@ var RuleCtrl = (function (_super) {
 }(basic_crud_srv_ctrl_1.default));
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = RuleCtrl;
+//# sourceMappingURL=rule.srv.ctrl.js.map

@@ -15,3 +15,4 @@ preferenceSchema.set("toJSON", {
 });
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = preferenceSchema;
+//# sourceMappingURL=preference.srv.model.js.map

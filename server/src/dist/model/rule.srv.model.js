@@ -26,3 +26,4 @@ ruleSchema.set("toJSON", {
 });
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = ruleSchema;
+//# sourceMappingURL=rule.srv.model.js.map

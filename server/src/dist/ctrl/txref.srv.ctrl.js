@@ -40,3 +40,4 @@ var TxrefCtrl = (function (_super) {
 }(basic_crud_srv_ctrl_1.default));
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = TxrefCtrl;
+//# sourceMappingURL=txref.srv.ctrl.js.map

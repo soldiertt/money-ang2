@@ -13,3 +13,4 @@ txrefSchema.set("toJSON", {
 });
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = txrefSchema;
+//# sourceMappingURL=txref.srv.model.js.map

@@ -37,7 +37,6 @@ export class MoneyTableComponent {
     this.initTotals(false);
     this._categoryRestService.listForYear(this.displayParamService.year).subscribe(categories => {
       this.categories = categories;
-      console.log(categories);
       this.computeTotals();
     });
   }

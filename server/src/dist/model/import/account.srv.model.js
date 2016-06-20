@@ -20,3 +20,4 @@ accountSchema.set("toJSON", {
 });
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = accountSchema;
+//# sourceMappingURL=account.srv.model.js.map

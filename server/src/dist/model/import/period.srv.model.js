@@ -26,3 +26,4 @@ periodSchema.set("toJSON", {
 });
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = periodSchema;
+//# sourceMappingURL=period.srv.model.js.map

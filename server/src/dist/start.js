@@ -41,3 +41,4 @@ else {
     server_1.default.listen(port, ipaddress);
     console.log("Server running at http://" + ipaddress + ":" + port + "/");
 }
+//# sourceMappingURL=start.js.map

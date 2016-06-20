@@ -38,3 +38,4 @@ transactionSchema.set("toJSON", {
 });
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = transactionSchema;
+//# sourceMappingURL=tx.srv.model.js.map

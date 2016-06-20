@@ -158,3 +158,4 @@ var CategoryCtrl = (function (_super) {
 }(basic_crud_srv_ctrl_1.default));
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = CategoryCtrl;
+//# sourceMappingURL=category.srv.ctrl.js.map
