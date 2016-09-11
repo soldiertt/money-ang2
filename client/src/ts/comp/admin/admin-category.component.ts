@@ -1,28 +1,22 @@
 import {Component} from "@angular/core";
-import {AbstractControl, Control, ControlGroup, FormBuilder, Validators} from "@angular/common";
+import {AbstractControl, FormControl, FormGroup, FormBuilder, Validators} from "@angular/forms";
 
 import {Category}               from "../../model/core/category.class";
 import {CatType, CatFrequency}  from "../../model/core/money-enums";
 import {CategoryYearsChecker}   from "../../model/utils/category-years-checker";
 import {CategoryRestService}    from "../../service/category-rest.service";
 import {FormUtilsService}       from "../../service/form-utils.service";
-import {DisplayErrorDirective}  from "../directive/display-error.directive";
-import {FocusOnInitDirective}   from "../directive/focus-on-init.directive";
-import {CategorySorterPipe}     from "../../pipe/money-pipes";
-import {AdminMenuComponent}     from "./admin-menu.component";
 
 @Component({
     selector: "money-admin-category",
-    templateUrl: "assets/html/admin/category.html",
-    directives: [DisplayErrorDirective, FocusOnInitDirective, AdminMenuComponent],
-    pipes: [CategorySorterPipe]
+    templateUrl: "assets/html/admin/category.html"
 })
 export class AdminCategoryComponent {
     categories: Array<Category>;
-    createForm: ControlGroup;
-    editForm: ControlGroup;
+    createForm: FormGroup;
+    editForm: FormGroup;
     editedCat: Category;
-    name: Control;
+    name: FormControl;
     yearList: Array<number>;
     txExistsForRemovedYears: boolean = false;
 
@@ -49,7 +43,7 @@ export class AdminCategoryComponent {
       });
     }
 
-    yearsValueChange(event) {
+    /*yearsValueChange(event) {
       // Multi-value field not yet manage, so do manually
       let allSelectedYears: Array<number> = [];
       for (let i in event.target.selectedOptions) {
@@ -57,8 +51,8 @@ export class AdminCategoryComponent {
           allSelectedYears.push(Number(event.target.selectedOptions[i].value));
         }
       }
-      (<Control> this.createForm.controls["years"]).updateValue(allSelectedYears);
-    }
+      this.createForm.controls["years"].setValue(allSelectedYears);
+    }*/
 
     yearsEditValueChange(event) {
       // Multi-value field not yet manage, so do manually
@@ -68,7 +62,7 @@ export class AdminCategoryComponent {
           allSelectedYears.push(Number(event.target.selectedOptions[i].value));
         }
       }
-      (<Control> this.editForm.controls["years"]).updateValue(allSelectedYears);
+      this.editForm.controls["years"].setValue(allSelectedYears);
     }
 
     onCreate(): void {
@@ -76,7 +70,7 @@ export class AdminCategoryComponent {
       let newCateg: Category = new Category(controls["name"].value, CatType[<string>controls["type"].value], CatFrequency[<string>controls["frequency"].value], controls["years"].value);
       this._categoryRestService.create(newCateg).subscribe(response => {
         this.categories.push(response.json());
-        this._formUtilsService.reset(this.createForm, "name", "type", "frequency", "years");
+        this.createForm.reset();
       }, err => console.log(err));
     }
 
@@ -127,7 +121,7 @@ export class AdminCategoryComponent {
 
     onEdit(category: Category): void {
       this.editedCat = category;
-      (<Control> this.editForm.controls["years"]).updateValue(category.years);
+      this.editForm.controls["years"].setValue(category.years);
     }
 
     onCancelEdit($event): void {

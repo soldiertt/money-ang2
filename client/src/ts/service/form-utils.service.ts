@@ -1,14 +1,7 @@
 import {Injectable} from "@angular/core";
-import {Control, ControlGroup} from "@angular/common";
 
 @Injectable()
 export class FormUtilsService {
-
-    reset(form: ControlGroup, ...controlNames: Array<string>): void {
-      for (let controlName of controlNames) {
-        (<Control> form.controls[controlName]).updateValue("");
-      }
-    }
 
     getAppYears(): Array<number> {
       let startYear = 2015;

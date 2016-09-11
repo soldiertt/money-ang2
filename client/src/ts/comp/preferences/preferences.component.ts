@@ -5,8 +5,7 @@ import {PreferenceRestService} from "../../service/preference-rest.service";
 
 @Component({
   selector: "money-preferences",
-  templateUrl: "assets/html/preferences/index.html",
-  directives: []
+  templateUrl: "assets/html/preferences/index.html"
 })
 export class PreferencesComponent implements OnInit {
   preference: Preference  = new Preference();

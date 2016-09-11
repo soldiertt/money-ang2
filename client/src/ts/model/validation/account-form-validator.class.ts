@@ -1,13 +1,13 @@
-import {Control} from "@angular/common";
+import {FormControl} from "@angular/forms";
 import {AdminAccountSettingComponent} from "../../comp/admin/admin-account-setting.component";
 import {FieldMapping} from "../core/field-mapping.class";
 
 export class AccountFormValidator {
-  public validate: (control: Control) => Object;
+  public validate: (control: FormControl) => Object;
 
   constructor(component: AdminAccountSettingComponent) {
     let validator = this;
-    validator.validate = (control: Control) => {
+    validator.validate = (control: FormControl) => {
       return validator.validateMapping(component);
     };
   }
@@ -121,7 +121,7 @@ export class AccountFormValidator {
     return mm === (date.getMonth() + 1) && dd === date.getDate() && yyyy === date.getFullYear();
   }
 
-  isValidNumber(control: Control) {
+  isValidNumber(control: FormControl) {
     if (!isNaN(control.value)) {
       return null;
     } else {

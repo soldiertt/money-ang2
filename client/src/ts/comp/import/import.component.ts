@@ -2,7 +2,6 @@ import {Component, OnInit} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/observable/forkJoin";
 
-import {AccountSetting}                     from "../../model/core/account-setting.class";
 import {Tx}                                 from "../../model/core/tx.class";
 import {Category}                           from "../../model/core/category.class";
 import {CatType, CatFrequency}              from "../../model/core/money-enums";
@@ -22,8 +21,7 @@ import {CatfilterPipe, CategorySorterPipe}  from "../../pipe/money-pipes";
 @Component({
   selector: "money-import",
   templateUrl: "assets/html/import/index.html",
-  styleUrls: ["assets/css/import.css"],
-  pipes: [CatfilterPipe, CategorySorterPipe]
+  styleUrls: ["assets/css/import.css"]
 })
 export class ImportComponent implements OnInit {
 

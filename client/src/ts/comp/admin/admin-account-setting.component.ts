@@ -1,6 +1,6 @@
 import {Component}                  from "@angular/core";
-import {Control, ControlGroup, FormBuilder, Validators} from "@angular/common";
-import {Http, RequestOptions, RequestMethod, Headers} from "@angular/http";
+import {FormControl, FormGroup, FormBuilder, Validators} from "@angular/forms";
+import {Http} from "@angular/http";
 
 import {AccountSetting}             from "../../model/core/account-setting.class";
 import {FieldMapping}               from "../../model/core/field-mapping.class";
@@ -8,20 +8,18 @@ import {AccountFormValidator}       from "../../model/validation/account-form-va
 import {AccountSettingRestService}  from "../../service/account-setting-rest.service";
 import {FormUtilsService}           from "../../service/form-utils.service";
 import {UploadCsvService}           from "../../service/upload-csv.service";
-import {DisplayErrorDirective}      from "../directive/display-error.directive";
-import {AdminMenuComponent}         from "./admin-menu.component";
+
 
 @Component({
     selector: "money-admin-account-setting",
     templateUrl: "assets/html/admin/account-setting.html",
     styleUrls : ["assets/css/admin/account-setting.css"],
-    directives: [DisplayErrorDirective, AdminMenuComponent]
 })
 export class AdminAccountSettingComponent {
-  accountForm: ControlGroup;
+  accountForm: FormGroup;
   fileFirstLines: Array<string>;
   lineTokens: Array<string>;
-  dummyFieldMappingControl: Control;
+  dummyFieldMappingControl: FormControl;
   accountSetting: AccountSetting = new AccountSetting();
   allAccountSettings: Array<AccountSetting>;
 
@@ -72,7 +70,7 @@ export class AdminAccountSettingComponent {
     Called after a mapping select box changed, to force validation computing.
   **/
   onMappingChange($event) {
-    this.dummyFieldMappingControl.updateValue($event); // Just to fire change detection
+    this.dummyFieldMappingControl.setValue($event); // Just to fire change detection
   }
 
   onCsvSampleUpload(fileinput: any) {
@@ -80,13 +78,13 @@ export class AdminAccountSettingComponent {
     let sampleCsvFile: File = fileinput.target.files[0],
         adminCsvComp = this,
         successCallback = function(response: any) {
-          (<Control> adminCsvComp.accountForm.controls["csvfile"]).setErrors(undefined);
+          adminCsvComp.accountForm.controls["csvfile"].setErrors(undefined);
           let allLines: Array<string> = JSON.parse(response);
           adminCsvComp.fileFirstLines = allLines.slice(0, 15);
           adminCsvComp.updateTokens(adminCsvComp);
         },
         failureCallback = function(response: any) {
-          (<Control> adminCsvComp.accountForm.controls["csvfile"]).setErrors({"uploadfailed": true});
+          adminCsvComp.accountForm.controls["csvfile"].setErrors({"uploadfailed": true});
         };
 
     this._uploadCsvService.uploadFile(UPLOAD_URL, sampleCsvFile, successCallback, failureCallback);

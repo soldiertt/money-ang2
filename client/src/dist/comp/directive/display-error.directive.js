@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/common"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/forms"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,30 +13,31 @@ System.register(["@angular/core", "@angular/common"], function(exports_1, contex
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, common_1;
+    var core_1, forms_1;
     var DisplayErrorDirective;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (common_1_1) {
-                common_1 = common_1_1;
+            function (forms_1_1) {
+                forms_1 = forms_1_1;
             }],
         execute: function() {
             DisplayErrorDirective = (function () {
                 // we inject the form model
-                function DisplayErrorDirective(formModel) {
-                    this.formModel = formModel;
+                function DisplayErrorDirective(hostFormGroup) {
+                    this.hostFormGroup = hostFormGroup;
                 }
                 // we then find the control
                 DisplayErrorDirective.prototype.ngOnInit = function () {
-                    this.control = this.formModel.form.find(this.controlName);
+                    var _this = this;
+                    this.control = this.hostFormGroup.directives.find(function (dir) { return dir.name === _this.controlName; });
                 };
                 // the div in the template will only be added if
                 // the control is dirty and has the specified error
                 DisplayErrorDirective.prototype.isDisplayed = function () {
-                    return (this.control.dirty || this.controlName === "csvfile") && this.control.hasError(this.error);
+                    return (this.control.dirty || this.controlName === "csvfile") && this.control.errors && this.control.errors.hasOwnProperty(this.error);
                 };
                 __decorate([
                     core_1.Input("control"), 
@@ -52,7 +53,7 @@ System.register(["@angular/core", "@angular/common"], function(exports_1, contex
                         template: "<div *ngIf=\"isDisplayed()\" class=\"alert alert-danger\"><ng-content></ng-content></div>"
                     }),
                     __param(0, core_1.Host()), 
-                    __metadata('design:paramtypes', [common_1.NgFormModel])
+                    __metadata('design:paramtypes', [forms_1.FormGroupDirective])
                 ], DisplayErrorDirective);
                 return DisplayErrorDirective;
             }());

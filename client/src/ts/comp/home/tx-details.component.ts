@@ -1,7 +1,7 @@
 import {Component, Input, Output, EventEmitter} from "@angular/core";
 
 import {Tx} from "../../model/core/tx.class";
-import {Category, Period} from "../../model/core/category.class";
+import { Period} from "../../model/core/category.class";
 import {CategoryRestService}    from "../../service/category-rest.service";
 import {TxrefRestService}    from "../../service/txref-rest.service";
 

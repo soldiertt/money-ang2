@@ -21,16 +21,6 @@ System.register(["@angular/core"], function(exports_1, context_1) {
             FormUtilsService = (function () {
                 function FormUtilsService() {
                 }
-                FormUtilsService.prototype.reset = function (form) {
-                    var controlNames = [];
-                    for (var _i = 1; _i < arguments.length; _i++) {
-                        controlNames[_i - 1] = arguments[_i];
-                    }
-                    for (var _a = 0, controlNames_1 = controlNames; _a < controlNames_1.length; _a++) {
-                        var controlName = controlNames_1[_a];
-                        form.controls[controlName].updateValue("");
-                    }
-                };
                 FormUtilsService.prototype.getAppYears = function () {
                     var startYear = 2015;
                     var endYear = new Date().getFullYear();

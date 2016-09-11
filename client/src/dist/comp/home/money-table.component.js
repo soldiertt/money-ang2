@@ -1,4 +1,4 @@
-System.register(["@angular/core", "./tx-details.component", "../../model/core/money-enums", "../../service/display-param.service", "../../service/category-rest.service", "../../service/form-utils.service", "../directive/tooltip.directive", "../directive/money-icon.directive", "../../pipe/money-pipes"], function(exports_1, context_1) {
+System.register(["@angular/core", "../../model/core/money-enums", "../../service/display-param.service", "../../service/category-rest.service", "../../service/form-utils.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,15 +10,12 @@ System.register(["@angular/core", "./tx-details.component", "../../model/core/mo
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, tx_details_component_1, money_enums_1, display_param_service_1, category_rest_service_1, form_utils_service_1, tooltip_directive_1, money_icon_directive_1, money_pipes_1;
+    var core_1, money_enums_1, display_param_service_1, category_rest_service_1, form_utils_service_1;
     var MoneyTableComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (tx_details_component_1_1) {
-                tx_details_component_1 = tx_details_component_1_1;
             },
             function (money_enums_1_1) {
                 money_enums_1 = money_enums_1_1;
@@ -31,15 +28,6 @@ System.register(["@angular/core", "./tx-details.component", "../../model/core/mo
             },
             function (form_utils_service_1_1) {
                 form_utils_service_1 = form_utils_service_1_1;
-            },
-            function (tooltip_directive_1_1) {
-                tooltip_directive_1 = tooltip_directive_1_1;
-            },
-            function (money_icon_directive_1_1) {
-                money_icon_directive_1 = money_icon_directive_1_1;
-            },
-            function (money_pipes_1_1) {
-                money_pipes_1 = money_pipes_1_1;
             }],
         execute: function() {
             MoneyTableComponent = (function () {
@@ -201,8 +189,6 @@ System.register(["@angular/core", "./tx-details.component", "../../model/core/mo
                         selector: "money-table",
                         templateUrl: "assets/html/home/money-table.html",
                         styleUrls: ["assets/css/money-table.css", "assets/css/tooltip.css"],
-                        directives: [tooltip_directive_1.TooltipDirective, tx_details_component_1.TxDetailsComponent, money_icon_directive_1.MoneyIconDirective],
-                        pipes: [money_pipes_1.CatfilterPipe, money_pipes_1.CategorySorterPipe, money_pipes_1.PeriodFilterPipe],
                         encapsulation: core_1.ViewEncapsulation.None
                     }), 
                     __metadata('design:paramtypes', [display_param_service_1.DisplayParamService, category_rest_service_1.CategoryRestService, form_utils_service_1.FormUtilsService])

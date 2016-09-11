@@ -1,19 +1,17 @@
 import {Component} from "@angular/core";
-import {Control, ControlGroup, FormBuilder, Validators} from "@angular/common";
+import {FormGroup, FormBuilder} from "@angular/forms";
 
 import {UploadCsvService}           from "../../service/upload-csv.service";
-import {DisplayErrorDirective}      from "../directive/display-error.directive";
 import {CsvFilesRestService}       from "../../service/csv-files-rest.service";
 
 @Component({
     selector: "money-admin-uploads",
     templateUrl: "assets/html/admin/uploads.html",
-    styleUrls : ["assets/css/admin/uploads.css"],
-    directives: [DisplayErrorDirective]
+    styleUrls : ["assets/css/admin/uploads.css"]
 })
 export class AdminUploadsComponent {
 
-  uploadForm: ControlGroup;
+  uploadForm: FormGroup;
   csvFilenames: Array<string>;
   defaultCsvPath: string;
 
@@ -34,11 +32,11 @@ export class AdminUploadsComponent {
     let csvFile: File = fileinput.target.files[0],
         adminUploadComp = this,
         successCallback = function(response: any) {
-          (<Control> adminUploadComp.uploadForm.controls["csvfile"]).setErrors(undefined);
+          adminUploadComp.uploadForm.controls["csvfile"].setErrors(undefined);
           adminUploadComp.csvFilenames.push(response.fileName);
         },
         failureCallback = function(response: any) {
-          (<Control> adminUploadComp.uploadForm.controls["csvfile"]).setErrors({"uploadfailed": true});
+          adminUploadComp.uploadForm.controls["csvfile"].setErrors({"uploadfailed": true});
         };
 
     this._uploadCsvService.uploadFile(UPLOAD_URL, csvFile, successCallback, failureCallback);

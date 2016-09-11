@@ -2,16 +2,17 @@
 <div class="content-large content-left">
 <h1>Rules management</h1>
 <!-- CREATION FORM -->
-<form (ngSubmit)="onSubmit();nameCtrl.focus()" [ngFormModel]="createForm" class="form-horizontal">
+<form (ngSubmit)="onSubmit();nameCtrl.focus()" [formGroup]="createForm" class="form-horizontal">
   <div class="form-group">
     <label for="rule-name" class="control-label col-sm-2">Name *</label>
     <div class="col-sm-9">
-      <input type="text" name="rule-name" id="rule-name" ngControl="name" #nameCtrl class="form-control" [(ngModel)]="newRule.name" />
+      <input type="text" name="rule-name" id="rule-name" formControlName="name" #nameCtrl class="form-control" [(ngModel)]="newRule.name" />
       <display-error control="name" error="required">Name is required</display-error>
       <display-error control="name" error="minlength">Minimum length is 3 characters</display-error>
       <display-error control="name" error="maxlength">Maximum length is 50 characters</display-error>
     </div>
   </div>
+
 
   <div class="form-group" *ngFor="let condition of newRule.conditions, let i = index">
     <label class="control-label col-sm-2">Condition {{i + 1}} *</label>
@@ -22,16 +23,16 @@
       </select>
     </div>
     <div class="col-sm-3">
-      <select class="form-control" [(ngModel)]="condition.operator" *ngIf="condition.fieldType == 'STRING'">
+      <select class="form-control" [(ngModel)]="condition.operator" [ngModelOptions]="{standalone: true}" *ngIf="condition.fieldType == 'STRING'">
         <option *ngFor="let operator of stringOperators" [value]="operator.operator">{{operator.label}}</option>
       </select>
-      <select class="form-control" [(ngModel)]="condition.operator" *ngIf="condition.fieldType == 'NUMBER'">
+      <select class="form-control" [(ngModel)]="condition.operator" [ngModelOptions]="{standalone: true}" *ngIf="condition.fieldType == 'NUMBER'">
         <option *ngFor="let operator of numOperators" [value]="operator.operator">{{operator.label}}</option>
       </select>
     </div>
     <div class="col-sm-3">
-      <input *ngIf="condition.fieldType == 'STRING'" type="text" class="form-control" [(ngModel)]="condition.valueStr" (keyup)="onConditionUpdated($event)" />
-      <input *ngIf="condition.fieldType == 'NUMBER'" type="number" step="any" class="form-control" [(ngModel)]="condition.valueNum" (keyup)="onConditionUpdated($event)" />
+      <input *ngIf="condition.fieldType == 'STRING'" type="text" class="form-control" [(ngModel)]="condition.valueStr" [ngModelOptions]="{standalone: true}" (keyup)="onConditionUpdated($event)" />
+      <input *ngIf="condition.fieldType == 'NUMBER'" type="number" step="any" class="form-control" [(ngModel)]="condition.valueNum" [ngModelOptions]="{standalone: true}" (keyup)="onConditionUpdated($event)" />
     </div>
     <div class="col-sm-1" *ngIf="i + 1 == newRule.conditions.length">
       <span class="glyphicon glyphicon-plus" (click)="onAddCondition()"></span>
@@ -42,6 +43,7 @@
   <div class="form-group">
     <label class="control-label col-sm-2"></label>
     <div class="col-sm-9">
+      <input type="hidden" formControlName="conditions" name="conditions" />
       <display-error control="conditions" error="wrongConditions">Conditions are required</display-error>
     </div>
   </div>
@@ -49,7 +51,7 @@
   <div class="form-group">
     <label for="cat-type" class="control-label col-sm-2">Category Type *</label>
     <div class="col-sm-9">
-      <select name="cat-type" id="cat-type" ngControl="catType" class="form-control" (change)="onCatTypeChanged($event)" [(ngModel)]="newRule.category.type">
+      <select name="cat-type" id="cat-type" formControlName="catType" class="form-control" (change)="onCatTypeChanged($event)" [(ngModel)]="newRule.category.type">
         <option value="FIXED">FIXED</option>
         <option value="OTHER">OTHER</option>
         <option value="INCOMING">INCOMING</option>
@@ -59,7 +61,7 @@
   <div class="form-group">
     <label for="cat-frequency" class="control-label col-sm-2">Category frequency *</label>
     <div class="col-sm-9">
-      <select name="cat-frequency" id="cat-frequency" ngControl="catFrequency" class="form-control" (change)="onCatFrequencyChanged($event)" [(ngModel)]="newRule.category.frequency">
+      <select name="cat-frequency" id="cat-frequency" formControlName="catFrequency" class="form-control" (change)="onCatFrequencyChanged($event)" [(ngModel)]="newRule.category.frequency">
         <option value="MONTHLY">MONTHLY</option>
         <option value="QUARTER">QUARTER</option>
         <option value="YEARLY">YEARLY</option>
@@ -69,7 +71,7 @@
   <div class="form-group">
     <label for="cat-id" class="control-label col-sm-2">Category name *</label>
     <div class="col-sm-9">
-      <select name="cat-id" id="cat-id" ngControl="catId" class="form-control" [(ngModel)]="newRule.categoryId">
+      <select name="cat-id" id="cat-id" formControlName="catId" class="form-control" [(ngModel)]="newRule.categoryId">
         <option value="" disabled selected>Select a category ...</option>
         <option *ngFor="let cat of categories | catfilter : [newRule.category.type] : [newRule.category.frequency] | categorySorter" [value]="cat.id">{{cat.name}}</option>
       </select>

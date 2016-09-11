@@ -1,12 +1,11 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
 
 import {MultipartUploader}          from "../model/formutil/multipart-uploader.class";
 import {MultipartItem}              from "../model/formutil/multipart-item.class";
 
 @Injectable()
 export class UploadCsvService {
-    constructor(private _http: Http) {
+    constructor() {
     }
 
     uploadFile(uploadUrl: string, file: File, successCallback: Function, failureCallback: Function) {

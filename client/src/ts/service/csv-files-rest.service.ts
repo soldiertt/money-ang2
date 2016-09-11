@@ -4,7 +4,6 @@ import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";
 
 import {AccountSetting} from "../model/core/account-setting.class";
-import {TxMapper} from "../model/utils/tx-mapper.class";
 
 @Injectable()
 export class CsvFilesRestService {

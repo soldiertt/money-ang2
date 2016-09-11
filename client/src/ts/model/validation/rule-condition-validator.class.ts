@@ -1,13 +1,13 @@
-import {Control} from "@angular/common";
+import {FormControl} from "@angular/forms";
 import {AdminRuleComponent} from "../../comp/admin/admin-rule.component";
-import {CondFieldType, CondOperator}  from "../../model/core/money-enums";
+import {CondFieldType}  from "../../model/core/money-enums";
 
 export class RuleConditionValidator {
-  public validate: (control: Control) => Object;
+  public validate: (control: FormControl) => Object;
 
   constructor(component: AdminRuleComponent) {
     let validator = this;
-    validator.validate = (control: Control) => {
+    validator.validate = (control: FormControl) => {
       return validator.validateConditions(component);
     };
   }

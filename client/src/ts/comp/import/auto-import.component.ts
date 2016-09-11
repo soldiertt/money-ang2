@@ -2,10 +2,8 @@ import {Component, OnInit} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/observable/forkJoin";
 
-import {AccountSetting}                     from "../../model/core/account-setting.class";
 import {Tx}                                 from "../../model/core/tx.class";
-import {Category}                           from "../../model/core/category.class";
-import {CatType, CatFrequency}              from "../../model/core/money-enums";
+import {CatFrequency}                       from "../../model/core/money-enums";
 import {Txref}                              from "../../model/core/txref.class";
 import {TxMapper}                           from "../../model/utils/tx-mapper.class";
 import {TxFormData}                         from "../../model/formutil/tx-form-data.class";

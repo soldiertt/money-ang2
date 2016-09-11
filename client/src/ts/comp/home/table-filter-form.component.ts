@@ -1,24 +1,21 @@
-import {Component, EventEmitter, Output} from "@angular/core";
-import {Control, ControlGroup, FormBuilder, Validators} from "@angular/common";
-
+import {Component} from "@angular/core";
+import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 import {FilterPreset}             from "../../model/core/filter-preset.class";
 import {DisplayParamService}      from "../../service/display-param.service";
 import {FormUtilsService}         from "../../service/form-utils.service";
 import {FilterPresetRestService}  from "../../service/filter-preset-rest.service";
-import {FocusOnInitDirective}     from "../directive/focus-on-init.directive";
 
 @Component({
     selector: "money-table-filter-form",
     templateUrl: "assets/html/home/table-filter-form.html",
-    styleUrls: ["assets/css/table-filter-form.css"],
-    directives: [FocusOnInitDirective]
+    styleUrls: ["assets/css/table-filter-form.css"]
 })
 export class TableFilterFormComponent {
   allYears: Array<number>;
   allPresets: Array<FilterPreset> = [];
-  filterForm: ControlGroup;
-  presetNameCtrl: Control;
-  selectedPresetCtrl: Control;
+  filterForm: FormGroup;
+  presetNameCtrl: FormControl;
+  selectedPresetCtrl: FormControl;
   editPresetName: boolean;
 
   constructor(public displayParamService: DisplayParamService,
@@ -31,9 +28,20 @@ export class TableFilterFormComponent {
 
     this.presetNameCtrl = fb.control("", Validators.required);
     this.selectedPresetCtrl = fb.control("");
-    this.filterForm = fb.group({presetName: this.presetNameCtrl, selectedPreset: this.selectedPresetCtrl});
+    this.filterForm = fb.group({
+      presetName: this.presetNameCtrl,
+      selectedPreset: this.selectedPresetCtrl,
+      selectedYear: fb.control(""),
+      catFixed: fb.control(""),
+      catOther: fb.control(""),
+      catIncoming: fb.control(""),
+      freqMonthly: fb.control(""),
+      freqQuarter: fb.control(""),
+      freqYearly: fb.control(""),
+      displayTotal: fb.control("")
+    });
 
-    this.filterForm.find("selectedPreset").valueChanges.subscribe((presetId) => {
+    this.filterForm.controls["selectedPreset"].valueChanges.subscribe((presetId) => {
       this.loadFilter(presetId);
     });
   }
@@ -53,7 +61,7 @@ export class TableFilterFormComponent {
 
   onFilterUpdated($event) {
     this.displayParamService.hasChanged();
-    this.selectedPresetCtrl.updateValue("");
+    this.selectedPresetCtrl.setValue("");
   }
 
   onAskSave() {

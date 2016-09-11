@@ -1,4 +1,4 @@
-System.register(["@angular/core", "./money-table.component", "./table-filter-form.component"], function(exports_1, context_1) {
+System.register(["@angular/core"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,18 +10,12 @@ System.register(["@angular/core", "./money-table.component", "./table-filter-for
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, money_table_component_1, table_filter_form_component_1;
+    var core_1;
     var HomeComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (money_table_component_1_1) {
-                money_table_component_1 = money_table_component_1_1;
-            },
-            function (table_filter_form_component_1_1) {
-                table_filter_form_component_1 = table_filter_form_component_1_1;
             }],
         execute: function() {
             HomeComponent = (function () {
@@ -30,8 +24,7 @@ System.register(["@angular/core", "./money-table.component", "./table-filter-for
                 HomeComponent = __decorate([
                     core_1.Component({
                         selector: "money-home",
-                        templateUrl: "assets/html/home/index.html",
-                        directives: [money_table_component_1.MoneyTableComponent, table_filter_form_component_1.TableFilterFormComponent]
+                        templateUrl: "assets/html/home/index.html"
                     }), 
                     __metadata('design:paramtypes', [])
                 ], HomeComponent);

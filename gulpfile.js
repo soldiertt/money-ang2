@@ -8,7 +8,7 @@ const rename = require('gulp-rename');
 
 gulp.task('app-bundle', function () {
 
-  var tsProject = ts.createProject('client/src/ts/tsconfig.json',{ outDir: undefined, rootDir: undefined, out: "money-bundle.min.js"});
+  var tsProject = ts.createProject('client/src/ts/tsconfig.json',{ rootDir: 'client/src/ts', out: "money-bundle.min.js"});
 
   return tsProject.src()
     .pipe(ts(tsProject))

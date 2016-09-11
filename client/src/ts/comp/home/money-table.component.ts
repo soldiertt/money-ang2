@@ -1,22 +1,16 @@
-import {Component, OnInit, ViewEncapsulation} from "@angular/core";
+import {Component, ViewEncapsulation} from "@angular/core";
 
-import {TxDetailsComponent}     from "./tx-details.component";
 import {Category, Period}       from "../../model/core/category.class";
-import {Tx}                     from "../../model/core/tx.class";
 import {CatFrequency, CatType}  from "../../model/core/money-enums";
 import {DisplayParamService}    from "../../service/display-param.service"; // Used in view
 import {CategoryRestService}    from "../../service/category-rest.service";
 import {FormUtilsService}       from "../../service/form-utils.service";
-import {TooltipDirective}       from "../directive/tooltip.directive";
-import {MoneyIconDirective}     from "../directive/money-icon.directive";
-import {CatfilterPipe, CategorySorterPipe, PeriodFilterPipe}  from "../../pipe/money-pipes";
+
 
 @Component({
     selector: "money-table",
     templateUrl: "assets/html/home/money-table.html",
     styleUrls: ["assets/css/money-table.css", "assets/css/tooltip.css"],
-    directives: [TooltipDirective, TxDetailsComponent, MoneyIconDirective],
-    pipes: [CatfilterPipe, CategorySorterPipe, PeriodFilterPipe],
     encapsulation: ViewEncapsulation.None
 })
 export class MoneyTableComponent {

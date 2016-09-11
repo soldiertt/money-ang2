@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/common", "../../model/core/rule.class", "../../model/formutil/operator-helper.class", "../../model/core/money-enums", "../../model/validation/rule-condition-validator.class", "../../service/rule-rest.service", "../../service/rule.service", "../../service/category-rest.service", "../directive/display-error.directive", "../../pipe/money-pipes", "./admin-menu.component"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/forms", "../../model/core/rule.class", "../../model/formutil/operator-helper.class", "../../model/core/money-enums", "../../model/validation/rule-condition-validator.class", "../../service/rule-rest.service", "../../service/rule.service", "../../service/category-rest.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,15 +10,15 @@ System.register(["@angular/core", "@angular/common", "../../model/core/rule.clas
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, rule_class_1, operator_helper_class_1, money_enums_1, rule_condition_validator_class_1, rule_rest_service_1, rule_service_1, category_rest_service_1, display_error_directive_1, money_pipes_1, admin_menu_component_1;
+    var core_1, forms_1, rule_class_1, operator_helper_class_1, money_enums_1, rule_condition_validator_class_1, rule_rest_service_1, rule_service_1, category_rest_service_1;
     var FieldHelper, AdminRuleComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (common_1_1) {
-                common_1 = common_1_1;
+            function (forms_1_1) {
+                forms_1 = forms_1_1;
             },
             function (rule_class_1_1) {
                 rule_class_1 = rule_class_1_1;
@@ -40,15 +40,6 @@ System.register(["@angular/core", "@angular/common", "../../model/core/rule.clas
             },
             function (category_rest_service_1_1) {
                 category_rest_service_1 = category_rest_service_1_1;
-            },
-            function (display_error_directive_1_1) {
-                display_error_directive_1 = display_error_directive_1_1;
-            },
-            function (money_pipes_1_1) {
-                money_pipes_1 = money_pipes_1_1;
-            },
-            function (admin_menu_component_1_1) {
-                admin_menu_component_1 = admin_menu_component_1_1;
             }],
         execute: function() {
             FieldHelper = (function () {
@@ -77,7 +68,6 @@ System.register(["@angular/core", "@angular/common", "../../model/core/rule.clas
                     });
                     this._ruleRestService.list().subscribe(function (rules) {
                         _this.rules = rules;
-                        console.log(rules);
                     });
                     var ruleConditionValidator = new rule_condition_validator_class_1.RuleConditionValidator(this);
                     this.dummyFieldConditionsControl = fb.control("", ruleConditionValidator.validate);
@@ -92,10 +82,10 @@ System.register(["@angular/core", "@angular/common", "../../model/core/rule.clas
                     this.fieldNames.push(new FieldHelper(3, "thirdPartyAccountName", "Third-party account name", money_enums_1.CondFieldType.STRING));
                     this.fieldNames.push(new FieldHelper(4, "thirdPartyAccountNumber", "Third-party account number", money_enums_1.CondFieldType.STRING));
                     this.createForm = fb.group({
-                        name: fb.control("", common_1.Validators.compose([common_1.Validators.required, common_1.Validators.minLength(3), common_1.Validators.maxLength(50)])),
-                        catType: fb.control("", common_1.Validators.required),
-                        catFrequency: fb.control("", common_1.Validators.required),
-                        catId: fb.control("", common_1.Validators.required),
+                        name: fb.control("", forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.minLength(3), forms_1.Validators.maxLength(50)])),
+                        catType: fb.control("", forms_1.Validators.required),
+                        catFrequency: fb.control("", forms_1.Validators.required),
+                        catId: fb.control("", forms_1.Validators.required),
                         conditions: this.dummyFieldConditionsControl
                     });
                 }
@@ -104,19 +94,19 @@ System.register(["@angular/core", "@angular/common", "../../model/core/rule.clas
                     condition.fieldType = this.fieldNames[$event.target.value].type;
                     condition.valueStr = undefined;
                     condition.valueNum = undefined;
-                    this.dummyFieldConditionsControl.updateValue($event); // Just to fire change detection
+                    this.dummyFieldConditionsControl.setValue($event); // Just to fire change detection
                 };
                 AdminRuleComponent.prototype.onConditionUpdated = function ($event) {
                     this.dummyFieldConditionsControl.markAsDirty();
-                    this.dummyFieldConditionsControl.updateValue($event); // Just to fire change detection
+                    this.dummyFieldConditionsControl.setValue($event); // Just to fire change detection
                 };
                 AdminRuleComponent.prototype.onAddCondition = function () {
                     this.newRule.conditions.push(new rule_class_1.Condition());
-                    this.dummyFieldConditionsControl.updateValue("add"); // Just to fire change detection
+                    this.dummyFieldConditionsControl.setValue("add"); // Just to fire change detection
                 };
                 AdminRuleComponent.prototype.onRemoveCondition = function () {
                     this.newRule.conditions.pop();
-                    this.dummyFieldConditionsControl.updateValue("remove"); // Just to fire change detection
+                    this.dummyFieldConditionsControl.setValue("remove"); // Just to fire change detection
                 };
                 AdminRuleComponent.prototype.onCatTypeChanged = function ($event) {
                     this.newRule.category.type = money_enums_1.CatType[$event.target.value];
@@ -175,7 +165,7 @@ System.register(["@angular/core", "@angular/common", "../../model/core/rule.clas
                     this.editedRuleIndex = j;
                     this.formMode = "edit";
                     this.newRule = rule;
-                    this.dummyFieldConditionsControl.updateValue(j); // Just to fire change detection
+                    this.dummyFieldConditionsControl.setValue(j); // Just to fire change detection
                 };
                 AdminRuleComponent.prototype.onCancelEdit = function ($event) {
                     $event.preventDefault();
@@ -201,11 +191,9 @@ System.register(["@angular/core", "@angular/common", "../../model/core/rule.clas
                 AdminRuleComponent = __decorate([
                     core_1.Component({
                         selector: "money-admin-rule",
-                        templateUrl: "assets/html/admin/rule.html",
-                        directives: [display_error_directive_1.DisplayErrorDirective, admin_menu_component_1.AdminMenuComponent],
-                        pipes: [money_pipes_1.CatfilterPipe, money_pipes_1.CategorySorterPipe]
+                        templateUrl: "assets/html/admin/rule.html"
                     }), 
-                    __metadata('design:paramtypes', [rule_rest_service_1.RuleRestService, category_rest_service_1.CategoryRestService, common_1.FormBuilder, core_1.ElementRef, rule_service_1.RuleService])
+                    __metadata('design:paramtypes', [rule_rest_service_1.RuleRestService, category_rest_service_1.CategoryRestService, forms_1.FormBuilder, core_1.ElementRef, rule_service_1.RuleService])
                 ], AdminRuleComponent);
                 return AdminRuleComponent;
             }());

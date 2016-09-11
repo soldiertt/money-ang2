@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/common", "../../model/core/filter-preset.class", "../../service/display-param.service", "../../service/form-utils.service", "../../service/filter-preset-rest.service", "../directive/focus-on-init.directive"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/forms", "../../model/core/filter-preset.class", "../../service/display-param.service", "../../service/form-utils.service", "../../service/filter-preset-rest.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,15 +10,15 @@ System.register(["@angular/core", "@angular/common", "../../model/core/filter-pr
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, filter_preset_class_1, display_param_service_1, form_utils_service_1, filter_preset_rest_service_1, focus_on_init_directive_1;
+    var core_1, forms_1, filter_preset_class_1, display_param_service_1, form_utils_service_1, filter_preset_rest_service_1;
     var TableFilterFormComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (common_1_1) {
-                common_1 = common_1_1;
+            function (forms_1_1) {
+                forms_1 = forms_1_1;
             },
             function (filter_preset_class_1_1) {
                 filter_preset_class_1 = filter_preset_class_1_1;
@@ -31,9 +31,6 @@ System.register(["@angular/core", "@angular/common", "../../model/core/filter-pr
             },
             function (filter_preset_rest_service_1_1) {
                 filter_preset_rest_service_1 = filter_preset_rest_service_1_1;
-            },
-            function (focus_on_init_directive_1_1) {
-                focus_on_init_directive_1 = focus_on_init_directive_1_1;
             }],
         execute: function() {
             TableFilterFormComponent = (function () {
@@ -47,10 +44,21 @@ System.register(["@angular/core", "@angular/common", "../../model/core/filter-pr
                     this._filterPresetRestService.list().subscribe(function (allPresets) {
                         _this.allPresets = allPresets;
                     });
-                    this.presetNameCtrl = fb.control("", common_1.Validators.required);
+                    this.presetNameCtrl = fb.control("", forms_1.Validators.required);
                     this.selectedPresetCtrl = fb.control("");
-                    this.filterForm = fb.group({ presetName: this.presetNameCtrl, selectedPreset: this.selectedPresetCtrl });
-                    this.filterForm.find("selectedPreset").valueChanges.subscribe(function (presetId) {
+                    this.filterForm = fb.group({
+                        presetName: this.presetNameCtrl,
+                        selectedPreset: this.selectedPresetCtrl,
+                        selectedYear: fb.control(""),
+                        catFixed: fb.control(""),
+                        catOther: fb.control(""),
+                        catIncoming: fb.control(""),
+                        freqMonthly: fb.control(""),
+                        freqQuarter: fb.control(""),
+                        freqYearly: fb.control(""),
+                        displayTotal: fb.control("")
+                    });
+                    this.filterForm.controls["selectedPreset"].valueChanges.subscribe(function (presetId) {
                         _this.loadFilter(presetId);
                     });
                 }
@@ -67,7 +75,7 @@ System.register(["@angular/core", "@angular/common", "../../model/core/filter-pr
                 };
                 TableFilterFormComponent.prototype.onFilterUpdated = function ($event) {
                     this.displayParamService.hasChanged();
-                    this.selectedPresetCtrl.updateValue("");
+                    this.selectedPresetCtrl.setValue("");
                 };
                 TableFilterFormComponent.prototype.onAskSave = function () {
                     this.editPresetName = true;
@@ -89,10 +97,9 @@ System.register(["@angular/core", "@angular/common", "../../model/core/filter-pr
                     core_1.Component({
                         selector: "money-table-filter-form",
                         templateUrl: "assets/html/home/table-filter-form.html",
-                        styleUrls: ["assets/css/table-filter-form.css"],
-                        directives: [focus_on_init_directive_1.FocusOnInitDirective]
+                        styleUrls: ["assets/css/table-filter-form.css"]
                     }), 
-                    __metadata('design:paramtypes', [display_param_service_1.DisplayParamService, form_utils_service_1.FormUtilsService, common_1.FormBuilder, filter_preset_rest_service_1.FilterPresetRestService])
+                    __metadata('design:paramtypes', [display_param_service_1.DisplayParamService, form_utils_service_1.FormUtilsService, forms_1.FormBuilder, filter_preset_rest_service_1.FilterPresetRestService])
                 ], TableFilterFormComponent);
                 return TableFilterFormComponent;
             }());

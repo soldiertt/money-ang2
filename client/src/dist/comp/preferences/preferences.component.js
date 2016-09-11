@@ -59,8 +59,7 @@ System.register(["@angular/core", "../../model/core/preference.class", "../../se
                 PreferencesComponent = __decorate([
                     core_1.Component({
                         selector: "money-preferences",
-                        templateUrl: "assets/html/preferences/index.html",
-                        directives: []
+                        templateUrl: "assets/html/preferences/index.html"
                     }), 
                     __metadata('design:paramtypes', [preference_rest_service_1.PreferenceRestService])
                 ], PreferencesComponent);

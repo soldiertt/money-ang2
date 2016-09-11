@@ -2,15 +2,15 @@
   <h1>Preferences</h1>
   <form class="form-horizontal" (submit)="onSave()">
     <div class="form-group">
-      <label for="pref-csv-path" class="control-label col-sm-3">Csv files location</label>
+      <label for="pref-default-path" class="control-label col-sm-3">Csv files location</label>
       <div class="col-sm-9">
-        <input type="checkbox" [(ngModel)]="preference.useDefaultCsvPath" /> Use default location
+        <input type="checkbox" [(ngModel)]="preference.useDefaultCsvPath" id="pref-default-path" name="pref-default-path" /> Use default location
       </div>
     </div>
     <div class="form-group" *ngIf="!preference.useDefaultCsvPath">
       <label for="pref-csv-path" class="control-label col-sm-3">Specify location</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" [(ngModel)]="preference.csvPath" />
+        <input type="text" class="form-control" [(ngModel)]="preference.csvPath" id="pref-csv-path" name="pref-csv-path" />
       </div>
     </div>
     <div class="form-group">

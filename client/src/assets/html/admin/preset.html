@@ -14,8 +14,8 @@
       <td>
         <div *ngIf="editedPreset?.id != preset.id">{{preset.name}} <span class="glyphicon glyphicon-pencil action-link" (click)="onEdit(preset)"></span></div>
         <div *ngIf="editedPreset?.id == preset.id">
-          <form [ngFormModel]="editForm" (ngSubmit)="onUpdate()">
-            <input type="text" class="form-control" ngControl="presetName" [(ngModel)]="editedPreset.name" focusOnInit />
+          <form [formGroup]="editForm" (ngSubmit)="onUpdate()">
+            <input type="text" class="form-control" formControlName="presetName" [(ngModel)]="editedPreset.name" focusOnInit />
             <display-error control="presetName" error="required">Name is required</display-error>
             <input type="submit" value="Ok" [disabled]="!editForm.valid" class="btn btn-primary" /> <a href (click)="onCancelEdit($event)">Cancel</a>
           </form>

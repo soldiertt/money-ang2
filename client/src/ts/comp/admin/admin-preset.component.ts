@@ -1,20 +1,16 @@
 import {Component} from "@angular/core";
-import {ControlGroup, Control, FormBuilder, Validators} from "@angular/common";
+import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 
 import {FilterPreset} from "../../model/core/filter-preset.class";
 import {FilterPresetRestService}    from "../../service/filter-preset-rest.service";
-import {DisplayErrorDirective}  from "../directive/display-error.directive";
-import {FocusOnInitDirective}   from "../directive/focus-on-init.directive";
-import {AdminMenuComponent}     from "./admin-menu.component";
 
 @Component({
     selector: "money-admin-preset",
-    templateUrl: "assets/html/admin/preset.html",
-    directives: [DisplayErrorDirective, FocusOnInitDirective, AdminMenuComponent]
+    templateUrl: "assets/html/admin/preset.html"
 })
 export class AdminPresetComponent {
 
-  editForm: ControlGroup;
+  editForm: FormGroup;
   filterPresets: Array<FilterPreset> = [];
   editedPreset: FilterPreset;
 

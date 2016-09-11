@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/common", "../../service/filter-preset-rest.service", "../directive/display-error.directive", "../directive/focus-on-init.directive", "./admin-menu.component"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/forms", "../../service/filter-preset-rest.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,27 +10,18 @@ System.register(["@angular/core", "@angular/common", "../../service/filter-prese
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, filter_preset_rest_service_1, display_error_directive_1, focus_on_init_directive_1, admin_menu_component_1;
+    var core_1, forms_1, filter_preset_rest_service_1;
     var AdminPresetComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (common_1_1) {
-                common_1 = common_1_1;
+            function (forms_1_1) {
+                forms_1 = forms_1_1;
             },
             function (filter_preset_rest_service_1_1) {
                 filter_preset_rest_service_1 = filter_preset_rest_service_1_1;
-            },
-            function (display_error_directive_1_1) {
-                display_error_directive_1 = display_error_directive_1_1;
-            },
-            function (focus_on_init_directive_1_1) {
-                focus_on_init_directive_1 = focus_on_init_directive_1_1;
-            },
-            function (admin_menu_component_1_1) {
-                admin_menu_component_1 = admin_menu_component_1_1;
             }],
         execute: function() {
             AdminPresetComponent = (function () {
@@ -42,7 +33,7 @@ System.register(["@angular/core", "@angular/common", "../../service/filter-prese
                         _this.filterPresets = allPresets;
                     });
                     this.editForm = fb.group({
-                        presetName: fb.control("", common_1.Validators.required)
+                        presetName: fb.control("", forms_1.Validators.required)
                     });
                 }
                 AdminPresetComponent.prototype.onDelete = function (preset, index) {
@@ -71,10 +62,9 @@ System.register(["@angular/core", "@angular/common", "../../service/filter-prese
                 AdminPresetComponent = __decorate([
                     core_1.Component({
                         selector: "money-admin-preset",
-                        templateUrl: "assets/html/admin/preset.html",
-                        directives: [display_error_directive_1.DisplayErrorDirective, focus_on_init_directive_1.FocusOnInitDirective, admin_menu_component_1.AdminMenuComponent]
+                        templateUrl: "assets/html/admin/preset.html"
                     }), 
-                    __metadata('design:paramtypes', [filter_preset_rest_service_1.FilterPresetRestService, common_1.FormBuilder])
+                    __metadata('design:paramtypes', [filter_preset_rest_service_1.FilterPresetRestService, forms_1.FormBuilder])
                 ], AdminPresetComponent);
                 return AdminPresetComponent;
             }());

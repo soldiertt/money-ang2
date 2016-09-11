@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/common", "../../service/upload-csv.service", "../directive/display-error.directive", "../../service/csv-files-rest.service"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/forms", "../../service/upload-csv.service", "../../service/csv-files-rest.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,21 +10,18 @@ System.register(["@angular/core", "@angular/common", "../../service/upload-csv.s
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, upload_csv_service_1, display_error_directive_1, csv_files_rest_service_1;
+    var core_1, forms_1, upload_csv_service_1, csv_files_rest_service_1;
     var AdminUploadsComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (common_1_1) {
-                common_1 = common_1_1;
+            function (forms_1_1) {
+                forms_1 = forms_1_1;
             },
             function (upload_csv_service_1_1) {
                 upload_csv_service_1 = upload_csv_service_1_1;
-            },
-            function (display_error_directive_1_1) {
-                display_error_directive_1 = display_error_directive_1_1;
             },
             function (csv_files_rest_service_1_1) {
                 csv_files_rest_service_1 = csv_files_rest_service_1_1;
@@ -66,10 +63,9 @@ System.register(["@angular/core", "@angular/common", "../../service/upload-csv.s
                     core_1.Component({
                         selector: "money-admin-uploads",
                         templateUrl: "assets/html/admin/uploads.html",
-                        styleUrls: ["assets/css/admin/uploads.css"],
-                        directives: [display_error_directive_1.DisplayErrorDirective]
+                        styleUrls: ["assets/css/admin/uploads.css"]
                     }), 
-                    __metadata('design:paramtypes', [common_1.FormBuilder, upload_csv_service_1.UploadCsvService, csv_files_rest_service_1.CsvFilesRestService])
+                    __metadata('design:paramtypes', [forms_1.FormBuilder, upload_csv_service_1.UploadCsvService, csv_files_rest_service_1.CsvFilesRestService])
                 ], AdminUploadsComponent);
                 return AdminUploadsComponent;
             }());

@@ -1,5 +1,5 @@
 import {Component, ElementRef} from "@angular/core";
-import {Control, FormBuilder, Validators, ControlGroup} from "@angular/common";
+import {FormControl, FormBuilder, Validators, FormGroup, FormArray} from "@angular/forms";
 
 import {Condition, Rule}              from "../../model/core/rule.class";
 import {Category}                     from "../../model/core/category.class";
@@ -9,9 +9,6 @@ import {RuleConditionValidator}       from "../../model/validation/rule-conditio
 import {RuleRestService}              from "../../service/rule-rest.service";
 import {RuleService}                  from "../../service/rule.service";
 import {CategoryRestService}          from "../../service/category-rest.service";
-import {DisplayErrorDirective}        from "../directive/display-error.directive";
-import {CatfilterPipe, CategorySorterPipe}  from "../../pipe/money-pipes";
-import {AdminMenuComponent}           from "./admin-menu.component";
 
 class FieldHelper {
   index: number;
@@ -28,19 +25,17 @@ class FieldHelper {
 
 @Component({
     selector: "money-admin-rule",
-    templateUrl: "assets/html/admin/rule.html",
-    directives: [DisplayErrorDirective, AdminMenuComponent],
-    pipes: [CatfilterPipe, CategorySorterPipe]
+    templateUrl: "assets/html/admin/rule.html"
 })
 export class AdminRuleComponent {
   formMode: string = "create";
-  createForm: ControlGroup;
+  createForm: FormGroup;
   newRule: Rule = new Rule();
   editedRuleIndex: number;
   fieldNames: Array<FieldHelper> = [];
   stringOperators: Array<OperatorHelper> = [];
   numOperators: Array<OperatorHelper> = [];
-  dummyFieldConditionsControl: Control;
+  dummyFieldConditionsControl: FormControl;
   categories: Array<Category>;
   rules: Array<any>; // Rules populated with category
 
@@ -56,7 +51,6 @@ export class AdminRuleComponent {
 
     this._ruleRestService.list().subscribe(rules => {
       this.rules = rules;
-      console.log(rules);
     });
 
     let ruleConditionValidator = new RuleConditionValidator(this);
@@ -89,22 +83,22 @@ export class AdminRuleComponent {
     condition.fieldType = this.fieldNames[$event.target.value].type;
     condition.valueStr = undefined;
     condition.valueNum = undefined;
-    this.dummyFieldConditionsControl.updateValue($event); // Just to fire change detection
+    this.dummyFieldConditionsControl.setValue($event); // Just to fire change detection
   }
 
   onConditionUpdated($event) {
     this.dummyFieldConditionsControl.markAsDirty();
-    this.dummyFieldConditionsControl.updateValue($event); // Just to fire change detection
+    this.dummyFieldConditionsControl.setValue($event); // Just to fire change detection
   }
 
   onAddCondition() {
     this.newRule.conditions.push(new Condition());
-    this.dummyFieldConditionsControl.updateValue("add"); // Just to fire change detection
+    this.dummyFieldConditionsControl.setValue("add"); // Just to fire change detection
   }
 
   onRemoveCondition() {
     this.newRule.conditions.pop();
-    this.dummyFieldConditionsControl.updateValue("remove"); // Just to fire change detection
+    this.dummyFieldConditionsControl.setValue("remove"); // Just to fire change detection
   }
 
   onCatTypeChanged($event) {
@@ -165,7 +159,7 @@ export class AdminRuleComponent {
     this.editedRuleIndex = j;
     this.formMode = "edit";
     this.newRule = rule;
-    this.dummyFieldConditionsControl.updateValue(j); // Just to fire change detection
+    this.dummyFieldConditionsControl.setValue(j); // Just to fire change detection
   }
 
   onCancelEdit($event) {

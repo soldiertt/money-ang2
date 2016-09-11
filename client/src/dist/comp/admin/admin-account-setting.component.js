@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/common", "@angular/http", "../../model/core/account-setting.class", "../../model/core/field-mapping.class", "../../model/validation/account-form-validator.class", "../../service/account-setting-rest.service", "../../service/form-utils.service", "../../service/upload-csv.service", "../directive/display-error.directive", "./admin-menu.component"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/forms", "@angular/http", "../../model/core/account-setting.class", "../../model/core/field-mapping.class", "../../model/validation/account-form-validator.class", "../../service/account-setting-rest.service", "../../service/form-utils.service", "../../service/upload-csv.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,15 +10,15 @@ System.register(["@angular/core", "@angular/common", "@angular/http", "../../mod
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, http_1, account_setting_class_1, field_mapping_class_1, account_form_validator_class_1, account_setting_rest_service_1, form_utils_service_1, upload_csv_service_1, display_error_directive_1, admin_menu_component_1;
+    var core_1, forms_1, http_1, account_setting_class_1, field_mapping_class_1, account_form_validator_class_1, account_setting_rest_service_1, form_utils_service_1, upload_csv_service_1;
     var AdminAccountSettingComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (common_1_1) {
-                common_1 = common_1_1;
+            function (forms_1_1) {
+                forms_1 = forms_1_1;
             },
             function (http_1_1) {
                 http_1 = http_1_1;
@@ -40,12 +40,6 @@ System.register(["@angular/core", "@angular/common", "@angular/http", "../../mod
             },
             function (upload_csv_service_1_1) {
                 upload_csv_service_1 = upload_csv_service_1_1;
-            },
-            function (display_error_directive_1_1) {
-                display_error_directive_1 = display_error_directive_1_1;
-            },
-            function (admin_menu_component_1_1) {
-                admin_menu_component_1 = admin_menu_component_1_1;
             }],
         execute: function() {
             AdminAccountSettingComponent = (function () {
@@ -60,12 +54,12 @@ System.register(["@angular/core", "@angular/common", "@angular/http", "../../mod
                     this.dummyFieldMappingControl = fb.control("", accountFormValidator.validate);
                     this.dummyFieldMappingControl.markAsDirty();
                     this.accountForm = fb.group({
-                        name: fb.control("", common_1.Validators.compose([common_1.Validators.required, common_1.Validators.minLength(3), common_1.Validators.maxLength(30)])),
-                        accountNumber: fb.control("", common_1.Validators.compose([common_1.Validators.required, common_1.Validators.minLength(16), common_1.Validators.maxLength(16)])),
+                        name: fb.control("", forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.minLength(3), forms_1.Validators.maxLength(30)])),
+                        accountNumber: fb.control("", forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.minLength(16), forms_1.Validators.maxLength(16)])),
                         csvfile: fb.control(""),
-                        fileStartsWith: fb.control("", common_1.Validators.compose([common_1.Validators.required])),
+                        fileStartsWith: fb.control("", forms_1.Validators.compose([forms_1.Validators.required])),
                         headerLinesCount: fb.control("", accountFormValidator.isValidNumber),
-                        fieldSeparator: fb.control("", common_1.Validators.compose([common_1.Validators.required, common_1.Validators.minLength(1), common_1.Validators.maxLength(1)])),
+                        fieldSeparator: fb.control("", forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.minLength(1), forms_1.Validators.maxLength(1)])),
                         fieldMapping: this.dummyFieldMappingControl
                     });
                     this._accountSettingRestService.list().subscribe(function (accountSettings) {
@@ -96,7 +90,7 @@ System.register(["@angular/core", "@angular/common", "@angular/http", "../../mod
                   Called after a mapping select box changed, to force validation computing.
                 **/
                 AdminAccountSettingComponent.prototype.onMappingChange = function ($event) {
-                    this.dummyFieldMappingControl.updateValue($event); // Just to fire change detection
+                    this.dummyFieldMappingControl.setValue($event); // Just to fire change detection
                 };
                 AdminAccountSettingComponent.prototype.onCsvSampleUpload = function (fileinput) {
                     var UPLOAD_URL = "/uploadsample";
@@ -149,9 +143,8 @@ System.register(["@angular/core", "@angular/common", "@angular/http", "../../mod
                         selector: "money-admin-account-setting",
                         templateUrl: "assets/html/admin/account-setting.html",
                         styleUrls: ["assets/css/admin/account-setting.css"],
-                        directives: [display_error_directive_1.DisplayErrorDirective, admin_menu_component_1.AdminMenuComponent]
                     }), 
-                    __metadata('design:paramtypes', [http_1.Http, common_1.FormBuilder, account_setting_rest_service_1.AccountSettingRestService, form_utils_service_1.FormUtilsService, upload_csv_service_1.UploadCsvService])
+                    __metadata('design:paramtypes', [http_1.Http, forms_1.FormBuilder, account_setting_rest_service_1.AccountSettingRestService, form_utils_service_1.FormUtilsService, upload_csv_service_1.UploadCsvService])
                 ], AdminAccountSettingComponent);
                 return AdminAccountSettingComponent;
             }());
