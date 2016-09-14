@@ -18,8 +18,7 @@ gulp.task('app-bundle', function () {
 
 gulp.task('vendor-bundle', function() {
   gulp.src([
-    'node_modules/es6-shim/es6-shim.min.js',
-    'node_modules/systemjs/dist/system-polyfills.js',
+    'node_modules/core-js/client/shim.min.js',
     'node_modules/systemjs/dist/system.src.js',
     'node_modules/rxjs/bundles/Rx.js',
     'node_modules/@angular/core/index.js',
@@ -27,7 +26,7 @@ gulp.task('vendor-bundle', function() {
     'node_modules/@angular/http/index.js'
   ])
   .pipe(concat('vendors.min.js'))
-  .pipe(uglify({mangle: false}))
+  //.pipe(uglify({mangle: false}))
   .pipe(gulp.dest('./client/src/assets/js'));
 });
 
