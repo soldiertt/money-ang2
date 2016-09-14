@@ -6,9 +6,6 @@
   "scripts": {
     "build-client": "rm -rf client/src/dist && tsc -p client/src/ts",
     "build-server": "rm -rf server/src/dist && tsc -p server/src/ts",
-    "postinstall": "npm run typings-server && npm run typings-client",
-    "typings-server": "cd server/src/ts && typings install",
-    "typings-client": "cd client/src/ts && typings install",
     "test": "karma start karma.conf.js",
     "posttest": "node_modules/.bin/remap-istanbul -i coverage/coverage-final.json -o coverage -t html",
     "start": "node --use_strict server/src/dist/start.js"
@@ -33,7 +30,6 @@
     "compression": "^1.4.3",
     "core-js": "^2.4.1",
     "ejs": "^2.3.1",
-    "es6-shim": "^0.35.1",
     "express": "^4.12.3",
     "jquery": "^2.2.0",
     "method-override": "^2.3.2",
@@ -69,7 +65,6 @@
     "karma-chrome-launcher": "^0.2.3",
     "karma-coverage": "^0.5.5",
     "karma-jasmine": "^0.3.8",
-    "remap-istanbul": "^0.6.2",
-    "typescript": "^1.8.10"
+    "remap-istanbul": "^0.6.2"
   }
 }
