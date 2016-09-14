@@ -1,6 +1,5 @@
-System.register(["@angular/core", "@angular/forms", "../../service/upload-csv.service", "../../service/csv-files-rest.service"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/forms", "../../service/upload-csv.service", "../../service/csv-files-rest.service"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,10 +9,10 @@ System.register(["@angular/core", "@angular/forms", "../../service/upload-csv.se
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, forms_1, upload_csv_service_1, csv_files_rest_service_1;
-    var AdminUploadsComponent;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, forms_1, upload_csv_service_1, csv_files_rest_service_1, AdminUploadsComponent;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -25,8 +24,9 @@ System.register(["@angular/core", "@angular/forms", "../../service/upload-csv.se
             },
             function (csv_files_rest_service_1_1) {
                 csv_files_rest_service_1 = csv_files_rest_service_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             AdminUploadsComponent = (function () {
                 function AdminUploadsComponent(fb, _uploadCsvService, _csvFilesRestService) {
                     var _this = this;
@@ -59,18 +59,18 @@ System.register(["@angular/core", "@angular/forms", "../../service/upload-csv.se
                         console.log(csvFilename, "was deleted");
                     });
                 };
-                AdminUploadsComponent = __decorate([
-                    core_1.Component({
-                        selector: "money-admin-uploads",
-                        templateUrl: "assets/html/admin/uploads.html",
-                        styleUrls: ["assets/css/admin/uploads.css"]
-                    }), 
-                    __metadata('design:paramtypes', [forms_1.FormBuilder, upload_csv_service_1.UploadCsvService, csv_files_rest_service_1.CsvFilesRestService])
-                ], AdminUploadsComponent);
                 return AdminUploadsComponent;
             }());
+            AdminUploadsComponent = __decorate([
+                core_1.Component({
+                    selector: "money-admin-uploads",
+                    templateUrl: "assets/html/admin/uploads.html",
+                    styleUrls: ["assets/css/admin/uploads.css"]
+                }),
+                __metadata("design:paramtypes", [forms_1.FormBuilder, upload_csv_service_1.UploadCsvService, csv_files_rest_service_1.CsvFilesRestService])
+            ], AdminUploadsComponent);
             exports_1("AdminUploadsComponent", AdminUploadsComponent);
         }
-    }
+    };
 });
 //# sourceMappingURL=admin-uploads.component.js.map

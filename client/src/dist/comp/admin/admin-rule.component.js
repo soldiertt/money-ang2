@@ -1,6 +1,5 @@
-System.register(["@angular/core", "@angular/forms", "../../model/core/rule.class", "../../model/formutil/operator-helper.class", "../../model/core/money-enums", "../../model/validation/rule-condition-validator.class", "../../service/rule-rest.service", "../../service/rule.service", "../../service/category-rest.service"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/forms", "../../model/core/rule.class", "../../model/formutil/operator-helper.class", "../../model/core/money-enums", "../../model/validation/rule-condition-validator.class", "../../service/rule-rest.service", "../../service/rule.service", "../../service/category-rest.service"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,10 +9,10 @@ System.register(["@angular/core", "@angular/forms", "../../model/core/rule.class
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, forms_1, rule_class_1, operator_helper_class_1, money_enums_1, rule_condition_validator_class_1, rule_rest_service_1, rule_service_1, category_rest_service_1;
-    var FieldHelper, AdminRuleComponent;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, forms_1, rule_class_1, operator_helper_class_1, money_enums_1, rule_condition_validator_class_1, rule_rest_service_1, rule_service_1, category_rest_service_1, FieldHelper, AdminRuleComponent;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -40,8 +39,9 @@ System.register(["@angular/core", "@angular/forms", "../../model/core/rule.class
             },
             function (category_rest_service_1_1) {
                 category_rest_service_1 = category_rest_service_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             FieldHelper = (function () {
                 function FieldHelper(index, name, label, type) {
                     this.index = index;
@@ -188,17 +188,21 @@ System.register(["@angular/core", "@angular/forms", "../../model/core/rule.class
                     }
                     return tooltip;
                 };
-                AdminRuleComponent = __decorate([
-                    core_1.Component({
-                        selector: "money-admin-rule",
-                        templateUrl: "assets/html/admin/rule.html"
-                    }), 
-                    __metadata('design:paramtypes', [rule_rest_service_1.RuleRestService, category_rest_service_1.CategoryRestService, forms_1.FormBuilder, core_1.ElementRef, rule_service_1.RuleService])
-                ], AdminRuleComponent);
                 return AdminRuleComponent;
             }());
+            AdminRuleComponent = __decorate([
+                core_1.Component({
+                    selector: "money-admin-rule",
+                    templateUrl: "assets/html/admin/rule.html"
+                }),
+                __metadata("design:paramtypes", [rule_rest_service_1.RuleRestService,
+                    category_rest_service_1.CategoryRestService,
+                    forms_1.FormBuilder,
+                    core_1.ElementRef,
+                    rule_service_1.RuleService])
+            ], AdminRuleComponent);
             exports_1("AdminRuleComponent", AdminRuleComponent);
         }
-    }
+    };
 });
 //# sourceMappingURL=admin-rule.component.js.map

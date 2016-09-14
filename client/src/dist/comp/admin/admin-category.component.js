@@ -1,6 +1,5 @@
-System.register(["@angular/core", "@angular/forms", "../../model/core/category.class", "../../model/core/money-enums", "../../model/utils/category-years-checker", "../../service/category-rest.service", "../../service/form-utils.service"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/forms", "../../model/core/category.class", "../../model/core/money-enums", "../../model/utils/category-years-checker", "../../service/category-rest.service", "../../service/form-utils.service"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,10 +9,10 @@ System.register(["@angular/core", "@angular/forms", "../../model/core/category.c
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, forms_1, category_class_1, money_enums_1, category_years_checker_1, category_rest_service_1, form_utils_service_1;
-    var AdminCategoryComponent;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, forms_1, category_class_1, money_enums_1, category_years_checker_1, category_rest_service_1, form_utils_service_1, AdminCategoryComponent;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -34,8 +33,9 @@ System.register(["@angular/core", "@angular/forms", "../../model/core/category.c
             },
             function (form_utils_service_1_1) {
                 form_utils_service_1 = form_utils_service_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             AdminCategoryComponent = (function () {
                 function AdminCategoryComponent(_categoryRestService, _formUtilsService, _categoryYearsChecker, fb) {
                     var _this = this;
@@ -194,17 +194,20 @@ System.register(["@angular/core", "@angular/forms", "../../model/core/category.c
                         console.error("Cannot find category to delete with id ", category.id);
                     }
                 };
-                AdminCategoryComponent = __decorate([
-                    core_1.Component({
-                        selector: "money-admin-category",
-                        templateUrl: "assets/html/admin/category.html"
-                    }), 
-                    __metadata('design:paramtypes', [category_rest_service_1.CategoryRestService, form_utils_service_1.FormUtilsService, category_years_checker_1.CategoryYearsChecker, forms_1.FormBuilder])
-                ], AdminCategoryComponent);
                 return AdminCategoryComponent;
             }());
+            AdminCategoryComponent = __decorate([
+                core_1.Component({
+                    selector: "money-admin-category",
+                    templateUrl: "assets/html/admin/category.html"
+                }),
+                __metadata("design:paramtypes", [category_rest_service_1.CategoryRestService,
+                    form_utils_service_1.FormUtilsService,
+                    category_years_checker_1.CategoryYearsChecker,
+                    forms_1.FormBuilder])
+            ], AdminCategoryComponent);
             exports_1("AdminCategoryComponent", AdminCategoryComponent);
         }
-    }
+    };
 });
 //# sourceMappingURL=admin-category.component.js.map

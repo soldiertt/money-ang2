@@ -1,6 +1,5 @@
-System.register(["@angular/core", "./rule-rest.service", "./category-rest.service", "../model/formutil/tx-form-data.class", "../model/core/money-enums"], function(exports_1, context_1) {
+System.register(["@angular/core", "./rule-rest.service", "./category-rest.service", "../model/formutil/tx-form-data.class", "../model/core/money-enums"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,10 +9,10 @@ System.register(["@angular/core", "./rule-rest.service", "./category-rest.servic
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, rule_rest_service_1, category_rest_service_1, tx_form_data_class_1, money_enums_1;
-    var RuleService;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, rule_rest_service_1, category_rest_service_1, tx_form_data_class_1, money_enums_1, RuleService;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -28,8 +27,9 @@ System.register(["@angular/core", "./rule-rest.service", "./category-rest.servic
             },
             function (money_enums_1_1) {
                 money_enums_1 = money_enums_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             RuleService = (function () {
                 function RuleService(_ruleRestService, _categoryRestService) {
                     this._ruleRestService = _ruleRestService;
@@ -125,14 +125,15 @@ System.register(["@angular/core", "./rule-rest.service", "./category-rest.servic
                     }
                     return match;
                 };
-                RuleService = __decorate([
-                    core_1.Injectable(), 
-                    __metadata('design:paramtypes', [rule_rest_service_1.RuleRestService, category_rest_service_1.CategoryRestService])
-                ], RuleService);
                 return RuleService;
             }());
+            RuleService = __decorate([
+                core_1.Injectable(),
+                __metadata("design:paramtypes", [rule_rest_service_1.RuleRestService,
+                    category_rest_service_1.CategoryRestService])
+            ], RuleService);
             exports_1("RuleService", RuleService);
         }
-    }
+    };
 });
 //# sourceMappingURL=rule.service.js.map

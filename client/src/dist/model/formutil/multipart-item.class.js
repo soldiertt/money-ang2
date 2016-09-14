@@ -1,10 +1,10 @@
-System.register([], function(exports_1, context_1) {
+System.register([], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var MultipartItem;
     return {
-        setters:[],
-        execute: function() {
+        setters: [],
+        execute: function () {
             MultipartItem = (function () {
                 function MultipartItem(uploader) {
                     this.uploader = uploader;
@@ -115,6 +115,6 @@ System.register([], function(exports_1, context_1) {
             }());
             exports_1("MultipartItem", MultipartItem);
         }
-    }
+    };
 });
 //# sourceMappingURL=multipart-item.class.js.map

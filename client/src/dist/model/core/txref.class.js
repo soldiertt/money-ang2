@@ -1,10 +1,10 @@
-System.register([], function(exports_1, context_1) {
+System.register([], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var Txref;
     return {
-        setters:[],
-        execute: function() {
+        setters: [],
+        execute: function () {
             Txref = (function () {
                 function Txref(ref) {
                     this.ref = ref;
@@ -13,6 +13,6 @@ System.register([], function(exports_1, context_1) {
             }());
             exports_1("Txref", Txref);
         }
-    }
+    };
 });
 //# sourceMappingURL=txref.class.js.map

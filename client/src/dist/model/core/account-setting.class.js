@@ -1,10 +1,10 @@
-System.register([], function(exports_1, context_1) {
+System.register([], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var AccountSetting;
     return {
-        setters:[],
-        execute: function() {
+        setters: [],
+        execute: function () {
             AccountSetting = (function () {
                 function AccountSetting() {
                     this.headerLinesCount = 0;
@@ -16,6 +16,6 @@ System.register([], function(exports_1, context_1) {
             }());
             exports_1("AccountSetting", AccountSetting);
         }
-    }
+    };
 });
 //# sourceMappingURL=account-setting.class.js.map

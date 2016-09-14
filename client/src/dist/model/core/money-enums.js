@@ -1,10 +1,10 @@
-System.register([], function(exports_1, context_1) {
+System.register([], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var CatType, CatFrequency, CondOperator, CondFieldType;
     return {
-        setters:[],
-        execute: function() {
+        setters: [],
+        execute: function () {
             (function (CatType) {
                 CatType[CatType["FIXED"] = "FIXED"] = "FIXED";
                 CatType[CatType["OTHER"] = "OTHER"] = "OTHER";
@@ -32,6 +32,6 @@ System.register([], function(exports_1, context_1) {
             })(CondFieldType || (CondFieldType = {}));
             exports_1("CondFieldType", CondFieldType);
         }
-    }
+    };
 });
 //# sourceMappingURL=money-enums.js.map

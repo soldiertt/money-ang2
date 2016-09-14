@@ -1,6 +1,5 @@
-System.register(["@angular/core", "../../model/core/category.class", "../../service/category-rest.service", "../../service/txref-rest.service"], function(exports_1, context_1) {
+System.register(["@angular/core", "../../model/core/category.class", "../../service/category-rest.service", "../../service/txref-rest.service"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,10 +9,10 @@ System.register(["@angular/core", "../../model/core/category.class", "../../serv
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, category_class_1, category_rest_service_1, txref_rest_service_1;
-    var TxDetailsComponent;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, category_class_1, category_rest_service_1, txref_rest_service_1, TxDetailsComponent;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -25,8 +24,9 @@ System.register(["@angular/core", "../../model/core/category.class", "../../serv
             },
             function (txref_rest_service_1_1) {
                 txref_rest_service_1 = txref_rest_service_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             TxDetailsComponent = (function () {
                 function TxDetailsComponent(_categoryRestService, _txrefRestService) {
                     this._categoryRestService = _categoryRestService;
@@ -46,29 +46,29 @@ System.register(["@angular/core", "../../model/core/category.class", "../../serv
                         console.log("txref removed");
                     });
                 };
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', Array)
-                ], TxDetailsComponent.prototype, "txList", void 0);
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', category_class_1.Period)
-                ], TxDetailsComponent.prototype, "period", void 0);
-                __decorate([
-                    core_1.Output("txDeleted"), 
-                    __metadata('design:type', core_1.EventEmitter)
-                ], TxDetailsComponent.prototype, "txDeletedEmitter", void 0);
-                TxDetailsComponent = __decorate([
-                    core_1.Component({
-                        selector: "money-tx-details",
-                        templateUrl: "assets/html/home/tx-details.html"
-                    }), 
-                    __metadata('design:paramtypes', [category_rest_service_1.CategoryRestService, txref_rest_service_1.TxrefRestService])
-                ], TxDetailsComponent);
                 return TxDetailsComponent;
             }());
+            __decorate([
+                core_1.Input(),
+                __metadata("design:type", Array)
+            ], TxDetailsComponent.prototype, "txList", void 0);
+            __decorate([
+                core_1.Input(),
+                __metadata("design:type", category_class_1.Period)
+            ], TxDetailsComponent.prototype, "period", void 0);
+            __decorate([
+                core_1.Output("txDeleted"),
+                __metadata("design:type", core_1.EventEmitter)
+            ], TxDetailsComponent.prototype, "txDeletedEmitter", void 0);
+            TxDetailsComponent = __decorate([
+                core_1.Component({
+                    selector: "money-tx-details",
+                    templateUrl: "assets/html/home/tx-details.html"
+                }),
+                __metadata("design:paramtypes", [category_rest_service_1.CategoryRestService, txref_rest_service_1.TxrefRestService])
+            ], TxDetailsComponent);
             exports_1("TxDetailsComponent", TxDetailsComponent);
         }
-    }
+    };
 });
 //# sourceMappingURL=tx-details.component.js.map

@@ -1,6 +1,5 @@
-System.register(["@angular/core", "../model/formutil/multipart-uploader.class", "../model/formutil/multipart-item.class"], function(exports_1, context_1) {
+System.register(["@angular/core", "../model/formutil/multipart-uploader.class", "../model/formutil/multipart-item.class"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,10 +9,10 @@ System.register(["@angular/core", "../model/formutil/multipart-uploader.class", 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, multipart_uploader_class_1, multipart_item_class_1;
-    var UploadCsvService;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, multipart_uploader_class_1, multipart_item_class_1, UploadCsvService;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -22,8 +21,9 @@ System.register(["@angular/core", "../model/formutil/multipart-uploader.class", 
             },
             function (multipart_item_class_1_1) {
                 multipart_item_class_1 = multipart_item_class_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             UploadCsvService = (function () {
                 function UploadCsvService() {
                 }
@@ -44,14 +44,14 @@ System.register(["@angular/core", "../model/formutil/multipart-uploader.class", 
                     item.callback = uploadCallback;
                     item.upload();
                 };
-                UploadCsvService = __decorate([
-                    core_1.Injectable(), 
-                    __metadata('design:paramtypes', [])
-                ], UploadCsvService);
                 return UploadCsvService;
             }());
+            UploadCsvService = __decorate([
+                core_1.Injectable(),
+                __metadata("design:paramtypes", [])
+            ], UploadCsvService);
             exports_1("UploadCsvService", UploadCsvService);
         }
-    }
+    };
 });
 //# sourceMappingURL=upload-csv.service.js.map

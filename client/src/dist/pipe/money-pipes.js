@@ -1,6 +1,5 @@
-System.register(["@angular/core"], function(exports_1, context_1) {
+System.register(["@angular/core"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,14 +9,15 @@ System.register(["@angular/core"], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
-    var CategorySorterPipe, PeriodFilterPipe, CatfilterPipe;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, CategorySorterPipe, PeriodFilterPipe, CatfilterPipe;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             CategorySorterPipe = (function () {
                 function CategorySorterPipe() {
                 }
@@ -55,14 +55,14 @@ System.register(["@angular/core"], function(exports_1, context_1) {
                     }
                     return array;
                 };
-                CategorySorterPipe = __decorate([
-                    core_1.Pipe({
-                        name: "categorySorter"
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], CategorySorterPipe);
                 return CategorySorterPipe;
             }());
+            CategorySorterPipe = __decorate([
+                core_1.Pipe({
+                    name: "categorySorter"
+                }),
+                __metadata("design:paramtypes", [])
+            ], CategorySorterPipe);
             exports_1("CategorySorterPipe", CategorySorterPipe);
             PeriodFilterPipe = (function () {
                 function PeriodFilterPipe() {
@@ -76,14 +76,14 @@ System.register(["@angular/core"], function(exports_1, context_1) {
                         return periods;
                     }
                 };
-                PeriodFilterPipe = __decorate([
-                    core_1.Pipe({
-                        name: "periodFilter"
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], PeriodFilterPipe);
                 return PeriodFilterPipe;
             }());
+            PeriodFilterPipe = __decorate([
+                core_1.Pipe({
+                    name: "periodFilter"
+                }),
+                __metadata("design:paramtypes", [])
+            ], PeriodFilterPipe);
             exports_1("PeriodFilterPipe", PeriodFilterPipe);
             CatfilterPipe = (function () {
                 function CatfilterPipe() {
@@ -100,16 +100,16 @@ System.register(["@angular/core"], function(exports_1, context_1) {
                         return categories;
                     }
                 };
-                CatfilterPipe = __decorate([
-                    core_1.Pipe({
-                        name: "catfilter"
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], CatfilterPipe);
                 return CatfilterPipe;
             }());
+            CatfilterPipe = __decorate([
+                core_1.Pipe({
+                    name: "catfilter"
+                }),
+                __metadata("design:paramtypes", [])
+            ], CatfilterPipe);
             exports_1("CatfilterPipe", CatfilterPipe);
         }
-    }
+    };
 });
 //# sourceMappingURL=money-pipes.js.map

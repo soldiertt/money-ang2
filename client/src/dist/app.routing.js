@@ -1,10 +1,9 @@
-System.register(['@angular/router', "./comp/home/home.component", "./comp/import/import.component", "./comp/import/auto-import.component", "./comp/preferences/preferences.component", "./comp/admin/admin-category.component", "./comp/admin/admin-rule.component", "./comp/admin/admin-account-setting.component", "./comp/admin/admin-uploads.component", "./comp/admin/admin-preset.component", "./comp/secret.component", "./service/can-activate-auth.gard"], function(exports_1, context_1) {
+System.register(["@angular/router", "./comp/home/home.component", "./comp/import/import.component", "./comp/import/auto-import.component", "./comp/preferences/preferences.component", "./comp/admin/admin-category.component", "./comp/admin/admin-rule.component", "./comp/admin/admin-account-setting.component", "./comp/admin/admin-uploads.component", "./comp/admin/admin-preset.component", "./comp/secret.component", "./service/can-activate-auth.gard"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var router_1, home_component_1, import_component_1, auto_import_component_1, preferences_component_1, admin_category_component_1, admin_rule_component_1, admin_account_setting_component_1, admin_uploads_component_1, admin_preset_component_1, secret_component_1, can_activate_auth_gard_1;
-    var appRoutes, routing;
+    var router_1, home_component_1, import_component_1, auto_import_component_1, preferences_component_1, admin_category_component_1, admin_rule_component_1, admin_account_setting_component_1, admin_uploads_component_1, admin_preset_component_1, secret_component_1, can_activate_auth_gard_1, appRoutes, routing;
     return {
-        setters:[
+        setters: [
             function (router_1_1) {
                 router_1 = router_1_1;
             },
@@ -40,8 +39,9 @@ System.register(['@angular/router', "./comp/home/home.component", "./comp/import
             },
             function (can_activate_auth_gard_1_1) {
                 can_activate_auth_gard_1 = can_activate_auth_gard_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             appRoutes = [
                 { path: "", component: home_component_1.HomeComponent, pathMatch: 'full', canActivate: [can_activate_auth_gard_1.CanActivateViaAuthGuard] },
                 { path: "import", component: import_component_1.ImportComponent, pathMatch: 'full', canActivate: [can_activate_auth_gard_1.CanActivateViaAuthGuard] },
@@ -56,6 +56,6 @@ System.register(['@angular/router', "./comp/home/home.component", "./comp/import
             ];
             exports_1("routing", routing = router_1.RouterModule.forRoot(appRoutes));
         }
-    }
+    };
 });
 //# sourceMappingURL=app.routing.js.map

@@ -1,6 +1,5 @@
-System.register(["@angular/core", "../../model/core/preference.class", "../../service/preference-rest.service"], function(exports_1, context_1) {
+System.register(["@angular/core", "../../model/core/preference.class", "../../service/preference-rest.service"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,10 +9,10 @@ System.register(["@angular/core", "../../model/core/preference.class", "../../se
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, preference_class_1, preference_rest_service_1;
-    var PreferencesComponent;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, preference_class_1, preference_rest_service_1, PreferencesComponent;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -22,8 +21,9 @@ System.register(["@angular/core", "../../model/core/preference.class", "../../se
             },
             function (preference_rest_service_1_1) {
                 preference_rest_service_1 = preference_rest_service_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             PreferencesComponent = (function () {
                 function PreferencesComponent(_preferenceRestService) {
                     this._preferenceRestService = _preferenceRestService;
@@ -56,17 +56,17 @@ System.register(["@angular/core", "../../model/core/preference.class", "../../se
                         });
                     }
                 };
-                PreferencesComponent = __decorate([
-                    core_1.Component({
-                        selector: "money-preferences",
-                        templateUrl: "assets/html/preferences/index.html"
-                    }), 
-                    __metadata('design:paramtypes', [preference_rest_service_1.PreferenceRestService])
-                ], PreferencesComponent);
                 return PreferencesComponent;
             }());
+            PreferencesComponent = __decorate([
+                core_1.Component({
+                    selector: "money-preferences",
+                    templateUrl: "assets/html/preferences/index.html"
+                }),
+                __metadata("design:paramtypes", [preference_rest_service_1.PreferenceRestService])
+            ], PreferencesComponent);
             exports_1("PreferencesComponent", PreferencesComponent);
         }
-    }
+    };
 });
 //# sourceMappingURL=preferences.component.js.map

@@ -1,14 +1,14 @@
-System.register(["../../model/core/money-enums"], function(exports_1, context_1) {
+System.register(["../../model/core/money-enums"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var money_enums_1;
-    var RuleConditionValidator;
+    var money_enums_1, RuleConditionValidator;
     return {
-        setters:[
+        setters: [
             function (money_enums_1_1) {
                 money_enums_1 = money_enums_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             RuleConditionValidator = (function () {
                 function RuleConditionValidator(component) {
                     var validator = this;
@@ -49,6 +49,6 @@ System.register(["../../model/core/money-enums"], function(exports_1, context_1)
             }());
             exports_1("RuleConditionValidator", RuleConditionValidator);
         }
-    }
+    };
 });
 //# sourceMappingURL=rule-condition-validator.class.js.map

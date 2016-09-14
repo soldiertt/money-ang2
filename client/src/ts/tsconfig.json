@@ -9,12 +9,16 @@
     "removeComments": false,
     "noImplicitAny": false,
     "rootDir": ".",
-    "outDir":"../dist"
+    "outDir": "../dist",
+    "typeRoots": [
+      "../../../node_modules/@types"
+    ]
   },
+  "types": [
+    "core-js"
+  ],
   "exclude": [
     "node_modules",
-    "dist",
-    "typings/main",
-    "typings/main.d.ts"
+    "dist"
   ]
 }

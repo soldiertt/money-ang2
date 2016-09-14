@@ -1,6 +1,5 @@
-System.register(["@angular/core", "@angular/forms"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/forms"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -13,17 +12,18 @@ System.register(["@angular/core", "@angular/forms"], function(exports_1, context
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, forms_1;
-    var DisplayErrorDirective;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, forms_1, DisplayErrorDirective;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
             function (forms_1_1) {
                 forms_1 = forms_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             DisplayErrorDirective = (function () {
                 // we inject the form model
                 function DisplayErrorDirective(hostFormGroup) {
@@ -39,26 +39,26 @@ System.register(["@angular/core", "@angular/forms"], function(exports_1, context
                 DisplayErrorDirective.prototype.isDisplayed = function () {
                     return (this.control.dirty || this.controlName === "csvfile") && this.control.errors && this.control.errors.hasOwnProperty(this.error);
                 };
-                __decorate([
-                    core_1.Input("control"), 
-                    __metadata('design:type', String)
-                ], DisplayErrorDirective.prototype, "controlName", void 0);
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', String)
-                ], DisplayErrorDirective.prototype, "error", void 0);
-                DisplayErrorDirective = __decorate([
-                    core_1.Component({
-                        selector: "display-error",
-                        template: "<div *ngIf=\"isDisplayed()\" class=\"alert alert-danger\"><ng-content></ng-content></div>"
-                    }),
-                    __param(0, core_1.Host()), 
-                    __metadata('design:paramtypes', [forms_1.FormGroupDirective])
-                ], DisplayErrorDirective);
                 return DisplayErrorDirective;
             }());
+            __decorate([
+                core_1.Input("control"),
+                __metadata("design:type", String)
+            ], DisplayErrorDirective.prototype, "controlName", void 0);
+            __decorate([
+                core_1.Input(),
+                __metadata("design:type", String)
+            ], DisplayErrorDirective.prototype, "error", void 0);
+            DisplayErrorDirective = __decorate([
+                core_1.Component({
+                    selector: "display-error",
+                    template: "<div *ngIf=\"isDisplayed()\" class=\"alert alert-danger\"><ng-content></ng-content></div>"
+                }),
+                __param(0, core_1.Host()),
+                __metadata("design:paramtypes", [forms_1.FormGroupDirective])
+            ], DisplayErrorDirective);
             exports_1("DisplayErrorDirective", DisplayErrorDirective);
         }
-    }
+    };
 });
 //# sourceMappingURL=display-error.directive.js.map

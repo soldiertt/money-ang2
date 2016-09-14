@@ -1,6 +1,5 @@
-System.register(["@angular/core", "@angular/http", "rxjs/add/operator/map"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/http", "rxjs/add/operator/map"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,18 +9,20 @@ System.register(["@angular/core", "@angular/http", "rxjs/add/operator/map"], fun
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1;
-    var CategoryRestService;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, http_1, CategoryRestService;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
             function (http_1_1) {
                 http_1 = http_1_1;
             },
-            function (_1) {}],
-        execute: function() {
+            function (_1) {
+            }
+        ],
+        execute: function () {
             CategoryRestService = (function () {
                 function CategoryRestService(_http) {
                     this._http = _http;
@@ -79,14 +80,14 @@ System.register(["@angular/core", "@angular/http", "rxjs/add/operator/map"], fun
                     return this._http.get("/restapi/tx/search?categoryId=" + categoryId + "&periodId=" + periodId)
                         .map(function (res) { return res.json(); });
                 };
-                CategoryRestService = __decorate([
-                    core_1.Injectable(), 
-                    __metadata('design:paramtypes', [http_1.Http])
-                ], CategoryRestService);
                 return CategoryRestService;
             }());
+            CategoryRestService = __decorate([
+                core_1.Injectable(),
+                __metadata("design:paramtypes", [http_1.Http])
+            ], CategoryRestService);
             exports_1("CategoryRestService", CategoryRestService);
         }
-    }
+    };
 });
 //# sourceMappingURL=category-rest.service.js.map

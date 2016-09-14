@@ -1,14 +1,14 @@
-System.register(["./money-enums"], function(exports_1, context_1) {
+System.register(["./money-enums"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var money_enums_1;
-    var Period, Category;
+    var money_enums_1, Period, Category;
     return {
-        setters:[
+        setters: [
             function (money_enums_1_1) {
                 money_enums_1 = money_enums_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             Period = (function () {
                 function Period(year, index) {
                     this.year = year;
@@ -53,6 +53,6 @@ System.register(["./money-enums"], function(exports_1, context_1) {
             }());
             exports_1("Category", Category);
         }
-    }
+    };
 });
 //# sourceMappingURL=category.class.js.map

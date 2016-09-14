@@ -1,6 +1,5 @@
-System.register(["@angular/core", "../core/category.class"], function(exports_1, context_1) {
+System.register(["@angular/core", "../core/category.class"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,17 +9,18 @@ System.register(["@angular/core", "../core/category.class"], function(exports_1,
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, category_class_1;
-    var CategoryYearsChecker;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, category_class_1, CategoryYearsChecker;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
             function (category_class_1_1) {
                 category_class_1 = category_class_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             CategoryYearsChecker = (function () {
                 function CategoryYearsChecker() {
                 }
@@ -42,14 +42,14 @@ System.register(["@angular/core", "../core/category.class"], function(exports_1,
                     category.periods = category.periods.filter(function (period) { return removedYears.indexOf(period.year) === -1; });
                     return category;
                 };
-                CategoryYearsChecker = __decorate([
-                    core_1.Injectable(), 
-                    __metadata('design:paramtypes', [])
-                ], CategoryYearsChecker);
                 return CategoryYearsChecker;
             }());
+            CategoryYearsChecker = __decorate([
+                core_1.Injectable(),
+                __metadata("design:paramtypes", [])
+            ], CategoryYearsChecker);
             exports_1("CategoryYearsChecker", CategoryYearsChecker);
         }
-    }
+    };
 });
 //# sourceMappingURL=category-years-checker.js.map

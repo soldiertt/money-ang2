@@ -1,1 +1,1 @@
-{"version":3,"file":"preference.class.js","sourceRoot":"","sources":["../../../ts/model/core/preference.class.ts"],"names":[],"mappings":";;;;;;;YAAA;gBAKE;oBACE,IAAI,CAAC,iBAAiB,GAAG,IAAI,CAAC;gBAChC,CAAC;gBAEH,iBAAC;YAAD,CAAC,AATD,IASC;YATD,mCASC,CAAA"}
+{"version":3,"file":"preference.class.js","sourceRoot":"","sources":["../../../ts/model/core/preference.class.ts"],"names":[],"mappings":";;;;;;;YAAA;gBAKE;oBACE,IAAI,CAAC,iBAAiB,GAAG,IAAI,CAAC;gBAChC,CAAC;gBAEH,iBAAC;YAAD,CAAC,AATD,IASC;;QACD,CAAC"}

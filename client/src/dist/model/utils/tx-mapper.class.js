@@ -1,14 +1,14 @@
-System.register(["../core/tx.class"], function(exports_1, context_1) {
+System.register(["../core/tx.class"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var tx_class_1;
-    var TxMapper;
+    var tx_class_1, TxMapper;
     return {
-        setters:[
+        setters: [
             function (tx_class_1_1) {
                 tx_class_1 = tx_class_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             TxMapper = (function () {
                 function TxMapper() {
                 }
@@ -78,6 +78,6 @@ System.register(["../core/tx.class"], function(exports_1, context_1) {
             }());
             exports_1("TxMapper", TxMapper);
         }
-    }
+    };
 });
 //# sourceMappingURL=tx-mapper.class.js.map

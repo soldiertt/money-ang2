@@ -1,14 +1,14 @@
-System.register(["../core/money-enums"], function(exports_1, context_1) {
+System.register(["../core/money-enums"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var money_enums_1;
-    var CategoryLink, TxFormData;
+    var money_enums_1, CategoryLink, TxFormData;
     return {
-        setters:[
+        setters: [
             function (money_enums_1_1) {
                 money_enums_1 = money_enums_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             CategoryLink = (function () {
                 function CategoryLink() {
                     this.categoryId = "";
@@ -40,6 +40,6 @@ System.register(["../core/money-enums"], function(exports_1, context_1) {
             }());
             exports_1("TxFormData", TxFormData);
         }
-    }
+    };
 });
 //# sourceMappingURL=tx-form-data.class.js.map

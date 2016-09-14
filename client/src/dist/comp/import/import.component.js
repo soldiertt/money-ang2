@@ -1,6 +1,5 @@
-System.register(["@angular/core", "rxjs/Observable", "rxjs/add/observable/forkJoin", "../../model/core/money-enums", "../../model/core/txref.class", "../../model/utils/tx-mapper.class", "../../service/preference-rest.service", "../../service/account-setting-rest.service", "../../service/category-rest.service", "../../service/csv-files-rest.service", "../../service/txref-rest.service", "../../service/rule.service", "../../service/form-utils.service"], function(exports_1, context_1) {
+System.register(["@angular/core", "rxjs/Observable", "rxjs/add/observable/forkJoin", "../../model/core/money-enums", "../../model/core/txref.class", "../../model/utils/tx-mapper.class", "../../service/preference-rest.service", "../../service/account-setting-rest.service", "../../service/category-rest.service", "../../service/csv-files-rest.service", "../../service/txref-rest.service", "../../service/rule.service", "../../service/form-utils.service"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,17 +9,18 @@ System.register(["@angular/core", "rxjs/Observable", "rxjs/add/observable/forkJo
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, Observable_1, money_enums_1, txref_class_1, tx_mapper_class_1, preference_rest_service_1, account_setting_rest_service_1, category_rest_service_1, csv_files_rest_service_1, txref_rest_service_1, rule_service_1, form_utils_service_1;
-    var ImportComponent;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, Observable_1, money_enums_1, txref_class_1, tx_mapper_class_1, preference_rest_service_1, account_setting_rest_service_1, category_rest_service_1, csv_files_rest_service_1, txref_rest_service_1, rule_service_1, form_utils_service_1, ImportComponent;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
             function (Observable_1_1) {
                 Observable_1 = Observable_1_1;
             },
-            function (_1) {},
+            function (_1) {
+            },
             function (money_enums_1_1) {
                 money_enums_1 = money_enums_1_1;
             },
@@ -50,8 +50,9 @@ System.register(["@angular/core", "rxjs/Observable", "rxjs/add/observable/forkJo
             },
             function (form_utils_service_1_1) {
                 form_utils_service_1 = form_utils_service_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             ImportComponent = (function () {
                 function ImportComponent(_prefRestService, _accountSettingRestService, _csvFilesRestService, _txrefRestService, _categoryRestService, _formUtilsService, _ruleService) {
                     this._prefRestService = _prefRestService;
@@ -204,18 +205,24 @@ System.register(["@angular/core", "rxjs/Observable", "rxjs/add/observable/forkJo
                     } ; });
                     this.populateTxToDisplay();
                 };
-                ImportComponent = __decorate([
-                    core_1.Component({
-                        selector: "money-import",
-                        templateUrl: "assets/html/import/index.html",
-                        styleUrls: ["assets/css/import.css"]
-                    }), 
-                    __metadata('design:paramtypes', [preference_rest_service_1.PreferenceRestService, account_setting_rest_service_1.AccountSettingRestService, csv_files_rest_service_1.CsvFilesRestService, txref_rest_service_1.TxrefRestService, category_rest_service_1.CategoryRestService, form_utils_service_1.FormUtilsService, rule_service_1.RuleService])
-                ], ImportComponent);
                 return ImportComponent;
             }());
+            ImportComponent = __decorate([
+                core_1.Component({
+                    selector: "money-import",
+                    templateUrl: "assets/html/import/index.html",
+                    styleUrls: ["assets/css/import.css"]
+                }),
+                __metadata("design:paramtypes", [preference_rest_service_1.PreferenceRestService,
+                    account_setting_rest_service_1.AccountSettingRestService,
+                    csv_files_rest_service_1.CsvFilesRestService,
+                    txref_rest_service_1.TxrefRestService,
+                    category_rest_service_1.CategoryRestService,
+                    form_utils_service_1.FormUtilsService,
+                    rule_service_1.RuleService])
+            ], ImportComponent);
             exports_1("ImportComponent", ImportComponent);
         }
-    }
+    };
 });
 //# sourceMappingURL=import.component.js.map

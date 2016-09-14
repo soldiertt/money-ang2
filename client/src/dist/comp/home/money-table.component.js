@@ -1,6 +1,5 @@
-System.register(["@angular/core", "../../model/core/money-enums", "../../service/display-param.service", "../../service/category-rest.service", "../../service/form-utils.service"], function(exports_1, context_1) {
+System.register(["@angular/core", "../../model/core/money-enums", "../../service/display-param.service", "../../service/category-rest.service", "../../service/form-utils.service"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,10 +9,10 @@ System.register(["@angular/core", "../../model/core/money-enums", "../../service
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, money_enums_1, display_param_service_1, category_rest_service_1, form_utils_service_1;
-    var MoneyTableComponent;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, money_enums_1, display_param_service_1, category_rest_service_1, form_utils_service_1, MoneyTableComponent;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -28,8 +27,9 @@ System.register(["@angular/core", "../../model/core/money-enums", "../../service
             },
             function (form_utils_service_1_1) {
                 form_utils_service_1 = form_utils_service_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             MoneyTableComponent = (function () {
                 function MoneyTableComponent(displayParamService, _categoryRestService, _formUtilsService) {
                     var _this = this;
@@ -184,19 +184,21 @@ System.register(["@angular/core", "../../model/core/money-enums", "../../service
                         }
                     }
                 };
-                MoneyTableComponent = __decorate([
-                    core_1.Component({
-                        selector: "money-table",
-                        templateUrl: "assets/html/home/money-table.html",
-                        styleUrls: ["assets/css/money-table.css", "assets/css/tooltip.css"],
-                        encapsulation: core_1.ViewEncapsulation.None
-                    }), 
-                    __metadata('design:paramtypes', [display_param_service_1.DisplayParamService, category_rest_service_1.CategoryRestService, form_utils_service_1.FormUtilsService])
-                ], MoneyTableComponent);
                 return MoneyTableComponent;
             }());
+            MoneyTableComponent = __decorate([
+                core_1.Component({
+                    selector: "money-table",
+                    templateUrl: "assets/html/home/money-table.html",
+                    styleUrls: ["assets/css/money-table.css", "assets/css/tooltip.css"],
+                    encapsulation: core_1.ViewEncapsulation.None
+                }),
+                __metadata("design:paramtypes", [display_param_service_1.DisplayParamService,
+                    category_rest_service_1.CategoryRestService,
+                    form_utils_service_1.FormUtilsService])
+            ], MoneyTableComponent);
             exports_1("MoneyTableComponent", MoneyTableComponent);
         }
-    }
+    };
 });
 //# sourceMappingURL=money-table.component.js.map

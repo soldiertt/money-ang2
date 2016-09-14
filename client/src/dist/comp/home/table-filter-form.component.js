@@ -1,6 +1,5 @@
-System.register(["@angular/core", "@angular/forms", "../../model/core/filter-preset.class", "../../service/display-param.service", "../../service/form-utils.service", "../../service/filter-preset-rest.service"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/forms", "../../model/core/filter-preset.class", "../../service/display-param.service", "../../service/form-utils.service", "../../service/filter-preset-rest.service"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,10 +9,10 @@ System.register(["@angular/core", "@angular/forms", "../../model/core/filter-pre
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, forms_1, filter_preset_class_1, display_param_service_1, form_utils_service_1, filter_preset_rest_service_1;
-    var TableFilterFormComponent;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, forms_1, filter_preset_class_1, display_param_service_1, form_utils_service_1, filter_preset_rest_service_1, TableFilterFormComponent;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -31,8 +30,9 @@ System.register(["@angular/core", "@angular/forms", "../../model/core/filter-pre
             },
             function (filter_preset_rest_service_1_1) {
                 filter_preset_rest_service_1 = filter_preset_rest_service_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             TableFilterFormComponent = (function () {
                 function TableFilterFormComponent(displayParamService, formUtilsService, fb, _filterPresetRestService) {
                     var _this = this;
@@ -93,18 +93,20 @@ System.register(["@angular/core", "@angular/forms", "../../model/core/filter-pre
                 TableFilterFormComponent.prototype.onCancelPreset = function () {
                     this.editPresetName = false;
                 };
-                TableFilterFormComponent = __decorate([
-                    core_1.Component({
-                        selector: "money-table-filter-form",
-                        templateUrl: "assets/html/home/table-filter-form.html",
-                        styleUrls: ["assets/css/table-filter-form.css"]
-                    }), 
-                    __metadata('design:paramtypes', [display_param_service_1.DisplayParamService, form_utils_service_1.FormUtilsService, forms_1.FormBuilder, filter_preset_rest_service_1.FilterPresetRestService])
-                ], TableFilterFormComponent);
                 return TableFilterFormComponent;
             }());
+            TableFilterFormComponent = __decorate([
+                core_1.Component({
+                    selector: "money-table-filter-form",
+                    templateUrl: "assets/html/home/table-filter-form.html",
+                    styleUrls: ["assets/css/table-filter-form.css"]
+                }),
+                __metadata("design:paramtypes", [display_param_service_1.DisplayParamService,
+                    form_utils_service_1.FormUtilsService, forms_1.FormBuilder,
+                    filter_preset_rest_service_1.FilterPresetRestService])
+            ], TableFilterFormComponent);
             exports_1("TableFilterFormComponent", TableFilterFormComponent);
         }
-    }
+    };
 });
 //# sourceMappingURL=table-filter-form.component.js.map
