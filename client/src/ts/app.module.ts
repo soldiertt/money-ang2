@@ -39,6 +39,10 @@ import {FocusOnInitDirective} from "./comp/directive/focus-on-init.directive";
 import {MoneyIconDirective} from "./comp/directive/money-icon.directive";
 import {TooltipDirective} from "./comp/directive/tooltip.directive";
 import {CategoryYearsChecker} from "./model/utils/category-years-checker";
+import {CookieService} from "angular2-cookie/services/cookies.service";
+import {SecretComponent} from "./comp/secret.component";
+import {AuthenticationService} from "./service/authentication.service";
+import {CanActivateViaAuthGuard} from "./service/can-activate-auth.gard";
 
 
 @NgModule({
@@ -51,6 +55,7 @@ import {CategoryYearsChecker} from "./model/utils/category-years-checker";
     ],
     declarations: [
         AppComponent,
+        SecretComponent,
         AdminAccountSettingComponent,
         AdminCategoryComponent,
         AdminMenuComponent,
@@ -77,6 +82,9 @@ import {CategoryYearsChecker} from "./model/utils/category-years-checker";
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         {provide: 'webApiBaseUrl', useValue: environment.webApiBaseUrl},
         {provide: RequestOptions, useClass: JsonRequestOptions},
+        CookieService,
+        AuthenticationService,
+        CanActivateViaAuthGuard,
         AccountSettingRestService,
         CategoryRestService,
         CsvFilesRestService,

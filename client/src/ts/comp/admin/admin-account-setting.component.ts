@@ -108,7 +108,7 @@ export class AdminAccountSettingComponent {
       this.accountSetting = new AccountSetting();
       this.fileFirstLines = undefined;
       this.lineTokens = undefined;
-      this._formUtilsService.reset(this.accountForm, "csvfile");
+      this.accountForm.reset();
     });
   }
 

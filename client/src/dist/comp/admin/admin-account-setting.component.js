@@ -123,7 +123,7 @@ System.register(["@angular/core", "@angular/forms", "@angular/http", "../../mode
                         _this.accountSetting = new account_setting_class_1.AccountSetting();
                         _this.fileFirstLines = undefined;
                         _this.lineTokens = undefined;
-                        _this._formUtilsService.reset(_this.accountForm, "csvfile");
+                        _this.accountForm.reset();
                     });
                 };
                 AdminAccountSettingComponent.prototype.onDelete = function (accountSetting) {
