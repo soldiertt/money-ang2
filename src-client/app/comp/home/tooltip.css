@@ -1,0 +1,76 @@
+.moneytooltip {
+  cursor: help;
+  position: relative;
+}
+
+.moneytooltip .tooltipcontent {
+  z-index: 10;
+  background-color: #123752;
+  display: none;
+  margin-top: 15px;
+  padding: 5px;
+  position: absolute;
+  border-radius: 8px;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.50);
+     -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.50);
+      -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.50);
+       -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.50);
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.50);
+}
+
+.moneytooltip.displayleft .tooltipcontent {
+  left:-350px;
+}
+
+/* CSS Triangles - see Trevor's post */
+.moneytooltip .tooltipcontent:after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  border-bottom: solid #123752 10px;
+  top: -10px;
+  content: " ";
+  height: 0;
+  left: 10%;
+  margin-left: -13px;
+  position: absolute;
+  width: 0;
+}
+
+.moneytooltip.displayleft .tooltipcontent:after {
+  left: 90%;
+}
+
+.moneytooltip.showtooltip .tooltipcontent {
+  display: block;
+}
+
+/* IE can just show/hide with no transition */
+.lte8 .moneytooltip .tooltipcontent {
+  display: none;
+}
+
+.lte8 .moneytooltip.showtooltip .tooltipcontent {
+  display: block;
+}
+
+.table-tooltip {
+  margin-bottom: 0;
+  width: 450px;
+  font-size: 11px;
+  border:0;
+}
+
+.table-tooltip th {
+  text-align: center;
+  background-color: #29516D;
+  border:1px solid #032137;
+}
+
+.table-tooltip td {
+  border:1px solid #032137;
+  color: black;
+}
+
+.table-tooltip td.nowrap {
+  white-space:nowrap;
+}

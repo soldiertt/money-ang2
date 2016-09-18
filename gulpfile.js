@@ -8,46 +8,47 @@ const rename = require('gulp-rename');
 
 gulp.task('app-bundle', function () {
 
-  var tsProject = ts.createProject('client/src/ts/tsconfig.json',{ rootDir: 'client/src/ts', out: "money-bundle.min.js"});
+    var tsProject = ts.createProject('src-client/app/tsconfig.json', {rootDir: 'src-client/app', out: "money-bundle.min.js"});
 
-  return tsProject.src()
-    .pipe(ts(tsProject))
-    .pipe(uglify({mangle: false}))
-    .pipe(gulp.dest('client/src/dist'));
+    return tsProject.src()
+        .pipe(ts(tsProject))
+        .pipe(uglify({mangle: false}))
+        .pipe(gulp.dest('src-client/dist'));
 });
 
-gulp.task('vendor-bundle', function() {
-  gulp.src([
-    'node_modules/core-js/client/shim.min.js',
-    'node_modules/systemjs/dist/system.src.js',
-    'node_modules/rxjs/bundles/Rx.js',
-    'node_modules/@angular/core/index.js',
-    'node_modules/@angular/router/index.js',
-    'node_modules/@angular/http/index.js'
-  ])
-  .pipe(concat('vendors.min.js'))
-  //.pipe(uglify({mangle: false}))
-  .pipe(gulp.dest('./client/src/assets/js'));
+gulp.task('vendor-bundle', function () {
+    gulp.src([
+        'node_modules/core-js/client/shim.min.js',
+        'node_modules/zone.js/dist/zone.js',
+        'node_modules/reflect-metadata/Reflect.js',
+        'node_modules/systemjs/dist/system.src.js',
+        'node_modules/@angular/core/index.js',
+        'node_modules/@angular/router/index.js',
+        'node_modules/@angular/http/index.js'
+    ])
+        .pipe(concat('vendors.min.js'))
+        //.pipe(uglify({mangle: false}))
+        .pipe(gulp.dest('./src-client/assets/js'));
 });
 
-gulp.task('boot-bundle', function() {
-  gulp.src('client/src/assets/js/system.config.prod.js')
-    .pipe(concat('boot.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('./client/src/assets/js'));
- });
+gulp.task('boot-bundle', function () {
+    gulp.src('src-client/assets/js/system.config.prod.js')
+        .pipe(concat('boot.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('./src-client/assets/js'));
+});
 
- gulp.task('html', function() {
-   gulp.src('server/src/views/index.ejs')
-     .pipe(htmlreplace({
-       'vendor': 'assets/js/vendors.min.js',
-       'app': 'assets/js/money-bundle.min.js',
-       'boot': 'assets/js/boot.min.js'
-     }))
-     .pipe(rename('index-prod.ejs'))
-     .pipe(gulp.dest('./server/src/views'));
- });
+gulp.task('html', function () {
+    gulp.src('src-server/views/index.ejs')
+        .pipe(htmlreplace({
+            'vendor': 'assets/js/vendors.min.js',
+            'app': 'assets/js/money-bundle.min.js',
+            'boot': 'assets/js/boot.min.js'
+        }))
+        .pipe(rename('index-prod.ejs'))
+        .pipe(gulp.dest('./src-server/views'));
+});
 
- gulp.task('default', ['app-bundle','vendor-bundle', 'boot-bundle', 'html'], function() {
-   console.log("Done");
- });
+gulp.task('default', ['app-bundle', 'vendor-bundle', 'boot-bundle', 'html'], function () {
+    console.log("Done");
+});

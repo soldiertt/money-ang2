@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <header class="row">
+    <nav class="col-md-12 navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Money V2</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
+              <li><a [routerLink]="['/import']" [routerLinkActive]="['router-link-active']">Import</a></li>
+            <li><a [routerLink]="['/auto-import']" [routerLinkActive]="['router-link-active']">Automatic import</a></li>
+            <li><a [routerLink]="['/uploads']" [routerLinkActive]="['router-link-active']">Uploads</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a [routerLink]="['/preferences']" [routerLinkActive]="['router-link-active']">Preferences</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administration <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a [routerLink]="['/admin-category']">Manage categories</a></li>
+                <li><a [routerLink]="['/admin-account-setting']">Manage account settings</a></li>
+                <li><a [routerLink]="['/admin-rule']">Manage rules</a></li>
+                <li><a [routerLink]="['/admin-preset']">Manage filter presets</a></li>
+              </ul>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="row">
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2016 Moneyv2</p>
+  </div>
+</footer>

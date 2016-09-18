@@ -1,0 +1,125 @@
+<money-admin-menu></money-admin-menu>
+<div class="content-large content-left">
+    <h1>Manage account settings</h1>
+    <form (ngSubmit)="createAccount()" [formGroup]="accountForm" class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-3">Account name *</label>
+            <div class="col-sm-9">
+                <input type="text" name="account-name" formControlName="name" class="form-control">
+                <display-error control="name" error="required">Field is required</display-error>
+                <display-error control="name" error="minlength">Minimum length is 3 characters</display-error>
+                <display-error control="name" error="maxlength">Maximum length is 30 characters</display-error>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3">Account number *</label>
+            <div class="col-sm-9">
+                <input type="text" name="account-number" formControlName="accountNumber" class="form-control">
+                <display-error control="accountNumber" error="required">Field is required</display-error>
+                <display-error control="accountNumber" error="minlength">Must be 16 characters</display-error>
+                <display-error control="accountNumber" error="maxlength">Must be 16 characters</display-error>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3">Select a sample csv file *</label>
+            <div class="col-sm-9">
+                <input type="file" name="csvfile" formControlName="csvfile" (change)="onCsvSampleUpload($event)" class="form-control">
+                <display-error control="csvfile" error="uploadfailed">Upload failed, please check your file is a valid csv.</display-error>
+            </div>
+        </div>
+        <div *ngIf="fileFirstLines">
+            <div class="form-group">
+                <label class="control-label col-sm-3">Your sample</label>
+                <div class="col-sm-9 fileheader">
+                    <div *ngFor="let line of fileFirstLines; let i=index" [ngClass]="{'csvline-header':accountSetting.headerLinesCount > i}">{{line}}</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3">Filename starts with *</label>
+                <div class="col-sm-9">
+                    <input type="text" name="file-starts-with" formControlName="fileStartsWith" class="form-control">
+                    <display-error control="fileStartsWith" error="required">Field is required</display-error>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3">Number of header lines *</label>
+                <div class="col-sm-9">
+                    <input type="number" name="header-lines" formControlName="headerLinesCount" [(ngModel)]="accountSetting.headerLinesCount"
+                           (ngModelChange)="onSettingChange($event)" class="form-control">
+                    <display-error control="headerLinesCount" error="wrongNumber">Field is required</display-error>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3">Field separator *</label>
+                <div class="col-sm-9">
+                    <input type="text" name="field-separator" formControlName="fieldSeparator"
+                           [(ngModel)]="accountSetting.fieldSeparator" (ngModelChange)="onSettingChange($event)" class="form-control">
+                    <display-error control="fieldSeparator" error="required">Field is required</display-error>
+                    <display-error control="fieldSeparator" error="minlength">Must be 1 character</display-error>
+                    <display-error control="fieldSeparator" error="maxlength">Must be 1 character</display-error>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3">Fields mapping</label>
+                <div class="col-sm-9">
+                    <table class="table table-striped app-table">
+                        <thead>
+                        <tr>
+                            <th>Csv field</th>
+                            <th>Field type</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let field of lineTokens; let i=index">
+                            <td>
+                                {{field}}
+                            </td>
+                            <td>
+                                <select [(ngModel)]="accountSetting.fieldMappings[i].value"
+                                        (ngModelChange)="onMappingChange($event)" class="form-control"
+                                        [ngModelOptions]="{standalone: true}">
+                                    <option value="ignore">[Ignore]</option>
+                                    <option value="amount">Amount</option>
+                                    <option value="communication">Communication</option>
+                                    <option value="date">Date (of transaction)</option>
+                                    <option value="description">Description</option>
+                                    <option value="id">Reference</option>
+                                    <option value="third-party-account-name">Third-party account name</option>
+                                    <option value="third-party-account-number">Third-party account number</option>
+                                </select>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <input type="checkbox" name="generateIdentifier" [(ngModel)]="accountSetting.generateIdentifier"
+                           (ngModelChange)="onMappingChange($event)" [ngModelOptions]="{standalone: true}"/>
+                    Generate reference (check only if no reference field in your csv export file !)
+                    <input type="hidden" formControlName="fieldMapping"/>
+                    <display-error control="fieldMapping" error="wrongMapping">Wrong mapping</display-error>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3"></label>
+                <div class="col-sm-9">
+                    <input type="submit" value="Create" [disabled]="!accountForm.valid" class="btn btn-default">
+                </div>
+            </div>
+        </div>
+    </form>
+    <table class="table table-striped app-table">
+        <thead>
+        <tr>
+            <th>Account name</th>
+            <th>Account number</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let setting of allAccountSettings">
+            <td>{{setting.name}}</td>
+            <td>{{setting.accountNumber}}</td>
+            <td><span class="glyphicon glyphicon-trash action-link" (click)="onDelete(setting)" title="Delete"></span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

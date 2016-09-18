@@ -1,0 +1,79 @@
+<div>
+  <div class="import-actions" *ngIf="txFormDataList.length > 0">
+    <button (click)="saveAllTx()" class="btn btn-default">Save all</button>
+  </div>
+  <div *ngIf="txFormDataList.length == 0">
+    There is no transaction to import.
+  </div>
+  <table class="table table-striped app-table table-valign-middle" *ngIf="txFormDataList.length > 0">
+    <thead>
+      <tr>
+        <th class="col-md-1 center">Date</th>
+        <th class="col-md-1 center">Amount</th>
+        <th class="col-md-2">Third-party</th>
+        <th class="col-md-2">Comment</th>
+        <th class="col-md-1"></th>
+        <th class="col-md-3">Category</th>
+        <th class="col-md-2 center">Compta date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let txFormData of txFormDataList">
+        <td class="center">{{txFormData.tx.date | date:"dd-MM-yyyy"}}</td>
+        <td class="center">{{txFormData.tx.amount / 100 | number:'1.2-2'}} €</td>
+        <td>{{txFormData.tx.thirdPartyAccount.name}} <span *ngIf="txFormData.tx.communication != ''" class="glyphicon glyphicon-info-sign" title="{{txFormData.tx.communication}}"></span></td>
+        <td>{{txFormData.tx.comment}}</td>
+        <!-- COLUMN TO SELECT CATEGORY -->
+        <td class="td-small">
+          <div>
+            <!-- CATEGORY TYPE -->
+            <span *ngIf="txFormData.tx.amount < 0">
+              <input type="radio" name="cat-type-{{txFormData.tx.ref}}" id="cat-type-fixed-{{txFormData.tx.ref}}" [checked]="'FIXED' === txFormData.categoryType" value="FIXED" (change)="catTypeChanged($event, txFormData)" />
+              <label [attr.for]="'cat-type-fixed-' + txFormData.tx.ref" class="label-std">Fixed</label>
+              <span class="spacer-span"></span>
+              <input type="radio" name="cat-type-{{txFormData.tx.ref}}" id="cat-type-other-{{txFormData.tx.ref}}" [checked]="'OTHER' === txFormData.categoryType" value="OTHER" (change)="catTypeChanged($event, txFormData)" />
+              <label [attr.for]="'cat-type-other-' + txFormData.tx.ref" class="label-std">Other</label>
+            </span>
+            <span *ngIf="txFormData.tx.amount > 0">
+              <input type="radio" name="cat-type-{{txFormData.tx.ref}}" id="cat-type-incoming-{{txFormData.tx.ref}}" value="INCOMING" checked="checked" disabled />
+              <label [attr.for]="'cat-type-incoming-' + txFormData.tx.ref" class="label-std">Incoming</label>
+            </span>
+          </div>
+          <div>
+            <!-- CATEGORY FREQUENCY -->
+            <input type="radio" name="cat-freq-{{txFormData.tx.ref}}" id="cat-freq-monthly-{{txFormData.tx.ref}}" value="MONTHLY" [checked]="'MONTHLY' === txFormData.categoryFrequency" (change)="catFrequencyChanged($event, txFormData)" />
+            <label [attr.for]="'cat-freq-monthly-' + txFormData.tx.ref" class="label-std">M</label>
+            <span class="spacer-span"></span>
+            <input type="radio" name="cat-freq-{{txFormData.tx.ref}}" id="cat-freq-quarter-{{txFormData.tx.ref}}" value="QUARTER" [checked]="'QUARTER' === txFormData.categoryFrequency" (change)="catFrequencyChanged($event, txFormData)" />
+            <label [attr.for]="'cat-freq-quarter-' + txFormData.tx.ref" class="label-std">Q</label>
+            <span class="spacer-span"></span>
+            <input type="radio" name="cat-freq-{{txFormData.tx.ref}}" id="cat-freq-yearly-{{txFormData.tx.ref}}" value="YEARLY" [checked]="'YEARLY' === txFormData.categoryFrequency" (change)="catFrequencyChanged($event, txFormData)" />
+            <label [attr.for]="'cat-freq-yearly-' + txFormData.tx.ref" class="label-std">Y</label>
+          </div>
+        </td>
+        <!-- CATEGORY -->
+        <td>
+          <div>
+            <select class="form-control" [(ngModel)]="txFormData.categoryLink.categoryId">
+              <option value="" disabled selected>Select a category ...</option>
+              <option *ngFor="let cat of allCategories | catfilter : [txFormData.categoryType] : [txFormData.categoryFrequency] : [getTxYear(txFormData)] | categorySorter" [value]="cat.id">{{cat.name}}</option>
+            </select>
+          </div>
+        </td>
+        <!-- COLUMN TO SELECT COMPTA DATE -->
+        <td class="center">
+          <input type="checkbox" value="compta" (change)="comptaDateChanged($event, txFormData)" #comptaDateCheck />
+          <select [(ngModel)]="txFormData.comptaMonth" [disabled]="!comptaDateCheck.checked" class="form-control form-control-inline input-sm">
+            <option *ngFor="let month of months" [value]="month.value" [attr.selected]="month.value == txFormData.comptaMonth ? 'selected' : undefined">{{month.name}}</option>
+          </select>
+          <select [(ngModel)]="txFormData.comptaYear" [disabled]="!comptaDateCheck.checked" class="form-control form-control-inline input-sm">
+            <option *ngFor="let year of years" [value]="year" [attr.selected]="year == txFormData.comptaYear ? 'selected' : undefined">{{year}}</option>
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="import-actions" style="text-align:right;" *ngIf="txFormDataList.length > 0">
+    <button (click)="saveAllTx()" class="btn btn-default">Save all</button>
+  </div>
+</div>
