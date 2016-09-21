@@ -11,9 +11,7 @@
     "noImplicitAny": false,
     "rootDir": ".",
     "outDir": "../dist",
-    "typeRoots": [
-      "../../node_modules/@types"
-    ]
+    "typeRoots": ["../../node_modules/@types"]
   },
   "types": [
     "core-js"
