@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
+import {FormGroup, Validators, FormBuilder} from "@angular/forms";
 import {FilterPreset}             from "../../model/core/filter-preset.class";
 import {DisplayParamService}      from "../../service/display-param.service";
 import {FormUtilsService}         from "../../service/form-utils.service";
@@ -37,15 +37,14 @@ export class TableFilterFormComponent {
             displayTotal: fb.control("")
         });
 
-        this.filterForm.controls["selectedPreset"].valueChanges.subscribe((presetId) => {
-            this.loadFilter(presetId);
+        this.filterForm.controls["selectedPreset"].valueChanges.subscribe((preset) => {
+            this.loadFilter(preset);
         });
     }
 
-    private loadFilter(presetId: string) {
-        if (presetId !== "") {
-            let selectedFilter: FilterPreset = this.allPresets.filter(elem => elem.id === presetId)[0];
-            this.displayParamService.filterPreset = FilterPreset.build(selectedFilter);
+    private loadFilter(preset: FilterPreset) {
+        if (preset) {
+            this.displayParamService.filterPreset = FilterPreset.build(preset);
             this.displayParamService.hasChanged();
         }
     }
@@ -57,7 +56,7 @@ export class TableFilterFormComponent {
         });
     }
 
-    onFilterUpdated($event) {
+    onFilterUpdated() {
         this.displayParamService.hasChanged();
         this.filterForm.controls["selectedPreset"].setValue("");
     }

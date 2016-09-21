@@ -1,6 +1,5 @@
 import {CondOperator, CondFieldType} from "./money-enums";
 import {Category}         from "./category.class";
-import {OperatorHelper}   from "../formutil/operator-helper.class";
 
 export class Condition {
   id: string;

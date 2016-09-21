@@ -1,4 +1,4 @@
-(function(global) {
+(function() {
 
   var paths = {
     // paths serve as alias
@@ -38,4 +38,4 @@
 
   System.config(config);
 
-})(this);
+})();

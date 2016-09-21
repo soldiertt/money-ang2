@@ -5,7 +5,7 @@
     <div>
       <select formControlName="selectedPreset">
         <option value="" disabled selected>Select preset ...</option>
-        <option *ngFor="let preset of allPresets" [value]="preset.id">{{preset.name}}</option><!-- TODO use [ngValue]="preset" on future release -->
+        <option *ngFor="let preset of allPresets" [ngValue]="preset">{{preset.name}}</option>
       </select>
     </div>
     <div *ngIf="notExistsCurrentFilter()">
@@ -28,30 +28,36 @@
   <fieldset class="fields-group">
     <legend>Category type</legend>
     <div>
-      <input type="checkbox" id="category-type-fixed" formControlName="catFixed" [(ngModel)]="displayParamService.filterPreset.catTypeFixed" (ngModelChange)="onFilterUpdated($event)" />
+      <input type="checkbox" id="category-type-fixed" formControlName="catFixed"
+             [(ngModel)]="displayParamService.filterPreset.catTypeFixed" (ngModelChange)="onFilterUpdated()" />
       <label for="category-type-fixed">Fixed</label>
     </div>
     <div>
-      <input type="checkbox" id="category-type-other" formControlName="catOther" [(ngModel)]="displayParamService.filterPreset.catTypeOther" (ngModelChange)="onFilterUpdated($event)" />
+      <input type="checkbox" id="category-type-other" formControlName="catOther"
+             [(ngModel)]="displayParamService.filterPreset.catTypeOther" (ngModelChange)="onFilterUpdated()" />
       <label for="category-type-other">Other</label>
     </div>
     <div>
-      <input type="checkbox" id="category-type-incoming" formControlName="catIncoming" [(ngModel)]="displayParamService.filterPreset.catTypeIncoming" (ngModelChange)="onFilterUpdated($event)" />
+      <input type="checkbox" id="category-type-incoming" formControlName="catIncoming"
+             [(ngModel)]="displayParamService.filterPreset.catTypeIncoming" (ngModelChange)="onFilterUpdated()" />
       <label for="category-type-incoming">Incoming</label>
     </div>
   </fieldset>
   <fieldset class="fields-group">
     <legend>Category frequency</legend>
     <div>
-      <input type="checkbox" id="category-freq-monthly" formControlName="freqMonthly" [(ngModel)]="displayParamService.filterPreset.catFreqMonthly" (ngModelChange)="onFilterUpdated($event)" />
+      <input type="checkbox" id="category-freq-monthly" formControlName="freqMonthly"
+             [(ngModel)]="displayParamService.filterPreset.catFreqMonthly" (ngModelChange)="onFilterUpdated()" />
       <label for="category-freq-monthly">Monthly</label>
     </div>
     <div>
-      <input type="checkbox" id="category-freq-quarter" formControlName="freqQuarter" [(ngModel)]="displayParamService.filterPreset.catFreqQuarter" (ngModelChange)="onFilterUpdated($event)" />
+      <input type="checkbox" id="category-freq-quarter" formControlName="freqQuarter"
+             [(ngModel)]="displayParamService.filterPreset.catFreqQuarter" (ngModelChange)="onFilterUpdated()" />
       <label for="category-freq-quarter">Quarter</label>
     </div>
     <div>
-      <input type="checkbox" id="category-freq-yearly" formControlName="freqYearly" [(ngModel)]="displayParamService.filterPreset.catFreqYearly" (ngModelChange)="onFilterUpdated($event)" />
+      <input type="checkbox" id="category-freq-yearly" formControlName="freqYearly"
+             [(ngModel)]="displayParamService.filterPreset.catFreqYearly" (ngModelChange)="onFilterUpdated()" />
       <label for="category-freq-yearly">Yearly</label>
     </div>
   </fieldset>

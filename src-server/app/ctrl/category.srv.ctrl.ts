@@ -1,6 +1,5 @@
 import * as mongoose from "mongoose";
 import BasicCrudCtrl from "./basic-crud.srv.ctrl";
-import txSchema from "../model/tx.srv.model";
 
 export default class CategoryCtrl extends BasicCrudCtrl {
 

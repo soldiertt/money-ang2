@@ -3,27 +3,27 @@
     <h1>Manage account settings</h1>
     <form (ngSubmit)="createAccount()" [formGroup]="accountForm" class="form-horizontal">
         <div class="form-group">
-            <label class="control-label col-sm-3">Account name *</label>
+            <label for="account-name" class="control-label col-sm-3">Account name *</label>
             <div class="col-sm-9">
-                <input type="text" name="account-name" formControlName="name" class="form-control">
+                <input type="text" name="account-name" id="account-name" formControlName="name" class="form-control">
                 <display-error control="name" error="required">Field is required</display-error>
                 <display-error control="name" error="minlength">Minimum length is 3 characters</display-error>
                 <display-error control="name" error="maxlength">Maximum length is 30 characters</display-error>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-3">Account number *</label>
+            <label for="account-number" class="control-label col-sm-3">Account number *</label>
             <div class="col-sm-9">
-                <input type="text" name="account-number" formControlName="accountNumber" class="form-control">
+                <input type="text" name="account-number" id="account-number" formControlName="accountNumber" class="form-control">
                 <display-error control="accountNumber" error="required">Field is required</display-error>
                 <display-error control="accountNumber" error="minlength">Must be 16 characters</display-error>
                 <display-error control="accountNumber" error="maxlength">Must be 16 characters</display-error>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-3">Select a sample csv file *</label>
+            <label for="csvfile" class="control-label col-sm-3">Select a sample csv file *</label>
             <div class="col-sm-9">
-                <input type="file" name="csvfile" formControlName="csvfile" (change)="onCsvSampleUpload($event)" class="form-control">
+                <input type="file" name="csvfile" id="csvfile" formControlName="csvfile" (change)="onCsvSampleUpload($event)" class="form-control">
                 <display-error control="csvfile" error="uploadfailed">Upload failed, please check your file is a valid csv.</display-error>
             </div>
         </div>
@@ -35,24 +35,24 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-3">Filename starts with *</label>
+                <label for="file-starts-with" class="control-label col-sm-3">Filename starts with *</label>
                 <div class="col-sm-9">
-                    <input type="text" name="file-starts-with" formControlName="fileStartsWith" class="form-control">
+                    <input type="text" name="file-starts-with" id="file-starts-with" formControlName="fileStartsWith" class="form-control">
                     <display-error control="fileStartsWith" error="required">Field is required</display-error>
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-3">Number of header lines *</label>
+                <label for="header-lines" class="control-label col-sm-3">Number of header lines *</label>
                 <div class="col-sm-9">
-                    <input type="number" name="header-lines" formControlName="headerLinesCount" [(ngModel)]="accountSetting.headerLinesCount"
+                    <input type="number" name="header-lines" id="header-lines" formControlName="headerLinesCount" [(ngModel)]="accountSetting.headerLinesCount"
                            (ngModelChange)="onSettingChange($event)" class="form-control">
                     <display-error control="headerLinesCount" error="wrongNumber">Field is required</display-error>
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-3">Field separator *</label>
+                <label for="field-separator" class="control-label col-sm-3">Field separator *</label>
                 <div class="col-sm-9">
-                    <input type="text" name="field-separator" formControlName="fieldSeparator"
+                    <input type="text" name="field-separator" id="field-separator" formControlName="fieldSeparator"
                            [(ngModel)]="accountSetting.fieldSeparator" (ngModelChange)="onSettingChange($event)" class="form-control">
                     <display-error control="fieldSeparator" error="required">Field is required</display-error>
                     <display-error control="fieldSeparator" error="minlength">Must be 1 character</display-error>
@@ -99,8 +99,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-3"></label>
-                <div class="col-sm-9">
+                <div class="col-sm-offset-3 col-sm-9">
                     <input type="submit" value="Create" [disabled]="!accountForm.valid" class="btn btn-default">
                 </div>
             </div>

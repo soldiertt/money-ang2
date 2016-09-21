@@ -8,4 +8,4 @@ export function render(req, res) {
       title: "Money V2"
     });
   }
-};
+}
