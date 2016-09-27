@@ -34,11 +34,12 @@ export default class BasicCrudCtrl {
   };
 
   create(req, res) {
-    let object = new this.objectModel(req.body);
+    let ctrl = this;
+    let object = new ctrl.objectModel(req.body);
     object.save(function (err) {
       if (err) {
         return res.status(400).send({
-          message: this.getErrorMessage(err)
+          message: ctrl.getErrorMessage(err)
         });
       } else {
         res.json(object);
@@ -48,11 +49,11 @@ export default class BasicCrudCtrl {
 
   list(req, res) {
     let queryObj = {};
-
-    this.objectModel.find(queryObj).exec(function (err, objectList) {
+    let ctrl = this;
+    ctrl.objectModel.find(queryObj).exec(function (err, objectList) {
       if (err) {
         return res.status(400).send({
-          message: this.getErrorMessage(err)
+          message: ctrl.getErrorMessage(err)
         });
       } else {
         res.json(objectList);
@@ -79,10 +80,11 @@ export default class BasicCrudCtrl {
 
   delete(req, res) {
     let object = req.object;
+    let ctrl = this;
     object.remove(function (err) {
       if (err) {
         return res.status(400).send({
-          message: this.getErrorMessage(err)
+          message: ctrl.getErrorMessage(err)
         });
       } else {
         res.json(object);
