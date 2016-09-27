@@ -3,7 +3,6 @@
  */
 import { NgModule }      from '@angular/core';
 import {CommonModule, APP_BASE_HREF, HashLocationStrategy, LocationStrategy}      from '@angular/common';
-import {RequestOptions} from "@angular/http";
 import { environment } from './environments/environment';
 import {AccountSettingRestService} from "./service/account-setting-rest.service";
 import {CategoryRestService} from "./service/category-rest.service";
@@ -14,7 +13,6 @@ import {PreferenceRestService} from "./service/preference-rest.service";
 import {RuleService} from "./service/rule.service";
 import {RuleRestService} from "./service/rule-rest.service";
 import {TxrefRestService} from "./service/txref-rest.service";
-import {JsonRequestOptions} from "./model/config/json-request-options";
 
 @NgModule({
     imports:      [
@@ -28,7 +26,6 @@ import {JsonRequestOptions} from "./model/config/json-request-options";
         {provide: APP_BASE_HREF, useValue : "/"},
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         {provide: 'webApiBaseUrl', useValue: environment.webApiBaseUrl},
-        {provide: RequestOptions, useClass: JsonRequestOptions},
         AccountSettingRestService,
         CategoryRestService,
         CsvFilesRestService,

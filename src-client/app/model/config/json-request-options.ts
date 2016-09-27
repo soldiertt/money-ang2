@@ -1,8 +1,11 @@
-import {BaseRequestOptions, Headers} from "@angular/http";
+import {BaseRequestOptions} from "@angular/http";
+import {Injectable} from "@angular/core";
 
+@Injectable()
 export class JsonRequestOptions extends BaseRequestOptions {
-    headers:Headers = new Headers({
-        "Content-Type": "application/json; charset=utf-8",
-        "Accept": "application/json"
-    });
+    constructor () {
+        super();
+        this.headers.append("Content-Type", "application/json; charset=utf-8");
+        this.headers.append("Accept", "application/json");
+    }
 }

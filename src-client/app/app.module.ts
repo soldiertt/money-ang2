@@ -7,7 +7,8 @@ import {HomeModule} from "./home.module";
 import {ImportModule} from "./import.module";
 import {SecurityModule} from "./security.module";
 import {CoreModule} from "./core.module";
-
+import {RequestOptions} from "@angular/http";
+import {JsonRequestOptions} from "./model/config/json-request-options";
 
 @NgModule({
     imports: [
@@ -23,7 +24,7 @@ import {CoreModule} from "./core.module";
         AppComponent
     ],
     providers: [
-
+        {provide: RequestOptions, useClass: JsonRequestOptions}
     ],
     bootstrap: [ AppComponent ]
 })
