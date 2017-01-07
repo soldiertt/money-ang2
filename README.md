@@ -27,6 +27,6 @@
 4. Go to Preferences and choose the year you want to work on and choose the directory the app should read your csv files.
 5. Go to import link and save your tx !
 
-## RoadMap
+## Setup
 
-* Create rules management interface where you can route your tx directly to the appropraite category depending on some criteria.
+Run with mongoDB listening on 27017
