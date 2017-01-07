@@ -9,6 +9,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
   }
 
   addTx(req, res) {
+    let ctrl = this;
     let tx = req.body.tx;
     let catLink = req.body.categoryLink;
     this.objectModel.update({ _id: catLink.categoryId,
@@ -23,7 +24,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
         function (err) {
           if (err) {
             return res.status(400).send({
-              message: this.getErrorMessage(err)
+              message: ctrl.getErrorMessage(err)
             });
           } else {
             res.json(tx);
@@ -33,6 +34,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
   }
 
   removeTx(req, res) {
+    let ctrl = this;
     let tx = req.body;
     let periodId = req.params.periodId;
     this.objectModel.update({ "periods._id" : periodId },
@@ -43,7 +45,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
         function (err) {
           if (err) {
             return res.status(400).send({
-              message: this.getErrorMessage(err)
+              message: ctrl.getErrorMessage(err)
             });
           } else {
             res.json(tx);
@@ -53,6 +55,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
   }
 
   updatePeriodMarkAsPaid (req, res) {
+    let ctrl = this;
     let categoryId = req.body.categoryId;
     let periodId = req.body.periodId;
     let markAsPaid = req.body.markAsPaid;
@@ -66,7 +69,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
       function(err, doc) {
         if (err) {
           return res.status(400).send({
-            message: this.getErrorMessage(err)
+            message: ctrl.getErrorMessage(err)
           });
         } else {
           res.json(doc);
@@ -76,6 +79,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
   }
 
   search (req, res) {
+    let ctrl = this;
     let year = req.query.year;
     if (req.query.id) {
       // Make sure the specific category exists within a specific year
@@ -83,7 +87,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
       this.objectModel.findOne({_id: catId, years: year}).exec(function (err, category) {
         if (err) {
           return res.status(400).send({
-            message: this.getErrorMessage(err)
+            message: ctrl.getErrorMessage(err)
           });
         } else {
           res.json(category);
@@ -94,7 +98,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
       this.objectModel.find({years: year}, "-periods.txList").exec(function (err, categories) {
         if (err) {
           return res.status(400).send({
-            message: this.getErrorMessage(err)
+            message: ctrl.getErrorMessage(err)
           });
         } else {
           res.json(categories);
@@ -104,6 +108,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
   }
 
   searchTx (req, res) {
+    let ctrl = this;
     let categoryId = req.query.categoryId;
     let years = req.query.years;
     let periodId = req.query.periodId;
@@ -120,7 +125,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
           }, function (err, category) {
             if (err) {
               return res.status(400).send({
-                message: this.getErrorMessage(err)
+                message: ctrl.getErrorMessage(err)
               });
             } else {
               res.json(category);
@@ -132,7 +137,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
       this.objectModel.findOne({ _id: categoryId, "periods._id" : periodId }, {"periods.$" : 1 }, function (err, category) {
         if (err) {
           return res.status(400).send({
-            message: this.getErrorMessage(err)
+            message: ctrl.getErrorMessage(err)
           });
         } else {
           res.json(category);
@@ -142,6 +147,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
   }
 
   update (req, res) {
+    let ctrl = this;
     let category = req.object;
     category.years = req.body.years;
     category.periods = req.body.periods;
@@ -149,7 +155,7 @@ export default class CategoryCtrl extends BasicCrudCtrl {
     category.save(function (err) {
         if (err) {
           return res.status(400).send({
-            message: this.getErrorMessage(err)
+            message: ctrl.getErrorMessage(err)
           });
         } else {
           res.json(category);
